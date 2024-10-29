@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Entrepreneurship } from '../../models/entrepreneurship.model';
+import { EntrepreneurshipService } from '../../services/entrepreneurship.service';
 
 @Component({
   selector: 'app-entrepreneurship-list-component',
@@ -7,6 +9,14 @@ import { Component } from '@angular/core';
   templateUrl: './entrepreneurship-list-component.component.html',
   styleUrl: './entrepreneurship-list-component.component.css'
 })
-export class EntrepreneurshipListComponentComponent {
+export class EntrepreneurshipListComponent implements OnInit {
+  entrepreneurships: Entrepreneurship[] = [];
 
+  constructor(private entrepreneurshipService: EntrepreneurshipService) {}
+
+  ngOnInit(): void {
+    this.entrepreneurshipService.getEntrepreneurship().subscribe((data) => {
+      this.entrepreneurships = data;
+    });
+  }
 }

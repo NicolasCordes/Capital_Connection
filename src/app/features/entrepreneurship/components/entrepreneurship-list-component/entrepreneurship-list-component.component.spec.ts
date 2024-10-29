@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EntrepreneurshipListComponentComponent } from './entrepreneurship-list-component.component';
+import { EntrepreneurshipListComponent } from './entrepreneurship-list-component.component';
 
 describe('EntrepreneurshipListComponentComponent', () => {
-  let component: EntrepreneurshipListComponentComponent;
-  let fixture: ComponentFixture<EntrepreneurshipListComponentComponent>;
+  let component: EntrepreneurshipListComponent;
+  let fixture: ComponentFixture<EntrepreneurshipListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EntrepreneurshipListComponentComponent]
+      imports: [EntrepreneurshipListComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(EntrepreneurshipListComponentComponent);
+    fixture = TestBed.createComponent(EntrepreneurshipListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
