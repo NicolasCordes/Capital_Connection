@@ -1,0 +1,15 @@
+<form [formGroup]="form" (ngSubmit)="onLogin()">
+    <fieldset>
+        <legend>Inicio de sesión</legend>
+        <section>
+            <label for="username">Nombre de Usuario</label>
+            <input type="text" id="username" autocomplete="username" formControlName="username">
+        </section>
+        <section>
+            <label for="password">Contraseña</label>
+            <input #password type="password" id="password" formControlName="password">
+            <button type="button" (click)="onRevealPassword(password)">Ojito</button>
+        </section>
+        <button type="submit" [disabled]="form.invalid">Iniciar sesión</button>
+    </fieldset>
+</form>

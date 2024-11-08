@@ -1,1 +1,80 @@
-<p>entrepreneurship-form-component works!</p>
+<form [formGroup]="entrepreneurshipForm" (ngSubmit)="saveEntrepreneurship()">
+
+  <!-- Nombre -->
+  <label>
+    Nombre:
+    <input type="text" formControlName="name" required>
+    <div *ngIf="entrepreneurshipForm.get('name')?.hasError('required') && entrepreneurshipForm.get('name')?.touched">
+      <p>El nombre es requerido.</p>
+    </div>
+  </label>
+
+  <!-- Descripción -->
+  <label>
+    Descripción:
+    <input type="text" formControlName="description" required>
+    <div *ngIf="entrepreneurshipForm.get('description')?.hasError('required') && entrepreneurshipForm.get('description')?.touched">
+      <p>La descripción es requerida.</p>
+    </div>
+  </label>
+
+  <!-- Objetivo financiero -->
+  <label>
+    Objetivo financiero:
+    <input type="number" formControlName="goal" required>
+    <div *ngIf="entrepreneurshipForm.get('goal')?.hasError('required') && entrepreneurshipForm.get('goal')?.touched">
+      <p>El objetivo financiero es requerido.</p>
+    </div>
+  </label>
+
+  <!-- Categoría -->
+  <label>
+    Categoría:
+    <input type="text" formControlName="category" required>
+    <div *ngIf="entrepreneurshipForm.get('category')?.hasError('required') && entrepreneurshipForm.get('category')?.touched">
+      <p>La categoría es requerida.</p>
+    </div>
+  </label>
+
+  <!-- Cargar imágenes -->
+  <label>
+    Cargar imágenes (máximo 2MB por imagen):
+    <input type="file" (change)="onFileSelected($event, 'image')" multiple accept="image/*">
+  </label>
+
+  <div *ngIf="imageUrlsArray.length">
+    <h3>Imágenes seleccionadas:</h3>
+    <ul>
+      <li *ngFor="let image of imageUrlsArray.controls; let i = index; trackBy: trackByIndex">
+        <img [src]="image.value" alt="Imagen cargada" width="100" />
+      </li>
+    </ul>
+  </div>
+
+  <!-- Cargar videos -->
+  <label>
+    Cargar videos (máximo 5MB por video):
+    <input type="file" (change)="onFileSelected($event, 'video')" multiple accept="video/*">
+  </label>
+
+  <div *ngIf="videoUrlsArray.length">
+    <h3>Videos seleccionados:</h3>
+    <ul>
+      <li *ngFor="let video of videoUrlsArray.controls; let i = index; trackBy: trackByIndex">
+        <video width="200" controls>
+          <source [src]="video.value" type="video/mp4" />
+          Tu navegador no soporta el formato de video.
+        </video>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Indicador de carga -->
+  <div *ngIf="isUploading">
+    <p>Cargando archivos...</p>
+  </div>
+
+  <!-- Botón para enviar el formulario -->
+  <button type="submit" [disabled]="!entrepreneurshipForm.valid || isUploading">Guardar</button>
+
+</form>

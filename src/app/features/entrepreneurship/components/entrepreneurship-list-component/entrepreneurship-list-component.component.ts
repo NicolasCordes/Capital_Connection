@@ -19,4 +19,12 @@ export class EntrepreneurshipListComponent implements OnInit {
       this.entrepreneurships = data;
     });
   }
+
+  deleteEntrepreneurship(id: number): void {
+    this.entrepreneurshipService.deleteEntrepreneurship(id).subscribe(() => {
+      this.entrepreneurships = this.entrepreneurships.filter(
+        (entrepreneurship) => entrepreneurship.id !== id
+      );
+    });
+  }
 }

@@ -1,0 +1,54 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <fieldset>
+      <legend>Registrarse</legend>
+      <section>
+          <label for="email">Correo electrónico</label>
+          <input type="text" id="email" autocomplete="email" formControlName="email">
+          @if (form.controls['email'].touched) {
+              @if (form.controls['email'].getError('required')) {
+                  <span>El email no puede permanecer vacío</span>
+              }
+              @if (form.controls['email'].getError('email')) {
+                  <span>El email no es un correo válido</span>
+              }
+          }
+      </section>
+      <section>
+          <label for="username">Nombre de Usuario</label>
+          <input type="text" id="username" autocomplete="username" formControlName="username">
+          @if (form.controls['username'].touched) {
+              @if (form.controls['username'].getError('required')) {
+                  <span>El nombre de usuario no puede permanecer vacío</span>
+              }
+              @if (form.controls['username'].getError('minlength')) {
+                  <span>El nombre de usuario es muy corto</span>
+              }
+          }
+      </section>
+
+<section>
+  <label for="role">Contraseña</label>
+  <select type="role" id="role" formControlName="role">
+    <option>Emprendedor</option>
+    <option>Inversor</option>
+  </select>
+</section>
+
+      <section>
+          <label for="password">Contraseña</label>
+          <input #password type="password" id="password" formControlName="password">
+          <button type="button" (click)="onRevealPassword(password)">Ojito</button>
+          @if (form.controls['password'].touched) {
+
+              @if (form.controls['password'].getError('required')) {
+                  <span>La contraseña no puede permanecer vacía</span>
+              }
+              @if (form.controls['password'].getError('minlength')) {
+                  <span>La contraseña es muy corta</span>
+              }
+          }
+      </section>
+      <button type="submit" [disabled]="form.invalid">Enviar</button>
+  </fieldset>
+</form>
+

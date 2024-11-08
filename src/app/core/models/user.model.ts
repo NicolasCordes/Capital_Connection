@@ -1,5 +1,4 @@
 import { Address } from "./address.model";
-import { Category } from "./category.model";
 
 export interface User {
 Id?: Number,
@@ -9,6 +8,6 @@ email: String,
 dateOfBirth: Date,
 wallet : BigInt,
 yearsOfExperience : Number,
-industry : Category,
+industry : string,
 Address : Address
 }
