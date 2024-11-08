@@ -32,15 +32,15 @@ export class EntrepreneurshipDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    if (id) {
+    this.route.paramMap.subscribe((params) => {
+      const id = params.get('id') ?? '';
       this.entrepreneurshipService
         .getEntrepreneurshipById(id)
-        .subscribe((data) => {
-          this.entrepreneurship = data;
-          this.initForm(data);
+        .subscribe((entrepreneurship) => {
+          this.entrepreneurship = entrepreneurship;
+          this.initForm(entrepreneurship);
         });
-    }
+    });
   }
 
   private initForm(data: Entrepreneurship): void {
@@ -52,14 +52,6 @@ export class EntrepreneurshipDetailComponent implements OnInit {
       images: this.fb.array(data.images || []),
       videos: this.fb.array(data.videos || []),
     });
-  }
-
-  get images() {
-    return this.entrepreneurshipForm.get('images') as FormArray;
-  }
-
-  get videos() {
-    return this.entrepreneurshipForm.get('videos') as FormArray;
   }
 
   enableEditing(): void {
@@ -74,32 +66,6 @@ export class EntrepreneurshipDetailComponent implements OnInit {
         this.initForm(this.entrepreneurship);
       }
     }
-  }
-
-  onFileSelected(event: any, type: 'image' | 'video'): void {
-    const files = event.target.files;
-    const formArray = type === 'image' ? this.images : this.videos;
-    const maxSize = type === 'image' ? 2 * 1024 * 1024 : 5 * 1024 * 1024; // 2MB para imágenes, 5MB para videos
-
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-
-      if (file.size > maxSize) {
-        alert(`El archivo ${file.name} excede el tamaño máximo permitido.`);
-        continue;
-      }
-
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        formArray.push(this.fb.control(e.target.result));
-      };
-      reader.readAsDataURL(file);
-    }
-  }
-
-  deleteMedia(index: number, type: 'image' | 'video'): void {
-    const formArray = type === 'image' ? this.images : this.videos;
-    formArray.removeAt(index);
   }
 
   formHasChanged(): boolean {

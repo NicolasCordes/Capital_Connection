@@ -1,7 +1,7 @@
 import { Review } from '../../reviews/models/review.model';
 
 export interface Entrepreneurship {
-  id: number;
+  id?: string;
   name: string;
   description: string;
   goal: number; // objetivo financiero

@@ -16,33 +16,8 @@
     </div>
 
     <!-- Mostrar imágenes -->
-    <div class="images">
-      <h3>Imágenes</h3>
-      <ul class="media-list">
-        <li *ngFor="let image of currentEntrepreneurship.images; let i = index">
-          <img [src]="image" alt="Imagen cargada" />
-          <button type="button" (click)="deleteMedia(i, 'image')">
-            Eliminar
-          </button>
-        </li>
-      </ul>
-    </div>
 
     <!-- Mostrar videos -->
-    <div class="videos">
-      <h3>Videos</h3>
-      <ul class="media-list">
-        <li *ngFor="let video of currentEntrepreneurship.videos; let i = index">
-          <video controls>
-            <source [src]="video" type="video/mp4" />
-            Tu navegador no soporta el formato de video.
-          </video>
-          <button type="button" (click)="deleteMedia(i, 'video')">
-            Eliminar
-          </button>
-        </li>
-      </ul>
-    </div>
 
     <button *ngIf="!isEditing" (click)="enableEditing()">Editar</button>
   </div>
@@ -106,45 +81,6 @@
     </label>
 
     <!-- Cargar imágenes -->
-    <label>
-      Cargar imágenes (máximo 2MB por imagen):
-      <input
-        type="file"
-        (change)="onFileSelected($event, 'image')"
-        multiple
-        accept="image/*"
-      />
-    </label>
-    <ul>
-      <li *ngFor="let image of images.controls; let i = index">
-        <img [src]="image.value" alt="Imagen cargada" />
-        <button type="button" (click)="deleteMedia(i, 'image')">
-          Eliminar
-        </button>
-      </li>
-    </ul>
-
-    <!-- Cargar videos -->
-    <label>
-      Cargar videos (máximo 5MB por video):
-      <input
-        type="file"
-        (change)="onFileSelected($event, 'video')"
-        multiple
-        accept="video/*"
-      />
-    </label>
-    <ul>
-      <li *ngFor="let video of videos.controls; let i = index">
-        <video controls>
-          <source [src]="video.value" type="video/mp4" />
-          Tu navegador no soporta el formato de video.
-        </video>
-        <button type="button" (click)="deleteMedia(i, 'video')">
-          Eliminar
-        </button>
-      </li>
-    </ul>
 
     <!-- Botones de guardar y cancelar -->
     <button

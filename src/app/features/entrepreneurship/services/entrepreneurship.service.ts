@@ -14,7 +14,7 @@ export class EntrepreneurshipService {
     return this.http.get<Entrepreneurship[]>(this.urlBase);
   }
 
-  getEntrepreneurshipById(id: number | null): Observable<Entrepreneurship> {
+  getEntrepreneurshipById(id: string): Observable<Entrepreneurship> {
     return this.http.get<Entrepreneurship>(`${this.urlBase}/${id}`);
   }
 
@@ -24,7 +24,7 @@ export class EntrepreneurshipService {
     return this.http.post<Entrepreneurship>(this.urlBase, entrepreneurship);
   }
 
-  deleteEntrepreneurship(id: number | undefined): Observable<Entrepreneurship> {
+  deleteEntrepreneurship(id: string): Observable<Entrepreneurship> {
     return this.http.delete<Entrepreneurship>(`${this.urlBase}/${id}`);
   }
 

@@ -25,11 +25,11 @@ export class EntrepreneurshipListComponent implements OnInit {
     });
   }
 
-  navigateToDetails(id: number): void {
+  navigateToDetails(id: string|null): void {
     this.router.navigate([`/entrepreneurships/${id}`]);
   }
 
-  deleteEntrepreneurship(id: number): void {
+  deleteEntrepreneurship(id: string|null): void {
     this.entrepreneurshipService.deleteEntrepreneurship(id).subscribe(() => {
       this.entrepreneurships = this.entrepreneurships.filter(
         (entrepreneurship) => entrepreneurship.id !== id
