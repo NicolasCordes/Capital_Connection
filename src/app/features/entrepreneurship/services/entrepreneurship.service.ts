@@ -1,13 +1,12 @@
-import { HttpClient } from "@angular/common/http";
-import { inject, Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { Entrepreneurship } from "../models/entrepreneurship.model";
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Entrepreneurship } from '../models/entrepreneurship.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EntrepreneurshipService {
-
   http = inject(HttpClient);
   private urlBase = 'http://localhost:3000/entrepreneurships';
 
@@ -15,19 +14,24 @@ export class EntrepreneurshipService {
     return this.http.get<Entrepreneurship[]>(this.urlBase);
   }
 
-  getEntrepreneurshipById(id: number | null): Observable<Entrepreneurship> {
+  getEntrepreneurshipById(id: string): Observable<Entrepreneurship> {
     return this.http.get<Entrepreneurship>(`${this.urlBase}/${id}`);
   }
 
-  postEntrepreneurship(entrepreneurship: Entrepreneurship): Observable<Entrepreneurship> {
+  postEntrepreneurship(
+    entrepreneurship: Entrepreneurship
+  ): Observable<Entrepreneurship> {
     return this.http.post<Entrepreneurship>(this.urlBase, entrepreneurship);
   }
 
-  deleteEntrepreneurship(id: number | undefined): Observable<Entrepreneurship> {
+  deleteEntrepreneurship(id: string): Observable<Entrepreneurship> {
     return this.http.delete<Entrepreneurship>(`${this.urlBase}/${id}`);
   }
 
-  updateEntrepreneurship(id: number | null, entrepreneurship: Entrepreneurship): Observable<Entrepreneurship> {
-    return this.http.put<Entrepreneurship>(`${this.urlBase}/${id}`, entrepreneurship);
+  updateEntrepreneurship(entrepreneurship: Entrepreneurship) {
+    return this.http.patch<Entrepreneurship>(
+      `${this.urlBase}/${entrepreneurship.id}`,
+      entrepreneurship
+    );
   }
 }
