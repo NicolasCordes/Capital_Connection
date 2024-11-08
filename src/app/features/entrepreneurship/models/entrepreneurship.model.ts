@@ -1,4 +1,4 @@
-import { Review } from "../../reviews/models/review.model";
+import { Review } from '../../reviews/models/review.model';
 
 export interface Entrepreneurship {
   id: number;

@@ -3,28 +3,46 @@
 
   <!-- Modo de Visualización -->
   <div *ngIf="!isEditing">
-    <h3>Imágenes:</h3>
-    <ul>
-      <li *ngFor="let image of currentEntrepreneurship.images; let i = index">
-        <img [src]="image" alt="Imagen cargada" width="100" />
-        <button type="button" (click)="deleteMedia(i, 'image')">
-          Eliminar
-        </button>
-      </li>
-    </ul>
+    <!-- Mostrar nombre, descripción, objetivo y categoría -->
+    <div class="entrepreneurship-details">
+      <p>
+        <strong>Descripción:</strong> {{ currentEntrepreneurship.description }}
+      </p>
+      <p>
+        <strong>Objetivo Financiero:</strong>
+        {{ currentEntrepreneurship.goal | currency }}
+      </p>
+      <p><strong>Categoría:</strong> {{ currentEntrepreneurship.category }}</p>
+    </div>
 
-    <h3>Videos:</h3>
-    <ul>
-      <li *ngFor="let video of currentEntrepreneurship.videos; let i = index">
-        <video width="200" controls>
-          <source [src]="video" type="video/mp4" />
-          Tu navegador no soporta el formato de video.
-        </video>
-        <button type="button" (click)="deleteMedia(i, 'video')">
-          Eliminar
-        </button>
-      </li>
-    </ul>
+    <!-- Mostrar imágenes -->
+    <div class="images">
+      <h3>Imágenes</h3>
+      <ul class="media-list">
+        <li *ngFor="let image of currentEntrepreneurship.images; let i = index">
+          <img [src]="image" alt="Imagen cargada" />
+          <button type="button" (click)="deleteMedia(i, 'image')">
+            Eliminar
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Mostrar videos -->
+    <div class="videos">
+      <h3>Videos</h3>
+      <ul class="media-list">
+        <li *ngFor="let video of currentEntrepreneurship.videos; let i = index">
+          <video controls>
+            <source [src]="video" type="video/mp4" />
+            Tu navegador no soporta el formato de video.
+          </video>
+          <button type="button" (click)="deleteMedia(i, 'video')">
+            Eliminar
+          </button>
+        </li>
+      </ul>
+    </div>
 
     <button *ngIf="!isEditing" (click)="enableEditing()">Editar</button>
   </div>
@@ -99,7 +117,7 @@
     </label>
     <ul>
       <li *ngFor="let image of images.controls; let i = index">
-        <img [src]="image.value" alt="Imagen cargada" width="100" />
+        <img [src]="image.value" alt="Imagen cargada" />
         <button type="button" (click)="deleteMedia(i, 'image')">
           Eliminar
         </button>
@@ -118,7 +136,7 @@
     </label>
     <ul>
       <li *ngFor="let video of videos.controls; let i = index">
-        <video width="200" controls>
+        <video controls>
           <source [src]="video.value" type="video/mp4" />
           Tu navegador no soporta el formato de video.
         </video>
