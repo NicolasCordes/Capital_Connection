@@ -1,1 +1,140 @@
-<p>entrepreneurship-detail-component works!</p>
+<div *ngIf="entrepreneurship as currentEntrepreneurship">
+  <h2>{{ currentEntrepreneurship.name }} - Detalles</h2>
+
+  <!-- Modo de Visualización -->
+  <div *ngIf="!isEditing">
+    <h3>Imágenes:</h3>
+    <ul>
+      <li *ngFor="let image of currentEntrepreneurship.images; let i = index">
+        <img [src]="image" alt="Imagen cargada" width="100" />
+        <button type="button" (click)="deleteMedia(i, 'image')">
+          Eliminar
+        </button>
+      </li>
+    </ul>
+
+    <h3>Videos:</h3>
+    <ul>
+      <li *ngFor="let video of currentEntrepreneurship.videos; let i = index">
+        <video width="200" controls>
+          <source [src]="video" type="video/mp4" />
+          Tu navegador no soporta el formato de video.
+        </video>
+        <button type="button" (click)="deleteMedia(i, 'video')">
+          Eliminar
+        </button>
+      </li>
+    </ul>
+
+    <button *ngIf="!isEditing" (click)="enableEditing()">Editar</button>
+  </div>
+
+  <!-- Modo de Edición -->
+  <form
+    *ngIf="isEditing"
+    [formGroup]="entrepreneurshipForm"
+    (ngSubmit)="saveEntrepreneurship()"
+  >
+    <label>
+      Nombre:
+      <input type="text" formControlName="name" />
+      <div
+        *ngIf="
+          entrepreneurshipForm.get('name')?.invalid &&
+          entrepreneurshipForm.get('name')?.touched
+        "
+      >
+        Nombre es obligatorio.
+      </div>
+    </label>
+
+    <label>
+      Descripción:
+      <input type="text" formControlName="description" />
+      <div
+        *ngIf="
+          entrepreneurshipForm.get('description')?.invalid &&
+          entrepreneurshipForm.get('description')?.touched
+        "
+      >
+        Descripción es obligatoria.
+      </div>
+    </label>
+
+    <label>
+      Objetivo financiero:
+      <input type="number" formControlName="goal" />
+      <div
+        *ngIf="
+          entrepreneurshipForm.get('goal')?.invalid &&
+          entrepreneurshipForm.get('goal')?.touched
+        "
+      >
+        El objetivo es obligatorio.
+      </div>
+    </label>
+
+    <label>
+      Categoría:
+      <input type="text" formControlName="category" />
+      <div
+        *ngIf="
+          entrepreneurshipForm.get('category')?.invalid &&
+          entrepreneurshipForm.get('category')?.touched
+        "
+      >
+        La categoría es obligatoria.
+      </div>
+    </label>
+
+    <!-- Cargar imágenes -->
+    <label>
+      Cargar imágenes (máximo 2MB por imagen):
+      <input
+        type="file"
+        (change)="onFileSelected($event, 'image')"
+        multiple
+        accept="image/*"
+      />
+    </label>
+    <ul>
+      <li *ngFor="let image of images.controls; let i = index">
+        <img [src]="image.value" alt="Imagen cargada" width="100" />
+        <button type="button" (click)="deleteMedia(i, 'image')">
+          Eliminar
+        </button>
+      </li>
+    </ul>
+
+    <!-- Cargar videos -->
+    <label>
+      Cargar videos (máximo 5MB por video):
+      <input
+        type="file"
+        (change)="onFileSelected($event, 'video')"
+        multiple
+        accept="video/*"
+      />
+    </label>
+    <ul>
+      <li *ngFor="let video of videos.controls; let i = index">
+        <video width="200" controls>
+          <source [src]="video.value" type="video/mp4" />
+          Tu navegador no soporta el formato de video.
+        </video>
+        <button type="button" (click)="deleteMedia(i, 'video')">
+          Eliminar
+        </button>
+      </li>
+    </ul>
+
+    <!-- Botones de guardar y cancelar -->
+    <button
+      type="submit"
+      [disabled]="!entrepreneurshipForm.valid || !formHasChanged()"
+    >
+      Guardar
+    </button>
+    <button type="button" (click)="cancelEditing()">Cancelar</button>
+  </form>
+</div>

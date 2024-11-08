@@ -7,5 +7,70 @@
       "role": "Emprendedor",
       "email": "a@gmail.com"
     }
+  ],
+  "entrepreneurships": [
+    {
+      "id": "1",
+      "name": "Emprendimiento A",
+      "description": "Un emprendimiento innovador en tecnología.",
+      "goal": 50000,
+      "category": "Tecnología",
+      "images": [
+        "https://example.com/image1.jpg",
+        "https://example.com/image2.jpg"
+      ],
+      "videos": [
+        "https://example.com/video1.mp4",
+        "https://example.com/video2.mp4"
+      ],
+      "reviews": [
+        {
+          "rating": 4,
+          "comment": "Gran emprendimiento, muy prometedor.",
+          "author": "Juan Pérez"
+        },
+        {
+          "rating": 5,
+          "comment": "Excelente trabajo, me encanta.",
+          "author": "María López"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Emprendimiento B",
+      "description": "Un emprendimiento de moda y estilo.",
+      "goal": 30000,
+      "category": "Moda",
+      "images": [
+        "https://example.com/image3.jpg",
+        "https://example.com/image4.jpg"
+      ],
+      "videos": [
+        "https://example.com/video3.mp4",
+        "https://example.com/video4.mp4"
+      ],
+      "reviews": [
+        {
+          "rating": 3,
+          "comment": "Interesante, pero faltan más opciones.",
+          "author": "Carlos Gómez"
+        },
+        {
+          "rating": 4,
+          "comment": "Me gusta mucho, con potencial.",
+          "author": "Ana Martínez"
+        }
+      ]
+    },
+    {
+      "id": "2014",
+      "name": "as",
+      "description": "as",
+      "goal": 23,
+      "category": "323",
+      "images": [],
+      "videos": []
+    }
   ]
 }
