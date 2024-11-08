@@ -1,35 +1,87 @@
+
+  
+
+/* Estilos generales para el nav */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #111;
+  padding: 1rem 3rem;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+/* Estilo para la lista de navegación */
 nav ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    gap: 15px;
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+/* Efecto hover sobre los enlaces */
+nav ul li a:hover {
+  color: #ffa500;
+}
+
+/* Estilo para el botón de Cerrar Sesión */
+nav ul li .button {
+  background-color: #f44336;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  text-decoration: none;
+}
+
+nav ul li .button:hover {
+  background-color: #d32f2f;
+}
+
+/* Estilo para el botón de "Agregar Emprendimiento" */
+nav button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+nav button:hover {
+  background-color: #388e3c;
+}
+
+/* Estilos para la versión móvil */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    padding: 1rem;
   }
-  
-  nav ul li {
-    display: inline;
+
+  nav ul {
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    margin-top: 1rem;
   }
-  
-  nav ul li a {
-    text-decoration: none;
-    color: #333;
-    padding: 8px 15px;
-    transition: background-color 0.3s, color 0.3s;
+
+  nav button {
+    width: 100%;
+    margin-top: 1rem;
   }
-  
-  nav ul li a:hover {
-    background-color: #f0f0f0;
-    color: #000;
-    border-radius: 4px;
-  }
-  
-  nav ul li a.button {
-    color: #fff;
-    background-color: #007bff;
-    border-radius: 4px;
-  }
-  
-  nav ul li a.button:hover {
-    background-color: #0056b3;
-  }
-  
+}

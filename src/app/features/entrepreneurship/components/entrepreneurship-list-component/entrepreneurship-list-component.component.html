@@ -1,14 +1,19 @@
 <div *ngIf="entrepreneurships.length > 0; else noData">
-    <ul>
-      <li *ngFor="let entrepreneurship of entrepreneurships; let i = index">
-        <!-- Aquí puedes mostrar el nombre o algún dato del emprendimiento -->
-        <h3>{{ entrepreneurship.name }}</h3>
-        <p>{{ entrepreneurship.description }}</p>
-        <button (click)="deleteEntrepreneurship(entrepreneurship.id)">Eliminar</button>
-      </li>
-    </ul>
-  </div>
+  <ul>
+    <li *ngFor="let entrepreneurship of entrepreneurships; let i = index">
+      <!-- Aquí puedes mostrar el nombre o algún dato del emprendimiento -->
+      <h3>{{ entrepreneurship.name }}</h3>
+      <p>{{ entrepreneurship.description }}</p>
+      <button (click)="navigateToDetails(entrepreneurship.id)">
+        Ver Detalles
+      </button>
+      <button (click)="deleteEntrepreneurship(entrepreneurship.id)">
+        Eliminar
+      </button>
+    </li>
+  </ul>
+</div>
 
-  <ng-template #noData>
-    <p>No hay emprendimientos disponibles</p>
-  </ng-template>
+<ng-template #noData>
+  <p>No hay emprendimientos disponibles</p>
+</ng-template>

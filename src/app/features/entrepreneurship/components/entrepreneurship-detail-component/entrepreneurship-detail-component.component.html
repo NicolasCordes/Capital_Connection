@@ -1,1 +1,94 @@
-<p>entrepreneurship-detail-component works!</p>
+<div *ngIf="entrepreneurship as currentEntrepreneurship">
+  <h2>{{ currentEntrepreneurship.name }} - Detalles</h2>
+
+  <!-- Modo de Visualización -->
+  <div *ngIf="!isEditing">
+    <!-- Mostrar nombre, descripción, objetivo y categoría -->
+    <div class="entrepreneurship-details">
+      <p>
+        <strong>Descripción:</strong> {{ currentEntrepreneurship.description }}
+      </p>
+      <p>
+        <strong>Objetivo Financiero:</strong>
+        {{ currentEntrepreneurship.goal | currency }}
+      </p>
+      <p><strong>Categoría:</strong> {{ currentEntrepreneurship.category }}</p>
+    </div>
+
+    <!-- Mostrar imágenes -->
+
+    <!-- Mostrar videos -->
+
+    <button *ngIf="!isEditing" (click)="enableEditing()">Editar</button>
+  </div>
+
+  <!-- Modo de Edición -->
+  <form
+    *ngIf="isEditing"
+    [formGroup]="entrepreneurshipForm"
+    (ngSubmit)="saveEntrepreneurship()"
+  >
+    <label>
+      Nombre:
+      <input type="text" formControlName="name" />
+      <div
+        *ngIf="
+          entrepreneurshipForm.get('name')?.invalid &&
+          entrepreneurshipForm.get('name')?.touched
+        "
+      >
+        Nombre es obligatorio.
+      </div>
+    </label>
+
+    <label>
+      Descripción:
+      <input type="text" formControlName="description" />
+      <div
+        *ngIf="
+          entrepreneurshipForm.get('description')?.invalid &&
+          entrepreneurshipForm.get('description')?.touched
+        "
+      >
+        Descripción es obligatoria.
+      </div>
+    </label>
+
+    <label>
+      Objetivo financiero:
+      <input type="number" formControlName="goal" />
+      <div
+        *ngIf="
+          entrepreneurshipForm.get('goal')?.invalid &&
+          entrepreneurshipForm.get('goal')?.touched
+        "
+      >
+        El objetivo es obligatorio.
+      </div>
+    </label>
+
+    <label>
+      Categoría:
+      <input type="text" formControlName="category" />
+      <div
+        *ngIf="
+          entrepreneurshipForm.get('category')?.invalid &&
+          entrepreneurshipForm.get('category')?.touched
+        "
+      >
+        La categoría es obligatoria.
+      </div>
+    </label>
+
+    <!-- Cargar imágenes -->
+
+    <!-- Botones de guardar y cancelar -->
+    <button
+      type="submit"
+      [disabled]="!entrepreneurshipForm.valid || !formHasChanged()"
+    >
+      Guardar
+    </button>
+    <button type="button" (click)="cancelEditing()">Cancelar</button>
+  </form>
+</div>

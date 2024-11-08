@@ -1,15 +1,20 @@
 <nav>
   <ul>
-    <li> <a routerLink="home"> Home </a> </li>
+ <li> <a routerLink="home"> Home </a> </li>
     <li> <a routerLink=""> Mi perfil </a> </li>
     <li> <a routerLink="user-add"> Agregar </a> </li>
+    <li><a routerLink="home"> Home </a></li>
+    <li><a routerLink=""> Mi perfil </a></li>
 
     @if (!activeUser) {
-      <li> <a routerLink="login"> Iniciar Sesion</a> </li>
-      <li> <a routerLink="sign-in"> Registrarse </a> </li>
+    <li><a routerLink="login"> Iniciar Sesion</a></li>
+    <li><a routerLink="sign-in"> Registrarse </a></li>
     }@else {
-      <li> <a class="button" (click)="onLogOut()"> Cerrar Sesion</a> </li>
+    <li><a class="button" (click)="onLogOut()"> Cerrar Sesion</a></li>
     }
-
   </ul>
+
+  <button [routerLink]="['/add-entrepreneuship']">
+    Agregar Emprendimiento
+  </button>
 </nav>
