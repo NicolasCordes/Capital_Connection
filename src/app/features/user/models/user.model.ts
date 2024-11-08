@@ -1,13 +1,13 @@
 import { Address } from "./address.model";
 
 export interface User {
-Id?: Number,
-name: String,
-surname: String,
-email: String,
+id?: number,
+name: string,
+surname: string,
+email: string,
 dateOfBirth: Date,
 wallet : BigInt,
-yearsOfExperience : Number,
+yearsOfExperience : number,
 industry : string,
-Address : Address
+address : Address
 }

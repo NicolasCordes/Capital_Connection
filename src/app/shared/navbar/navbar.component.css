@@ -1,0 +1,35 @@
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 15px;
+  }
+  
+  nav ul li {
+    display: inline;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    color: #333;
+    padding: 8px 15px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  nav ul li a:hover {
+    background-color: #f0f0f0;
+    color: #000;
+    border-radius: 4px;
+  }
+  
+  nav ul li a.button {
+    color: #fff;
+    background-color: #007bff;
+    border-radius: 4px;
+  }
+  
+  nav ul li a.button:hover {
+    background-color: #0056b3;
+  }
+  

@@ -7,5 +7,24 @@
       "role": "Emprendedor",
       "email": "a@gmail.com"
     }
+  ],
+  "users": [
+    {
+      "id": "2410",
+      "name": "sfdf",
+      "surname": "sdfsdf",
+      "email": "nicopalacioscalvi@gmail.com",
+      "dateOfBirth": "2024-08-15",
+      "wallet": "dsf",
+      "yearsOfExperience": "3545345",
+      "industry": "fgdgfgdfg",
+      "address": {
+        "street": "Mansilla",
+        "number": 4645,
+        "locality": "Mar del Plata",
+        "province": "Buenos Aires (provincia)",
+        "type": "Work"
+      }
+    }
   ]
 }

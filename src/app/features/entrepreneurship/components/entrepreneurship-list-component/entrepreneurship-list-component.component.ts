@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Entrepreneurship } from '../../models/entrepreneurship.model';
 import { EntrepreneurshipService } from '../../services/entrepreneurship.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-entrepreneurship-list-component',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './entrepreneurship-list-component.component.html',
   styleUrl: './entrepreneurship-list-component.component.css'
 })
