@@ -22,7 +22,7 @@ import { HttpClient } from '@angular/common/http';
   }
 
   // Agregar un emprendimiento a los favoritos de un usuario
-  addFavorite(userId: string, entrepreneurshipId: string): Observable<any> {
+  addFavorite(userId: string, entrepreneurshipId: number): Observable<any> {
     return this.getUserById(userId).pipe(
       // Aquí podemos manipular los favoritos
       switchMap(user => {

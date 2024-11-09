@@ -132,8 +132,8 @@ export class EntrepreneurshipDetailComponent implements OnInit {
   addReview(newReview: Review): void {
     if (this.entrepreneurship) {
       if(this.entrepreneurship.reviews){
-        this.reviews = [...this.entrepreneurship.reviews, newReview]; 
-      
+        this.reviews = [...this.entrepreneurship.reviews, newReview];
+
       }
       this.carga= !this.carga;
       // Aquí se guarda la reseña en el backend (si es necesario)
@@ -148,7 +148,7 @@ export class EntrepreneurshipDetailComponent implements OnInit {
   addToFavorites(): void {
     const userId = '2410'; // ID hardcodeado del usuario por el momento
 
-    this.favoriteListService.addFavorite(userId, this.id!)
+    this.favoriteListService.addFavorite(userId, this.id)
       .subscribe(
         response => {
           console.log('Emprendimiento agregado a favoritos', response);
@@ -162,5 +162,5 @@ export class EntrepreneurshipDetailComponent implements OnInit {
 }
 
 
-}
+
 

@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class AddFavoriteComponent {
   userId: string = '2410'; // El ID del usuario al que le agregamos el favorito
-  entrepreneurshipId: string = '28fa'; // El ID del emprendimiento que queremos agregar
+  entrepreneurshipId: number = 0; // El ID del emprendimiento que queremos agregar
 
   constructor(private favoriteListService: FavoriteListService, private router: Router) {}
 
