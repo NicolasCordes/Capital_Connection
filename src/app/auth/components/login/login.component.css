@@ -1,88 +1,182 @@
-/* Estilos generales para el formulario */
-form {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
+/* Variables de color */
+:root {
+  --primary-color: #6c5ce7;
+  --secondary-color: #00bcd4;
+  --accent-color: #f39c12;
+  --light-gray: #ecf0f1;
+  --dark-gray: #2d3436;
+  --white: #ffffff;
+  --border-color: #dfe6e9;
+  --input-focus-color: #6c5ce7;
+  --shadow-color: rgba(0, 0, 0, 0.15);
+}
 
-  fieldset {
-    border: none;
-    padding: 0;
+/* Estilo global para el body */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f7f7f7;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color:black;
+}
+
+/* Estilos del formulario */
+.login-form {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  border-radius: 10px;
+  padding: 40px;
+  width: 400px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  animation: formFadeIn 1s ease-out;
+  box-sizing: border-box;
+}
+
+legend {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color:black;
+  margin-bottom: 30px;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+label {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color:black;
+  margin-bottom: 8px;
+  transition: all 0.3s ease;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 2px solid var(--border-color);
+  background-color: var(--white);
+  font-size: 1rem;
+  color:black;
+  outline: none;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+/* Efecto de enfoque en los inputs */
+input:focus {
+  border-color: var(--input-focus-color);
+  box-shadow: 0 0 5px var(--input-focus-color);
+}
+
+input::placeholder {
+  color: var(--dark-gray);
+  opacity: 0.6;
+}
+
+/* Revelar contraseña */
+.password-group {
+  position: relative;
+}
+
+.reveal-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 10px var(--shadow-color);
+  border-radius: 50%;
+  padding: 5px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.reveal-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Icono ojo */
+.icon {
+  font-size: 20px;
+  color: var(--dark-gray);
+  transition: all 0.3s ease;
+}
+
+/* Estado abierto del ojo */
+.eye-open {
+  color: var(--primary-color);
+}
+
+/* Estado cerrado del ojo */
+.eye-closed {
+  color: var(--accent-color);
+}
+
+/* Estilo del botón de submit */
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--primary-color);
+  color: var(--white);
+  font-size: 1.1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-sizing: border-box;
+}
+
+.submit-btn:disabled {
+  background-color: #b2bec3;
+  cursor: not-allowed;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background-color: var(--accent-color);
+  transform: translateY(-3px);
+}
+
+/* Animaciones de entrada del formulario */
+@keyframes formFadeIn {
+  0% {
+      opacity: 0;
+      transform: translateY(-40px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* Responsividad para dispositivos pequeños */
+@media (max-width: 480px) {
+  .login-form {
+      width: 90%;
+      padding: 25px;
   }
 
   legend {
-    font-size: 1.5em;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #333;
+      font-size: 1.5rem;
   }
 
-  section {
-    margin-bottom: 20px;
+  .form-group input {
+      font-size: 0.9rem;
   }
 
-  label {
-    display: block;
-    font-size: 1em;
-    color: #333;
-    margin-bottom: 5px;
+  .submit-btn {
+      font-size: 1rem;
   }
-
-  input {
-    width: 100%;
-    padding: 10px;
-    font-size: 1em;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    transition: border-color 0.3s;
-  }
-
-  input:focus {
-    border-color: #007bff;
-    outline: none;
-  }
-
-  button {
-    padding: 8px 15px;
-    font-size: 1em;
-    color: white;
-    background-color: #007bff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-
-  button:hover {
-    background-color: #0056b3;
-  }
-
-  button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-
-  /* Estilo para el botón "Ojito" */
-  button[type="button"] {
-    margin-top: 10px;
-    padding: 5px 10px;
-    background-color: transparent;
-    border: 1px solid #007bff;
-    color: #007bff;
-    cursor: pointer;
-    font-size: 0.9em;
-    border-radius: 4px;
-  }
-
-  button[type="button"]:hover {
-    background-color: #f1f1f1;
-  }
-
-  section:last-child {
-    text-align: center;
-  }
+}

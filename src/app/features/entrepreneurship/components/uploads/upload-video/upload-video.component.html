@@ -5,22 +5,22 @@
       <input type="file" fileInput [formControl]="videoControl" multiple (change)="onFilesSelected($event)" />
     </ngx-mat-dropzone>
     <mat-error *ngIf="videoControl.hasError('required') && videoControl.touched">
-      El video es requerida.
+      El video es requerido.
     </mat-error>
   </mat-form-field>
 
   <div *ngIf="videoControl.value.length > 0">
     <h3>Videos seleccionados:</h3>
     <div *ngFor="let file of videoControl.value; let i = index" class="video-preview">
+      <!-- Aquí puedes mostrar una miniatura o información sobre el video -->
       <span>{{ file.name }} ({{ file.type }})</span>
-      <button type="button" (click)="removeFile(i) " *ngIf="!emitido">Eliminar</button> <!-- Botón de eliminación -->
+      <button type="button" class="remove-video" (click)="removeFile(i)" *ngIf="!emitido" aria-label="Eliminar video">Eliminar</button>
     </div>
   </div>
-@if(!emitido){
-  <div *ngIf="isUploading">Cargando video...</div>
 
-  <button mat-raised-button color="primary" type="submit" [disabled]="isUploading || !videoControl.valid">
+  <div *ngIf="isUploading" class="isUploading">Cargando video...</div>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="isUploading || !videoForm.valid" aria-label="Subir videos">
     Subir videos
   </button>
-}
 </form>

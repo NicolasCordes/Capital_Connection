@@ -36,6 +36,16 @@ div p {
   margin-top: 5px;
 }
 
+select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
 /* Estilo de las imágenes seleccionadas */
 h3 {
   margin-top: 20px;

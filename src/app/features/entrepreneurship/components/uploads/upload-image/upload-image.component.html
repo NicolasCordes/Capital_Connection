@@ -13,14 +13,13 @@
     <h3>Imágenes seleccionadas:</h3>
     <div *ngFor="let file of imageControl.value; let i = index" class="image-preview">
       <span>{{ file.name }} ({{ file.type }})</span>
-      <button type="button" (click)="removeFile(i) " *ngIf="!emitido">Eliminar</button> <!-- Botón de eliminación -->
+      <button type="button" (click)="removeFile(i)" *ngIf="!emitido" class="remove-image" aria-label="Eliminar imagen">Eliminar</button>
     </div>
   </div>
-@if(!emitido){
-  <div *ngIf="isUploading">Cargando imagen...</div>
 
-  <button mat-raised-button color="primary" type="submit" [disabled]="isUploading || !imageForm.valid">
+  <div *ngIf="isUploading" class="isUploading">Cargando imagen...</div>
+
+  <button mat-raised-button type="submit" [disabled]="isUploading || !imageForm.valid" aria-label="Subir imágenes">
     Subir imágenes
   </button>
-}
 </form>

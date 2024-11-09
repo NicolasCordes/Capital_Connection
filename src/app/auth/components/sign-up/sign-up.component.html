@@ -1,46 +1,37 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-container">
   <fieldset>
-      <legend>Registrarse</legend>
-      <section>
-          <label for="email">Correo electrónico</label>
-          <input type="text" id="email" autocomplete="email" formControlName="email">
-          @if (form.controls['email'].touched) {
-              @if (form.controls['email'].getError('required')) {
-                  <span>El email no puede permanecer vacío</span>
-              }
-              @if (form.controls['email'].getError('email')) {
-                  <span>El email no es un correo válido</span>
-              }
-          }
-      </section>
-      <section>
-          <label for="username">Nombre de Usuario</label>
-          <input type="text" id="username" autocomplete="username" formControlName="username">
-          @if (form.controls['username'].touched) {
-              @if (form.controls['username'].getError('required')) {
-                  <span>El nombre de usuario no puede permanecer vacío</span>
-              }
-              @if (form.controls['username'].getError('minlength')) {
-                  <span>El nombre de usuario es muy corto</span>
-              }
-          }
-      </section>
+    <legend class="form-title">Registrarse</legend>
 
-      <section>
-          <label for="password">Contraseña</label>
-          <input #password type="password" id="password" formControlName="password">
-          <button type="button" (click)="onRevealPassword(password)">Ojito</button>
-          @if (form.controls['password'].touched) {
+    <section class="form-group">
+      <label for="email">Correo electrónico</label>
+      <input type="text" id="email" autocomplete="email" formControlName="email" class="input-field">
+      <div *ngIf="form.controls['email'].touched">
+        <span *ngIf="form.controls['email'].hasError('required')" class="error-msg">El email no puede permanecer vacío</span>
+        <span *ngIf="form.controls['email'].hasError('email')" class="error-msg">El email no es válido</span>
+      </div>
+    </section>
 
-              @if (form.controls['password'].getError('required')) {
-                  <span>La contraseña no puede permanecer vacía</span>
-              }
-              @if (form.controls['password'].getError('minlength')) {
-                  <span>La contraseña es muy corta</span>
-              }
-          }
-      </section>
-      <button type="submit" [disabled]="form.invalid">Enviar</button>
+    <section class="form-group">
+      <label for="username">Nombre de Usuario</label>
+      <input type="text" id="username" autocomplete="username" formControlName="username" class="input-field">
+      <div *ngIf="form.controls['username'].touched">
+        <span *ngIf="form.controls['username'].hasError('required')" class="error-msg">El nombre de usuario no puede permanecer vacío</span>
+        <span *ngIf="form.controls['username'].hasError('minlength')" class="error-msg">El nombre de usuario es muy corto</span>
+      </div>
+    </section>
+
+    <section class="form-group">
+      <label for="password">Contraseña</label>
+      <div class="password-container">
+        <input #password type="password" id="password" formControlName="password" class="input-field">
+        <button type="button" (click)="onRevealPassword(password)" class="eye-icon">👁️</button>
+      </div>
+      <div *ngIf="form.controls['password'].touched">
+        <span *ngIf="form.controls['password'].hasError('required')" class="error-msg">La contraseña no puede permanecer vacía</span>
+        <span *ngIf="form.controls['password'].hasError('minlength')" class="error-msg">La contraseña es muy corta</span>
+      </div>
+    </section>
+
+    <button type="submit" [disabled]="form.invalid" class="submit-btn">Enviar</button>
   </fieldset>
 </form>
-

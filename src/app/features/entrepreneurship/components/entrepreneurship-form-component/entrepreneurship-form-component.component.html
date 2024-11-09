@@ -29,7 +29,14 @@
   <!-- Categoría -->
   <label>
     Categoría:
-    <input type="text" formControlName="category" required />
+    <select formControlName="category" required>
+      <option value="" disabled selected>Seleccione una categoría</option>
+      <option value="tecnologia">Tecnología</option>
+      <option value="salud">Salud</option>
+      <option value="educacion">Educación</option>
+      <option value="sostenibilidad">Sostenibilidad</option>
+      <option value="alimentacion">Alimentación</option>
+    </select>
     <div *ngIf="entrepreneurshipForm.get('category')?.hasError('required') && entrepreneurshipForm.get('category')?.touched">
       <p>La categoría es requerida.</p>
     </div>

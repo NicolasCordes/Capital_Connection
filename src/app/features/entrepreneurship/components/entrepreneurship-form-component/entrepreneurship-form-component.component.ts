@@ -27,7 +27,7 @@ export class EntrepreneurshipFormComponent implements OnInit {
       goal: [0, [Validators.required, Validators.min(1)]],
       category: ['', Validators.required],
       images: this.fb.array([]), // FormArray para almacenar URLs de imágenes
-      videos: this.fb.array([]), // FormArray para almacenar URLs de imágenes
+      videos: this.fb.array([]), // FormArray para almacenar URLs de videos
     });
   }
 

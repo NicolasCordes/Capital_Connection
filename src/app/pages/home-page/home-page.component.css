@@ -1,0 +1,16 @@
+h2 {
+    font-family: 'Arial', sans-serif; /* Fuente limpia y moderna */
+    font-size: 2rem; /* Tamaño de fuente adecuado */
+    color: #333; /* Color de texto en gris oscuro */
+    margin: 20px 0; /* Espaciado superior e inferior */
+    padding: 10px 20px; /* Espaciado interno */
+    background-color: #f4f4f9; /* Fondo suave */
+    border-left: 5px solid #4CAF50; /* Línea decorativa en el borde izquierdo */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  }
+
+  h2 span {
+    color: #4CAF50; /* Color del nombre en verde */
+    font-weight: bold; /* Nombre en negrita */
+  }

@@ -10,3 +10,13 @@ export interface Entrepreneurship {
   images: string[]; // URLs de imágenes
   videos: string[]; // URLs de videos
 }
+
+export interface PageResponse {
+  content: Entrepreneurship[];
+  page: {
+    size: number;
+    number: number;
+    totalElements: number;
+    totalPages: number;
+  };
+}

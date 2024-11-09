@@ -1,129 +1,121 @@
 /* Estilos generales */
-body {
+:host {
+  display: block;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
   font-family: Arial, sans-serif;
-  background-color: #f4f7fc;
   color: #333;
-  padding: 20px;
 }
 
+/* Título */
 h2 {
-  color: #4a90e2;
-  margin-bottom: 20px;
+  text-align: center;
+  color: #4caf50;
+  margin-bottom: 1rem;
 }
 
-/* Modo de visualización */
+/* Detalles del emprendimiento */
 .entrepreneurship-details {
-  background-color: #fff;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  border: 1px solid #e0e0e0;
   border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
 }
 
 .entrepreneurship-details p {
-  font-size: 16px;
-  margin: 10px 0;
+  margin: 0.5rem 0;
+  font-size: 1rem;
 }
 
-.entrepreneurship-details strong {
-  color: #4a90e2;
+/* Imágenes */
+h3 {
+  color: #4caf50;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
 }
 
-/* Listado de imágenes y videos */
-.images,
-.videos {
-  margin-top: 20px;
+.images-section, .videos-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
-.images ul,
-.videos ul {
-  list-style: none;
-  padding: 0;
-}
-
-.media-list li {
-  display: inline-block;
-  margin: 10px;
-  text-align: center;
-}
-
-img,
-video {
-  display: block;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  max-width: 100%;
-  max-height: 150px;
-}
-
-button {
-  background-color: #e74c3c;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #c0392b;
-}
-
-/* Modo de edición */
-form {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-top: 20px;
-}
-
-label {
-  display: block;
-  font-weight: bold;
-  margin: 10px 0;
-}
-
-input[type="text"],
-input[type="number"],
-input[type="file"] {
+.images-section img, .videos-section video {
   width: 100%;
-  padding: 8px;
-  margin-top: 5px;
+  max-width: 200px;
+  height: auto;
+  border: 2px solid #e0e0e0;
+  border-radius: 4px;
+}
+
+/* Formulario */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+form label {
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+form input[type="text"],
+form input[type="number"],
+form select {
+  width: 100%;
+  padding: 0.5rem;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 4px;
+  font-size: 1rem;
 }
 
-input[type="file"] {
-  display: inline-block;
+form input[type="file"] {
+  padding: 0.5rem 0;
 }
 
-button[type="submit"],
-button[type="button"] {
-  background-color: #4a90e2;
-  color: white;
-  padding: 10px 15px;
+form .error {
+  color: #ff0000;
+  font-size: 0.85rem;
+  margin-top: 0.3rem;
+}
+
+/* Botones */
+button {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #4caf50;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
-  margin-right: 10px;
+  transition: background-color 0.3s;
 }
 
-button[type="submit"]:disabled {
-  background-color: #aaa;
+button:disabled {
+  background-color: #ccc;
   cursor: not-allowed;
 }
 
-button[type="submit"]:hover,
-button[type="button"]:hover {
-  background-color: #357ab7;
+button:hover:not(:disabled) {
+  background-color: #43a047;
 }
 
-ul {
-  margin: 0;
-  padding: 0;
+button.cancel {
+  background-color: #ff5722;
 }
 
-li {
-  list-style: none;
-  margin: 5px 0;
+button.cancel:hover {
+  background-color: #e64a19;
 }
+
+/* Sección de botones en el formulario */
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
