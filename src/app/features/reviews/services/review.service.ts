@@ -9,7 +9,7 @@ import { Review } from "../models/review.model";
   export class ReviewService {
   
     http = inject(HttpClient)
-    urlBase = 'http://localhost:3000/reviews';
+    urlBase = 'http://localhost:8080/reviews';
   
     getReview(): Observable<Review[]> {
       return this.http.get<Review[]>(this.urlBase);

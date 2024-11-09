@@ -63,6 +63,7 @@ export class EntrepreneurshipFormComponent implements OnInit {
     if (this.entrepreneurshipForm.valid) {
       const ent = this.entrepreneurshipForm.getRawValue();
       ent.id_user = '123';
+      console.log('Emprendimiento a enviar:', ent); // Verifica las URLs de las imágenes
       console.log(ent);
       this.entrepreneurshipService
         .postEntrepreneurship(ent)
