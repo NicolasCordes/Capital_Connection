@@ -61,6 +61,7 @@ export class EntrepreneurshipListComponent implements OnInit {
       }
     );
   }
+
   calculateCollected(entrepreneurship: Entrepreneurship): void {
     // Verifica que el id sea válido y convierte a número
     if (entrepreneurship.id && !isNaN(Number(entrepreneurship.id))) {
@@ -91,10 +92,11 @@ export class EntrepreneurshipListComponent implements OnInit {
     if (id) {
       this.router.navigate([`/entrepreneurships/${id}`]);
     }
+
   }
 
   // Eliminación de un emprendimiento
-  deleteEntrepreneurship(id: string | null): void {
+  deleteEntrepreneurship(id: number | null): void {
     this.entrepreneurshipService.deleteEntrepreneurship(id).subscribe(() => {
       this.entrepreneurships = this.entrepreneurships.filter(
         (entrepreneurship) => entrepreneurship.id !== id

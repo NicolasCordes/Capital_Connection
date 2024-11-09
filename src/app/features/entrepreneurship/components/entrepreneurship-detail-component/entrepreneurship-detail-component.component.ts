@@ -13,11 +13,12 @@ import {
 import { CommonModule } from '@angular/common';
 import { ReviewsFormComponentComponent } from "../../../reviews/components/reviews-form-component/reviews-form-component.component";
 import { Review } from '../../../reviews/models/review.model';
+import { ReviewsListComponentComponent } from "../../../reviews/components/reviews-list-component/reviews-list-component.component";
 
 @Component({
   selector: 'app-entrepreneurship-detail-component',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, ReviewsFormComponentComponent],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, ReviewsFormComponentComponent, ReviewsListComponentComponent],
   templateUrl: './entrepreneurship-detail-component.component.html',
   styleUrls: ['./entrepreneurship-detail-component.component.css'],
 })
@@ -25,7 +26,9 @@ export class EntrepreneurshipDetailComponent implements OnInit {
   entrepreneurshipForm!: FormGroup;
   isEditing = false;
   entrepreneurship: Entrepreneurship | null = null;
-  id: string | null = null;
+  id: number = 0;
+  reviews: Review[] = [];
+  carga: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -36,7 +39,7 @@ export class EntrepreneurshipDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
-      this.id = params.get('id') ?? '';
+      this.id = parseInt(params.get('id') || '0', 10);
       this.entrepreneurshipService.getEntrepreneurshipById(this.id).subscribe((entrepreneurship) => {
         this.entrepreneurship = entrepreneurship;
         this.initForm(entrepreneurship);
@@ -120,12 +123,15 @@ export class EntrepreneurshipDetailComponent implements OnInit {
 
   addReview(newReview: Review): void {
     if (this.entrepreneurship) {
-      this.entrepreneurship.reviews = [...(this.entrepreneurship.reviews || []), newReview];
-      // Actualizar la reseña en el backend (si es necesario)
+      if(this.entrepreneurship.reviews){
+        this.reviews = [...this.entrepreneurship.reviews, newReview]; 
+      
+      }
+      this.carga= !this.carga;
+      // Aquí se guarda la reseña en el backend (si es necesario)
       this.entrepreneurshipService.updateEntrepreneurship(this.id, this.entrepreneurship).subscribe(() => {
         console.log('Reseña agregada correctamente');
       });
     }
   }
-  
 }
