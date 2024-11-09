@@ -8,7 +8,7 @@ import { Entrepreneurship } from '../models/entrepreneurship.model';
 })
 export class EntrepreneurshipService {
   http = inject(HttpClient);
-  private urlBase = 'http://localhost:3000/entrepreneurships';
+  private urlBase = 'http://localhost:8080/entrepreneurships';
 
   getEntrepreneurship(): Observable<Entrepreneurship[]> {
     return this.http.get<Entrepreneurship[]>(this.urlBase);
@@ -24,7 +24,7 @@ export class EntrepreneurshipService {
     return this.http.post<Entrepreneurship>(this.urlBase, entrepreneurship);
   }
 
-  deleteEntrepreneurship(id: string): Observable<Entrepreneurship> {
+  deleteEntrepreneurship(id: string | null ): Observable<Entrepreneurship> {
     return this.http.delete<Entrepreneurship>(`${this.urlBase}/${id}`);
   }
 

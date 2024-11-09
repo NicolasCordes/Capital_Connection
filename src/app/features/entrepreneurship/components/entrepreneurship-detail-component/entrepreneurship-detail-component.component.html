@@ -17,6 +17,17 @@
 
     <!-- Mostrar imágenes -->
 
+      <h3>Imágenes del Emprendimiento</h3>
+      <div *ngFor="let image of entrepreneurship.images">
+        <img [src]="image" alt="Imagen del emprendimiento" width="200" height="200">
+      </div>
+
+      <h3>Videos del Emprendimiento</h3>
+      <div *ngFor="let video of entrepreneurship.videos">
+        <video [src]="video" controls width="400">
+          Tu navegador no soporta la etiqueta de video.
+        </video>      </div>
+
     <!-- Mostrar videos -->
 
     <button *ngIf="!isEditing" (click)="enableEditing()">Editar</button>

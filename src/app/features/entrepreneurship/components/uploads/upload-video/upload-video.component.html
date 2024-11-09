@@ -1,0 +1,26 @@
+<form [formGroup]="videoForm" (ngSubmit)="uploadVideo()">
+  <mat-form-field appearance="fill">
+    <mat-label>Cargar video</mat-label>
+    <ngx-mat-dropzone>
+      <input type="file" fileInput [formControl]="videoControl" multiple (change)="onFilesSelected($event)" />
+    </ngx-mat-dropzone>
+    <mat-error *ngIf="videoControl.hasError('required') && videoControl.touched">
+      El video es requerida.
+    </mat-error>
+  </mat-form-field>
+
+  <div *ngIf="videoControl.value.length > 0">
+    <h3>Videos seleccionados:</h3>
+    <div *ngFor="let file of videoControl.value; let i = index" class="video-preview">
+      <span>{{ file.name }} ({{ file.type }})</span>
+      <button type="button" (click)="removeFile(i) " *ngIf="!emitido">Eliminar</button> <!-- Botón de eliminación -->
+    </div>
+  </div>
+@if(!emitido){
+  <div *ngIf="isUploading">Cargando video...</div>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="isUploading || !videoControl.valid">
+    Subir videos
+  </button>
+}
+</form>

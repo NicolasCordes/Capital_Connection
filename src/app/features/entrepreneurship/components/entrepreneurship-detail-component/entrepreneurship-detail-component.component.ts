@@ -24,6 +24,7 @@ export class EntrepreneurshipDetailComponent implements OnInit {
   isEditing = false;
   entrepreneurship: Entrepreneurship | null = null;
 
+
   constructor(
     private route: ActivatedRoute,
     private entrepreneurshipService: EntrepreneurshipService,

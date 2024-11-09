@@ -1,0 +1,29 @@
+.image-preview {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.image-thumbnail {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.remove-image {
+  font-size: 20px;
+  color: red;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.remove-image:hover {
+  color: darkred;
+}
+
+button[disabled] {
+  background-color: lightgray;
+  cursor: not-allowed;
+}
