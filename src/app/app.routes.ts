@@ -9,6 +9,8 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './auth/components/login/login.component';
 import { SignupComponent } from './auth/components/sign-up/sign-up.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { AddFavoriteComponent } from './features/favorite-list/components/add-favorite/add-favorite.component';
+import { FavoriteListComponent } from './features/favorite-list/components/list-favorite/favorite-list.component';
 
 export const routes: Routes = [
   {
@@ -37,9 +39,13 @@ export const routes: Routes = [
       path:'users',
       component:UserListComponent
     },
+    { path: 'add-favorite', component: AddFavoriteComponent },
+    { path: 'favorites/:id', component: FavoriteListComponent },
   {
     path: '**',
     redirectTo: 'home',
     pathMatch: 'full',
   },
+
+
 ];

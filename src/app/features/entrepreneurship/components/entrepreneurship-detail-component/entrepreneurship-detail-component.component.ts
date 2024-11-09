@@ -13,7 +13,11 @@ import {
 import { CommonModule } from '@angular/common';
 import { ReviewsFormComponentComponent } from "../../../reviews/components/reviews-form-component/reviews-form-component.component";
 import { Review } from '../../../reviews/models/review.model';
+
+import { FavoriteListService } from '../../../favorite-list/services/favorite-list.service';
+
 import { ReviewsListComponentComponent } from "../../../reviews/components/reviews-list-component/reviews-list-component.component";
+
 
 @Component({
   selector: 'app-entrepreneurship-detail-component',
@@ -26,13 +30,17 @@ export class EntrepreneurshipDetailComponent implements OnInit {
   entrepreneurshipForm!: FormGroup;
   isEditing = false;
   entrepreneurship: Entrepreneurship | null = null;
+
+  userId: string = '123'; // Asegúrate de obtener el userId correctamente, aquí lo he dejado estático por ahora.
   id: number = 0;
   reviews: Review[] = [];
   carga: boolean = false;
 
+
   constructor(
     private route: ActivatedRoute,
     private entrepreneurshipService: EntrepreneurshipService,
+    private favoriteListService: FavoriteListService,
     private fb: FormBuilder,
     private router: Router
   ) {}
@@ -134,4 +142,25 @@ export class EntrepreneurshipDetailComponent implements OnInit {
       });
     }
   }
+
+
+  // Método corregido para agregar el emprendimiento a favoritos
+  addToFavorites(): void {
+    const userId = '2410'; // ID hardcodeado del usuario por el momento
+
+    this.favoriteListService.addFavorite(userId, this.id!)
+      .subscribe(
+        response => {
+          console.log('Emprendimiento agregado a favoritos', response);
+        },
+        error => {
+          error = 'Hubo un problema al agregar el emprendimiento a favoritos.';
+          console.error('Error al agregar a favoritos', error);
+        }
+      );
+  }
 }
+
+
+}
+
