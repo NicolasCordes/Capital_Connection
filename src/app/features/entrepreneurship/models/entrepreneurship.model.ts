@@ -9,6 +9,7 @@ export interface Entrepreneurship {
   category: string;
   images: string[]; // URLs de imágenes
   videos: string[]; // URLs de videos
+  reviews?: Review [];
 }
 
 export interface PageResponse {

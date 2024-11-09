@@ -119,3 +119,33 @@ button.cancel:hover {
   justify-content: space-between;
 }
 
+.review-list {
+  margin-top: 20px;
+}
+
+.review-item {
+  background-color: #f1f3f5;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  border-left: 4px solid #007bff;
+}
+
+.review-item p {
+  margin: 5px 0;
+}
+
+.review-item strong {
+  font-size: 16px;
+  color: #333;
+}
+
+.review-item .review-stars {
+  color: #ffc107;
+  font-weight: bold;
+}
+
+.review-item .review-date {
+  font-size: 12px;
+  color: #6c757d;
+}
