@@ -16,7 +16,7 @@ import { Donation } from "../models/donation.model";
       return this.http.get<Donation[]>(this.urlBase);
     }
   
-    getDonationById(id: Number | null): Observable<Donation> {
+    getDonationById(id: string | null): Observable<Donation> {
       return this.http.get<Donation>(`${this.urlBase}/${id}`)
     }
   
@@ -24,11 +24,16 @@ import { Donation } from "../models/donation.model";
       return this.http.post<Donation>(this.urlBase, donation)
     }
   
-    deleteDonation(id: Number | undefined): Observable<Donation> {
+    deleteDonation(id: string | undefined): Observable<Donation> {
       return this.http.delete<Donation>(`${this.urlBase}/${id}`)
     }
   
-    updateDonation(id: Number | null, donation: Donation): Observable<Donation> {
+    updateDonation(id: string | null, donation: Donation): Observable<Donation> {
       return this.http.put<Donation>(`${this.urlBase}/${id}`, donation);
     }
+
+    getDonationsByEntrepreneurshipId(entrepreneurshipId: number): Observable<Donation[]> {
+      return this.http.get<Donation[]>(`${this.urlBase}?entrepreneurshipId=${entrepreneurshipId}`);
+    }
+
   }

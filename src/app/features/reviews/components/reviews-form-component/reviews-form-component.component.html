@@ -1,24 +1,33 @@
+
 <form [formGroup]="reviewForm" (ngSubmit)="submitReview()">
-    <label>
-      Nombre del Revisor:
+
+     <!-- Nombre del Usuario:
       <input formControlName="reviewerName" type="text" />
       <div *ngIf="reviewForm.get('reviewerName')?.invalid && reviewForm.get('reviewerName')?.touched">
         El nombre es obligatorio.
       </div>
     </label>
-  
+    --> 
     <label>
       Calificación:
-      <input formControlName="stars" type="number" min="1" max="5" />
+      <div class="star-rating">
+        <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+          <i
+            class="fa fa-star"
+            [ngClass]="{'checked': i < reviewForm.get('stars')?.value}"
+            (click)="setRating(i + 1)">
+          </i>
+        </ng-container>
+      </div>
       <div *ngIf="reviewForm.get('stars')?.invalid && reviewForm.get('stars')?.touched">
         La calificación debe estar entre 1 y 5.
       </div>
     </label>
-  
+      
     <label>
       Comentario:
-      <textarea formControlName="comment"></textarea>
-      <div *ngIf="reviewForm.get('comment')?.invalid && reviewForm.get('comment')?.touched">
+      <textarea formControlName="reviewText"></textarea>
+      <div *ngIf="reviewForm.get('reviewText')?.invalid && reviewForm.get('reviewText')?.touched">
         El comentario es obligatorio.
       </div>
     </label>
@@ -26,3 +35,5 @@
     <button type="submit" [disabled]="!reviewForm.valid">Agregar Reseña</button>
   </form>
   
+
+ 

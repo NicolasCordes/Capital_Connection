@@ -46,25 +46,16 @@
       </div>
     </label>
 
-    <label>
-      Objetivo financiero:
-      <input type="number" formControlName="goal" />
-      <div *ngIf="entrepreneurshipForm.get('goal')?.invalid && entrepreneurshipForm.get('goal')?.touched">
-        El objetivo es obligatorio.
-      </div>
-    </label>
+    <!-- Formulario de Reseñas -->
+    <h3>Agregar una Reseña</h3>
+    <app-reviews-form-component (reviewCreated)="addReview($event)" [entrepreneurship]="entrepreneurship"></app-reviews-form-component>
 
-    <label>
-      Categoría:
-      <select formControlName="category">
-        <option value="" disabled>Seleccione una categoría</option>
-        <option value="tecnologia">Tecnología</option>
-        <option value="salud">Salud</option>
-        <option value="educacion">Educación</option>
-        <option value="sostenibilidad">Sostenibilidad</option>
-        <option value="alimentacion">Alimentación</option>
-      </select>
-    </label>
+@if(!carga){
+  <app-reviews-list-component [reviews]="entrepreneurship.reviews || []"></app-reviews-list-component>
+
+}@else{
+  <app-reviews-list-component [reviews]="entrepreneurship.reviews || []"></app-reviews-list-component>
+
 
     <!-- Edición de Imágenes -->
     <h3>Imágenes</h3>
@@ -115,4 +106,8 @@
     <button type="submit" [disabled]="!entrepreneurshipForm.valid || !formHasChanged()">Guardar</button>
     <button type="button" (click)="cancelEditing()">Cancelar</button>
   </form>
+
+}
+  </div>
+
 </div>

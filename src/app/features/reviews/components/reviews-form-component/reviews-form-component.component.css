@@ -57,3 +57,19 @@ form {
     font-size: 12px;
   }
   
+  .star-rating {
+    display: flex;
+    gap: 5px;
+    cursor: pointer;
+  }
+  
+  .fa-star {
+    font-size: 1.5rem;
+    color: #ddd;
+  }
+  
+  .fa-star.checked {
+    color: #ffc107; /* Color de las estrellas seleccionadas */
+  }
+  
+  

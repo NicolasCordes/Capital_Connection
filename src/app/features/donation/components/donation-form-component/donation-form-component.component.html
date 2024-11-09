@@ -1,1 +1,9 @@
-<p>donation-form-component works!</p>
+<form [formGroup]="donationForm" (ngSubmit)="onSubmit()">
+    <label for="amount">Cantidad:</label>
+    <input id="amount" formControlName="amount" type="number" />
+  
+    <label for="date">Fecha:</label>
+    <input id="date" formControlName="date" type="date" />
+  
+    <button type="submit" [disabled]="!donationForm.valid">Agregar Donación</button>
+  </form>
