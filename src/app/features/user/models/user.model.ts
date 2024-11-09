@@ -10,4 +10,5 @@ wallet : BigInt,
 yearsOfExperience : number,
 industry : string,
 address : Address
+favorites: { type: string, id: string }[];
 }
