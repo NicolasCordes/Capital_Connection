@@ -14,12 +14,14 @@ label {
   margin-bottom: 10px;
   font-weight: bold;
   font-size: 1rem;
+  color: black;
 }
 
 /* Estilo de los campos de entrada */
 input[type="text"],
 input[type="number"],
-input[type="file"] {
+input[type="file"],
+textarea {
   width: 100%;
   padding: 8px;
   margin-top: 5px;
@@ -27,6 +29,13 @@ input[type="file"] {
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 1rem;
+  resize: vertical; /* Permite redimensionar el textarea verticalmente */
+}
+
+/* Estilo del campo de texto (textarea) */
+textarea {
+  min-height: 120px; /* Altura mínima */
+  max-height: 300px; /* Altura máxima */
 }
 
 /* Mensajes de error */
@@ -119,7 +128,8 @@ input[type="file"] {
 
   input[type="text"],
   input[type="number"],
-  input[type="file"] {
+  input[type="file"],
+  textarea {
     font-size: 0.9rem;
   }
 

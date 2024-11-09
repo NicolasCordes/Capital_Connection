@@ -11,7 +11,7 @@
   <!-- Descripción -->
   <label>
     Descripción:
-    <input type="text" formControlName="description" required />
+    <textarea formControlName="description" rows="5" cols="50" required></textarea>
     <div *ngIf="entrepreneurshipForm.get('description')?.hasError('required') && entrepreneurshipForm.get('description')?.touched">
       <p>La descripción es requerida.</p>
     </div>

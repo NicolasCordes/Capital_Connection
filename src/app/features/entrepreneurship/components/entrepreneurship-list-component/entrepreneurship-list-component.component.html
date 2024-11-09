@@ -1,17 +1,39 @@
-<div *ngIf="entrepreneurships.length > 0; else noData">
-  <ul>
-    <li *ngFor="let entrepreneurship of entrepreneurships; let i = index">
-      <!-- Aquí puedes mostrar el nombre o algún dato del emprendimiento -->
+<!-- Encabezado con imagen de fondo -->
+<div class="explore-header">
+  <h1>Explorar los emprendimientos</h1>
+</div>
+
+<div *ngIf="entrepreneurships.length > 0;" class="card-container">
+  <div class="card" *ngFor="let entrepreneurship of entrepreneurships; let i = index">
+    <div class="card-image">
+      <img [src]="entrepreneurship.images" alt="Proyecto">
+    </div>
+    <div class="card-content">
       <h3>{{ entrepreneurship.name }}</h3>
-      <p>{{ entrepreneurship.description }}</p>
-      <button *ngIf="entrepreneurship.id"  (click)="navigateToDetails(entrepreneurship.id)">
-        Ver Detalles
-      </button>
-      <button *ngIf="entrepreneurship.id"  (click)="deleteEntrepreneurship(entrepreneurship.id)">
-        Eliminar
-      </button>
-    </li>
-  </ul>
+      <p>{{ entrepreneurship.description.length > 250 ? (entrepreneurship.description | slice: 0:250) + '...' : entrepreneurship.description }}</p>
+      <div class="goal-progress">
+        <p>Goal: ${{ entrepreneurship.goal }}</p>
+        <!-- <div class="progress-bar">
+          <div class="progress" [style.width]="(entrepreneurship.collected / entrepreneurship.goal) * 100 + '%'"></div>
+        </div>
+        <p>{{ ((entrepreneurship.collected / entrepreneurship.goal) * 100).toFixed(2) }}% Collected</p>
+      </div> -->
+      <div class="card-footer">
+        <span>#{{ entrepreneurship.category }}</span>
+        <button *ngIf="entrepreneurship.id" (click)="navigateToDetails(entrepreneurship.id)">Ver Detalles</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Indicador de carga -->
+<div *ngIf="isLoading" class="loading">
+  <p>Cargando más emprendimientos...</p>
+</div>
+
+<!-- Mensaje si no hay más datos -->
+<div *ngIf="!hasMore && !isLoading" class="no-more-data">
+  <p>No hay más emprendimientos disponibles.</p>
 </div>
 
 <ng-template #noData>

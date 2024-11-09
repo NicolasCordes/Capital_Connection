@@ -1,56 +1,201 @@
-/* Estilos para la lista de emprendimientos */
-.entrepreneurship-list {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
+/* Encabezado con imagen de fondo */
+.explore-header {
+  position: relative; /* Necesario para posicionar el pseudo-elemento encima */
+  background-image: url('https://res.cloudinary.com/dyho1ydzl/image/upload/v1731173954/3-days-in-san-fran_banner_3_gqnhsl.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  margin-bottom: 2.5rem;
 }
 
-.entrepreneurship-item {
-  margin-bottom: 20px;
+/* Pseudo-elemento para oscurecer la imagen de fondo */
+.explore-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3); /* Capa oscura con opacidad */
+  z-index: 1; /* Asegura que la capa de oscuridad esté por debajo del contenido */
+}
+/* Estilo del h1 */
+.explore-header h1 {
+  font-family: 'Whyte Inktrap', Helvetica, 'Sans-serif';
+  font-size: 6rem;
+  line-height: 104px;
+  font-weight: 500;
+  color: white;
+  z-index: 2;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Para asegurar buena visibilidad sobre la imagen */
+  text-transform: uppercase; /* Si deseas que sea en mayúsculas */
+  letter-spacing: 1px; /* Si prefieres darle espacio entre las letras */
 }
 
-.entrepreneurship-card {
+/* Estilos responsivos */
+@media (min-width: 768px) {
+  .explore-header h1 {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .explore-header h1 {
+    font-size: 2.5rem;
+  }
+}
+
+
+/* Contenedor general de las cards */
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
   padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  justify-items: center;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+/* Estilo para cada card */
+.card {
   background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  height: auto;
+  user-select: none;
 }
 
-h3 {
-  margin: 0;
-  font-size: 1.5rem;
-  color: #333;
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
 }
 
-p {
-  font-size: 1rem;
-  color: #555;
+/* Imagen de la card */
+.card-image {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
 }
 
-.buttons {
-  margin-top: 15px;
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-button {
-  padding: 10px 15px;
-  margin-right: 10px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+/* Contenido dentro de la card */
+.card-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
 }
 
-button:hover {
+.card-content h3,
+.card-content p {
+  user-select: none;
+  color: black;
+}
+
+.card-content p {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limita el texto a 3 líneas */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Barra de progreso */
+.goal-progress {
+  margin-top: 10px;
+}
+
+.goal-progress p {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.progress {
+  height: 100%;
+  background-color: #4caf50;
+  border-radius: 5px;
+}
+
+/* Footer de la card */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 15px;
+  border-top: 1px solid #ddd;
+}
+
+.card-footer span {
+  font-size: 14px;
+  color: #888;
+}
+
+.card-footer button {
+  padding: 10px 20px;
   background-color: #007bff;
   color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
 }
 
-button:focus {
-  outline: none;
+.card-footer button:hover {
+  background-color: #0056b3;
 }
 
-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+/* Carga de nuevos proyectos */
+.loading {
+  text-align: center;
+  font-size: 16px;
+  padding: 10px;
+}
+
+.no-more-data {
+  text-align: center;
+  font-size: 16px;
+  padding: 10px;
+  color: #aaa;
+}
+
+/* Para móvil */
+@media (max-width: 768px) {
+  .card-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Para pantallas muy pequeñas */
+@media (max-width: 480px) {
+  .card-container {
+    grid-template-columns: 1fr;
+  }
 }

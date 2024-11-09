@@ -6,16 +6,18 @@
   font-family: 'Arial', sans-serif;
 }
 
+html, body {
+  height: 100%;  /* Aseguramos que el html y el body ocupen el 100% de la altura */
+}
+
 body {
   background-color: #121212; /* Fondo oscuro */
   color: white; /* Texto blanco para contraste */
   font-family: 'Arial', sans-serif;
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  position: relative;
   margin: 0;
+  padding: 0;
+  overflow-y: scroll;  /* Habilitar scroll vertical */
+  position: relative;
   background: linear-gradient(45deg,
     rgba(212, 175, 55, 0.4), /* dorado */
     rgba(192, 192, 192, 0.4), /* plateado */
@@ -39,4 +41,3 @@ body {
     background-position: 0% 50%;
   }
 }
-
