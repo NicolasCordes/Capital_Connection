@@ -85,7 +85,28 @@
       </div>
       <button type="button" (click)="addVideo()">Agregar Video</button>
     </div>
-
+    <div *ngIf="entrepreneurship as currentEntrepreneurship">
+      <h2>{{ currentEntrepreneurship.name }} - Detalles</h2>
+    
+      <!-- Sección de detalles de emprendimiento existente -->
+    
+      <!-- Formulario de Reseñas -->
+      <h3>Agregar una Reseña</h3>
+      <app-reviews-form-component (reviewCreated)="addReview($event)"></app-reviews-form-component>
+    
+    
+    <!-- Lista de Reseñas Existentes -->
+<h3>Reseñas</h3>
+<div class="review-list">
+  <div *ngFor="let review of entrepreneurship?.reviews" class="review-item">
+    <p><strong>{{ review.reviewerName }}</strong></p>
+    <p class="review-stars">{{ review.stars }} estrellas</p>
+    <p>{{ review.comment }}</p>
+    <p class="review-date">{{ review.date | date }}</p>
+    </div>
+  </div>
+  
+ </div>
     <!-- Botones de guardar y cancelar -->
     <button type="submit" [disabled]="!entrepreneurshipForm.valid || !formHasChanged()">Guardar</button>
     <button type="button" (click)="cancelEditing()">Cancelar</button>

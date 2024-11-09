@@ -11,11 +11,13 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ReviewsFormComponentComponent } from "../../../reviews/components/reviews-form-component/reviews-form-component.component";
+import { Review } from '../../../reviews/models/review.model';
 
 @Component({
   selector: 'app-entrepreneurship-detail-component',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, ReviewsFormComponentComponent],
   templateUrl: './entrepreneurship-detail-component.component.html',
   styleUrls: ['./entrepreneurship-detail-component.component.css'],
 })
@@ -115,4 +117,15 @@ export class EntrepreneurshipDetailComponent implements OnInit {
       });
     }
   }
+
+  addReview(newReview: Review): void {
+    if (this.entrepreneurship) {
+      this.entrepreneurship.reviews = [...(this.entrepreneurship.reviews || []), newReview];
+      // Actualizar la reseña en el backend (si es necesario)
+      this.entrepreneurshipService.updateEntrepreneurship(this.id, this.entrepreneurship).subscribe(() => {
+        console.log('Reseña agregada correctamente');
+      });
+    }
+  }
+  
 }
