@@ -10,17 +10,27 @@
     </div>
     <div class="card-content">
       <h3>{{ entrepreneurship.name }}</h3>
-      <p>{{ entrepreneurship.description.length > 250 ? (entrepreneurship.description | slice: 0:250) + '...' : entrepreneurship.description }}</p>
+      <p>
+        {{ entrepreneurship.description.length > 250 
+            ? (entrepreneurship.description | slice: 0:250) + '...' 
+            : entrepreneurship.description 
+        }}
+      </p>
       <div class="goal-progress">
-        <p>Goal: ${{ entrepreneurship.goal }}</p>
-        <!-- <div class="progress-bar">
-          <div class="progress" [style.width]="(entrepreneurship.collected / entrepreneurship.goal) * 100 + '%'"></div>
+        <p>Goal: ${{ entrepreneurship.goal || 0 }}</p> <!-- Asignar valor por defecto si 'goal' es undefined -->
+        <div class="progress-bar">
+          <div class="progress" 
+               [style.width]="(entrepreneurship.collected || 0) / (entrepreneurship.goal || 1) * 100 + '%'">
+          </div>
         </div>
-        <p>{{ ((entrepreneurship.collected / entrepreneurship.goal) * 100).toFixed(2) }}% Collected</p>
-      </div> -->
+        <p>{{ ((entrepreneurship.collected || 0) / (entrepreneurship.goal || 1) * 100).toFixed(2) }}% Collected</p>
+      </div>
       <div class="card-footer">
         <span>#{{ entrepreneurship.category }}</span>
-        <button *ngIf="entrepreneurship.id" (click)="navigateToDetails(entrepreneurship.id)">Ver Detalles</button>
+        <button *ngIf="entrepreneurship.id" 
+                (click)="navigateToDetails(entrepreneurship.id)">
+          Ver Detalles
+        </button>
       </div>
     </div>
   </div>

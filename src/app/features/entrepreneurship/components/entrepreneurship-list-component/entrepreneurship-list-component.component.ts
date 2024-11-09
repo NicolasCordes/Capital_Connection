@@ -5,6 +5,7 @@ import { Route, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { of } from 'rxjs/internal/observable/of';
+import { DonationService } from '../../../donation/services/donation.service';
 
 @Component({
   selector: 'app-entrepreneurship-list-component',
@@ -23,6 +24,7 @@ export class EntrepreneurshipListComponent implements OnInit {
 
   constructor(
     private entrepreneurshipService: EntrepreneurshipService,
+    private donationService: DonationService, // Inyecta DonationService
     private router: Router
   ) {}
 
@@ -32,30 +34,63 @@ export class EntrepreneurshipListComponent implements OnInit {
 
    // Función para cargar datos
    loadEntrepreneurships(): void {
-    if (this.isLoading || !this.hasMore) return;  // No cargar si ya está en proceso o no hay más datos
+    if (this.isLoading || !this.hasMore) return;
     this.isLoading = true;
 
     this.entrepreneurshipService.getEntrepreneurship(this.page, this.size).subscribe(
       (data) => {
         if (data && data.content) {
-          this.entrepreneurships = [...this.entrepreneurships, ...data.content];  // Añadir más datos a la lista actual
-          this.hasMore = data.content.length === this.size;  // Determina si hay más datos para cargar
-          this.page++;  // Incrementa el número de página
+          // Añade cada emprendimiento a la lista actual
+          this.entrepreneurships = [...this.entrepreneurships, ...data.content];
+          
+          // Calcula el total recaudado por cada emprendimiento
+          this.entrepreneurships.forEach((entrepreneurship) => {
+            this.calculateCollected(entrepreneurship);
+          });
+          
+          this.hasMore = data.content.length === this.size;
+          this.page++;
         } else {
           this.hasMore = false;
         }
-        this.isLoading = false;  // Finaliza el estado de carga
+        this.isLoading = false;
       },
       (error) => {
-        console.error('Error al obtener los datos:', error);  // Manejo de errores
+        console.error('Error al obtener los datos:', error);
         this.isLoading = false;
       }
     );
   }
-
-   // Navegación a los detalles de un emprendimiento
-   navigateToDetails(id: string | null): void {
-    this.router.navigate([`/entrepreneurships/${id}`]);
+  calculateCollected(entrepreneurship: Entrepreneurship): void {
+    // Verifica que el id sea válido y convierte a número
+    if (entrepreneurship.id && !isNaN(Number(entrepreneurship.id))) {
+      // Convertir el id a number antes de hacer la llamada
+      const entrepreneurshipId = Number(entrepreneurship.id);
+  
+      // Llamada al servicio para obtener las donaciones
+      this.donationService.getDonationsByEntrepreneurshipId(entrepreneurshipId).subscribe(
+        (donations) => {
+          // Sumar las donaciones para obtener el total recaudado
+          entrepreneurship.collected = donations.reduce(
+            (total, donation) => total + Number(donation.amount), 
+            0
+          );
+        },
+        (error) => {
+          // Manejo de errores
+          console.error(`Error al obtener donaciones para el emprendimiento ${entrepreneurship.id}:`, error);
+        }
+      );
+    } else {
+      // Si el id es inválido o no se puede convertir a número, mostrar un mensaje de error
+      console.error(`El id del emprendimiento es inválido: ${entrepreneurship.id}`);
+    }
+  }
+  
+  navigateToDetails(id: string | null): void {
+    if (id) {
+      this.router.navigate([`/entrepreneurships/${id}`]);
+    }
   }
 
   // Eliminación de un emprendimiento
