@@ -3,6 +3,8 @@ import { Entrepreneurship } from '../../models/entrepreneurship.model';
 import { EntrepreneurshipService } from '../../services/entrepreneurship.service';
 import { Route, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { catchError } from 'rxjs/internal/operators/catchError';
+import { of } from 'rxjs/internal/observable/of';
 
 @Component({
   selector: 'app-entrepreneurship-list-component',
@@ -20,10 +22,25 @@ export class EntrepreneurshipListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.entrepreneurshipService.getEntrepreneurship().subscribe((data) => {
-      this.entrepreneurships = data;
-    });
+    const page = 0;  // Página inicial
+    const size = 20; // Tamaño de la página
+
+    // Llamada al servicio para obtener los datos
+    this.entrepreneurshipService.getEntrepreneurship(page, size).subscribe(
+      (data) => {
+        console.log(data);  // Ver la respuesta completa
+        if (data && data.content) {
+          this.entrepreneurships = data.content;  // Asignar los emprendimientos a la propiedad
+        } else {
+          console.log('No se recibieron datos de la API.');
+        }
+      },
+      (error) => {
+        console.error('Error al obtener los datos:', error);  // Manejar errores
+      }
+    );
   }
+
 
   navigateToDetails(id: string|null): void {
     this.router.navigate([`/entrepreneurships/${id}`]);

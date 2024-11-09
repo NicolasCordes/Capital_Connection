@@ -10,133 +10,60 @@
   ],
   "entrepreneurships": [
     {
-      "id": "1",
-      "name": "Emprendimiento A",
-      "description": "Un emprendimiento innovador en tecnología.",
-      "goal": 50000,
-      "category": "Tecnología",
+      "id": "320f",
+      "name": "asdsadsa",
+      "description": "asddas",
+      "goal": 324234,
+      "category": "asdasd",
       "images": [
-        "https://example.com/image1.jpg",
-        "https://example.com/image2.jpg"
+        "https://res.cloudinary.com/dyho1ydzl/image/upload/v1731104313/e0bck8te6jtw0zz42ptt.jpg"
       ],
-      "videos": [
-        "https://example.com/video1.mp4",
-        "https://example.com/video2.mp4"
-      ],
-      "reviews": [
-        {
-          "rating": 4,
-          "comment": "Gran emprendimiento, muy prometedor.",
-          "author": "Juan Pérez"
-        },
-        {
-          "rating": 5,
-          "comment": "Excelente trabajo, me encanta.",
-          "author": "María López"
-        }
+      "videos": []
+    },
+    {
+      "id": "cc58",
+      "name": "dsad",
+      "description": "asdasd",
+      "goal": 43214122,
+      "category": "asddsa",
+      "images": [],
+      "video": [
+        "https://res.cloudinary.com/dyho1ydzl/video/upload/v1731105764/d9js1ad2cxscyt6zsxyr.mp4"
       ]
     },
     {
-      "id": "2",
-      "name": "Emprendimiento B",
-      "description": "Un emprendimiento de moda y estilo.",
-      "goal": 30000,
-      "category": "Moda",
+      "id": "28fa",
+      "name": "sdadsa",
+      "description": "dsadsasa",
+      "goal": 23413412,
+      "category": "asdasd",
       "images": [
-        "https://example.com/image3.jpg",
-        "https://example.com/image4.jpg"
-      ],
-      "videos": [
-        "https://example.com/video3.mp4",
-        "https://example.com/video4.mp4"
-      ],
-      "reviews": [
-        {
-          "rating": 3,
-          "comment": "Interesante, pero faltan más opciones.",
-          "author": "Carlos Gómez"
-        },
-        {
-          "rating": 4,
-          "comment": "Me gusta mucho, con potencial.",
-          "author": "Ana Martínez"
-        }
+        "https://res.cloudinary.com/dyho1ydzl/image/upload/v1731109688/hq657dvknvtotjiz5phs.jpg"
       ]
     },
     {
-      "id": "0b02",
-      "name": "pele",
-      "description": "grini",
-      "goal": 15235345,
-      "category": "fdafsd",
-      "images": [],
-      "videos": []
+      "id": "f476",
+      "name": "asdasd",
+      "description": "sdadsa",
+      "goal": 324234,
+      "category": "asdasd",
+      "images": [
+        "https://res.cloudinary.com/dyho1ydzl/image/upload/v1731110533/ripld9iqpk5vvhskpy9s.jpg"
+      ],
+      "videos": [
+        "https://res.cloudinary.com/dyho1ydzl/video/upload/v1731110534/e2ebf9uoyx5ybsspv1pt.mp4"
+      ]
     },
     {
-      "id": "33c7",
-      "name": "Javier",
-      "description": "Milei",
-      "goal": 5400,
-      "category": "presidente",
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": "e528",
-      "name": "dasd",
-      "description": "dasdas",
-      "goal": 13213,
-      "category": "weqweqw",
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": "412",
-      "name": "juan",
-      "description": "jose",
-      "goal": 123213,
-      "category": "pito",
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": "0a5f",
-      "name": "dasdas",
-      "description": "asdasdas",
-      "goal": 13213213,
-      "category": "f<sdfsdf",
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": "cd54",
-      "name": "sasa",
-      "description": "sasa",
-      "goal": 243243,
-      "category": "fdsfsdf",
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": "2b69",
-      "name": "fdsfds",
-      "description": "sdfdsf",
-      "goal": 324324,
-      "category": "fsfds",
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": "db55",
-      "name": "mauro",
-      "description": "dasdsad",
-      "goal": 3213123,
-      "category": "adsad",
+      "id": "ed80",
+      "name": "asddsa",
+      "description": "asdasd",
+      "goal": 21423,
+      "category": "sdadsa",
       "images": [],
       "videos": []
     }
   ],
-  
   "users": [
     {
       "id": "2410",
@@ -154,4 +81,6 @@
         "province": "Buenos Aires (provincia)",
         "type": "Work"
       }
+    }
+  ]
 }

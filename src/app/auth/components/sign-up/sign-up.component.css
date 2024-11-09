@@ -1,0 +1,194 @@
+/* Estilos generales */
+body {
+  background-color: #0e0e0e;
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  overflow: hidden;
+  height: 100vh;
+}
+
+.form-container {
+  max-width: 400px;
+  margin: 50px auto;
+  background-color: #1a1a1a; /* Fondo negro */
+  padding: 30px;
+  border-radius: 10px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  z-index: 2; /* Asegura que el formulario esté por encima del fondo animado */
+}
+
+/* Animación del fondo */
+@keyframes gradientBackground {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Efecto de neón en el borde */
+.form-container:hover {
+  box-shadow: 0 0 15px #00ffb3, 0 0 25px #ff00ff;
+  border: 2px solid #00ffb3;
+}
+
+/* Título */
+.form-title {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #fff;
+  text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+.input-field {
+  width: calc(100% - 30px);
+  padding: 12px;
+  background: #333;
+  border: 1px solid #555;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 1;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #00ffb3;
+  box-shadow: 0 0 15px rgba(0, 255, 179, 0.7);
+}
+
+.password-container {
+  position: relative;
+}
+
+button[type="button"].eye-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: #00ffb3;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+button[type="button"].eye-icon:hover {
+  transform: scale(1.2);
+}
+
+button[type="submit"].submit-btn {
+  width: 100%;
+  padding: 15px;
+  background: #00ffb3;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button[type="submit"].submit-btn:disabled {
+  background: #555;
+  cursor: not-allowed;
+}
+
+button[type="submit"].submit-btn:hover:not(:disabled) {
+  background: #00cc99;
+}
+
+.error-msg {
+  color: #ff4d4d;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+/* Efecto de linterna (solo cuando el mouse está fuera) */
+.form-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: rgba(0, 255, 179, 0.3);
+  pointer-events: none;
+  transition: width 0.2s, height 0.2s;
+  transform: translate(-50%, -50%);
+  visibility: hidden; /* Inicialmente invisible */
+}
+
+/* Cuando el mouse está fuera, el círculo se muestra */
+body:hover::after {
+  visibility: visible;
+  width: 400px;
+  height: 400px;
+  transition: width 0.5s, height 0.5s;
+}
+
+/* Movimiento de la linterna con el cursor fuera del formulario */
+body:hover::after {
+  animation: followCursor 1s ease-in-out infinite;
+}
+
+/* Animación para que el círculo siga al cursor */
+@keyframes followCursor {
+  0% {
+    left: 50%;
+    top: 50%;
+  }
+  50% {
+    left: 60%;
+    top: 60%;
+  }
+  100% {
+    left: 50%;
+    top: 50%;
+  }
+}
+
+/* Responsividad para móviles */
+@media (max-width: 480px) {
+  .form-container {
+    padding: 20px;
+  }
+
+  .form-title {
+    font-size: 1.6rem;
+  }
+
+  .input-field, .submit-btn {
+    font-size: 1rem;
+    padding: 10px;
+  }
+
+  .eye-icon {
+    font-size: 1.5rem;
+  }
+}

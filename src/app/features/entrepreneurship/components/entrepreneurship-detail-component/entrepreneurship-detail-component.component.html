@@ -3,40 +3,34 @@
 
   <!-- Modo de Visualización -->
   <div *ngIf="!isEditing">
-    <!-- Mostrar nombre, descripción, objetivo y categoría -->
+    <!-- Mostrar detalles -->
     <div class="entrepreneurship-details">
-      <p>
-        <strong>Descripción:</strong> {{ currentEntrepreneurship.description }}
-      </p>
-      <p>
-        <strong>Objetivo Financiero:</strong>
-        {{ currentEntrepreneurship.goal | currency }}
-      </p>
+      <p><strong>Descripción:</strong> {{ currentEntrepreneurship.description }}</p>
+      <p><strong>Objetivo Financiero:</strong> {{ currentEntrepreneurship.goal | currency }}</p>
       <p><strong>Categoría:</strong> {{ currentEntrepreneurship.category }}</p>
     </div>
 
     <!-- Mostrar imágenes -->
+    <h3>Imágenes del Emprendimiento</h3>
+    <div *ngFor="let image of entrepreneurship.images">
+      <img [src]="image" alt="Imagen del emprendimiento" width="200" height="200" />
+    </div>
 
     <!-- Mostrar videos -->
+    <h3>Videos del Emprendimiento</h3>
+    <div *ngFor="let video of entrepreneurship.videos">
+      <video [src]="video" controls width="400">Tu navegador no soporta la etiqueta de video.</video>
+    </div>
 
     <button *ngIf="!isEditing" (click)="enableEditing()">Editar</button>
   </div>
 
   <!-- Modo de Edición -->
-  <form
-    *ngIf="isEditing"
-    [formGroup]="entrepreneurshipForm"
-    (ngSubmit)="saveEntrepreneurship()"
-  >
+  <form *ngIf="isEditing" [formGroup]="entrepreneurshipForm" (ngSubmit)="saveEntrepreneurship()">
     <label>
       Nombre:
       <input type="text" formControlName="name" />
-      <div
-        *ngIf="
-          entrepreneurshipForm.get('name')?.invalid &&
-          entrepreneurshipForm.get('name')?.touched
-        "
-      >
+      <div *ngIf="entrepreneurshipForm.get('name')?.invalid && entrepreneurshipForm.get('name')?.touched">
         Nombre es obligatorio.
       </div>
     </label>
@@ -44,12 +38,7 @@
     <label>
       Descripción:
       <input type="text" formControlName="description" />
-      <div
-        *ngIf="
-          entrepreneurshipForm.get('description')?.invalid &&
-          entrepreneurshipForm.get('description')?.touched
-        "
-      >
+      <div *ngIf="entrepreneurshipForm.get('description')?.invalid && entrepreneurshipForm.get('description')?.touched">
         Descripción es obligatoria.
       </div>
     </label>
@@ -57,38 +46,48 @@
     <label>
       Objetivo financiero:
       <input type="number" formControlName="goal" />
-      <div
-        *ngIf="
-          entrepreneurshipForm.get('goal')?.invalid &&
-          entrepreneurshipForm.get('goal')?.touched
-        "
-      >
+      <div *ngIf="entrepreneurshipForm.get('goal')?.invalid && entrepreneurshipForm.get('goal')?.touched">
         El objetivo es obligatorio.
       </div>
     </label>
 
     <label>
       Categoría:
-      <input type="text" formControlName="category" />
-      <div
-        *ngIf="
-          entrepreneurshipForm.get('category')?.invalid &&
-          entrepreneurshipForm.get('category')?.touched
-        "
-      >
-        La categoría es obligatoria.
-      </div>
+      <select formControlName="category">
+        <option value="" disabled>Seleccione una categoría</option>
+        <option value="tecnologia">Tecnología</option>
+        <option value="salud">Salud</option>
+        <option value="educacion">Educación</option>
+        <option value="sostenibilidad">Sostenibilidad</option>
+        <option value="alimentacion">Alimentación</option>
+      </select>
     </label>
 
-    <!-- Cargar imágenes -->
+    <!-- Edición de Imágenes -->
+    <h3>Imágenes</h3>
+    <div formArrayName="images">
+      <div *ngFor="let imageCtrl of images.controls; let i = index">
+         <div *ngFor="let image of entrepreneurship.images">
+      <img [src]="image" alt="Imagen del emprendimiento" width="200" height="200" />
+    </div>
+        <input [formControlName]="i" placeholder="URL de la imagen" />
+        <button type="button" (click)="removeImage(i)">Eliminar</button>
+      </div>
+      <button type="button" (click)="addImage()">Agregar Imagen</button>
+    </div>
+
+    <!-- Edición de Videos -->
+    <h3>Videos</h3>
+    <div formArrayName="videos">
+      <div *ngFor="let videoCtrl of videos.controls; let i = index">
+        <input [formControlName]="i" placeholder="URL del video" />
+        <button type="button" (click)="removeVideo(i)">Eliminar</button>
+      </div>
+      <button type="button" (click)="addVideo()">Agregar Video</button>
+    </div>
 
     <!-- Botones de guardar y cancelar -->
-    <button
-      type="submit"
-      [disabled]="!entrepreneurshipForm.valid || !formHasChanged()"
-    >
-      Guardar
-    </button>
+    <button type="submit" [disabled]="!entrepreneurshipForm.valid || !formHasChanged()">Guardar</button>
     <button type="button" (click)="cancelEditing()">Cancelar</button>
   </form>
 </div>

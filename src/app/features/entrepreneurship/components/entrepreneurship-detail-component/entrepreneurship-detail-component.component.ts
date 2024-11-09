@@ -23,6 +23,7 @@ export class EntrepreneurshipDetailComponent implements OnInit {
   entrepreneurshipForm!: FormGroup;
   isEditing = false;
   entrepreneurship: Entrepreneurship | null = null;
+  id: string | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,13 +34,11 @@ export class EntrepreneurshipDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
-      const id = params.get('id') ?? '';
-      this.entrepreneurshipService
-        .getEntrepreneurshipById(id)
-        .subscribe((entrepreneurship) => {
-          this.entrepreneurship = entrepreneurship;
-          this.initForm(entrepreneurship);
-        });
+      this.id = params.get('id') ?? '';
+      this.entrepreneurshipService.getEntrepreneurshipById(this.id).subscribe((entrepreneurship) => {
+        this.entrepreneurship = entrepreneurship;
+        this.initForm(entrepreneurship);
+      });
     });
   }
 
@@ -49,9 +48,33 @@ export class EntrepreneurshipDetailComponent implements OnInit {
       description: [data.description, Validators.required],
       goal: [data.goal, Validators.required],
       category: [data.category, Validators.required],
-      images: this.fb.array(data.images || []),
-      videos: this.fb.array(data.videos || []),
+      images: this.fb.array(data.images.map(image => this.fb.control(image)) || []),
+      videos: this.fb.array(data.videos.map(video => this.fb.control(video)) || []),
     });
+  }
+
+  get images(): FormArray {
+    return this.entrepreneurshipForm.get('images') as FormArray;
+  }
+
+  get videos(): FormArray {
+    return this.entrepreneurshipForm.get('videos') as FormArray;
+  }
+
+  addImage(): void {
+    this.images.push(this.fb.control(''));
+  }
+
+  removeImage(index: number): void {
+    this.images.removeAt(index);
+  }
+
+  addVideo(): void {
+    this.videos.push(this.fb.control(''));
+  }
+
+  removeVideo(index: number): void {
+    this.videos.removeAt(index);
   }
 
   enableEditing(): void {
@@ -69,22 +92,27 @@ export class EntrepreneurshipDetailComponent implements OnInit {
   }
 
   formHasChanged(): boolean {
-    return (
-      JSON.stringify(this.entrepreneurshipForm.value) !==
-      JSON.stringify(this.entrepreneurship)
-    );
+    return JSON.stringify(this.entrepreneurshipForm.value) !== JSON.stringify(this.entrepreneurship);
   }
 
   saveEntrepreneurship(): void {
     if (this.entrepreneurshipForm.valid) {
-      const updatedEntrepreneurship: Entrepreneurship =
-        this.entrepreneurshipForm.value;
-      this.entrepreneurshipService
-        .updateEntrepreneurship(updatedEntrepreneurship)
-        .subscribe(() => {
-          this.isEditing = false;
-          this.router.navigate(['/entrepreneurships']); // Redirige a la lista de emprendimientos
+      const updatedEntrepreneurship: Entrepreneurship = {
+        ...this.entrepreneurship,
+        ...this.entrepreneurshipForm.value,
+        images: this.images.value,  // Array de imágenes actualizado
+        videos: this.videos.value   // Array de videos actualizado
+      };
+
+      console.log('Updated Entrepreneurship:', updatedEntrepreneurship);
+
+      this.entrepreneurshipService.updateEntrepreneurship(this.id, updatedEntrepreneurship).subscribe(() => {
+        this.isEditing = false;
+        // Forzar la recarga del componente para evitar ver datos obsoletos
+        this.router.navigate(['/entrepreneurships']).then(() => {
+          this.router.navigate(['/entrepreneurships', this.id]); // Redirige de nuevo para mostrar la vista actualizada
         });
+      });
     }
   }
 }

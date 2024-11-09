@@ -1,0 +1,25 @@
+<form [formGroup]="imageForm" (ngSubmit)="uploadImages()">
+  <mat-form-field appearance="fill">
+    <mat-label>Cargar imagen</mat-label>
+    <ngx-mat-dropzone>
+      <input type="file" fileInput [formControl]="imageControl" multiple (change)="onFilesSelected($event)" />
+    </ngx-mat-dropzone>
+    <mat-error *ngIf="imageControl.hasError('required') && imageControl.touched">
+      La imagen es requerida.
+    </mat-error>
+  </mat-form-field>
+
+  <div *ngIf="imageControl.value.length > 0">
+    <h3>Imágenes seleccionadas:</h3>
+    <div *ngFor="let file of imageControl.value; let i = index" class="image-preview">
+      <span>{{ file.name }} ({{ file.type }})</span>
+      <button type="button" (click)="removeFile(i)" *ngIf="!emitido" class="remove-image" aria-label="Eliminar imagen">Eliminar</button>
+    </div>
+  </div>
+
+  <div *ngIf="isUploading" class="isUploading">Cargando imagen...</div>
+
+  <button mat-raised-button type="submit" [disabled]="isUploading || !imageForm.valid" aria-label="Subir imágenes">
+    Subir imágenes
+  </button>
+</form>

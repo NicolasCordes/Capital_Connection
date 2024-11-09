@@ -4,10 +4,10 @@
       <!-- Aquí puedes mostrar el nombre o algún dato del emprendimiento -->
       <h3>{{ entrepreneurship.name }}</h3>
       <p>{{ entrepreneurship.description }}</p>
-      <button (click)="navigateToDetails(entrepreneurship.id)">
+      <button *ngIf="entrepreneurship.id"  (click)="navigateToDetails(entrepreneurship.id)">
         Ver Detalles
       </button>
-      <button (click)="deleteEntrepreneurship(entrepreneurship.id)">
+      <button *ngIf="entrepreneurship.id"  (click)="deleteEntrepreneurship(entrepreneurship.id)">
         Eliminar
       </button>
     </li>
