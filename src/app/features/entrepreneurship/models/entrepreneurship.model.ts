@@ -1,7 +1,7 @@
 import { Review } from '../../reviews/models/review.model';
 
 export interface Entrepreneurship {
-  id?: string;
+  id?: number;
   id_user: string;
   name: string;
   description: string;

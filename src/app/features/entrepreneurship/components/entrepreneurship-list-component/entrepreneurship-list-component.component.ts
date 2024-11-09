@@ -54,12 +54,12 @@ export class EntrepreneurshipListComponent implements OnInit {
   }
 
    // Navegación a los detalles de un emprendimiento
-   navigateToDetails(id: string | null): void {
+   navigateToDetails(id: number | null): void {
     this.router.navigate([`/entrepreneurships/${id}`]);
   }
 
   // Eliminación de un emprendimiento
-  deleteEntrepreneurship(id: string | null): void {
+  deleteEntrepreneurship(id: number | null): void {
     this.entrepreneurshipService.deleteEntrepreneurship(id).subscribe(() => {
       this.entrepreneurships = this.entrepreneurships.filter(
         (entrepreneurship) => entrepreneurship.id !== id
