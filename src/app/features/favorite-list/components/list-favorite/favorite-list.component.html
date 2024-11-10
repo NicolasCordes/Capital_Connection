@@ -1,6 +1,7 @@
 <h2>Lista de Favoritos</h2>
 <ul>
   <li *ngFor="let favorite of userFavorites">
-    Emprendimiento ID: {{ favorite.id }}
+    <h3>{{ favorite.name }}</h3>
+    <p>{{ favorite.description }}</p>
   </li>
 </ul>

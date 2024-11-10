@@ -1,3 +1,4 @@
+import { Entrepreneurship } from "../../entrepreneurship/models/entrepreneurship.model";
 import { Address } from "./address.model";
 
 export interface User {
@@ -10,5 +11,5 @@ wallet : BigInt,
 yearsOfExperience : number,
 industry : string,
 address : Address
-favorites: { type: string, id: string }[];
+favorites: { entrepreneurship: Entrepreneurship}[];
 }

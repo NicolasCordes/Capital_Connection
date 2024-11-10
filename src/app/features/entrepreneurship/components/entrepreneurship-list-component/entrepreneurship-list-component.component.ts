@@ -56,9 +56,7 @@ export class EntrepreneurshipListComponent implements OnInit {
           this.entrepreneurships = [...this.entrepreneurships, ...data.content];
           
           // Calcula el total recaudado por cada emprendimiento
-          this.entrepreneurships.forEach((entrepreneurship) => {
-            this.calculateCollected(entrepreneurship);
-          });
+          
           
           this.hasMore = data.content.length === this.size;
           this.page++;
@@ -74,38 +72,12 @@ export class EntrepreneurshipListComponent implements OnInit {
     );
   }
 
-  // Función para calcular el total recaudado de las donaciones
-  calculateCollected(entrepreneurship: Entrepreneurship): void {
-    // Verifica que el id sea válido y convierte a número
-    if (entrepreneurship.id && !isNaN(Number(entrepreneurship.id))) {
-      // Convertir el id a number antes de hacer la llamada
-      const entrepreneurshipId = Number(entrepreneurship.id);
-  
-      // Llamada al servicio para obtener las donaciones
-      this.donationService.getDonationsByEntrepreneurshipId(entrepreneurshipId).subscribe(
-        (donations) => {
-          // Asegúrate de usar number en toda la operación
-          entrepreneurship.collected = donations.reduce(
-            (total, donation) => total + Number(donation.amount), // Convertimos donation.amount a number
-            0 // Inicia con 0 para asegurar que todo sea number
-          );
-  
-          // Si necesitas convertir el resultado a otro tipo de dato o hacer cálculos adicionales:
-          const collectedAmount = entrepreneurship.collected; // Esto ya es un number
-          console.log("Total recaudado como número:", collectedAmount);
-  
-          // Para mostrar como string:
-          const collectedAmountString = entrepreneurship.collected.toString(); // Mostrar como string
-          console.log("Total recaudado como string:", collectedAmountString);
-        },
-        (error) => {
-          console.error("Error fetching donations:", error);
-        }
-      );
-    } else {
-      // Si el id es inválido o no se puede convertir a número, mostrar un mensaje de error
-      console.error(`El id del emprendimiento es inválido: ${entrepreneurship.id}`);
-    }
+
+
+  getProgressWidth(goal: number, collected: number): number {
+    if (!goal) return 0; // Evita división por cero
+    const progress = Math.min((collected / goal) * 100, 100); // Limita el progreso al 100%
+    return Math.round(progress); // Redondea el progreso al entero más cercano
   }
 
   // Navegación a los detalles de un emprendimiento

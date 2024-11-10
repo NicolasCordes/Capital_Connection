@@ -182,6 +182,30 @@
   margin-top: 20px;
 }
 
+
+/* Contenedor de la barra de progreso */
+.progress-bar-container {
+  width: 100%;
+  background-color: #e0e0e0; /* Fondo gris claro */
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 10px;
+  height: 20px; /* Altura de la barra */
+}
+
+/* Barra de progreso */
+.progress-bar {
+  background-color: #4caf50; /* Color verde */
+  color: white;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: bold;
+  line-height: 20px; /* Alinea el texto verticalmente */
+  height: 100%;
+  border-radius: 8px 0 0 8px; /* Bordes redondeados */
+  transition: width 0.3s ease; /* Animación suave */
+}
+
 /* Para móvil */
 @media (max-width: 768px) {
   .card-container {

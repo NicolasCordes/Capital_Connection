@@ -18,7 +18,6 @@ export class AuthService {
     private http: HttpClient,
     private tokenService: TokenService
   ) {
-    // Verificar si hay un token en localStorage cuando se inicializa el servicio
     this.checkSession();
   }
 

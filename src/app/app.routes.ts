@@ -18,7 +18,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomePageComponent },
   { path: 'entrepreneurships', component: EntrepreneurshipListComponent },
-  { path: 'add-entrepreneurship', component: EntrepreneurshipFormComponent },
+  { path: 'add-entrepreneurship', component: EntrepreneurshipFormComponent, canActivate: [guardGuard] },
   { path: 'entrepreneurships/:id', component: EntrepreneurshipDetailComponent },
   { path: 'user-add', component: UserFormComponent },
   { path: 'users', component: UserListComponent },

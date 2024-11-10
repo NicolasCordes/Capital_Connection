@@ -28,14 +28,14 @@ export class DonationDetailComponentComponent {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      const numericId = Number(id); // Convertir id a número
+      const numericId = Number(id);
       this.entrepreneurshipService
 
         .getEntrepreneurshipById(Number(id))
 
         .subscribe((entrepreneurship) => {
           this.entrepreneurship = entrepreneurship;
-          this.loadDonations(numericId); // Cargar donaciones del emprendimiento
+          this.loadDonations(numericId); 
         });
     }
   }
@@ -49,6 +49,6 @@ export class DonationDetailComponentComponent {
   }
 
   onDonationAdded(donation: Donation) {
-    this.donations.push(donation); // Añadir la nueva donación a la lista
+    this.donations.push(donation); 
   }
 }

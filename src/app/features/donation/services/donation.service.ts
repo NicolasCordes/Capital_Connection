@@ -21,10 +21,9 @@ import { Donation } from "../models/donation.model";
     }
   
     postDonation(donation: Donation): Observable<Donation> {
-      // Convertir BigInt a string antes de enviar a la API
       const donationWithStringAmount = {
         ...donation,
-        amount: donation.amount.toString(),  // Convertimos BigInt a String
+        amount: donation.amount.toString(), 
       };
     
       return this.http.post<Donation>(this.urlBase, donationWithStringAmount);

@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Donation } from '../../donation/models/donation.model';
 
+
 @Component({
   selector: 'app-profile-list',
   standalone: true,
@@ -16,6 +17,7 @@ import { Donation } from '../../donation/models/donation.model';
   styleUrls: ['./profile-list.component.css']
 })
 export class ProfileListComponent implements OnInit {
+
   activeUser: ActiveUser | undefined;
   donateds: Donation[] = [];
   donatedEntrepreneurships: Entrepreneurship[] = [];
@@ -47,6 +49,7 @@ export class ProfileListComponent implements OnInit {
         this.entrepreneurshipService.getEntrepreneurshipById(id!).subscribe(entrepreneurship => {
           this.donatedEntrepreneurships.push(entrepreneurship);
         });
+
       });
     });
   }
@@ -56,5 +59,19 @@ export class ProfileListComponent implements OnInit {
     if (id) {
       this.router.navigate([`/entrepreneurships/${id}`]);
     }
+
+    // Método para redirigir a la ruta de favoritos del usuario activo
+  goToFavorites(): void {
+    if (this.activeUser) {
+      this.router.navigate([`/favorites/${this.activeUser.id}`]);  // Redirige a la ruta de favoritos
+    } else {
+      console.error('No active user found');
+    }
+  }
+
+
+  }
+
   }
 }
+

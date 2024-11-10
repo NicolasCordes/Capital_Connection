@@ -2,7 +2,6 @@
   <fieldset>
     <legend class="form-title">Registrarse</legend>
 
-    <!-- Campo de correo electrónico -->
     <section class="form-group">
       <label for="email">Correo electrónico</label>
       <input type="text" id="email" formControlName="email" class="input-field">
@@ -12,7 +11,6 @@
       </div>
     </section>
 
-    <!-- Campo de nombre de usuario -->
     <section class="form-group">
       <label for="username">Nombre de Usuario</label>
       <input type="text" id="username" formControlName="username" class="input-field">
@@ -21,7 +19,6 @@
       </div>
     </section>
 
-    <!-- Campo de contraseña -->
     <section class="form-group">
       <label for="password">Contraseña</label>
       <input type="password" id="password" formControlName="password" class="input-field">
@@ -30,7 +27,6 @@
       </div>
     </section>
 
-    <!-- Campo de nombre -->
     <section class="form-group">
       <label for="name">Nombre</label>
       <input type="text" id="name" formControlName="name" class="input-field">
@@ -39,7 +35,6 @@
       </div>
     </section>
 
-    <!-- Campo de apellido -->
     <section class="form-group">
       <label for="surname">Apellido</label>
       <input type="text" id="surname" formControlName="surname" class="input-field">
@@ -48,7 +43,6 @@
       </div>
     </section>
 
-    <!-- Campo de fecha de nacimiento -->
     <section class="form-group">
       <label for="dateOfBirth">Fecha de Nacimiento</label>
       <input type="date" id="dateOfBirth" formControlName="dateOfBirth" class="input-field">
@@ -57,7 +51,6 @@
       </div>
     </section>
 
-    <!-- Campo de años de experiencia -->
     <section class="form-group">
       <label for="yearsOfExperience">Años de Experiencia</label>
       <input type="number" id="yearsOfExperience" formControlName="yearsOfExperience" class="input-field">
@@ -66,7 +59,6 @@
       </div>
     </section>
 
-    <!-- Campo de industria -->
 <section class="form-group">
   <label for="industry">Industria</label>
   <select id="industry" formControlName="industry" class="input-field">
@@ -82,7 +74,6 @@
 </section>
 
 
-     <!-- Usamos el componente de dirección -->
      <app-address-form (address)="updateAddress($event)"></app-address-form>
 
 

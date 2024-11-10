@@ -26,5 +26,9 @@ export class DonationListComponentComponent {
     }
   }
 
-   
+
+   convertToNumber(amount: BigInt): number {
+    return Number(amount);
+  }
+
 }

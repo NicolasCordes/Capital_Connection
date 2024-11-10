@@ -1,151 +1,262 @@
-/* Estilos generales */
-:host {
-  display: block;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 1rem;
-  font-family: Arial, sans-serif;
-  color: #333;
+@import url(//fonts.googleapis.com/css?family=Lato:300:400);
+
+body {
+  margin: 0;
+  font-family: 'Lato', sans-serif;
 }
 
-/* Título */
-h2 {
+h1, h2 {
+  font-weight: 300;
+  letter-spacing: 2px;
+  font-size: 48px;
+  color: white;
+}
+
+p {
+  letter-spacing: 1px;
+  font-size: 14px;
+  color: #333333;
+}
+
+.header {
+  position: relative;
   text-align: center;
-  color: #4caf50;
-  margin-bottom: 1rem;
+  background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%);
+  color: white;
+  padding: 20px 0;
+  margin-bottom: 0; 
 }
-
-/* Detalles del emprendimiento */
-.entrepreneurship-details {
-  margin-bottom: 2rem;
-  padding: 1rem;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-}
-
-.entrepreneurship-details p {
-  margin: 0.5rem 0;
-  font-size: 1rem;
-}
-
-/* Imágenes */
-h3 {
-  color: #4caf50;
-  font-size: 1.2rem;
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
-}
-
-.images-section, .videos-section {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.images-section img, .videos-section video {
-  width: 100%;
-  max-width: 200px;
-  height: auto;
-  border: 2px solid #e0e0e0;
-  border-radius: 4px;
-}
-
-/* Formulario */
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-form label {
-  font-weight: bold;
-  margin-bottom: 0.3rem;
-}
-
-form input[type="text"],
-form input[type="number"],
-form select {
-  width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1rem;
-}
-
-form input[type="file"] {
-  padding: 0.5rem 0;
-}
-
-form .error {
-  color: #ff0000;
-  font-size: 0.85rem;
-  margin-top: 0.3rem;
-}
-
-/* Botones */
-button {
-  padding: 0.6rem 1.2rem;
-  font-size: 1rem;
-  font-weight: bold;
-  color: #fff;
-  background-color: #4caf50;
-  border: none;
-  border-radius: 4px;
+.follow-btn {
+  background-color: #b3d9e6; 
+  border: 2px solid #3399bb;
+  color: #3399bb;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center; 
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+.follow-btn {
+  
+  background-color: #e6f2ff; /* Color del fondo del botón */
+  border: 2px solid #3399bb; /* Borde azul */
+  color: #3399bb; /* Color del texto */
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center; /* Alinea el texto */
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-button:hover:not(:disabled) {
-  background-color: #43a047;
+/* Cambio de color del botón cuando se pasa el ratón */
+.follow-btn:hover {
+  background-color: #b3d9e6; /* Fondo más suave al pasar el ratón */
+  color: #3399bb; /* Texto azul al pasar el ratón */
+  border-color: #3399bb; /* Borde azul al pasar el ratón */
 }
 
-button.cancel {
-  background-color: #ff5722;
+/* Elimina el contorno del botón cuando está enfocado */
+.follow-btn:focus {
+  outline: none;
+}
+.progress-bar-container {
+  width: 100%;
+  background-color: #e0e0e0;
+  height: 20px;
+  position: relative;
+  margin: 0;
+  padding: 0;
 }
 
-button.cancel:hover {
-  background-color: #e64a19;
+.progress-bar {
+  background-color: #4caf50; /* Verde */
+  height: 100%;
+  transition: width 0.3s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
 }
 
-/* Sección de botones en el formulario */
-.form-buttons {
+.progress-bar-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.9rem;
+  font-weight: bold;
+  z-index: 2;
+}
+.content {
+  padding: 40px 20px;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.entrepreneurship-wrapper {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
 }
 
-.review-list {
+.entrepreneurship-details {
+  margin-bottom: 20px;
+  text-align: left;
+  width: 45%; /* Ancho reducido para que ocupe menos de la mitad de la pantalla */
+  background-color: white; /* Fondo blanco */
+  padding: 15px; /* Menos padding para reducir el espacio interno */
+  border: 2px solid #f0f0f0; /* Borde gris clarito */
+  border-radius: 8px; /* Bordes redondeados */
+  transition: border-color 0.3s ease; /* Transición suave para el borde */
+}
+
+/* Estilo cuando se pasa el ratón por encima */
+.entrepreneurship-details:hover {
+  border-color: #3399bb; /* Cambia el color del borde a azul */
+}
+
+/* Estilo para los párrafos dentro de los detalles */
+.entrepreneurship-details p {
+  font-size: 14px; /* Fuente un poco más pequeña */
+  margin-bottom: 12px; /* Espacio reducido entre los párrafos */
+  color: #333; /* Color de texto oscuro para mejor legibilidad */
+}
+
+/* Estilo para los títulos dentro de los detalles */
+.entrepreneurship-details strong {
+  font-size: 16px; /* Un tamaño más pequeño para los títulos */
+  color: #333; /* Color negro por defecto */
+  font-weight: bold; /* Negrita */
+  transition: color 0.3s ease; /* Transición suave para el color */
+}
+
+/* Cambio de color al pasar el ratón por encima de las palabras en fuerte (strong) */
+.entrepreneurship-details strong:hover {
+  color: #00ACC1; /* Cambia el color a celeste cuando se pasa el ratón */
+}
+
+/* Ajuste en el contenedor principal para balancear el tamaño */
+.entrepreneurship-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.carousel-container {
+  width: 55%; /* Aumenta el tamaño del carrusel para que ocupe más espacio */
+}
+
+.donations {
   margin-top: 20px;
 }
 
-.review-item {
-  background-color: #f1f3f5;
-  padding: 15px;
+/* Carrusel */
+.carousel-container {
+  position: relative;
+  width: 50%; /* El tamaño del carrusel es el 50% */
+  height: 500px;
+  overflow: hidden;
   border-radius: 8px;
-  margin-bottom: 15px;
-  border-left: 4px solid #007bff;
+  color: white;
 }
 
-.review-item p {
-  margin: 5px 0;
+.carousel-slide {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
-.review-item strong {
-  font-size: 16px;
-  color: #333;
+.carousel-slide-content img,
+.carousel-slide-content video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
-.review-item .review-stars {
-  color: #ffc107;
-  font-weight: bold;
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: white;
+  color: black;
+  font-size: 2.5rem;
+  padding: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  border: 2px solid #d3d3d3;
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.review-item .review-date {
-  font-size: 12px;
-  color: #6c757d;
+.carousel-arrow:hover {
+  background-color: #f1f1f1;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-arrow-left {
+  left: 10px;
+}
+
+.carousel-arrow-right {
+  right: 10px;
+}
+
+.reviews, .reviews-form, .donations {
+  margin-top: 40px;
+}
+
+.reviews-title {
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.reviews-form {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+  .entrepreneurship-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .entrepreneurship-details {
+    width: 100%;
+    text-align: center;
+  }
+
+  .carousel-container {
+    width: 95%;
+  }
+
+  .carousel-slide-content img {
+    height: 250px;
+  }
+
+  .carousel-arrow {
+    font-size: 2rem;
+    padding: 10px;
+  }
 }

@@ -14,7 +14,7 @@ import { AddressFormComponent } from "../../../features/user/address-form/addres
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.css']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent {
 
   private formBuilder = inject(FormBuilder);
 
@@ -27,7 +27,7 @@ export class SignupComponent implements OnInit {
     dateOfBirth: ['', Validators.required],
     yearsOfExperience: [0, [Validators.required, Validators.min(0)]],
     industry: ['', Validators.required],
-    wallet: [{ value: 0, disabled: true }], // Inicializa en 0 y desactiva el campo
+    wallet: [{ value: 0, disabled: true }], 
     address: this.formBuilder.group({
       street: ['', Validators.required],
       number: [0, Validators.required],
@@ -39,9 +39,6 @@ export class SignupComponent implements OnInit {
 
   constructor(private authService: AuthService, private router: Router) { }
 
-  ngOnInit(): void {
-    // Inicializar otros datos si es necesario
-  }
 
   onSubmit() {
     if (this.form.invalid) return;
@@ -50,8 +47,8 @@ export class SignupComponent implements OnInit {
 
     const user = {
       ...this.form.getRawValue(),
-      wallet: 0, // Asegura que `wallet` se envíe como BigInt
-      favorites: [] // Inicializa `favorites` como un array vacío
+      wallet: 0, 
+      favorites: [] 
     } as AccountData;
 
     this.authService.signup(user).subscribe({

@@ -1,3 +1,9 @@
+
+<p>{{activeUser?.username}}</p>
+
+<!-- Botón para redirigir a la ruta de favoritos del usuario activo -->
+<button (click)="goToFavorites()">Ir a favoritos</button>
+
 <div *ngIf="donatedEntrepreneurships.length > 0; else noDonations">
     <h3>Emprendimientos en los que has donado:</h3>
 
@@ -18,3 +24,4 @@
     <p>No has donado a ningún emprendimiento.</p>
   </ng-template>
   
+

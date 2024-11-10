@@ -1,5 +1,5 @@
 <div *ngIf="reviews.length > 0; else noReviews" class="review-container">
-  <h3 class="review-header">Reseñas:</h3>
+  
   <div *ngFor="let review of reviews" class="review-item">
     @if (review.idEntrepreneurship === id) {
       <h4 class="reviewer-name">Usuario: {{ review.id_user }}</h4>

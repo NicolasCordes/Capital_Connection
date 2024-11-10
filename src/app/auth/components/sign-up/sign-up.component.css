@@ -1,4 +1,3 @@
-/* Estilos generales del formulario */
 .form-container {
   max-width: 600px;
   margin: 0 auto;
@@ -17,7 +16,6 @@
   text-align: center;
 }
 
-/* Estilos de los grupos de campos */
 .form-group {
   margin-bottom: 15px;
 }
@@ -43,7 +41,6 @@
   outline: none;
 }
 
-/* Estilos del botón de envío */
 .submit-btn {
   width: 100%;
   padding: 12px;
@@ -65,14 +62,12 @@
   background-color: #0056b3;
 }
 
-/* Estilos de los mensajes de error */
 .error-msg {
   font-size: 0.875em;
   color: #d9534f;
   margin-top: 5px;
 }
 
-/* Personalización de app-address-form */
 .address-form .form-group {
   margin-bottom: 15px;
 }
