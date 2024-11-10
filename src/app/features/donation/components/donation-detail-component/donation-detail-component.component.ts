@@ -29,7 +29,7 @@ export class DonationDetailComponentComponent {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.entrepreneurshipService
-        .getEntrepreneurshipById(id)
+        .getEntrepreneurshipById(Number(id))
         .subscribe((entrepreneurship) => {
           this.entrepreneurship = entrepreneurship;
           this.loadDonations(id); // Cargar donaciones del emprendimiento

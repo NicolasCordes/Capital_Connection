@@ -172,18 +172,14 @@
   background-color: #0056b3;
 }
 
-/* Carga de nuevos proyectos */
-.loading {
-  text-align: center;
-  font-size: 16px;
-  padding: 10px;
-}
-
-.no-more-data {
+/* Indicador de carga y mensaje de no más datos */
+.loading, .no-more-data {
   text-align: center;
   font-size: 16px;
   padding: 10px;
   color: #aaa;
+  width: 100%;
+  margin-top: 20px;
 }
 
 /* Para móvil */
