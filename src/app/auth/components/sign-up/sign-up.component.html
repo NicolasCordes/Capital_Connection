@@ -2,35 +2,90 @@
   <fieldset>
     <legend class="form-title">Registrarse</legend>
 
+    <!-- Campo de correo electrónico -->
     <section class="form-group">
       <label for="email">Correo electrónico</label>
-      <input type="text" id="email" autocomplete="email" formControlName="email" class="input-field">
+      <input type="text" id="email" formControlName="email" class="input-field">
       <div *ngIf="form.controls['email'].touched">
-        <span *ngIf="form.controls['email'].hasError('required')" class="error-msg">El email no puede permanecer vacío</span>
+        <span *ngIf="form.controls['email'].hasError('required')" class="error-msg">El email es obligatorio</span>
         <span *ngIf="form.controls['email'].hasError('email')" class="error-msg">El email no es válido</span>
       </div>
     </section>
 
+    <!-- Campo de nombre de usuario -->
     <section class="form-group">
       <label for="username">Nombre de Usuario</label>
-      <input type="text" id="username" autocomplete="username" formControlName="username" class="input-field">
-      <div *ngIf="form.controls['username'].touched">
-        <span *ngIf="form.controls['username'].hasError('required')" class="error-msg">El nombre de usuario no puede permanecer vacío</span>
-        <span *ngIf="form.controls['username'].hasError('minlength')" class="error-msg">El nombre de usuario es muy corto</span>
+      <input type="text" id="username" formControlName="username" class="input-field">
+      <div *ngIf="form.controls['username'].touched && form.controls['username'].invalid" class="error-msg">
+        El nombre de usuario es obligatorio y debe tener al menos 4 caracteres.
       </div>
     </section>
 
+    <!-- Campo de contraseña -->
     <section class="form-group">
       <label for="password">Contraseña</label>
-      <div class="password-container">
-        <input #password type="password" id="password" formControlName="password" class="input-field">
-        <button type="button" (click)="onRevealPassword(password)" class="eye-icon">👁️</button>
-      </div>
-      <div *ngIf="form.controls['password'].touched">
-        <span *ngIf="form.controls['password'].hasError('required')" class="error-msg">La contraseña no puede permanecer vacía</span>
-        <span *ngIf="form.controls['password'].hasError('minlength')" class="error-msg">La contraseña es muy corta</span>
+      <input type="password" id="password" formControlName="password" class="input-field">
+      <div *ngIf="form.controls['password'].touched && form.controls['password'].invalid" class="error-msg">
+        La contraseña es obligatoria y debe tener al menos 6 caracteres.
       </div>
     </section>
+
+    <!-- Campo de nombre -->
+    <section class="form-group">
+      <label for="name">Nombre</label>
+      <input type="text" id="name" formControlName="name" class="input-field">
+      <div *ngIf="form.controls['name'].touched && form.controls['name'].invalid" class="error-msg">
+        El nombre es obligatorio.
+      </div>
+    </section>
+
+    <!-- Campo de apellido -->
+    <section class="form-group">
+      <label for="surname">Apellido</label>
+      <input type="text" id="surname" formControlName="surname" class="input-field">
+      <div *ngIf="form.controls['surname'].touched && form.controls['surname'].invalid" class="error-msg">
+        El apellido es obligatorio.
+      </div>
+    </section>
+
+    <!-- Campo de fecha de nacimiento -->
+    <section class="form-group">
+      <label for="dateOfBirth">Fecha de Nacimiento</label>
+      <input type="date" id="dateOfBirth" formControlName="dateOfBirth" class="input-field">
+      <div *ngIf="form.controls['dateOfBirth'].touched && form.controls['dateOfBirth'].invalid" class="error-msg">
+        La fecha de nacimiento es obligatoria.
+      </div>
+    </section>
+
+    <!-- Campo de años de experiencia -->
+    <section class="form-group">
+      <label for="yearsOfExperience">Años de Experiencia</label>
+      <input type="number" id="yearsOfExperience" formControlName="yearsOfExperience" class="input-field">
+      <div *ngIf="form.controls['yearsOfExperience'].touched && form.controls['yearsOfExperience'].invalid" class="error-msg">
+        Los años de experiencia son obligatorios.
+      </div>
+    </section>
+
+    <!-- Campo de industria -->
+<section class="form-group">
+  <label for="industry">Industria</label>
+  <select id="industry" formControlName="industry" class="input-field">
+    <option value="tecnologia">Tecnología</option>
+    <option value="salud">Salud</option>
+    <option value="educacion">Educación</option>
+    <option value="sostenibilidad">Sostenibilidad</option>
+    <option value="alimentacion">Alimentación</option>
+  </select>
+  <div *ngIf="form.controls['industry'].touched && form.controls['industry'].invalid" class="error-msg">
+    La industria es obligatoria.
+  </div>
+</section>
+
+
+     <!-- Usamos el componente de dirección -->
+     <app-address-form (address)="updateAddress($event)"></app-address-form>
+
+
 
     <button type="submit" [disabled]="form.invalid" class="submit-btn">Enviar</button>
   </fieldset>

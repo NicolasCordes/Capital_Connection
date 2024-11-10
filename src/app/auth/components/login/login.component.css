@@ -1,182 +1,92 @@
-/* Variables de color */
-:root {
-  --primary-color: #6c5ce7;
-  --secondary-color: #00bcd4;
-  --accent-color: #f39c12;
-  --light-gray: #ecf0f1;
-  --dark-gray: #2d3436;
-  --white: #ffffff;
-  --border-color: #dfe6e9;
-  --input-focus-color: #6c5ce7;
-  --shadow-color: rgba(0, 0, 0, 0.15);
-}
-
-/* Estilo global para el body */
-body {
-  font-family: 'Poppins', sans-serif;
-  background-color: #f7f7f7;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  color:black;
-}
-
-/* Estilos del formulario */
+/* Estilo para el formulario de inicio de sesión */
 .login-form {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  border-radius: 10px;
-  padding: 40px;
-  width: 400px;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-  animation: formFadeIn 1s ease-out;
-  box-sizing: border-box;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f4f4f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-legend {
-  font-size: 1.8rem;
-  font-weight: 600;
-  color:black;
-  margin-bottom: 30px;
+.login-form fieldset {
+  border: none;
+}
+
+.login-form legend {
+  font-size: 1.5em;
+  color: #333;
   text-align: center;
-  letter-spacing: 2px;
+  margin-bottom: 20px;
 }
 
 .form-group {
-  margin-bottom: 20px;
-  position: relative;
+  margin-bottom: 15px;
 }
 
-label {
-  font-size: 1.1rem;
-  font-weight: 500;
-  color:black;
-  margin-bottom: 8px;
-  transition: all 0.3s ease;
+.form-group label {
+  display: block;
+  font-size: 1em;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
 }
 
-input {
+.form-group input {
   width: 100%;
-  padding: 12px;
-  border-radius: 8px;
-  border: 2px solid var(--border-color);
-  background-color: var(--white);
-  font-size: 1rem;
-  color:black;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1em;
+  color: #333;
+}
+
+.form-group input:focus {
   outline: none;
-  transition: all 0.3s ease;
-  box-sizing: border-box;
+  border-color: #007bff;
 }
 
-/* Efecto de enfoque en los inputs */
-input:focus {
-  border-color: var(--input-focus-color);
-  box-shadow: 0 0 5px var(--input-focus-color);
-}
-
-input::placeholder {
-  color: var(--dark-gray);
-  opacity: 0.6;
-}
-
-/* Revelar contraseña */
 .password-group {
-  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .reveal-btn {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
   background: none;
   border: none;
+  font-size: 1.2em;
+  color: #007bff;
   cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 0 10px var(--shadow-color);
-  border-radius: 50%;
-  padding: 5px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 0;
+  margin-left: 10px;
 }
 
 .reveal-btn:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  color: #0056b3;
 }
 
-/* Icono ojo */
-.icon {
-  font-size: 20px;
-  color: var(--dark-gray);
-  transition: all 0.3s ease;
-}
-
-/* Estado abierto del ojo */
-.eye-open {
-  color: var(--primary-color);
-}
-
-/* Estado cerrado del ojo */
-.eye-closed {
-  color: var(--accent-color);
-}
-
-/* Estilo del botón de submit */
 .submit-btn {
   width: 100%;
   padding: 12px;
-  background-color: var(--primary-color);
-  color: var(--white);
-  font-size: 1.1rem;
-  border-radius: 8px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 1.1em;
   border: none;
+  border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  box-sizing: border-box;
+  transition: background-color 0.3s;
 }
 
 .submit-btn:disabled {
-  background-color: #b2bec3;
+  background-color: #cccccc;
   cursor: not-allowed;
 }
 
-.submit-btn:hover:not(:disabled) {
-  background-color: var(--accent-color);
-  transform: translateY(-3px);
+.submit-btn:hover {
+  background-color: #0056b3;
 }
 
-/* Animaciones de entrada del formulario */
-@keyframes formFadeIn {
-  0% {
-      opacity: 0;
-      transform: translateY(-40px);
-  }
-  100% {
-      opacity: 1;
-      transform: translateY(0);
-  }
-}
-
-/* Responsividad para dispositivos pequeños */
-@media (max-width: 480px) {
-  .login-form {
-      width: 90%;
-      padding: 25px;
-  }
-
-  legend {
-      font-size: 1.5rem;
-  }
-
-  .form-group input {
-      font-size: 0.9rem;
-  }
-
-  .submit-btn {
-      font-size: 1rem;
-  }
+/* Estilos adicionales */
+.form-group input::placeholder {
+  color: #888;
 }

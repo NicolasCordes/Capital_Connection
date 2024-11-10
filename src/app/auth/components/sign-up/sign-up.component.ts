@@ -1,33 +1,59 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AccountData } from '../../types/account-data';
 import { AuthService } from '../../services/service.service';
 import { CommonModule } from '@angular/common';
+import { Address } from '../../../features/user/models/address.model';
+import { AddressFormComponent } from "../../../features/user/address-form/address-form.component";
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterModule,CommonModule],
+  imports: [ReactiveFormsModule, RouterModule, CommonModule, AddressFormComponent],
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.css']
 })
-export class SignupComponent  {
+export class SignupComponent implements OnInit {
 
   private formBuilder = inject(FormBuilder);
 
   form = this.formBuilder.group({
     username: ['', [Validators.required, Validators.minLength(4)]],
     password: ['', [Validators.required, Validators.minLength(6)]],
-    role: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]]
-  })
+    email: ['', [Validators.required, Validators.email]],
+    name: ['', Validators.required],
+    surname: ['', Validators.required],
+    dateOfBirth: ['', Validators.required],
+    yearsOfExperience: [0, [Validators.required, Validators.min(0)]],
+    industry: ['', Validators.required],
+    wallet: [{ value: 0, disabled: true }], // Inicializa en 0 y desactiva el campo
+    address: this.formBuilder.group({
+      street: ['', Validators.required],
+      number: [0, Validators.required],
+      locality: ['', Validators.required],
+      province: ['', Validators.required],
+      type: ['', Validators.required]
+    })
+  });
 
   constructor(private authService: AuthService, private router: Router) { }
 
+  ngOnInit(): void {
+    // Inicializar otros datos si es necesario
+  }
+
   onSubmit() {
     if (this.form.invalid) return;
-    const user = this.form.getRawValue() as AccountData;
+
+
+
+    const user = {
+      ...this.form.getRawValue(),
+      wallet: 0, // Asegura que `wallet` se envíe como BigInt
+      favorites: [] // Inicializa `favorites` como un array vacío
+    } as AccountData;
+
     this.authService.signup(user).subscribe({
       next: () => {
         alert('Usuario agregado');
@@ -35,19 +61,18 @@ export class SignupComponent  {
       },
       error: (error) => {
         console.error(error);
-        console.log('redirecting to Home');
         setTimeout(() => {
           this.router.navigate(['/']);
         }, 1500);
       }
-    })
+    });
   }
 
   onRevealPassword(pwInput: HTMLInputElement) {
-    if (pwInput.type == 'password') {
-      pwInput.type = 'text';
-    } else {
-      pwInput.type = 'password';
-    }
+    pwInput.type = pwInput.type === 'password' ? 'text' : 'password';
+  }
+
+  updateAddress(address: Address) {
+    this.form.get('address')?.setValue(address);
   }
 }

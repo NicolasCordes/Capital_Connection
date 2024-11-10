@@ -6,6 +6,46 @@
       "password": "Y3P6pvPTdDo56c9jb/qkM5Ot2vn/Zz8IUh26oK84k7I=",
       "role": "Emprendedor",
       "email": "a@gmail.com"
+    },
+    {
+      "id": "7ace",
+      "username": "nicocordes",
+      "password": "2y5YZIzbhCArPiRBBLH1WDhTluflBupLkhpkUEDOnRI=",
+      "email": "nicolascordes1@gmail.com",
+      "name": "Miguel",
+      "surname": "Cordes",
+      "dateOfBirth": "2023-11-01",
+      "yearsOfExperience": 2,
+      "industry": "papeles",
+      "wallet": 0,
+      "address": {
+        "street": "ferrer",
+        "number": 856,
+        "locality": "Mar Del Plata",
+        "province": "Buenos Aires",
+        "type": "Home"
+      },
+      "favorites": []
+    },
+    {
+      "id": "2671",
+      "username": "nicoals",
+      "password": "2y5YZIzbhCArPiRBBLH1WDhTluflBupLkhpkUEDOnRI=",
+      "email": "cordes-nicolas@estudiante.mdp.utn.edu.ar",
+      "name": "pepe2233",
+      "surname": "cfefv",
+      "dateOfBirth": "2023-08-30",
+      "yearsOfExperience": 6,
+      "industry": "alimentacion",
+      "wallet": 0,
+      "address": {
+        "street": "ferrer",
+        "number": 856,
+        "locality": "Mar Del Plata",
+        "province": "Buenos Aires",
+        "type": "Other"
+      },
+      "favorites": []
     }
   ],
   "users": [
