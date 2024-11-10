@@ -9,7 +9,6 @@ export interface Entrepreneurship {
   category: string;
   images: string[]; // URLs de imágenes
   videos: string[]; // URLs de videos
-  reviews?: Review [];
   collected?: number; // total recaudado
 }
 

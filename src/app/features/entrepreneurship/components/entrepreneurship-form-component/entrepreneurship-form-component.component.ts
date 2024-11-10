@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormArray, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray, FormControl, ReactiveFormsModule, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EntrepreneurshipService } from '../../services/entrepreneurship.service';
 import { UploadImageComponent } from '../uploads/upload-image/upload-image.component';
@@ -26,12 +26,22 @@ export class EntrepreneurshipFormComponent implements OnInit {
       description: ['', Validators.required],
       goal: [0, [Validators.required, Validators.min(1)]],
       category: ['', Validators.required],
-      images: this.fb.array([]), // FormArray para almacenar URLs de imágenes
+      images: this.fb.array([], this.imagesRequiredValidator()), // FormArray para almacenar URLs de imágenes
       videos: this.fb.array([]), // FormArray para almacenar URLs de videos
     });
   }
 
   ngOnInit(): void {}
+
+  imagesRequiredValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      // Verifica si el control es un FormArray y si no tiene elementos
+      if (control instanceof FormArray && control.length === 0) {
+        return { 'imagesRequired': true };
+      }
+      return null; // No hay error si tiene imágenes
+    };
+  }
 
   // Getter para el FormArray de imágenes
   get imagesFormArray(): FormArray {
@@ -63,6 +73,7 @@ export class EntrepreneurshipFormComponent implements OnInit {
     if (this.entrepreneurshipForm.valid) {
       const ent = this.entrepreneurshipForm.getRawValue();
       ent.id_user = '123';
+      ent.collected = 1; 
       console.log('Emprendimiento a enviar:', ent); // Verifica las URLs de las imágenes
       console.log(ent);
       this.entrepreneurshipService

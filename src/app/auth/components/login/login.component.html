@@ -1,17 +1,18 @@
 <form [formGroup]="form" (ngSubmit)="onLogin()" class="login-form">
-  <fieldset>
-      <legend>Inicio de sesión</legend>
-      <section class="form-group">
-          <label for="username">Nombre de Usuario</label>
-          <input type="text" id="username" autocomplete="username" formControlName="username" placeholder="Ingresa tu usuario" required>
-      </section>
-      <section class="form-group password-group">
-          <label for="password">Contraseña</label>
-          <input #password type="password" id="password" formControlName="password" placeholder="Ingresa tu contraseña" required>
-          <button type="button" (click)="onRevealPassword(password)" class="reveal-btn">
-              👁️
-          </button>
-      </section>
-      <button type="submit" [disabled]="form.invalid" class="submit-btn">Iniciar sesión</button>
-  </fieldset>
-</form>
+    <fieldset>
+        <legend>Inicio de sesión</legend>
+        <section class="form-group">
+            <label for="username">Nombre de Usuario</label>
+            <input type="text" id="username" autocomplete="username" formControlName="username" placeholder="Ingresa tu usuario" required>
+        </section>
+        <section class="form-group password-group">
+            <label for="password">Contraseña</label>
+            <input #password type="password" id="password" formControlName="password" placeholder="Ingresa tu contraseña" required>
+            <button type="button" (click)="onRevealPassword(password)" class="reveal-btn">
+                👁️
+            </button>
+        </section>
+        <button type="submit" [disabled]="form.invalid" class="submit-btn">Iniciar sesión</button>
+    </fieldset>
+  </form>
+  

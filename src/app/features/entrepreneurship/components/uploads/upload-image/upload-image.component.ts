@@ -31,7 +31,7 @@ export class UploadImageComponent {
     private mediaUploadService: MediaUploadService
   ) {
     // Inicializamos el FormControl y FormGroup para manejar las imágenes seleccionadas
-    this.imageControl = new FormControl([], [Validators.required]);
+    this.imageControl = new FormControl([]);
     this.imageForm = this.fb.group({
       imageControl: this.imageControl
     });

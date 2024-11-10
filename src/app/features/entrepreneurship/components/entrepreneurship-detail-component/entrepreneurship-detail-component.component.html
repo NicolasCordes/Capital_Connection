@@ -1,36 +1,35 @@
 <div *ngIf="entrepreneurship as currentEntrepreneurship">
   <h2>{{ currentEntrepreneurship.name }} - Detalles</h2>
 
+  <!-- Mostrar detalles -->
+  <div class="entrepreneurship-details">
+    <p><strong>Descripción:</strong> {{ currentEntrepreneurship.description }}</p>
+    <p><strong>Objetivo Financiero:</strong> {{ currentEntrepreneurship.goal | currency }}</p>
+    <p><strong>Categoría:</strong> {{ currentEntrepreneurship.category }}</p>
+  </div>
 
-    <!-- Mostrar detalles -->
-    <div class="entrepreneurship-details">
-      <p><strong>Descripción:</strong> {{ currentEntrepreneurship.description }}</p>
-      <p><strong>Objetivo Financiero:</strong> {{ currentEntrepreneurship.goal | currency }}</p>
-      <p><strong>Categoría:</strong> {{ currentEntrepreneurship.category }}</p>
-    </div>
+  <!-- Mostrar imágenes -->
+  <h3>Imágenes del Emprendimiento</h3>
+  <div *ngFor="let image of entrepreneurship.images">
+    <img [src]="image" alt="Imagen del emprendimiento" width="200" height="200" />
+  </div>
 
-    <!-- Mostrar imágenes -->
-    <h3>Imágenes del Emprendimiento</h3>
-    <div *ngFor="let image of entrepreneurship.images">
-      <img [src]="image" alt="Imagen del emprendimiento" width="200" height="200" />
-    </div>
+  <!-- Mostrar videos -->
+  <h3>Videos del Emprendimiento</h3>
+  <div *ngFor="let video of entrepreneurship.videos">
+    <video [src]="video" controls width="400">Tu navegador no soporta la etiqueta de video.</video>
+  </div>
 
-    <!-- Mostrar videos -->
-    <h3>Videos del Emprendimiento</h3>
-    <div *ngFor="let video of entrepreneurship.videos">
-      <video [src]="video" controls width="400">Tu navegador no soporta la etiqueta de video.</video>
-    </div>
+  <!-- Botón de agregar a favoritos -->
+  <button (click)="addToFavorites()">Agregar a Favoritos</button>
 
-    <!-- Botón de agregar a favoritos -->
-    <button (click)="addToFavorites()">Agregar a Favoritos</button>
+  <!-- Formulario de Reseñas -->
+  <h3>Agregar una Reseña</h3>
+  <app-reviews-form-component (reviewCreated)="addReview($event)" [entrepreneurship]="entrepreneurship"></app-reviews-form-component>
 
-    <!-- Formulario de Reseñas -->
-    <h3>Agregar una Reseña</h3>
-    <app-reviews-form-component (reviewCreated)="addReview($event)" [entrepreneurship]="entrepreneurship"></app-reviews-form-component>
+  <app-reviews-list-component [id]="entrepreneurship.id || 0"></app-reviews-list-component>
 
-@if(!carga){
-  <app-reviews-list-component [reviews]="entrepreneurship.reviews || []"></app-reviews-list-component>
-
-}@else{
-  <app-reviews-list-component [reviews]="entrepreneurship.reviews || []"></app-reviews-list-component>
-}
+  <!-- Formulario de Donación -->
+  <h3>Agregar Donación</h3>
+  <app-donation-form-component (donationAdded)="onDonationAdded($event)"></app-donation-form-component>
+</div>

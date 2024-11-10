@@ -12,7 +12,8 @@ import { ReviewsFormComponentComponent } from '../reviews-form-component/reviews
   styleUrls: ['./reviews-list-component.component.css']
 })
 export class ReviewsListComponentComponent implements OnInit {
-  @Input() reviews!: Review[];  // Declaramos la propiedad como @Input()
+  reviews: Review[]=[]; 
+  @Input() id!: number; 
 
   constructor(private reviewService: ReviewService) {}
 
@@ -22,7 +23,7 @@ export class ReviewsListComponentComponent implements OnInit {
 
   // Cargar las reseñas desde el backend
   loadReviews(): void {
-    this.reviewService.getReview().subscribe({
+    this.reviewService.getReviewById(this.id).subscribe({
       next: (reviews) => {
         this.reviews = reviews;
         console.log('Reseñas cargadas:', reviews);
@@ -33,20 +34,4 @@ export class ReviewsListComponentComponent implements OnInit {
     });
   }
 
-  // Añadir una nueva reseña a la lista y actualizar el backend
-  addReview(newReview: Review): void {
-    // Cambiar la referencia del array para que Angular detecte el cambio y actualice la vista
-    this.reviews = [...this.reviews, newReview];  // Crea una nueva referencia y agrega la nueva reseña
-  
-    // Opcional: Si deseas recargar las reseñas desde el backend (en caso de que la nueva reseña también se agregue en el servidor)
-    this.reviewService.postReview(newReview).subscribe({
-      next: (review) => {
-        console.log('Reseña añadida:', review);
-        this.loadReviews();  // Recargar las reseñas desde el backend
-      },
-      error: (err) => {
-        console.error('Error al añadir reseña:', err);
-      }
-    });
-  }
 }

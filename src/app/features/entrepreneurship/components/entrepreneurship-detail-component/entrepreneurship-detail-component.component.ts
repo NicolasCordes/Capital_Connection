@@ -17,12 +17,15 @@ import { Review } from '../../../reviews/models/review.model';
 import { FavoriteListService } from '../../../favorite-list/services/favorite-list.service';
 
 import { ReviewsListComponentComponent } from "../../../reviews/components/reviews-list-component/reviews-list-component.component";
+import { Donation } from '../../../donation/models/donation.model';
+import { DonationService } from '../../../donation/services/donation.service';
+import { DonationFormComponentComponent } from "../../../donation/components/donation-form-component/donation-form-component.component";
 
 
 @Component({
   selector: 'app-entrepreneurship-detail-component',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, ReviewsFormComponentComponent, ReviewsListComponentComponent],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, ReviewsFormComponentComponent, ReviewsListComponentComponent, DonationFormComponentComponent],
   templateUrl: './entrepreneurship-detail-component.component.html',
   styleUrls: ['./entrepreneurship-detail-component.component.css'],
 })
@@ -41,6 +44,7 @@ export class EntrepreneurshipDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private entrepreneurshipService: EntrepreneurshipService,
     private favoriteListService: FavoriteListService,
+    private donationService: DonationService,
     private fb: FormBuilder,
     private router: Router
   ) {}
@@ -131,10 +135,7 @@ export class EntrepreneurshipDetailComponent implements OnInit {
 
   addReview(newReview: Review): void {
     if (this.entrepreneurship) {
-      if(this.entrepreneurship.reviews){
-        this.reviews = [...this.entrepreneurship.reviews, newReview];
-
-      }
+      
       this.carga= !this.carga;
       // Aquí se guarda la reseña en el backend (si es necesario)
       this.entrepreneurshipService.updateEntrepreneurship(this.id, this.entrepreneurship).subscribe(() => {
@@ -159,8 +160,43 @@ export class EntrepreneurshipDetailComponent implements OnInit {
         }
       );
   }
-}
 
+  onDonationAdded(donation: Donation): void {
+    // Verifica si el emprendimiento existe y tiene un ID válido
+    if (this.entrepreneurship?.id) {
+      this.id = this.entrepreneurship.id;
+      console.log('ID del emprendimiento:', this.id);
+      donation.idEntrepreneurship = this.id;
+      
+      // Enviar la donación al backend
+      this.donationService.postDonation(donation).subscribe({
+        next: (donationResponse) => {
+          // Actualizamos la cantidad recaudada del emprendimiento
+          if (this.entrepreneurship) {
+            this.entrepreneurship.collected = donationResponse.amount;
+            console.log('Emprendimiento actualizado con la donación:', this.entrepreneurship);
+  
+            // Verificamos que entrepreneurship no sea null antes de actualizar
+            this.entrepreneurshipService.updateEntrepreneurship(this.id, this.entrepreneurship!).subscribe({
+              next: (data) => {
+                console.log('Emprendimiento actualizado:', data);
+              },
+              error: (err) => {
+                console.error('Error al actualizar el emprendimiento:', err);
+              }
+            });
+          }
+        },
+        error: (err) => {
+          console.error('Error al agregar la donación:', err);
+        }
+      });
+    } else {
+      console.error('No se pudo asociar la donación con un emprendimiento válido.');
+    }
+  }
+  
+}
 
 
 

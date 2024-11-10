@@ -3,6 +3,7 @@ import { Router, RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../auth/services/service.service';
 import { CommonModule } from '@angular/common';
+import { ActiveUser } from '../../auth/types/account-data';
 
 @Component({
   selector: 'app-navbar',
@@ -11,38 +12,22 @@ import { CommonModule } from '@angular/common';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent implements OnInit, OnDestroy {
+export class NavbarComponent implements OnInit {
+  activeUser: ActiveUser | undefined;
 
-  activeUser = false;
-  private sub?: Subscription;
+  constructor(private authService: AuthService) {}
 
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) { }
-
-  ngOnInit(): void {
-    this.sub = this.authService.auth().subscribe({
-      next: (activeUser) => {
-        if(activeUser) {
-          this.activeUser = true;
-        }
-      }
+  ngOnInit() {
+    // Suscribirse al estado de autenticación para mantener actualizado el estado del usuario
+    this.authService.auth().subscribe(activeUser => {
+      this.activeUser = activeUser;
     });
   }
 
-  ngOnDestroy(): void {
-    this.sub?.unsubscribe();
-  }
-
   onLogOut() {
-    this.authService.logout().subscribe({
-      next: (loggedOut) => {
-        if (loggedOut) {
-          this.activeUser = false;
-          this.router.navigate(['/']);
-        }
-      }
-    })
+    this.authService.logout().subscribe(() => {
+      // Redirigir al usuario a la página de inicio o login después de cerrar sesión
+      window.location.href = '/';
+    });
   }
 }

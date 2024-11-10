@@ -101,8 +101,11 @@ p {
 .carousel-slide {
   flex-shrink: 0;
   width: calc(100% / 3 - 30px); /* Cambiado de 300px a un valor proporcional */
-  height: 350px;
+  height: 400px; /* Altura fija para las tarjetas */
   margin: 0 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Distribuye bien los elementos dentro de la tarjeta */
 }
 
 .carousel-slide-content {
@@ -115,7 +118,8 @@ p {
   background-color: white;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
-  height: 100%; /* Asegura que el contenido ocupe todo el alto de la tarjeta */
+  height: 100%; /* Asegura que ocupe toda la altura de la tarjeta */
+  overflow: hidden; /* Evita que el contenido se desborde */
 }
 
 .carousel-slide-content:hover {
@@ -124,8 +128,8 @@ p {
 
 .carousel-slide-content img {
   max-width: 100%;
-  height: 180px; /* Ajusta el alto de las imágenes si es necesario */
-  object-fit: cover; /* Esto ayuda a que la imagen se recorte de forma que ocupe todo el espacio sin distorsionarse */
+  height: 180px; /* Mantiene una altura fija para las imágenes */
+  object-fit: cover; /* Mantiene la proporción de la imagen sin distorsionarla */
   border-radius: 8px;
   margin-bottom: 10px;
 }
@@ -135,12 +139,19 @@ p {
   font-size: 1.2rem;
   color: #333;
   font-weight: 600;
+  text-align: center;
 }
 
 .carousel-slide-content p {
   font-size: 1rem;
   color: #555;
   margin-bottom: 10px;
+  text-align: center;
+  overflow: hidden; /* Oculta el contenido que se desborda */
+  text-overflow: ellipsis; /* Agrega '...' al final si el texto es demasiado largo */
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limita el texto a 3 líneas */
+  -webkit-box-orient: vertical;
 }
 
 .carousel-slide-content p strong {

@@ -15,8 +15,8 @@ import { Review } from "../models/review.model";
       return this.http.get<Review[]>(this.urlBase);
     }
   
-    getReviewById(id: Number | null): Observable<Review> {
-      return this.http.get<Review>(`${this.urlBase}/${id}`)
+    getReviewById(id: Number | null): Observable<Review[]> {
+      return this.http.get<Review[]>(`${this.urlBase}/${id}`)
     }
   
     postReview(review: Review): Observable<Review> {

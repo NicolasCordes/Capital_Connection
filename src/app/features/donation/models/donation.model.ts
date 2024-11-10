@@ -1,5 +1,6 @@
 export interface Donation {
     id?: string,
-    amount: BigInt,
+    amount: number,
     date: Date
+    idEntrepreneurship?: number;
 }

@@ -11,6 +11,7 @@ import { SignupComponent } from './auth/components/sign-up/sign-up.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { AddFavoriteComponent } from './features/favorite-list/components/add-favorite/add-favorite.component';
 import { FavoriteListComponent } from './features/favorite-list/components/list-favorite/favorite-list.component';
+import { guardGuard } from './auth/guard/guard.guard';
 
 export const routes: Routes = [
   {
@@ -39,6 +40,11 @@ export const routes: Routes = [
       path:'users',
       component:UserListComponent
     },
+    {
+      path:'profile',
+      component:HomePageComponent,
+      canActivate: [guardGuard]
+    },
     { path: 'add-favorite', component: AddFavoriteComponent },
     { path: 'favorites/:id', component: FavoriteListComponent },
   {
@@ -46,6 +52,7 @@ export const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full',
   },
+
 
 
 ];
