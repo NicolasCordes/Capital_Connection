@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Entrepreneurship } from '../../models/entrepreneurship.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EntrepreneurshipService } from '../../services/entrepreneurship.service';
@@ -20,6 +20,8 @@ import { ReviewsListComponentComponent } from "../../../reviews/components/revie
 import { Donation } from '../../../donation/models/donation.model';
 import { DonationService } from '../../../donation/services/donation.service';
 import { DonationFormComponentComponent } from "../../../donation/components/donation-form-component/donation-form-component.component";
+import { AuthService } from '../../../../auth/services/service.service';
+import { ActiveUser } from '../../../../auth/types/account-data';
 
 
 @Component({
@@ -38,6 +40,9 @@ export class EntrepreneurshipDetailComponent implements OnInit {
   id: number = 0;
   reviews: Review[] = [];
   carga: boolean = false;
+  activeUser: ActiveUser | undefined;
+  userType: string = 'Guest';
+  authService= inject(AuthService)
 
 
   constructor(
@@ -50,6 +55,11 @@ export class EntrepreneurshipDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.authService.auth().subscribe((user) => {
+      this.activeUser = user;
+      this.userType = user ? 'Registered User' : 'Guest';
+    });
+    console.log(this.activeUser, this.userType);
     this.route.paramMap.subscribe((params) => {
       this.id = parseInt(params.get('id') || '0', 10);
       this.entrepreneurshipService.getEntrepreneurshipById(this.id).subscribe((entrepreneurship) => {
@@ -170,10 +180,21 @@ export class EntrepreneurshipDetailComponent implements OnInit {
       
       // Enviar la donación al backend
       this.donationService.postDonation(donation).subscribe({
-        next: (donationResponse) => {
+        next: (donationResponse: Donation) => {
           // Actualizamos la cantidad recaudada del emprendimiento
           if (this.entrepreneurship) {
-            this.entrepreneurship.collected = donationResponse.amount;
+            const donationAmount = Number(donationResponse.amount);
+            let collect : number = 0;
+            collect = this.entrepreneurship.collected ?? 0; // Si collected es undefined, se asigna 0
+            console.log('Nueva cantidad recaudada:', collect); 
+            if(collect!== 1){
+              collect += donationAmount;
+            }else{
+              collect=donationAmount;
+            }
+            this.entrepreneurship.collected = collect;
+  
+            console.log('Nueva cantidad recaudada:', collect); // Verificamos el valor actualizado de `collected`
             console.log('Emprendimiento actualizado con la donación:', this.entrepreneurship);
   
             // Verificamos que entrepreneurship no sea null antes de actualizar
@@ -195,6 +216,7 @@ export class EntrepreneurshipDetailComponent implements OnInit {
       console.error('No se pudo asociar la donación con un emprendimiento válido.');
     }
   }
+  
   
 }
 

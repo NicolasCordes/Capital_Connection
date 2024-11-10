@@ -1,9 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ReviewService } from '../../services/review.service';
 import { Review } from '../../models/review.model';
 import { CommonModule } from '@angular/common';
 import { Entrepreneurship } from '../../../entrepreneurship/models/entrepreneurship.model';
+import { AuthService } from '../../../../auth/services/service.service';
+import { ActiveUser } from '../../../../auth/types/account-data';
 
 @Component({
   selector: 'app-reviews-form-component',
@@ -12,7 +14,7 @@ import { Entrepreneurship } from '../../../entrepreneurship/models/entrepreneurs
   templateUrl: './reviews-form-component.component.html',
   styleUrls: ['./reviews-form-component.component.css']
 })
-export class ReviewsFormComponentComponent {
+export class ReviewsFormComponentComponent implements OnInit{
   @Input() entrepreneurship!:Entrepreneurship | null;
 
   @Output() reviewCreated = new EventEmitter<Review>(); // Emitir la nueva reseña
@@ -22,6 +24,17 @@ export class ReviewsFormComponentComponent {
     this.reviewForm = this.fb.group({
       stars: [5, [Validators.required, Validators.min(1), Validators.max(5)]],
       reviewText: ['', Validators.required],
+    });
+  }
+
+  
+  activeUser: ActiveUser | undefined;
+  userType: string = 'Guest';
+  authService= inject(AuthService)
+  ngOnInit(): void {
+    this.authService.auth().subscribe((user) => {
+      this.activeUser = user;
+      this.userType = user ? 'Registered User' : 'Guest';
     });
   }
 

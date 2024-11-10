@@ -74,6 +74,10 @@
         {
           "type": "entrepreneurship",
           "id": 1
+        },
+        {
+          "type": "entrepreneurship",
+          "id": 2
         }
       ],
       "id": "2410"
@@ -81,15 +85,15 @@
   ],
   "donations": [
     {
-      "id": "8e94",
-      "amount": "1000",
-      "date": "2000-12-10T00:00:00.000Z"
+      "id": "7ba0",
+      "amount": "15",
+      "date": "2024-11-10T16:43:20.306Z"
     },
     {
-      "id": "8e94",
-      "amount": "1000",
-      "date": "2000-12-10T00:00:00.000Z",
-      "idEntrepreneurship": 1
+      "id": "7ba0",
+      "amount": "15",
+      "date": "2024-11-10T16:43:20.306Z",
+      "idEntrepreneurship": 2
     }
   ]
 }

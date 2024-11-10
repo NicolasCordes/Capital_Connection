@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, OnInit } from '@angular/core';
+import { Component, EventEmitter, HostListener, inject, OnInit } from '@angular/core';
 import { Entrepreneurship } from '../../models/entrepreneurship.model';
 import { EntrepreneurshipService } from '../../services/entrepreneurship.service';
 import { Route, Router } from '@angular/router';
@@ -6,6 +6,8 @@ import { CommonModule } from '@angular/common';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { of } from 'rxjs/internal/observable/of';
 import { DonationService } from '../../../donation/services/donation.service';
+import { AuthService } from '../../../../auth/services/service.service';
+import { ActiveUser } from '../../../../auth/types/account-data';
 
 @Component({
   selector: 'app-entrepreneurship-list-component',
@@ -20,6 +22,11 @@ export class EntrepreneurshipListComponent implements OnInit {
   size = 6;                // Tamaño de cada página
   isLoading = false;       // Estado de carga
   hasMore = true;          // Indica si hay más datos para cargar
+  activeUser: ActiveUser | undefined;
+  userType: string = 'Guest';
+  authService= inject(AuthService)
+
+   
 
   constructor(
     private entrepreneurshipService: EntrepreneurshipService,
@@ -29,6 +36,11 @@ export class EntrepreneurshipListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadEntrepreneurships();
+    this.authService.auth().subscribe((user) => {
+      this.activeUser = user;
+      this.userType = user ? 'Registered User' : 'Guest';
+    });
+
   }
 
   // Función para cargar datos

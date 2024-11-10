@@ -8,20 +8,20 @@ export const guardGuard: CanActivateFn = () => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  // Verificar el estado de autenticación utilizando el servicio AuthService
   return authService.auth().pipe(
-    map((activeUser: ActiveUser | undefined) => { // Verificar si el usuario está autenticado o si hay un token
+    map((activeUser: ActiveUser | undefined) => {
+      // Log para verificar el estado de autenticación en el guard
+      console.log("Valor de activeUser en guard:", activeUser);
       if (activeUser || localStorage.getItem("token")) {
-        return true;  // Permitir el acceso si hay sesión activa o token en localStorage
+        return true;
       } else {
-        router.navigateByUrl('login'); // Redirigir si no está autenticado
+        router.navigateByUrl('login');
         return false;
       }
     }),
     catchError(() => {
-      // En caso de error, redirige a la página de acceso denegado
       router.navigateByUrl('login');
-      return of(false);  // Bloquear el acceso
+      return of(false);
     })
   );
 };

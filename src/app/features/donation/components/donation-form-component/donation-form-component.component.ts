@@ -1,7 +1,9 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Donation } from '../../models/donation.model';
 import { DonationService } from '../../services/donation.service';
+import { AuthService } from '../../../../auth/services/service.service';
+import { ActiveUser } from '../../../../auth/types/account-data';
 
 @Component({
   selector: 'app-donation-form-component',
@@ -10,10 +12,21 @@ import { DonationService } from '../../services/donation.service';
   templateUrl: './donation-form-component.component.html',
   styleUrl: './donation-form-component.component.css'
 })
-export class DonationFormComponentComponent {
+export class DonationFormComponentComponent implements OnInit{
+
+  activeUser: ActiveUser | undefined;
+  userType: string = 'Guest';
+  authService= inject(AuthService)
+
+  ngOnInit(): void {
+    this.authService.auth().subscribe((user) => {
+      this.activeUser = user;
+      this.userType = user ? 'Registered User' : 'Guest';
+    });
+  }
   donationForm = this.fb.group({
     amount: [0, [Validators.required, Validators.min(1)]],
-    date: ['', Validators.required],
+    
   });
 
   @Output() donationAdded: EventEmitter<Donation> = new EventEmitter();
@@ -23,9 +36,8 @@ export class DonationFormComponentComponent {
   onSubmit() {
     if (this.donationForm.valid) {
       const newDonation: Donation = {
-        id: undefined,  // O null si prefieres
         amount: this.donationForm.value.amount ?? 0,  // Mantener como BigInt
-        date: new Date(this.donationForm.value.date ?? new Date()),  // Asigna la fecha actual si date es null o undefined
+        date: new Date()  // Convertir la fecha a solo fecha sin hora
       };
   
       // Aquí ya no usamos JSON.stringify, solo pasamos el objeto
