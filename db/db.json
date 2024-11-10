@@ -48,26 +48,44 @@
       "favorites": []
     },
     {
-      "id": "b242",
-      "username": "SantiFidelibus",
-      "password": "vF5WnYvccjtZbOygXbg5iBe73ui56AeqmWw03/ucwXc=",
-      "email": "santiagofidelibus19@gmail.com",
-      "name": "santiago",
-      "surname": "fidelibus",
-      "dateOfBirth": "2003-12-19",
-      "yearsOfExperience": 13,
-      "industry": "tecnologia",
+      "id": "9a90",
+      "username": "pala",
+      "password": "NpDN+2ERgEtP08psyxz3zxd9/eA8wyz7Ulntf/GVH+g=",
+      "email": "nicopalacioscalvi@gmail.com",
+      "name": "Nicolas",
+      "surname": "Palacios",
+      "dateOfBirth": "2024-11-06",
+      "yearsOfExperience": 2,
+      "industry": "salud",
       "wallet": 0,
       "address": {
-        "street": "David Ortega",
-        "number": 1441,
-        "locality": "Mar del plata",
-        "province": "ARGENTINA",
+        "street": "Mansilla",
+        "number": 4645,
+        "locality": "Mar del Plata",
+        "province": "Buenos Aires (provincia)",
         "type": "Home"
       },
-      "favorites": [
-        1
-      ]
+      "favorites": []
+    },
+    {
+      "id": "69e4",
+      "username": "PALAORIGNIAL",
+      "password": "OdY5ardo+tqA8LhehC5LlVLkNA3WVKsP+cYkvp+HFas=",
+      "email": "nicopalacioscalvi@gmail.com",
+      "name": "Nicolas",
+      "surname": "Palacios",
+      "dateOfBirth": "2024-11-05",
+      "yearsOfExperience": 3,
+      "industry": "salud",
+      "wallet": 0,
+      "address": {
+        "street": "Mansilla",
+        "number": 4645,
+        "locality": "Mar del Plata",
+        "province": "Buenos Aires (provincia)",
+        "type": "Home"
+      },
+      "favorites": []
     }
   ],
   "users": [
@@ -147,79 +165,17 @@
   ],
   "donations": [
     {
-      "id": "7ba0",
-      "amount": "15",
-      "date": "2024-11-10T16:43:20.306Z"
+      "id": "d87b",
+      "amount": "13",
+      "date": "2024-11-10T20:34:17.163Z",
+      "idUser": "4193",
+      "idEntrepreneurship": 3
     },
     {
-      "id": "7ba0",
-      "amount": "15",
-      "date": "2024-11-10T16:43:20.306Z",
-      "idEntrepreneurship": 2
-    },
-    {
-      "id": "afcc",
-      "amount": "1000",
-      "date": "2024-11-10T19:07:57.824Z"
-    },
-    {
-      "id": "3742",
-      "amount": "3000",
-      "date": "2024-11-10T19:08:20.677Z"
-    },
-    {
-      "id": "3742",
-      "amount": "3000",
-      "date": "2024-11-10T19:08:20.677Z",
-      "idEntrepreneurship": 2
-    },
-    {
-      "id": "8c5f",
-      "amount": "200",
-      "date": "2024-11-10T19:17:25.097Z"
-    },
-    {
-      "id": "8c5f",
-      "amount": "200",
-      "date": "2024-11-10T19:17:25.097Z",
-      "idEntrepreneurship": 2
-    },
-    {
-      "id": "c09e",
-      "amount": "1000",
-      "date": "2024-11-10T19:17:48.077Z"
-    },
-    {
-      "id": "c09e",
-      "amount": "1000",
-      "date": "2024-11-10T19:17:48.077Z",
-      "idEntrepreneurship": 1
-    },
-    {
-      "id": "6c94",
-      "amount": "123",
-      "date": "2024-11-10T19:44:45.434Z"
-    },
-    {
-      "id": "ff3b",
-      "amount": "1500",
-      "date": "2024-11-10T21:11:46.075Z"
-    },
-    {
-      "id": "ff3b",
-      "amount": "1500",
-      "date": "2024-11-10T21:11:46.075Z",
-      "idEntrepreneurship": 1
-    },
-    {
-      "id": "7967",
-      "amount": "5000",
-      "date": "2024-11-10T21:23:59.811Z"
-    },
-    {
-      "id": "7967",
-      "amount": "5000",
-      "date": "2024-11-10T21:23:59.811Z",
+      "id": "bcfb",
+      "amount": "16",
+      "date": "2024-11-10T21:01:03.794Z",
+      "idUser": "69e4",
       "idEntrepreneurship": 1
     }
   ]

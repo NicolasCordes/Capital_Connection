@@ -2,7 +2,7 @@
     <h3>Lista de Donaciones</h3>
     <ul>
       <li *ngFor="let donation of donations">  
-        <strong>Monto:</strong> {{ convertToNumber(donation.amount) | currency }} <br />
+        <strong>Monto:</strong> {{ donation.amount }} <br />
         <strong>Fecha:</strong> {{ donation.date | date: 'short' }} <br />
       </li>
     </ul>

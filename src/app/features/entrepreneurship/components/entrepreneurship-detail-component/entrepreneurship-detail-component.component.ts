@@ -37,7 +37,7 @@ export class EntrepreneurshipDetailComponent implements OnInit {
   isEditing = false;
   entrepreneurship: Entrepreneurship | null = null;
 
-  userId: string = '123'; // Asegúrate de obtener el userId correctamente, aquí lo he dejado estático por ahora.
+  userId: string | null = null; // Asegúrate de obtener el userId correctamente, aquí lo he dejado estático por ahora.
   id: number = 0;
   reviews: Review[] = [];
   update: boolean = false;
@@ -71,6 +71,12 @@ export class EntrepreneurshipDetailComponent implements OnInit {
     this.authService.auth().subscribe((user) => {
       this.activeUser = user;
       this.userType = user ? 'Registered User' : 'Guest';
+      if(this.userType=== 'Registered User'){
+        if(this.activeUser?.id){
+          this.userId=this.activeUser.id;
+        }
+      }
+
     });
     console.log(this.activeUser, this.userType);
 
@@ -216,7 +222,10 @@ export class EntrepreneurshipDetailComponent implements OnInit {
       this.id = this.entrepreneurship.id;
       console.log('ID del emprendimiento:', this.id);
       donation.idEntrepreneurship = this.id;
-      
+
+      if(this.userId){donation.idUser=this.userId;}
+      // Enviar la donación al backend
+
       this.donationService.postDonation(donation).subscribe({
         next: (donationResponse: Donation) => {
    

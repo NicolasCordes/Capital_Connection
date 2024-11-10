@@ -41,4 +41,9 @@ import { Donation } from "../models/donation.model";
       return this.http.get<Donation[]>(`${this.urlBase}?entrepreneurshipId=${entrepreneurshipId}`);
     }
 
+     // Obtener las donaciones del usuario por ID
+  getDonationsByUserId(userId: string): Observable<Donation[]> {
+    return this.http.get<Donation[]>(`${this.urlBase}?idUser=${userId}`);
+  }
+    
   }
