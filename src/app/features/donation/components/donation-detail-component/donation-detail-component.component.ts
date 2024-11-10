@@ -28,16 +28,19 @@ export class DonationDetailComponentComponent {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
+      const numericId = Number(id); // Convertir id a número
       this.entrepreneurshipService
+
         .getEntrepreneurshipById(Number(id))
+
         .subscribe((entrepreneurship) => {
           this.entrepreneurship = entrepreneurship;
-          this.loadDonations(id); // Cargar donaciones del emprendimiento
+          this.loadDonations(numericId); // Cargar donaciones del emprendimiento
         });
     }
   }
 
-  private loadDonations(id: string) {
+  private loadDonations(id: number) {
     this.donationService
       .getDonationsByEntrepreneurshipId(Number(id))
       .subscribe((donations) => {
