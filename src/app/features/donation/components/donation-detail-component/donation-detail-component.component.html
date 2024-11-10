@@ -12,6 +12,8 @@
     <app-donation-form-component (donationAdded)="onDonationAdded($event)"></app-donation-form-component>
   
     <!-- Lista de Donaciones -->
-    <app-donation-list-component [entrepreneurshipId]="currentEntrepreneurship.id ?? null"></app-donation-list-component>
+    <app-donation-list-component [entrepreneurshipId]="currentEntrepreneurship.id ? (currentEntrepreneurship.id + '') : null"></app-donation-list-component>
+
+
 
   </div>
