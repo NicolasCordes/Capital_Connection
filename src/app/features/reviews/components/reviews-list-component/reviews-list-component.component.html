@@ -1,14 +1,17 @@
 <div *ngIf="reviews.length > 0; else noReviews" class="review-container">
   <h3 class="review-header">Reseñas:</h3>
   <div *ngFor="let review of reviews" class="review-item">
-    <h4 class="reviewer-name">Usuario: {{ review.id_user }}</h4>
-    <div class="review-stars">
-      <p class="rating-text">Calificación: {{ review.stars }} / 5</p>
-      <div class="star-rating">
-        <i *ngFor="let star of [1, 2, 3, 4, 5]" class="fa fa-star" [ngClass]="{'checked': star <= review.stars}"></i>
+    @if (review.idEntrepreneurship === id) {
+      <h4 class="reviewer-name">Usuario: {{ review.id_user }}</h4>
+      <div class="review-stars">
+        <p class="rating-text">Calificación: {{ review.stars }} / 5</p>
+        <div class="star-rating">
+          <i *ngFor="let star of [1, 2, 3, 4, 5]" class="fa fa-star" [ngClass]="{'checked': star <= review.stars}"></i>
+        </div>
       </div>
-    </div>
-    <p class="review-description">Texto: {{ review.reviewText || 'No disponible' }}</p> <!-- Verificación adicional -->
+      <p class="review-description">Texto: {{ review.reviewText || 'No disponible' }}</p> <!-- Verificación adicional -->
+
+    }
   </div>
 </div>
 

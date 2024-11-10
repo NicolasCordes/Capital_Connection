@@ -72,15 +72,22 @@ export class EntrepreneurshipListComponent implements OnInit {
       // Llamada al servicio para obtener las donaciones
       this.donationService.getDonationsByEntrepreneurshipId(entrepreneurshipId).subscribe(
         (donations) => {
-          // Sumar las donaciones para obtener el total recaudado
+          // Asegúrate de usar number en toda la operación
           entrepreneurship.collected = donations.reduce(
-            (total, donation) => total + Number(donation.amount), 
-            0
+            (total, donation) => total + Number(donation.amount), // Convertimos donation.amount a number
+            0 // Inicia con 0 para asegurar que todo sea number
           );
+  
+          // Si necesitas convertir el resultado a otro tipo de dato o hacer cálculos adicionales:
+          const collectedAmount = entrepreneurship.collected; // Esto ya es un number
+          console.log("Total recaudado como número:", collectedAmount);
+  
+          // Para mostrar como string:
+          const collectedAmountString = entrepreneurship.collected.toString(); // Mostrar como string
+          console.log("Total recaudado como string:", collectedAmountString);
         },
         (error) => {
-          // Manejo de errores
-          console.error(`Error al obtener donaciones para el emprendimiento ${entrepreneurship.id}:`, error);
+          console.error("Error fetching donations:", error);
         }
       );
     } else {

@@ -31,24 +31,11 @@ export class ReviewsFormComponentComponent {
       const newReview: Review = { 
         ...this.reviewForm.value,
         idUser: '1',  // Asignar el id_user. Asegúrate de que este tipo coincida con el backend.
-        entrepreneurship_id: this.entrepreneurship?.id || 0,  // Asignar el id del emprendimiento, si existe.
+        idEntrepreneurship: this.entrepreneurship?.id || 0,  // Asignar el id del emprendimiento, si existe.
         reviewText: this.reviewForm.get('reviewText')?.value, // Asegurarte de que reviewText esté en el formato correcto
         stars: this.reviewForm.get('stars')?.value, // Asegurarte de que stars esté en el formato correcto
-        entrepreneurships: [] // Iniciar el array para los emprendimientos
       };
 
-      if (this.entrepreneurship?.id) {
-        newReview.entrepreneurships.push({
-          id: this.entrepreneurship.id,
-          id_user: this.entrepreneurship.id_user,
-          name: this.entrepreneurship.name,
-          description: this.entrepreneurship.description,
-          goal: this.entrepreneurship.goal,
-          category: this.entrepreneurship.category,
-          images: this.entrepreneurship.images,
-          videos: this.entrepreneurship.videos,
-          reviews: [] // Suponiendo que es un arreglo vacío de reseñas
-        });
 
         console.log(newReview);
 
@@ -64,10 +51,13 @@ export class ReviewsFormComponentComponent {
         );
       }
     }
-  }
 
-  // Función para manejar la selección de estrellas
+      // Función para manejar la selección de estrellas
   setRating(value: number): void {
     this.reviewForm.get('stars')?.setValue(value);
   }
-}
+
+
+  }
+
+

@@ -8,89 +8,6 @@
       "email": "a@gmail.com"
     }
   ],
-  "entrepreneurships": [
-    {
-      "id": "320f",
-      "id_user": "user123",
-      "name": "asdsadsa",
-      "description": "asddas",
-      "goal": 324234,
-      "category": "asdasd",
-      "images": [
-        "https://res.cloudinary.com/dyho1ydzl/image/upload/v1731104313/e0bck8te6jtw0zz42ptt.jpg"
-      ],
-      "videos": [],
-      "reviews": []
-    },
-    {
-      "id": "cc58",
-      "id_user": "user456",
-      "name": "dsad",
-      "description": "asdasd",
-      "goal": 43214122,
-      "category": "asddsa",
-      "images": [],
-      "videos": [
-        "https://res.cloudinary.com/dyho1ydzl/video/upload/v1731105764/d9js1ad2cxscyt6zsxyr.mp4"
-      ],
-      "reviews": [
-        {
-          "id": 1,
-          "reviewerName": "John Doe",
-          "stars": 4,
-          "comment": "Gran emprendimiento, me encanta el concepto.",
-          "date": "2024-10-01T12:00:00Z"
-        }
-      ]
-    },
-    {
-      "id": "28fa",
-      "id_user": "user789",
-      "name": "sdadsa",
-      "description": "dsadsasa",
-      "goal": 23413412,
-      "category": "asdasd",
-      "images": [
-        "https://res.cloudinary.com/dyho1ydzl/image/upload/v1731109688/hq657dvknvtotjiz5phs.jpg"
-      ],
-      "videos": [],
-      "reviews": []
-    },
-    {
-      "id": "f476",
-      "id_user": "user101",
-      "name": "asdasd",
-      "description": "sdadsa",
-      "goal": 324234,
-      "category": "asdasd",
-      "images": [
-        "https://res.cloudinary.com/dyho1ydzl/image/upload/v1731110533/ripld9iqpk5vvhskpy9s.jpg"
-      ],
-      "videos": [
-        "https://res.cloudinary.com/dyho1ydzl/video/upload/v1731110534/e2ebf9uoyx5ybsspv1pt.mp4"
-      ],
-      "reviews": [
-        {
-          "id": 2,
-          "reviewerName": "Jane Smith",
-          "stars": 5,
-          "comment": "Excelente proyecto, definitivamente lo seguiré.",
-          "date": "2024-11-05T15:30:00Z"
-        }
-      ]
-    },
-    {
-      "id": "ed80",
-      "id_user": "user112",
-      "name": "asddsa",
-      "description": "asdasd",
-      "goal": 21423,
-      "category": "sdadsa",
-      "images": [],
-      "videos": [],
-      "reviews": []
-    }
-  ],
   "users": [
     {
       "favorites": [
@@ -153,9 +70,26 @@
         {
           "type": "entrepreneurship",
           "id": 4
+        },
+        {
+          "type": "entrepreneurship",
+          "id": 1
         }
       ],
       "id": "2410"
+    }
+  ],
+  "donations": [
+    {
+      "id": "8e94",
+      "amount": "1000",
+      "date": "2000-12-10T00:00:00.000Z"
+    },
+    {
+      "id": "8e94",
+      "amount": "1000",
+      "date": "2000-12-10T00:00:00.000Z",
+      "idEntrepreneurship": 1
     }
   ]
 }

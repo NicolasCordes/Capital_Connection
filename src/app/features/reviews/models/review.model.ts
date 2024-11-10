@@ -5,7 +5,7 @@ export interface Review {
     id_user:string;
     reviewText: string;
     stars: number; // Calificación, por ejemplo, de 1 a 5
-    entrepreneurships: Entrepreneurship[];
+    idEntrepreneurship: number;
 
   }
   

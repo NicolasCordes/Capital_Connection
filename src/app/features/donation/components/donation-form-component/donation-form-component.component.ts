@@ -12,7 +12,7 @@ import { DonationService } from '../../services/donation.service';
 })
 export class DonationFormComponentComponent {
   donationForm = this.fb.group({
-    amount: ['', [Validators.required, Validators.min(1)]],
+    amount: [0, [Validators.required, Validators.min(1)]],
     date: ['', Validators.required],
   });
 
@@ -24,10 +24,11 @@ export class DonationFormComponentComponent {
     if (this.donationForm.valid) {
       const newDonation: Donation = {
         id: undefined,  // O null si prefieres
-        amount: BigInt(this.donationForm.value.amount ?? 0),  // Asigna 0 si amount es null o undefined
+        amount: this.donationForm.value.amount ?? 0,  // Mantener como BigInt
         date: new Date(this.donationForm.value.date ?? new Date()),  // Asigna la fecha actual si date es null o undefined
       };
   
+      // Aquí ya no usamos JSON.stringify, solo pasamos el objeto
       this.donationService.postDonation(newDonation).subscribe((donation) => {
         this.donationAdded.emit(donation);
         this.donationForm.reset();
