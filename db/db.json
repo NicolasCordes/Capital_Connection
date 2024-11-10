@@ -46,6 +46,46 @@
         "type": "Other"
       },
       "favorites": []
+    },
+    {
+      "id": "9a90",
+      "username": "pala",
+      "password": "NpDN+2ERgEtP08psyxz3zxd9/eA8wyz7Ulntf/GVH+g=",
+      "email": "nicopalacioscalvi@gmail.com",
+      "name": "Nicolas",
+      "surname": "Palacios",
+      "dateOfBirth": "2024-11-06",
+      "yearsOfExperience": 2,
+      "industry": "salud",
+      "wallet": 0,
+      "address": {
+        "street": "Mansilla",
+        "number": 4645,
+        "locality": "Mar del Plata",
+        "province": "Buenos Aires (provincia)",
+        "type": "Home"
+      },
+      "favorites": []
+    },
+    {
+      "id": "69e4",
+      "username": "PALAORIGNIAL",
+      "password": "OdY5ardo+tqA8LhehC5LlVLkNA3WVKsP+cYkvp+HFas=",
+      "email": "nicopalacioscalvi@gmail.com",
+      "name": "Nicolas",
+      "surname": "Palacios",
+      "dateOfBirth": "2024-11-05",
+      "yearsOfExperience": 3,
+      "industry": "salud",
+      "wallet": 0,
+      "address": {
+        "street": "Mansilla",
+        "number": 4645,
+        "locality": "Mar del Plata",
+        "province": "Buenos Aires (provincia)",
+        "type": "Home"
+      },
+      "favorites": []
     }
   ],
   "users": [
@@ -125,15 +165,18 @@
   ],
   "donations": [
     {
-      "id": "7ba0",
-      "amount": "15",
-      "date": "2024-11-10T16:43:20.306Z"
+      "id": "d87b",
+      "amount": "13",
+      "date": "2024-11-10T20:34:17.163Z",
+      "idUser": "4193",
+      "idEntrepreneurship": 3
     },
     {
-      "id": "7ba0",
-      "amount": "15",
-      "date": "2024-11-10T16:43:20.306Z",
-      "idEntrepreneurship": 2
+      "id": "bcfb",
+      "amount": "16",
+      "date": "2024-11-10T21:01:03.794Z",
+      "idUser": "69e4",
+      "idEntrepreneurship": 1
     }
   ]
 }

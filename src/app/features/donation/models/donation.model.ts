@@ -3,4 +3,5 @@ export interface Donation {
     amount: number,
     date: Date
     idEntrepreneurship?: number;
+    idUser?: string;
 }
