@@ -52,6 +52,12 @@ export class HomePageComponent implements OnInit, OnDestroy {
     this.sub?.unsubscribe();
   }
 
+  getProgressWidth(goal: number, collected: number): number {
+    if (!goal) return 0; // Evita división por cero
+    const progress = Math.min((collected / goal) * 100, 100); // Limita el progreso al 100%
+    return Math.round(progress); // Redondea el progreso al entero más cercano
+  }
+
   moveSlider(direction: 'left' | 'right'): void {
     const totalSlides = this.entrepreneurships.length;
     const slidesVisible = 3; // Cambiado de 5 a 3

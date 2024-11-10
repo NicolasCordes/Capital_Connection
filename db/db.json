@@ -46,6 +46,28 @@
         "type": "Other"
       },
       "favorites": []
+    },
+    {
+      "id": "b242",
+      "username": "SantiFidelibus",
+      "password": "vF5WnYvccjtZbOygXbg5iBe73ui56AeqmWw03/ucwXc=",
+      "email": "santiagofidelibus19@gmail.com",
+      "name": "santiago",
+      "surname": "fidelibus",
+      "dateOfBirth": "2003-12-19",
+      "yearsOfExperience": 13,
+      "industry": "tecnologia",
+      "wallet": 0,
+      "address": {
+        "street": "David Ortega",
+        "number": 1441,
+        "locality": "Mar del plata",
+        "province": "ARGENTINA",
+        "type": "Home"
+      },
+      "favorites": [
+        1
+      ]
     }
   ],
   "users": [
@@ -134,6 +156,71 @@
       "amount": "15",
       "date": "2024-11-10T16:43:20.306Z",
       "idEntrepreneurship": 2
+    },
+    {
+      "id": "afcc",
+      "amount": "1000",
+      "date": "2024-11-10T19:07:57.824Z"
+    },
+    {
+      "id": "3742",
+      "amount": "3000",
+      "date": "2024-11-10T19:08:20.677Z"
+    },
+    {
+      "id": "3742",
+      "amount": "3000",
+      "date": "2024-11-10T19:08:20.677Z",
+      "idEntrepreneurship": 2
+    },
+    {
+      "id": "8c5f",
+      "amount": "200",
+      "date": "2024-11-10T19:17:25.097Z"
+    },
+    {
+      "id": "8c5f",
+      "amount": "200",
+      "date": "2024-11-10T19:17:25.097Z",
+      "idEntrepreneurship": 2
+    },
+    {
+      "id": "c09e",
+      "amount": "1000",
+      "date": "2024-11-10T19:17:48.077Z"
+    },
+    {
+      "id": "c09e",
+      "amount": "1000",
+      "date": "2024-11-10T19:17:48.077Z",
+      "idEntrepreneurship": 1
+    },
+    {
+      "id": "6c94",
+      "amount": "123",
+      "date": "2024-11-10T19:44:45.434Z"
+    },
+    {
+      "id": "ff3b",
+      "amount": "1500",
+      "date": "2024-11-10T21:11:46.075Z"
+    },
+    {
+      "id": "ff3b",
+      "amount": "1500",
+      "date": "2024-11-10T21:11:46.075Z",
+      "idEntrepreneurship": 1
+    },
+    {
+      "id": "7967",
+      "amount": "5000",
+      "date": "2024-11-10T21:23:59.811Z"
+    },
+    {
+      "id": "7967",
+      "amount": "5000",
+      "date": "2024-11-10T21:23:59.811Z",
+      "idEntrepreneurship": 1
     }
   ]
 }

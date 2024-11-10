@@ -10,7 +10,6 @@ export const guardGuard: CanActivateFn = () => {
 
   return authService.auth().pipe(
     map((activeUser: ActiveUser | undefined) => {
-      // Log para verificar el estado de autenticación en el guard
       console.log("Valor de activeUser en guard:", activeUser);
       if (activeUser || localStorage.getItem("token")) {
         return true;

@@ -7,7 +7,6 @@ export class TokenService {
 
   constructor() { }
 
-  // Método para generar un token aleatorio
   public generateToken(length: number = 32): string {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let token = '';

@@ -1,4 +1,3 @@
-/* Estilo para el formulario de inicio de sesión */
 .login-form {
   max-width: 400px;
   margin: 0 auto;
@@ -86,7 +85,6 @@
   background-color: #0056b3;
 }
 
-/* Estilos adicionales */
 .form-group input::placeholder {
   color: #888;
 }

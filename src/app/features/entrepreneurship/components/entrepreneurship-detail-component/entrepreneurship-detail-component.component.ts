@@ -22,12 +22,13 @@ import { DonationService } from '../../../donation/services/donation.service';
 import { DonationFormComponentComponent } from "../../../donation/components/donation-form-component/donation-form-component.component";
 import { AuthService } from '../../../../auth/services/service.service';
 import { ActiveUser } from '../../../../auth/types/account-data';
+import { MatIcon } from '@angular/material/icon';
 
 
 @Component({
   selector: 'app-entrepreneurship-detail-component',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, ReviewsFormComponentComponent, ReviewsListComponentComponent, DonationFormComponentComponent],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, ReviewsFormComponentComponent, ReviewsListComponentComponent, DonationFormComponentComponent, MatIcon],
   templateUrl: './entrepreneurship-detail-component.component.html',
   styleUrls: ['./entrepreneurship-detail-component.component.css'],
 })
@@ -39,11 +40,23 @@ export class EntrepreneurshipDetailComponent implements OnInit {
   userId: string = '123'; // Asegúrate de obtener el userId correctamente, aquí lo he dejado estático por ahora.
   id: number = 0;
   reviews: Review[] = [];
-  carga: boolean = false;
+  update: boolean = false;
   activeUser: ActiveUser | undefined;
   userType: string = 'Guest';
-  authService= inject(AuthService)
+  authService = inject(AuthService);
+  combinedMediaArray: string[] = [];
+  currentIndex: number = 0;
 
+  // Función para cargar las imágenes y videos
+  loadMedia() {
+    // Combinamos las imágenes y videos en un solo arreglo
+    if (this.entrepreneurship) {
+      this.combinedMediaArray = [
+        ...this.entrepreneurship.images,
+        ...this.entrepreneurship.videos
+      ];
+    }
+  }
 
   constructor(
     private route: ActivatedRoute,
@@ -60,13 +73,32 @@ export class EntrepreneurshipDetailComponent implements OnInit {
       this.userType = user ? 'Registered User' : 'Guest';
     });
     console.log(this.activeUser, this.userType);
+
     this.route.paramMap.subscribe((params) => {
       this.id = parseInt(params.get('id') || '0', 10);
       this.entrepreneurshipService.getEntrepreneurshipById(this.id).subscribe((entrepreneurship) => {
         this.entrepreneurship = entrepreneurship;
+        this.loadMedia();
+        console.log(this.combinedMediaArray);
         this.initForm(entrepreneurship);
       });
     });
+  }
+
+  previousSlide() {
+    if (this.currentIndex > 0) {
+      this.currentIndex--;
+    } else {
+      this.currentIndex = this.combinedMediaArray.length - 1;
+    }
+  }
+
+  nextSlide() {
+    if (this.currentIndex < this.combinedMediaArray.length - 1) {
+      this.currentIndex++;
+    } else {
+      this.currentIndex = 0;
+    }
   }
 
   private initForm(data: Entrepreneurship): void {
@@ -127,80 +159,83 @@ export class EntrepreneurshipDetailComponent implements OnInit {
       const updatedEntrepreneurship: Entrepreneurship = {
         ...this.entrepreneurship,
         ...this.entrepreneurshipForm.value,
-        images: this.images.value,  // Array de imágenes actualizado
-        videos: this.videos.value   // Array de videos actualizado
+        images: this.images.value,  
+        videos: this.videos.value  
       };
 
       console.log('Updated Entrepreneurship:', updatedEntrepreneurship);
 
       this.entrepreneurshipService.updateEntrepreneurship(this.id, updatedEntrepreneurship).subscribe(() => {
         this.isEditing = false;
-        // Forzar la recarga del componente para evitar ver datos obsoletos
         this.router.navigate(['/entrepreneurships']).then(() => {
-          this.router.navigate(['/entrepreneurships', this.id]); // Redirige de nuevo para mostrar la vista actualizada
+          this.router.navigate(['/entrepreneurships', this.id]);
         });
       });
     }
   }
 
+  isImage(media: string): boolean {
+    return media.includes('.jpg') || media.includes('.jpeg') || media.includes('.png');
+  }
+
+  isVideo(media: string): boolean {
+    return media.includes('.mp4') || media.includes('.webm') || media.includes('.ogg');
+  }
+
   addReview(newReview: Review): void {
     if (this.entrepreneurship) {
-      
-      this.carga= !this.carga;
-      // Aquí se guarda la reseña en el backend (si es necesario)
+      this.update = !this.update;
       this.entrepreneurshipService.updateEntrepreneurship(this.id, this.entrepreneurship).subscribe(() => {
         console.log('Reseña agregada correctamente');
       });
     }
   }
 
-
-  // Método corregido para agregar el emprendimiento a favoritos
-  addToFavorites(): void {
-    const userId = '2410'; // ID hardcodeado del usuario por el momento
-
-    this.favoriteListService.addFavorite(userId, this.id)
-      .subscribe(
-        response => {
-          console.log('Emprendimiento agregado a favoritos', response);
-        },
-        error => {
-          error = 'Hubo un problema al agregar el emprendimiento a favoritos.';
-          console.error('Error al agregar a favoritos', error);
-        }
-      );
-  }
+    addToFavorites(): void {
+  
+      if (this.activeUser) {
+        const userId = this.activeUser.id; 
+  
+        this.favoriteListService.addFavorite(userId, this.id)
+          .subscribe(
+            response => {
+              console.log('Emprendimiento agregado a favoritos', response);
+            },
+            error => {
+              console.error('Error al agregar a favoritos', error);
+            }
+          );
+      } else {
+        console.error('El usuario no está autenticado.');
+      }
+    }
+  
 
   onDonationAdded(donation: Donation): void {
-    // Verifica si el emprendimiento existe y tiene un ID válido
     if (this.entrepreneurship?.id) {
       this.id = this.entrepreneurship.id;
       console.log('ID del emprendimiento:', this.id);
       donation.idEntrepreneurship = this.id;
       
-      // Enviar la donación al backend
       this.donationService.postDonation(donation).subscribe({
         next: (donationResponse: Donation) => {
-          // Actualizamos la cantidad recaudada del emprendimiento
+   
           if (this.entrepreneurship) {
             const donationAmount = Number(donationResponse.amount);
-            let collect : number = 0;
-            collect = this.entrepreneurship.collected ?? 0; // Si collected es undefined, se asigna 0
-            console.log('Nueva cantidad recaudada:', collect); 
-            if(collect!== 1){
+            let collect: number = 0;
+            collect = this.entrepreneurship.collected ?? 0;
+            console.log('Nueva cantidad recaudada:', collect);
+            if (collect !== 1) {
               collect += donationAmount;
-            }else{
-              collect=donationAmount;
+            } else {
+              collect = donationAmount;
             }
             this.entrepreneurship.collected = collect;
-  
-            console.log('Nueva cantidad recaudada:', collect); // Verificamos el valor actualizado de `collected`
-            console.log('Emprendimiento actualizado con la donación:', this.entrepreneurship);
-  
-            // Verificamos que entrepreneurship no sea null antes de actualizar
+
+
+
             this.entrepreneurshipService.updateEntrepreneurship(this.id, this.entrepreneurship!).subscribe({
               next: (data) => {
-                console.log('Emprendimiento actualizado:', data);
               },
               error: (err) => {
                 console.error('Error al actualizar el emprendimiento:', err);
@@ -216,9 +251,18 @@ export class EntrepreneurshipDetailComponent implements OnInit {
       console.error('No se pudo asociar la donación con un emprendimiento válido.');
     }
   }
+
+  getProgressWidth(goal: number, collected: number): number {
+    if (goal <= 0) return 0;
+    const progress = (collected / goal) * 100;
+    return Math.min(Math.round(progress), 100); 
+  }
   
-  
+  getProgressColor(goal: number, collected: number): string {
+    const progress = this.getProgressWidth(goal, collected);
+    return progress >= 50 ? 'white' : 'black'; 
+  }
+
+
+
 }
-
-
-

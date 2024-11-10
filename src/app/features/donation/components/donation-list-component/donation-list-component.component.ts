@@ -26,7 +26,6 @@ export class DonationListComponentComponent {
     }
   }
 
-   // Función para convertir BigInt a number
    convertToNumber(amount: BigInt): number {
     return Number(amount);
   }

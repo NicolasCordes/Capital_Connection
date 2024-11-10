@@ -1,4 +1,4 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ReviewService } from '../../services/review.service';
 import { Review } from '../../models/review.model';
 import { CommonModule } from '@angular/common';
@@ -13,9 +13,10 @@ import { ActiveUser } from '../../../../auth/types/account-data';
   templateUrl: './reviews-list-component.component.html',
   styleUrls: ['./reviews-list-component.component.css']
 })
-export class ReviewsListComponentComponent implements OnInit {
+export class ReviewsListComponentComponent implements OnInit, OnChanges {
   reviews: Review[]=[]; 
   @Input() id!: number; 
+  @Input() update!: boolean; 
   
   activeUser: ActiveUser | undefined;
   userType: string = 'Guest';
@@ -24,11 +25,15 @@ export class ReviewsListComponentComponent implements OnInit {
   constructor(private reviewService: ReviewService) {}
 
   ngOnInit(): void {
-    this.loadReviews();
     this.authService.auth().subscribe((user) => {
       this.activeUser = user;
       this.userType = user ? 'Registered User' : 'Guest';
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.loadReviews();
+
   }
 
   // Cargar las reseñas desde el backend

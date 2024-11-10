@@ -36,11 +36,10 @@ export class DonationFormComponentComponent implements OnInit{
   onSubmit() {
     if (this.donationForm.valid) {
       const newDonation: Donation = {
-        amount: this.donationForm.value.amount ?? 0,  // Mantener como BigInt
-        date: new Date()  // Convertir la fecha a solo fecha sin hora
+        amount: this.donationForm.value.amount ?? 0, 
+        date: new Date() 
       };
   
-      // Aquí ya no usamos JSON.stringify, solo pasamos el objeto
       this.donationService.postDonation(newDonation).subscribe((donation) => {
         this.donationAdded.emit(donation);
         this.donationForm.reset();
