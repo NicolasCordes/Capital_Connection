@@ -34,6 +34,7 @@ export class EntrepreneurshipFormComponent implements OnInit {
       category: ['', Validators.required],
       images: this.fb.array([], this.imagesRequiredValidator()), // FormArray para almacenar URLs de imágenes
       videos: this.fb.array([]), // FormArray para almacenar URLs de videos
+      idUser: this.activeUser?.id, // FormArray para almacenar URLs de videos
     });
   }
 
@@ -83,9 +84,9 @@ export class EntrepreneurshipFormComponent implements OnInit {
   // Método para agregar el emprendimiento
   addEntrepreneurship(): void {
     if (this.entrepreneurshipForm.valid) {
-      const ent = this.entrepreneurshipForm.getRawValue();
-      ent.id_user = '123';
-     // ent.collected = 1; PRUEBA PARA VERIFICAR DONATION 
+      let ent = this.entrepreneurshipForm.getRawValue();
+      ent.idUser = this.activeUser?.id   
+     ent.collected = 1; 
       console.log('Emprendimiento a enviar:', ent); // Verifica las URLs de las imágenes
       console.log(ent);
       this.entrepreneurshipService

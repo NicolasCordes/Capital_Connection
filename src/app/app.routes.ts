@@ -11,6 +11,7 @@ import { ProfileListComponent } from "./features/profile/profile-list/profile-li
 import { UserFormComponent } from "./features/user/components/user-form/user-form.component";
 import { UserListComponent } from "./features/user/components/user-list/user-list.component";
 import { HomePageComponent } from "./pages/home-page/home-page.component";
+import { EntrepreneurshipsUpdatesComponent } from "./features/entrepreneurship/components/entrepreneurships-updates/entrepreneurships-updates.component";
 
 
 export const routes: Routes = [
@@ -25,5 +26,6 @@ export const routes: Routes = [
   { path: 'profile', component: ProfileListComponent, canActivate: [guardGuard] },
   { path: 'add-favorite', component: AddFavoriteComponent },
   { path: 'favorites/:id', component: FavoriteListComponent },
+  { path: 'update-entrepreneurships/:id', component: EntrepreneurshipsUpdatesComponent },
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];

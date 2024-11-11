@@ -86,83 +86,32 @@
         "type": "Home"
       },
       "favorites": []
-    }
-  ],
-  "users": [
+    },
     {
+      "id": "7daa",
+      "username": "SantiFidelibus",
+      "password": "vF5WnYvccjtZbOygXbg5iBe73ui56AeqmWw03/ucwXc=",
+      "email": "santiagofidelibus19@gmail.com",
+      "name": "Santiago German",
+      "surname": "Fidelibus",
+      "dateOfBirth": "2003-12-12",
+      "yearsOfExperience": 15,
+      "industry": "tecnologia",
+      "wallet": 0,
+      "address": {
+        "street": "David Ortega",
+        "number": 1441,
+        "locality": "Mar del plata",
+        "province": "ARGENTINA",
+        "type": "Home"
+      },
       "favorites": [
-        {
-          "type": "entrepreneurship",
-          "id": "28fa"
-        },
-        {
-          "type": "entrepreneurship",
-          "id": "3"
-        },
-        {
-          "type": "entrepreneurship",
-          "id": "3"
-        },
-        {
-          "type": "entrepreneurship",
-          "id": "3"
-        },
-        {
-          "type": "entrepreneurship",
-          "id": "3"
-        },
-        {
-          "type": "entrepreneurship",
-          "id": "3"
-        },
-        {
-          "type": "entrepreneurship",
-          "id": "3"
-        },
-        {
-          "type": "entrepreneurship",
-          "id": "3"
-        },
-        {
-          "type": "entrepreneurship",
-          "id": "3"
-        },
-        {
-          "type": "entrepreneurship",
-          "id": "3"
-        },
-        {
-          "type": "entrepreneurship",
-          "id": "6"
-        },
-        {
-          "type": "entrepreneurship",
-          "id": "6"
-        },
-        {
-          "type": "entrepreneurship",
-          "id": "4"
-        },
-        {
-          "type": "entrepreneurship",
-          "id": 1
-        },
-        {
-          "type": "entrepreneurship",
-          "id": 4
-        },
-        {
-          "type": "entrepreneurship",
-          "id": 1
-        },
-        {
-          "type": "entrepreneurship",
-          "id": 2
-        }
-      ],
-      "id": "2410"
+        3,
+        1
+      ]
     }
   ],
+  "users": [],
   "donations": [
     {
       "id": "d87b",
@@ -177,6 +126,27 @@
       "date": "2024-11-10T21:01:03.794Z",
       "idUser": "69e4",
       "idEntrepreneurship": 1
+    },
+    {
+      "id": "9372",
+      "amount": "100",
+      "date": "2024-11-10T22:31:35.125Z",
+      "idUser": "34bd",
+      "idEntrepreneurship": 2
+    },
+    {
+      "id": "9584",
+      "amount": "1100",
+      "date": "2024-11-10T23:30:31.184Z",
+      "idUser": "7daa",
+      "idEntrepreneurship": 2
+    },
+    {
+      "id": "1759",
+      "amount": "1222",
+      "date": "2024-11-10T23:38:25.469Z",
+      "idUser": "7daa",
+      "idEntrepreneurship": 3
     }
   ]
 }

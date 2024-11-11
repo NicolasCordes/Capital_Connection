@@ -28,7 +28,7 @@ import { MatIcon } from '@angular/material/icon';
 @Component({
   selector: 'app-entrepreneurship-detail-component',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, ReviewsFormComponentComponent, ReviewsListComponentComponent, DonationFormComponentComponent, MatIcon],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, ReviewsFormComponentComponent, ReviewsListComponentComponent, DonationFormComponentComponent],
   templateUrl: './entrepreneurship-detail-component.component.html',
   styleUrls: ['./entrepreneurship-detail-component.component.css'],
 })
