@@ -1,65 +1,67 @@
-<div *ngFor="let entrepreneurship of createdEntrepreneurships">
-    <div class="entrepreneurship-card">
+<div class="entrepreneurships-container">
+  <div class="header">
+    <h1>Mis Emprendimientos</h1>
+  </div>
+  <div *ngIf="createdEntrepreneurships.length === 0">
+    <p class="no-entrepreneurships-message">No tienes emprendimientos.</p>
+  </div>
+  
+  <div *ngFor="let entrepreneurship of createdEntrepreneurships">
+    @if(entrepreneurship.activated===true){
+      <div class="entrepreneurship-card">
       <h4>{{ entrepreneurship.name }}</h4>
       <p>{{ entrepreneurship.description }}</p>
       <button (click)="editEntrepreneurship(entrepreneurship)">Editar</button>
+      <button (click)="deleteEntrepreneurship(entrepreneurship)">Eliminar</button>
     </div>
-  
-    <!-- Formulario de edición (solo visible si se está editando este emprendimiento) -->
+}
+    
+    <!-- Formulario de edición -->
     <div *ngIf="editingEntrepreneurship === entrepreneurship">
-      <h3>Editar Emprendimiento</h3>
+      <h3 style="color: black;">Editar Emprendimiento</h3>
       <form [formGroup]="editForm" (ngSubmit)="saveChanges()">
+        
         <!-- Nombre -->
-        <div>
-          <label for="name">Nombre</label>
-          <input id="name" formControlName="name" required />
-          <div *ngIf="editForm.get('name')?.hasError('required') && editForm.get('name')?.touched">
-            <p>El nombre es requerido.</p>
-          </div>
-        </div>
-  
+        <label for="name">Nombre</label>
+        <input id="name" formControlName="name" required />
+        
         <!-- Descripción -->
-        <div>
-          <label for="description">Descripción</label>
-          <textarea id="description" formControlName="description" rows="5" cols="50" required></textarea>
-          <div *ngIf="editForm.get('description')?.hasError('required') && editForm.get('description')?.touched">
-            <p>La descripción es requerida.</p>
-          </div>
-        </div>
-  
+        <label for="description">Descripción</label>
+        <textarea id="description" formControlName="description" rows="5" cols="50" required></textarea>
+        
         <!-- Categoría -->
-        <div>
-          <label for="category">Categoría</label>
-          <select id="category" formControlName="category" required>
-            <option value="" disabled>Seleccione una categoría</option>
-            <option value="tecnologia">Tecnología</option>
-            <option value="salud">Salud</option>
-            <option value="educacion">Educación</option>
-            <option value="sostenibilidad">Sostenibilidad</option>
-            <option value="alimentacion">Alimentación</option>
-          </select>
-          <div *ngIf="editForm.get('category')?.hasError('required') && editForm.get('category')?.touched">
-            <p>La categoría es requerida.</p>
+        <label for="category">Categoría</label>
+        <select id="category" formControlName="category" required>
+          <option value="" disabled>Seleccione una categoría</option>
+          <option value="tecnologia">Tecnología</option>
+          <option value="salud">Salud</option>
+          <option value="educacion">Educación</option>
+          <option value="sostenibilidad">Sostenibilidad</option>
+          <option value="alimentacion">Alimentación</option>
+        </select>
+
+        <!-- Cargar y ver imágenes -->
+        <app-upload-image (imagesUploaded)="onImagesUploaded($event)"></app-upload-image>
+        <div formArrayName="images">
+          <div *ngFor="let image of imagesArray.controls; let i = index">
+            <img [src]="image.value" alt="Imagen seleccionada" class="video-preview" />
+            <button type="button" (click)="removeImage(i, true)">Eliminar</button>
           </div>
         </div>
-  
-        <!-- Imágenes (URLs, separadas por comas) -->
-        <div>
-          <label for="images">Imágenes (URLs, separadas por comas)</label>
-          <input id="images" formControlName="images" />
+
+        <!-- Cargar y ver videos -->
+        <app-upload-video (videosUploaded)="onVideosUploaded($event)"></app-upload-video>
+        <div formArrayName="videos">
+          <div *ngFor="let video of videosArray.controls; let i = index">
+            <video [src]="video.value" controls class="video-preview"></video>
+            <button type="button" (click)="removeVideo(i, true)">Eliminar</button>
+          </div>
         </div>
-  
-        <!-- Videos (URLs, separadas por comas) -->
-        <div>
-          <label for="videos">Videos (URLs, separadas por comas)</label>
-          <input id="videos" formControlName="videos" />
-        </div>
-  
-        <div>
-          <button type="submit" [disabled]="editForm.invalid">Guardar cambios</button>
-          <button type="button" (click)="cancelEdit()">Cancelar</button>
-        </div>
+
+        <!-- Botones -->
+        <button type="submit" [disabled]="editForm.invalid">Guardar cambios</button>
+        <button type="button" (click)="cancelEdit()">Cancelar</button>
       </form>
     </div>
   </div>
-  
+</div>

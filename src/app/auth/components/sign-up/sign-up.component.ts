@@ -24,10 +24,11 @@ export class SignupComponent {
     email: ['', [Validators.required, Validators.email]],
     name: ['', Validators.required],
     surname: ['', Validators.required],
-    dateOfBirth: ['', Validators.required],
+    dateOfBirth: ['', [Validators.required, this.ageValidator]],  // Agregar ageValidator aquí
     yearsOfExperience: [0, [Validators.required, Validators.min(0)]],
     industry: ['', Validators.required],
-    wallet: [{ value: 0, disabled: true }], 
+    wallet: [{ value: 0, disabled: true }],
+  
     address: this.formBuilder.group({
       street: ['', Validators.required],
       number: [0, Validators.required],
@@ -38,7 +39,27 @@ export class SignupComponent {
   });
 
   constructor(private authService: AuthService, private router: Router) { }
+ 
+  ageValidator(control: any): { [key: string]: boolean } | null {
+    const birthDate = new Date(control.value);
+    const currentDate = new Date();
+    
+    // Calcular la edad
+    let age = currentDate.getFullYear() - birthDate.getFullYear();
+    const monthDifference = currentDate.getMonth() - birthDate.getMonth();
+    
+    // Si la fecha de nacimiento aún no ha llegado este año, restar un año
+    if (monthDifference < 0 || (monthDifference === 0 && currentDate.getDate() < birthDate.getDate())) {
+      age--;
+    }
 
+    // Validar si la edad es mayor o igual a 16 años
+    if (age < 16) {
+      return { ageInvalid: true };  // El error se llamará "ageInvalid"
+    }
+
+    return null;  // Si la edad es válida, no hay error
+  }
 
   onSubmit() {
     if (this.form.invalid) return;

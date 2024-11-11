@@ -34,7 +34,6 @@
     <input id="industry" formControlName="industry" type="text">
   </div>
 
-  <!-- Subformulario de dirección -->
   <app-address-form (address)="onAddressAdded($event)"></app-address-form>
 
   <button type="submit" [disabled]="userForm.invalid || !isAddressFilled()">Guardar</button>

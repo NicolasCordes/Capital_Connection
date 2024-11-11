@@ -37,7 +37,7 @@ export class EntrepreneurshipDetailComponent implements OnInit {
   isEditing = false;
   entrepreneurship: Entrepreneurship | null = null;
 
-  userId: string | null = null; // Asegúrate de obtener el userId correctamente, aquí lo he dejado estático por ahora.
+  userId: string | null = null; 
   id: number = 0;
   reviews: Review[] = [];
   update: boolean = false;
@@ -47,9 +47,7 @@ export class EntrepreneurshipDetailComponent implements OnInit {
   combinedMediaArray: string[] = [];
   currentIndex: number = 0;
 
-  // Función para cargar las imágenes y videos
   loadMedia() {
-    // Combinamos las imágenes y videos en un solo arreglo
     if (this.entrepreneurship) {
       this.combinedMediaArray = [
         ...this.entrepreneurship.images,
@@ -78,12 +76,12 @@ export class EntrepreneurshipDetailComponent implements OnInit {
       }
 
     });
-    console.log(this.activeUser, this.userType);
-
     this.route.paramMap.subscribe((params) => {
       this.id = parseInt(params.get('id') || '0', 10);
       this.entrepreneurshipService.getEntrepreneurshipById(this.id).subscribe((entrepreneurship) => {
         this.entrepreneurship = entrepreneurship;
+        console.log('entrepreneurship', this.entrepreneurship)
+
         this.loadMedia();
         console.log(this.combinedMediaArray);
         this.initForm(entrepreneurship);
@@ -224,7 +222,6 @@ export class EntrepreneurshipDetailComponent implements OnInit {
       donation.idEntrepreneurship = this.id;
 
       if(this.userId){donation.idUser=this.userId;}
-      // Enviar la donación al backend
 
       this.donationService.postDonation(donation).subscribe({
         next: (donationResponse: Donation) => {
@@ -234,11 +231,9 @@ export class EntrepreneurshipDetailComponent implements OnInit {
             let collect: number = 0;
             collect = this.entrepreneurship.collected ?? 0;
             console.log('Nueva cantidad recaudada:', collect);
-            if (collect !== 1) {
+          
               collect += donationAmount;
-            } else {
-              collect = donationAmount;
-            }
+           
             this.entrepreneurship.collected = collect;
 
 

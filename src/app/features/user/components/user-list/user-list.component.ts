@@ -1,4 +1,3 @@
-// user-list.component.ts
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../service/user.service';
@@ -38,7 +37,7 @@ export class UserListComponent implements OnInit {
   deleteUser(userId: number | undefined): void {
     if (userId !== undefined && confirm('¿Estás seguro de que deseas eliminar este usuario?')) {
       this.userService.deleteUser(userId).subscribe(() => {
-        this.loadUsers(); // Recargar la lista después de eliminar
+        this.loadUsers(); 
       });
     } else if (userId === undefined) {
       console.error("User ID is undefined");

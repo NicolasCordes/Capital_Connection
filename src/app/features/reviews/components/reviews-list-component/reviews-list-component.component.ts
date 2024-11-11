@@ -10,12 +10,13 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 @Component({
   selector: 'app-reviews-list-component',
   standalone: true,
-  imports: [CommonModule, ReviewsFormComponentComponent,ReactiveFormsModule],  // Importando el formulario de reseña
+  imports: [CommonModule, ReviewsFormComponentComponent,ReactiveFormsModule],  
   templateUrl: './reviews-list-component.component.html',
   styleUrls: ['./reviews-list-component.component.css']
 })
 export class ReviewsListComponentComponent implements OnInit, OnChanges {
   reviews: Review[] = [];
+  averageRating: number = 0;  
   @Input() id!: number;
   @Input() update!: boolean;
 
@@ -28,7 +29,6 @@ export class ReviewsListComponentComponent implements OnInit, OnChanges {
   usersData: { id: string; username: string }[] = [];
 
   reviewUpdateForm: FormGroup;
-
 
   constructor(private fb: FormBuilder, private reviewService: ReviewService) {
     this.reviewUpdateForm = this.fb.group({
@@ -55,6 +55,7 @@ export class ReviewsListComponentComponent implements OnInit, OnChanges {
     this.reviewService.getReviewById(this.id).subscribe({
       next: (reviews) => {
         this.reviews = reviews;
+        this.calculateAverageRating(); 
         console.log('Reseñas cargadas:', reviews);
       },
       error: (err) => {
@@ -62,6 +63,15 @@ export class ReviewsListComponentComponent implements OnInit, OnChanges {
       }
     });
   }
+
+  calculateAverageRating(): void {
+    if (this.reviews.length > 0) {
+      const totalStars = this.reviews.reduce((acc, review) => acc + review.stars, 0);
+      this.averageRating = totalStars / this.reviews.length;
+    } else {
+      this.averageRating = 0;
+  }
+}
 
   loadUsers(): void {
     this.authService.getUsernames().subscribe({
@@ -75,42 +85,43 @@ export class ReviewsListComponentComponent implements OnInit, OnChanges {
     });
   }
 
+  
   deleteReview(idR: number) {
     this.reviewService.deleteReview(idR).subscribe((isDeleted) => {
       if (isDeleted) {
         this.reviews = this.reviews.filter(review => review.id !== idR);
+        this.calculateAverageRating(); 
         console.log('Reseña eliminada');
       }
     });
   }
 
   modifyReview(review: Review): void {
-    this.isEditing = true; // Habilitar el modo de edición
-    this.editingReview = { ...review }; // Clonamos la reseña para evitar modificaciones directas
-    // Establecer los valores del formulario con los valores de la reseña
+    this.isEditing = true;
+    this.editingReview = { ...review };
     this.reviewUpdateForm.patchValue({
       stars: this.editingReview.stars,
       reviewText: this.editingReview.reviewText,
     });
   }
-  
+
   setRating(value: number): void {
     this.reviewUpdateForm.get('stars')?.setValue(value);
   }
-  
+
   updateReview(): void {
     if (this.reviewUpdateForm.invalid) return;
-  
+
     const resultForm = this.reviewUpdateForm.getRawValue();
     this.editingReview = { ...this.editingReview, ...resultForm };
-  
+
     if (this.editingReview) {
       this.reviewService.updateReview(this.editingReview.id, this.editingReview).subscribe(
         (updatedReview) => {
           console.log('Reseña actualizada:', updatedReview);
           this.loadReviews();
-          this.isEditing = false; // Desactivar el modo de edición
-          this.editingReview = null; // Resetear la reseña en edición
+          this.isEditing = false;
+          this.editingReview = null;
         },
         (error) => {
           console.error('Error al actualizar la reseña', error);

@@ -1,101 +1,14 @@
 {
   "accounts": [
     {
-      "id": "4193",
-      "username": "juli",
-      "password": "Y3P6pvPTdDo56c9jb/qkM5Ot2vn/Zz8IUh26oK84k7I=",
-      "role": "Emprendedor",
-      "email": "a@gmail.com"
-    },
-    {
-      "id": "7ace",
-      "username": "nicocordes",
-      "password": "2y5YZIzbhCArPiRBBLH1WDhTluflBupLkhpkUEDOnRI=",
-      "email": "nicolascordes1@gmail.com",
-      "name": "Miguel",
-      "surname": "Cordes",
-      "dateOfBirth": "2023-11-01",
-      "yearsOfExperience": 2,
-      "industry": "papeles",
-      "wallet": 0,
-      "address": {
-        "street": "ferrer",
-        "number": 856,
-        "locality": "Mar Del Plata",
-        "province": "Buenos Aires",
-        "type": "Home"
-      },
-      "favorites": []
-    },
-    {
-      "id": "2671",
-      "username": "nicoals",
-      "password": "2y5YZIzbhCArPiRBBLH1WDhTluflBupLkhpkUEDOnRI=",
-      "email": "cordes-nicolas@estudiante.mdp.utn.edu.ar",
-      "name": "pepe2233",
-      "surname": "cfefv",
-      "dateOfBirth": "2023-08-30",
-      "yearsOfExperience": 6,
-      "industry": "alimentacion",
-      "wallet": 0,
-      "address": {
-        "street": "ferrer",
-        "number": 856,
-        "locality": "Mar Del Plata",
-        "province": "Buenos Aires",
-        "type": "Other"
-      },
-      "favorites": []
-    },
-    {
-      "id": "9a90",
-      "username": "pala",
-      "password": "NpDN+2ERgEtP08psyxz3zxd9/eA8wyz7Ulntf/GVH+g=",
-      "email": "nicopalacioscalvi@gmail.com",
-      "name": "Nicolas",
-      "surname": "Palacios",
-      "dateOfBirth": "2024-11-06",
-      "yearsOfExperience": 2,
-      "industry": "salud",
-      "wallet": 0,
-      "address": {
-        "street": "Mansilla",
-        "number": 4645,
-        "locality": "Mar del Plata",
-        "province": "Buenos Aires (provincia)",
-        "type": "Home"
-      },
-      "favorites": []
-    },
-    {
-      "id": "69e4",
-      "username": "PALAORIGNIAL",
-      "password": "OdY5ardo+tqA8LhehC5LlVLkNA3WVKsP+cYkvp+HFas=",
-      "email": "nicopalacioscalvi@gmail.com",
-      "name": "Nicolas",
-      "surname": "Palacios",
-      "dateOfBirth": "2024-11-05",
-      "yearsOfExperience": 3,
-      "industry": "salud",
-      "wallet": 0,
-      "address": {
-        "street": "Mansilla",
-        "number": 4645,
-        "locality": "Mar del Plata",
-        "province": "Buenos Aires (provincia)",
-        "type": "Home"
-      },
-      "favorites": []
-    },
-    {
-      "id": "7daa",
+      "id": "a027",
       "username": "SantiFidelibus",
       "password": "vF5WnYvccjtZbOygXbg5iBe73ui56AeqmWw03/ucwXc=",
       "email": "santiagofidelibus19@gmail.com",
       "name": "Santiago German",
       "surname": "Fidelibus",
-      "dateOfBirth": "2003-12-12",
-      "yearsOfExperience": 15,
+      "dateOfBirth": "2003-12-19",
+      "yearsOfExperience": 5,
       "industry": "tecnologia",
       "wallet": 0,
       "address": {
@@ -105,55 +18,133 @@
         "province": "ARGENTINA",
         "type": "Home"
       },
-      "favorites": [
-        3,
-        1
-      ]
+      "favorites": []
+    },
+    {
+      "id": "e981",
+      "username": "nicocordes",
+      "password": "fn/DV/wjdJ9bY/ZTLIW1Zg+EDQy5AekBfC+xEOFIZ4E=",
+      "email": "nicolascordes1@gmail.com",
+      "name": "Nicolas",
+      "surname": "Cordes",
+      "dateOfBirth": "2003-09-18",
+      "yearsOfExperience": 5,
+      "industry": "salud",
+      "wallet": 0,
+      "address": {
+        "street": "Arrue",
+        "number": 1318,
+        "locality": "Mar del plata",
+        "province": "Buenos aires",
+        "type": "Home"
+      },
+      "favorites": []
+    },
+    {
+      "id": "46de",
+      "username": "nicopala",
+      "password": "fn/DV/wjdJ9bY/ZTLIW1Zg+EDQy5AekBfC+xEOFIZ4E=",
+      "email": "nicopalacios@gmail.com",
+      "name": "Nicolas",
+      "surname": "Palacios",
+      "dateOfBirth": "2003-12-12",
+      "yearsOfExperience": 6,
+      "industry": "educacion",
+      "wallet": 0,
+      "address": {
+        "street": "Champagnat",
+        "number": 1800,
+        "locality": "Mar del plata",
+        "province": "Buenos Aires",
+        "type": "Work"
+      },
+      "favorites": []
+    },
+    {
+      "id": "87c5",
+      "username": "julipelle",
+      "password": "Y3P6pvPTdDo56c9jb/qkM5Ot2vn/Zz8IUh26oK84k7I=",
+      "email": "pellegrinijulian@gmail.com",
+      "name": "Julian",
+      "surname": "Pellegrini",
+      "dateOfBirth": "2004-12-14",
+      "yearsOfExperience": 2,
+      "industry": "alimentacion",
+      "wallet": 0,
+      "address": {
+        "street": "Don bosco",
+        "number": 1800,
+        "locality": "Mar del plata",
+        "province": "Buenos Aires",
+        "type": "Home"
+      },
+      "favorites": []
     }
   ],
   "users": [],
   "donations": [
     {
-      "id": "d87b",
-      "amount": "13",
-      "date": "2024-11-10T20:34:17.163Z",
-      "idUser": "4193",
-      "idEntrepreneurship": 3
-    },
-    {
-      "id": "bcfb",
-      "amount": "16",
-      "date": "2024-11-10T21:01:03.794Z",
-      "idUser": "69e4",
+      "id": "f378",
+      "amount": "50",
+      "date": "2024-11-11T07:41:34.663Z",
+      "idUser": "87c5",
       "idEntrepreneurship": 1
     },
     {
-      "id": "9372",
-      "amount": "100",
-      "date": "2024-11-10T22:31:35.125Z",
-      "idUser": "34bd",
-      "idEntrepreneurship": 2
+      "id": "6609",
+      "amount": "20000",
+      "date": "2024-11-11T07:41:51.731Z",
+      "idUser": "87c5",
+      "idEntrepreneurship": 1
     },
     {
-      "id": "9584",
-      "amount": "1100",
-      "date": "2024-11-10T23:30:31.184Z",
-      "idUser": "7daa",
-      "idEntrepreneurship": 2
-    },
-    {
-      "id": "1759",
-      "amount": "1222",
-      "date": "2024-11-10T23:38:25.469Z",
-      "idUser": "7daa",
+      "id": "f16c",
+      "amount": "40000",
+      "date": "2024-11-11T07:43:18.858Z",
+      "idUser": "87c5",
       "idEntrepreneurship": 3
     },
     {
-      "id": "c045",
-      "amount": "500",
-      "date": "2024-11-11T01:30:49.745Z",
-      "idUser": "4193",
-      "idEntrepreneurship": 1
+      "id": "2b2b",
+      "amount": "10000",
+      "date": "2024-11-11T07:44:11.758Z",
+      "idUser": "a027",
+      "idEntrepreneurship": 6
+    },
+    {
+      "id": "b476",
+      "amount": "12000",
+      "date": "2024-11-11T07:44:56.285Z",
+      "idUser": "a027",
+      "idEntrepreneurship": 4
+    },
+    {
+      "id": "1752",
+      "amount": "2000",
+      "date": "2024-11-11T07:45:28.229Z",
+      "idUser": "a027",
+      "idEntrepreneurship": 5
+    },
+    {
+      "id": "3468",
+      "amount": "20000",
+      "date": "2024-11-11T07:46:14.056Z",
+      "idUser": "e981",
+      "idEntrepreneurship": 2
+    },
+    {
+      "id": "2990",
+      "amount": "25000",
+      "date": "2024-11-11T07:47:12.241Z",
+      "idUser": "e981",
+      "idEntrepreneurship": 4
+    },
+    {
+      "id": "16d3",
+      "amount": "21000",
+      "date": "2024-11-11T07:47:58.449Z",
+      "idUser": "46de",
+      "idEntrepreneurship": 5
     }
   ]
 }

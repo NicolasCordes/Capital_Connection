@@ -18,7 +18,6 @@ export class NavbarComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
-    // Suscribirse al estado de autenticación para mantener actualizado el estado del usuario
     this.authService.auth().subscribe(activeUser => {
       this.activeUser = activeUser;
     });
@@ -26,7 +25,6 @@ export class NavbarComponent implements OnInit {
 
   onLogOut() {
     this.authService.logout().subscribe(() => {
-      // Redirigir al usuario a la página de inicio o login después de cerrar sesión
       window.location.href = '/';
     });
   }

@@ -10,15 +10,15 @@ import { ActiveUser } from '../../../../auth/types/account-data';
 @Component({
   selector: 'app-reviews-form-component',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],  // Aseguramos que ReactiveFormsModule esté importado
+  imports: [ReactiveFormsModule, CommonModule],  
   templateUrl: './reviews-form-component.component.html',
   styleUrls: ['./reviews-form-component.component.css']
 })
 export class ReviewsFormComponentComponent implements OnInit{
   @Input() entrepreneurship!: Entrepreneurship | null;
-  @Input() editingReview: Review | null = null; // Recibimos la reseña a editar
+  @Input() editingReview: Review | null = null;
   @Output() reviewCreated = new EventEmitter<Review>(); 
-  @Output() reviewUpdated = new EventEmitter<Review>(); // Evento para reseña actualizada
+  @Output() reviewUpdated = new EventEmitter<Review>(); 
   reviewForm: FormGroup;
 
   activeUser: ActiveUser | undefined;
@@ -57,7 +57,7 @@ export class ReviewsFormComponentComponent implements OnInit{
 
       if (this.editingReview) {
         newReview.idEntrepreneurship = this.editingReview.idEntrepreneurship
-        newReview.id = this.editingReview.id;  // Usamos el ID de la reseña si estamos editando
+        newReview.id = this.editingReview.id; 
         console.log(newReview);
 
         this.reviewService.updateReview(this.editingReview.id,newReview).subscribe(

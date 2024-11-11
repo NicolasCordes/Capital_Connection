@@ -1,102 +1,145 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { EntrepreneurshipService } from '../../services/entrepreneurship.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Entrepreneurship } from '../../models/entrepreneurship.model';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from '../../../../auth/services/service.service';
-import { CommonModule } from '@angular/common';
-import { ActiveUser } from '../../../../auth/types/account-data';
+  import { Component, inject, OnInit } from '@angular/core';
+  import { EntrepreneurshipService } from '../../services/entrepreneurship.service';
+  import { ActivatedRoute, Router } from '@angular/router';
+  import { Entrepreneurship } from '../../models/entrepreneurship.model';
+  import { AbstractControl, FormArray, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+  import { AuthService } from '../../../../auth/services/service.service';
+  import { CommonModule } from '@angular/common';
+  import { ActiveUser } from '../../../../auth/types/account-data';
+  import { UploadVideoComponent } from "../uploads/upload-video/upload-video.component";
+  import { UploadImageComponent } from "../uploads/upload-image/upload-image.component";
 
-@Component({
-  selector: 'app-entrepreneurships-updates',
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
-  templateUrl: './entrepreneurships-updates.component.html',
-  styleUrls: ['./entrepreneurships-updates.component.css']
-})
-export class EntrepreneurshipsUpdatesComponent implements OnInit{
-  createdEntrepreneurships: Entrepreneurship[] = [];
+  @Component({
+    selector: 'app-entrepreneurships-updates',
+    standalone: true,
+    imports: [ReactiveFormsModule, CommonModule, UploadVideoComponent, UploadImageComponent],
+    templateUrl: './entrepreneurships-updates.component.html',
+    styleUrls: ['./entrepreneurships-updates.component.css']
+  })
+  export class EntrepreneurshipsUpdatesComponent implements OnInit{
+    createdEntrepreneurships: Entrepreneurship[] = [];
   editForm: FormGroup;
   editingEntrepreneurship: Entrepreneurship | null = null;
+  activeUser: ActiveUser | undefined;
+  userType: string = 'Guest';
 
   entrepreneurshipService = inject(EntrepreneurshipService);
   fb = inject(FormBuilder);
+  authService = inject(AuthService);
 
   constructor() {
-    // Inicializamos el formulario
     this.editForm = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
       category: ['', Validators.required],
-      images: ['', Validators.required],  // Aquí podrías cambiar para aceptar un array de imágenes
-      videos: ['', ]   // Lo mismo con los videos
+      images: this.fb.array([]),
+      videos: this.fb.array([])
     });
   }
 
-  activeUser: ActiveUser | undefined;
-  userType: string = 'Guest';
-  authService= inject(AuthService)
   ngOnInit(): void {
     this.authService.auth().subscribe((user) => {
       this.activeUser = user;
       this.userType = user ? 'Registered User' : 'Guest';
       this.loadCreatedEntrepreneurships();
-
     });
-
-
   }
 
-    // Cargar los emprendimientos creados por el usuario
-    loadCreatedEntrepreneurships() {
-      if(this.activeUser){
-        this.entrepreneurshipService.getEntrepreneurshipsByUserId(this.activeUser?.id).subscribe(entrepreneurships => {
-          this.createdEntrepreneurships = entrepreneurships;
-          console.log(this.createdEntrepreneurships); // Verifica que esto sea un arreglo
-          console.log(entrepreneurships); // Verifica que esto sea un arreglo
+  // FormArrays para imágenes y videos
+  get imagesArray() {
+    return this.editForm.get('images') as FormArray;
+  }
 
-        });
-      }
-    
+  get videosArray() {
+    return this.editForm.get('videos') as FormArray;
+  }
+
+  loadCreatedEntrepreneurships() {
+    if (this.activeUser) {
+      this.entrepreneurshipService.getEntrepreneurshipsByUserId(this.activeUser?.id).subscribe(entrepreneurships => {
+        this.createdEntrepreneurships = entrepreneurships;
+      });
     }
+  }
 
-      // Mostrar el formulario de edición
   editEntrepreneurship(entrepreneurship: Entrepreneurship) {
     this.editingEntrepreneurship = entrepreneurship;
     this.editForm.patchValue({
       name: entrepreneurship.name,
       description: entrepreneurship.description,
-      category: entrepreneurship.category,
-      images: entrepreneurship.images.join(','), // Convertir a cadena separada por comas
-      videos: entrepreneurship.videos.join(',')
-      ,idUser: entrepreneurship.idUser,
-      });
+      category: entrepreneurship.category
+    });
+
+    // Limpiar y cargar imágenes y videos en los FormArray
+    this.imagesArray.clear();
+    this.videosArray.clear();
+    entrepreneurship.images.forEach(imageUrl => this.imagesArray.push(this.fb.control(imageUrl)));
+    entrepreneurship.videos.forEach(videoUrl => this.videosArray.push(this.fb.control(videoUrl)));
   }
 
-    // Guardar los cambios
-    saveChanges() {
-      if (this.editForm.invalid || !this.editingEntrepreneurship) {
-        return;
-      }
-    
-      // Crear un objeto actualizado con los datos del formulario
-      const updatedEntrepreneurship: Entrepreneurship = {
-        ...this.editingEntrepreneurship,
-        ...this.editForm.value,
-        images: this.editForm.value.images.split(','),  // Convertir de nuevo a array
-        videos: this.editForm.value.videos.split(',')
-      };
-    
-      // Usamos el id del emprendimiento para la actualización
-      const entrepreneurshipId = this.editingEntrepreneurship.id ?? null;
-      this.entrepreneurshipService.updateEntrepreneurship(entrepreneurshipId, updatedEntrepreneurship).subscribe(() => {
-        this.loadCreatedEntrepreneurships();  // Recargar la lista de emprendimientos
-        this.editingEntrepreneurship = null;  // Ocultar el formulario de edición
-      });
+  saveChanges() {
+    if (this.editForm.invalid || !this.editingEntrepreneurship) {
+      return;
     }
 
-     // Cancelar la edición
+    const updatedEntrepreneurship: Entrepreneurship = {
+      ...this.editingEntrepreneurship,
+      ...this.editForm.value
+    };
+
+    if(this.editingEntrepreneurship.id)
+    this.entrepreneurshipService.updateEntrepreneurship(this.editingEntrepreneurship.id, updatedEntrepreneurship).subscribe(() => {
+      this.loadCreatedEntrepreneurships();
+      this.editingEntrepreneurship = null;
+    });
+  }
+
   cancelEdit() {
     this.editingEntrepreneurship = null;
+  }
+
+  onImagesUploaded(imageUrls: string[]): void {
+    imageUrls.forEach(url => this.imagesArray.push(this.fb.control(url)));
+  }
+
+  onVideosUploaded(videoUrls: string[]): void {
+    videoUrls.forEach(url => this.videosArray.push(this.fb.control(url)));
+  }
+
+  removeImage(index: number, isPersistedImage: boolean = false): void {
+
+
+    const imageUrl = this.imagesArray.at(index).value;
+    this.imagesArray.removeAt(index);
+
+    if (isPersistedImage && this.editingEntrepreneurship) {
+      const updatedImages = this.imagesArray.value;
+      const updatedEntrepreneurship = { ...this.editingEntrepreneurship, images: updatedImages };
+      if(this.editingEntrepreneurship.id)
+      this.entrepreneurshipService.updateEntrepreneurship(this.editingEntrepreneurship.id, updatedEntrepreneurship)
+        .subscribe(() => this.loadCreatedEntrepreneurships());
+    }
+  }
+
+  removeVideo(index: number, isPersistedVideo: boolean = false): void {
+
+    const videoUrl = this.videosArray.at(index).value;
+    this.videosArray.removeAt(index);
+
+    if (isPersistedVideo && this.editingEntrepreneurship) {
+      const updatedVideos = this.videosArray.value;
+      const updatedEntrepreneurship = { ...this.editingEntrepreneurship, videos: updatedVideos };
+      if(this.editingEntrepreneurship.id)
+      this.entrepreneurshipService.updateEntrepreneurship(this.editingEntrepreneurship.id, updatedEntrepreneurship)
+        .subscribe(() => this.loadCreatedEntrepreneurships());
+    }
+  }
+
+  deleteEntrepreneurship(entrepreneurship: Entrepreneurship) {
+    if (entrepreneurship.id) {
+      this.entrepreneurshipService.deleteEntrepreneurship(entrepreneurship.id).subscribe(() => {
+        this.loadCreatedEntrepreneurships(); // Recargar la lista después de eliminar
+      });
+    }
   }
 }

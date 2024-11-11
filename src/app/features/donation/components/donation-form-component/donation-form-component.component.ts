@@ -37,12 +37,12 @@ export class DonationFormComponentComponent implements OnInit{
     if (this.donationForm.valid) {
       const newDonation: Donation = {
 
-        amount: this.donationForm.value.amount ?? 0,  // Mantener como BigInt
-        date: new Date(),  // Convertir la fecha a solo fecha sin hora
-        idUser: this.activeUser?.id  // Agregar el id del usuario a la donación
+        amount: this.donationForm.value.amount ?? 0, 
+        date: new Date(),  
+        idUser: this.activeUser?.id  
       };
   
-      // Aquí ya no usamos JSON.stringify, solo pasamos el objeto
+
      
         this.donationAdded.emit(newDonation);
 

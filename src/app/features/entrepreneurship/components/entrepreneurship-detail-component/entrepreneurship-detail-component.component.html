@@ -9,14 +9,13 @@
     <div class="progress-bar-container">
       <div 
         class="progress-bar" 
-        [style.width]="getProgressWidth(entrepreneurship.goal, entrepreneurship.collected || 0) + '%'"
-      >
-      </div>
+        [style.width]="getProgressWidth(entrepreneurship.goal, (entrepreneurship.collected || 0) - 1) + '%'"
+      ></div>
       <div 
         class="progress-bar-text" 
-        [style.color]="getProgressColor(entrepreneurship.goal, entrepreneurship.collected || 0)"
+        [style.color]="getProgressColor(entrepreneurship.goal, (entrepreneurship.collected || 0) - 1)"
       >
-        {{ getProgressWidth(entrepreneurship.goal, entrepreneurship.collected || 0) }}%
+        {{ getProgressWidth(entrepreneurship.goal, (entrepreneurship.collected || 0) - 1) }}%
       </div>
     </div>
   <!-- Contenedor principal con Slider a la izquierda y Detalles a la derecha -->
@@ -57,7 +56,7 @@
     </div>
 
      <!-- Botón de agregar a favoritos -->
-<button mat-button class="follow-btn" (click)="addToFavorites()">
+<button mat-button class="follow-btn" (click)="addToFavorites()" [disabled]="userType === 'Guest'">
   Agregar a Favoritos
 </button>
 

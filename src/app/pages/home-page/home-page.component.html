@@ -1,10 +1,8 @@
 <div class="header">
-    <!-- Logo y título -->
     <div class="inner-header flex">
       <h1>¡Juntos, hacemos que las grandes ideas despeguen 🚀!</h1>
     </div>
   
-    <!-- Contenedor de las ondas -->
     <div>
       <svg class="waves" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
         <defs>
@@ -20,19 +18,17 @@
     </div>
   </div>
   
-  <!-- Nuevo contenedor para el título -->
   <div class="content-title">
     <h2 style="color: black;">Algunas de las Campañas Disponibles</h2>
   </div>
   
-  <!-- Contenedor principal del contenido -->
   <div class="content">
     <div class="carousel-container">
         <div class="carousel-content" [style.transform]="carouselTransform">
           <div *ngFor="let entrepreneurship of entrepreneurships" class="carousel-slide">
+            @if(entrepreneurship.activated){
             <a [routerLink]="['/entrepreneurships', entrepreneurship.id]" class="carousel-slide-link">
               <div class="carousel-slide-content">
-                <!-- Imagen principal de la campaña -->
                 <img *ngIf="entrepreneurship.images && entrepreneurship.images.length > 0" 
                      [src]="entrepreneurship.images[0]" 
                      alt="{{ entrepreneurship.name }}" />
@@ -42,31 +38,30 @@
                 <h3>{{ entrepreneurship.name }}</h3>
                 <p>{{ entrepreneurship.description }}</p>
       
-                <!-- Mostrar el objetivo financiero y el total recaudado -->
                 <p><strong>Objetivo:</strong> ${{ entrepreneurship.goal }}</p>
-                <p><strong>Recaudado:</strong> ${{ entrepreneurship.collected || 0 }}</p>
-                <!-- Barra de progreso -->
+                <p><strong>Recaudado:</strong> ${{ (entrepreneurship.collected || 0)-1}}</p>
               <div class="progress-bar-container">
-                <div class="progress-bar" [style.width]="getProgressWidth(entrepreneurship.goal, entrepreneurship.collected || 0) + '%'">
-                  {{ getProgressWidth(entrepreneurship.goal, entrepreneurship.collected || 0) }}%
+                <div class="progress-bar" [style.width]="getProgressWidth(entrepreneurship.goal, (entrepreneurship.collected || 0) - 1) + '%'">
+                  {{ getProgressWidth(entrepreneurship.goal, (entrepreneurship.collected || 0) - 1) }}%
                 </div>
+              
               </div>
               </div>
+            
             </a>
+          }
           </div>
+        
         </div>
      
-  
-      <!-- Flechas para mover el slider -->
       <div class="carousel-arrow carousel-arrow-left" (click)="moveSlider('left')">
-        <span>&lt;</span> <!-- Flecha izquierda -->
+        <span>&lt;</span> 
       </div>
       <div class="carousel-arrow carousel-arrow-right" (click)="moveSlider('right')">
-        <span>&gt;</span> <!-- Flecha derecha -->
+        <span>&gt;</span> 
       </div>
     </div>
   
-    <!-- Botón para ver más -->
     <button mat-button color="primary" [routerLink]="'/entrepreneurships'">
       Ver más
     </button>

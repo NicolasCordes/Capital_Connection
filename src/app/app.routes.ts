@@ -12,6 +12,7 @@ import { UserFormComponent } from "./features/user/components/user-form/user-for
 import { UserListComponent } from "./features/user/components/user-list/user-list.component";
 import { HomePageComponent } from "./pages/home-page/home-page.component";
 import { EntrepreneurshipsUpdatesComponent } from "./features/entrepreneurship/components/entrepreneurships-updates/entrepreneurships-updates.component";
+import { DonationPageComponent } from "./pages/donation-page/donation-page.component";
 
 
 export const routes: Routes = [
@@ -24,8 +25,8 @@ export const routes: Routes = [
   { path: 'user-add', component: UserFormComponent },
   { path: 'users', component: UserListComponent },
   { path: 'profile', component: ProfileListComponent, canActivate: [guardGuard] },
-  { path: 'add-favorite', component: AddFavoriteComponent },
   { path: 'favorites/:id', component: FavoriteListComponent },
   { path: 'update-entrepreneurships/:id', component: EntrepreneurshipsUpdatesComponent },
+  {path:'donations/:id',component:DonationPageComponent},
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];

@@ -23,6 +23,5 @@
     </div>
   </label>
 
-  <button type="submit" [disabled]="!reviewForm.valid">
-  </button>
+  <button class="follow-btn" type="submit" [disabled]="!reviewForm.valid || userType === 'Guest'">Enviar reseña</button>
 </form>

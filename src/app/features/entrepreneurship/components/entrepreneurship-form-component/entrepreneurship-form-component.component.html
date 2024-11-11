@@ -1,4 +1,3 @@
-<!-- Contenedor principal para centrar el formulario -->
 <div class="page-container">
   <form [formGroup]="entrepreneurshipForm" (ngSubmit)="addEntrepreneurship()">
     <!-- Nombre -->
@@ -45,10 +44,21 @@
     </label>
 
     <app-upload-image (imagesUploaded)="onImagesUploaded($event)"></app-upload-image>
+    <div formArrayName="images">
+      <div *ngFor="let image of imagesArray.controls; let i = index">
+        <img [src]="image.value" alt="Imagen seleccionada" class="video-preview" />
+        <button type="button" (click)="removeImage(i)">Eliminar</button>
+      </div>
+    </div>
 
     <app-upload-video (videosUploaded)="onVideosUploaded($event)"></app-upload-video>
+    <div formArrayName="videos">
+      <div *ngFor="let video of videosArray.controls; let i = index">
+        <video [src]="video.value" controls class="video-preview"></video>
+        <button type="button" (click)="removeVideo(i)">Eliminar</button>
+      </div>
+    </div>
 
-    <!-- Botón para enviar el formulario -->
     <button type="submit" [disabled]="!entrepreneurshipForm.valid">
       Agregar Emprendimiento
     </button>
