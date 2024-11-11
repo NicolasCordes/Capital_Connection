@@ -147,6 +147,13 @@
       "date": "2024-11-10T23:38:25.469Z",
       "idUser": "7daa",
       "idEntrepreneurship": 3
+    },
+    {
+      "id": "c045",
+      "amount": "500",
+      "date": "2024-11-11T01:30:49.745Z",
+      "idUser": "4193",
+      "idEntrepreneurship": 1
     }
   ]
 }

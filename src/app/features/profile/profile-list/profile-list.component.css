@@ -2,24 +2,24 @@
 h3, h4, p, button {
     color: black;
   }
-  
+
   /* Estilos generales para los elementos */
   h3 {
     font-size: 1.5rem;
     margin-bottom: 15px;
   }
-  
+
   h4 {
     font-size: 1.2rem;
     margin-bottom: 10px;
   }
-  
+
   p {
     font-size: 1rem;
     line-height: 1.5;
     margin: 10px 0;
   }
-  
+
   button {
     background-color: #4caf50;
     color: white;
@@ -29,13 +29,13 @@ h3, h4, p, button {
     border-radius: 4px;
     transition: background-color 0.3s ease;
   }
-  
+
   button:hover {
     background-color: #45a049;
   }
-  
+
   ng-template p {
     font-size: 1rem;
     color: #f44336;
   }
-  
+
