@@ -15,10 +15,15 @@ import { ActiveUser } from '../../../../auth/types/account-data';
   styleUrls: ['./reviews-form-component.component.css']
 })
 export class ReviewsFormComponentComponent implements OnInit{
-  @Input() entrepreneurship!:Entrepreneurship | null;
-
-  @Output() reviewCreated = new EventEmitter<Review>(); // Emitir la nueva reseña
+  @Input() entrepreneurship!: Entrepreneurship | null;
+  @Input() editingReview: Review | null = null; // Recibimos la reseña a editar
+  @Output() reviewCreated = new EventEmitter<Review>(); 
+  @Output() reviewUpdated = new EventEmitter<Review>(); // Evento para reseña actualizada
   reviewForm: FormGroup;
+
+  activeUser: ActiveUser | undefined;
+  userType: string = 'Guest';
+  authService = inject(AuthService);
 
   constructor(private fb: FormBuilder, private reviewService: ReviewService) {
     this.reviewForm = this.fb.group({
@@ -27,36 +32,50 @@ export class ReviewsFormComponentComponent implements OnInit{
     });
   }
 
-  
-  activeUser: ActiveUser | undefined;
-  userType: string = 'Guest';
-  authService= inject(AuthService)
   ngOnInit(): void {
     this.authService.auth().subscribe((user) => {
       this.activeUser = user;
       this.userType = user ? 'Registered User' : 'Guest';
     });
+
+    if (this.editingReview) {
+      this.reviewForm.patchValue({
+        stars: this.editingReview.stars,
+        reviewText: this.editingReview.reviewText
+      });
+    }
   }
 
-  // Función para manejar el envío del formulario
   submitReview(): void {
     if (this.reviewForm.valid) {
       const newReview: Review = { 
         ...this.reviewForm.value,
-        idUser: '1',  // Asignar el id_user. Asegúrate de que este tipo coincida con el backend.
-        idEntrepreneurship: this.entrepreneurship?.id || 0,  // Asignar el id del emprendimiento, si existe.
-        reviewText: this.reviewForm.get('reviewText')?.value, // Asegurarte de que reviewText esté en el formato correcto
-        stars: this.reviewForm.get('stars')?.value, // Asegurarte de que stars esté en el formato correcto
+        idUser: this.activeUser?.id,
+        idEntrepreneurship: this.entrepreneurship?.id || 0,
+        username: this.activeUser?.username
       };
 
-
+      if (this.editingReview) {
+        newReview.idEntrepreneurship = this.editingReview.idEntrepreneurship
+        newReview.id = this.editingReview.id;  // Usamos el ID de la reseña si estamos editando
         console.log(newReview);
 
+        this.reviewService.updateReview(this.editingReview.id,newReview).subscribe(
+          (updatedReview) => {
+            console.log(updatedReview);
+
+            this.reviewUpdated.emit(updatedReview);
+            this.reviewForm.reset({ stars: 5 });
+          },
+          (error) => {
+            console.error('Error al actualizar la reseña', error);
+          }
+        );
+      } else {
         this.reviewService.postReview(newReview).subscribe(
           (review) => {
-            // Emitir la reseña recién guardada
             this.reviewCreated.emit(review);
-            this.reviewForm.reset({ stars: 5 }); // Restablecer el formulario
+            this.reviewForm.reset({ stars: 5 });
           },
           (error) => {
             console.error('Error al guardar la reseña', error);
@@ -64,13 +83,9 @@ export class ReviewsFormComponentComponent implements OnInit{
         );
       }
     }
+  }
 
-      // Función para manejar la selección de estrellas
   setRating(value: number): void {
     this.reviewForm.get('stars')?.setValue(value);
   }
-
-
-  }
-
-
+}

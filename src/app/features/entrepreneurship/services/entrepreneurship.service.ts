@@ -18,6 +18,10 @@ export class EntrepreneurshipService {
     return this.http.get<Entrepreneurship>(`${this.urlBase}/${id}`);
   }
 
+  getEntrepreneurshipsByUserId(userId: string): Observable<Entrepreneurship[]> {
+    return this.http.get<Entrepreneurship[]>(`${this.urlBase}/u/${userId}`);
+  }
+
   postEntrepreneurship(
     entrepreneurship: Entrepreneurship
   ): Observable<Entrepreneurship> {

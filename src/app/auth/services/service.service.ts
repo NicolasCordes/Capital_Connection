@@ -95,4 +95,19 @@ export class AuthService {
       })
     );
   }
+
+  getUsernames(): Observable<{ id: string; username: string }[]> {
+    return this.http.get<AccountData[]>(`${this.baseUrl}`).pipe(
+      map((users) => {
+        // Filtrar usuarios que tienen un id definido
+        return users
+          .filter(user => user.id !== undefined)  // Filtrar usuarios con id definido
+          .map(user => ({
+            id: user.id!,  // El operador '!' garantiza que el id no es undefined
+            username: user.username
+          }));
+      }),
+    );
+  }
+  
 }

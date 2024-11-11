@@ -1,0 +1,65 @@
+<div *ngFor="let entrepreneurship of createdEntrepreneurships">
+    <div class="entrepreneurship-card">
+      <h4>{{ entrepreneurship.name }}</h4>
+      <p>{{ entrepreneurship.description }}</p>
+      <button (click)="editEntrepreneurship(entrepreneurship)">Editar</button>
+    </div>
+  
+    <!-- Formulario de edición (solo visible si se está editando este emprendimiento) -->
+    <div *ngIf="editingEntrepreneurship === entrepreneurship">
+      <h3>Editar Emprendimiento</h3>
+      <form [formGroup]="editForm" (ngSubmit)="saveChanges()">
+        <!-- Nombre -->
+        <div>
+          <label for="name">Nombre</label>
+          <input id="name" formControlName="name" required />
+          <div *ngIf="editForm.get('name')?.hasError('required') && editForm.get('name')?.touched">
+            <p>El nombre es requerido.</p>
+          </div>
+        </div>
+  
+        <!-- Descripción -->
+        <div>
+          <label for="description">Descripción</label>
+          <textarea id="description" formControlName="description" rows="5" cols="50" required></textarea>
+          <div *ngIf="editForm.get('description')?.hasError('required') && editForm.get('description')?.touched">
+            <p>La descripción es requerida.</p>
+          </div>
+        </div>
+  
+        <!-- Categoría -->
+        <div>
+          <label for="category">Categoría</label>
+          <select id="category" formControlName="category" required>
+            <option value="" disabled>Seleccione una categoría</option>
+            <option value="tecnologia">Tecnología</option>
+            <option value="salud">Salud</option>
+            <option value="educacion">Educación</option>
+            <option value="sostenibilidad">Sostenibilidad</option>
+            <option value="alimentacion">Alimentación</option>
+          </select>
+          <div *ngIf="editForm.get('category')?.hasError('required') && editForm.get('category')?.touched">
+            <p>La categoría es requerida.</p>
+          </div>
+        </div>
+  
+        <!-- Imágenes (URLs, separadas por comas) -->
+        <div>
+          <label for="images">Imágenes (URLs, separadas por comas)</label>
+          <input id="images" formControlName="images" />
+        </div>
+  
+        <!-- Videos (URLs, separadas por comas) -->
+        <div>
+          <label for="videos">Videos (URLs, separadas por comas)</label>
+          <input id="videos" formControlName="videos" />
+        </div>
+  
+        <div>
+          <button type="submit" [disabled]="editForm.invalid">Guardar cambios</button>
+          <button type="button" (click)="cancelEdit()">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

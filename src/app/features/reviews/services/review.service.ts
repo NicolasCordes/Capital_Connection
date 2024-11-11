@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { map, Observable } from "rxjs";
 import { Review } from "../models/review.model";
 
 @Injectable({
@@ -23,11 +23,17 @@ import { Review } from "../models/review.model";
       return this.http.post<Review>(this.urlBase, review)
     }
   
-    deleteReview(id: Number | undefined): Observable<Review> {
-      return this.http.delete<Review>(`${this.urlBase}/${id}`)
+    deleteReview(id: Number | undefined): Observable<boolean> {
+      return this.http.delete<boolean>(`${this.urlBase}/${id}`).pipe(
+        map(()=>true)
+      )
     }
   
-    updateReview(id: Number | null, review: Review): Observable<Review> {
-      return this.http.put<Review>(`${this.urlBase}/${id}`, review);
+    updateReview(id: Number | null, review: Partial<Review>): Observable<Review> {
+      return this.http.patch<Review>(`${this.urlBase}/${id}`, review);
     }
-  }
+
+    
+}
+
+  

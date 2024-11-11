@@ -1,27 +1,28 @@
-
-<p>{{activeUser?.username}}</p>
+<p>{{ activeUser?.username }}</p>
 
 <!-- Botón para redirigir a la ruta de favoritos del usuario activo -->
 <button (click)="goToFavorites()">Ir a favoritos</button>
 
-<div *ngIf="donatedEntrepreneurships.length > 0; else noDonations">
-    <h3>Emprendimientos en los que has donado:</h3>
+<!-- Botones para cambiar entre secciones -->
+<button (click)="showSection('donations')">Mis Donaciones</button>
+<button (click)="goToMyEntrepreneurships()">Mis Emprendimientos</button>
 
- @for (entrepreneurship of donatedEntrepreneurships; track $index) {
-  @for (item of donateds; track $index) {
-
-    @if(item.idEntrepreneurship === entrepreneurship.id){
-      <h4>Emprendimiento beneficiado: {{ entrepreneurship.name }}</h4>
-      <h4>Monto donado: ${{item.amount}}</h4>
-      <h4>Dia de la donacion: {{ item.date | date: 'dd/MM/yyyy' }}</h4>
-      <button (click)="navigateToDetails(entrepreneurship.id)">Ver Emprendimiento</button>
-    }
-  }
- }
-     </div>
-  
+<!-- Sección de Donaciones -->
+<div *ngIf="currentSection === 'donations'">
   <ng-template #noDonations>
     <p>No has donado a ningún emprendimiento.</p>
   </ng-template>
-  
 
+  <div *ngIf="donatedEntrepreneurships.length > 0; else noDonations">
+    <h3>Emprendimientos en los que has donado:</h3>
+    <ng-container *ngFor="let entrepreneurship of donatedEntrepreneurships">
+      <ng-container *ngFor="let item of donateds">
+        <ng-container *ngIf="item.idEntrepreneurship === entrepreneurship.id">
+          <h4>Emprendimiento beneficiado: {{ entrepreneurship.name }}</h4>
+          <h4>Monto donado: ${{ item.amount }}</h4>
+          <h4>Dia de la donacion: {{ item.date | date: 'dd/MM/yyyy' }}</h4>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>
