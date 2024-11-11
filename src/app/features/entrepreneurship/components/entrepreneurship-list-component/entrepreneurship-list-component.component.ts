@@ -18,10 +18,10 @@ import { ActiveUser } from '../../../../auth/types/account-data';
 })
 export class EntrepreneurshipListComponent implements OnInit {
   entrepreneurships: Entrepreneurship[] = [];
-  page = 0;                // Página actual
-  size = 6;                // Tamaño de cada página
-  isLoading = false;       // Estado de carga
-  hasMore = true;          // Indica si hay más datos para cargar
+  page = 0;             
+  size = 12;              
+  isLoading = false;       
+  hasMore = true;    
   activeUser: ActiveUser | undefined;
   userType: string = 'Guest';
   authService= inject(AuthService)
@@ -30,39 +30,41 @@ export class EntrepreneurshipListComponent implements OnInit {
 
   constructor(
     private entrepreneurshipService: EntrepreneurshipService,
-    private donationService: DonationService, // Inyecta DonationService
+    private donationService: DonationService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.loadEntrepreneurships();
+ 
     this.authService.auth().subscribe((user) => {
       this.activeUser = user;
       this.userType = user ? 'Registered User' : 'Guest';
     });
-
+    this.loadEntrepreneurships();
   }
-
-  // Función para cargar datos
-   // Función para cargar datos
-   loadEntrepreneurships(): void {
+  loadEntrepreneurships(): void {
     if (this.isLoading || !this.hasMore) return;
     this.isLoading = true;
-
+  
     this.entrepreneurshipService.getEntrepreneurship(this.page, this.size).subscribe(
       (data) => {
+        console.log('Datos recibidos de la API:', data);
+  
         if (data && data.content) {
-          // Añade cada emprendimiento a la lista actual
-          this.entrepreneurships = [...this.entrepreneurships, ...data.content];
-          
-          // Calcula el total recaudado por cada emprendimiento
-          
-          
+          const filteredEntrepreneurships = data.content.filter((entrepreneurship: Entrepreneurship) => entrepreneurship.activated === true);
+  
+          console.log('Emprendimientos filtrados:', filteredEntrepreneurships);
+  
+          this.entrepreneurships = [...this.entrepreneurships, ...filteredEntrepreneurships];
+  
           this.hasMore = data.content.length === this.size;
-          this.page++;
+  
+          if (this.hasMore) this.page++;
+  
         } else {
           this.hasMore = false;
         }
+  
         this.isLoading = false;
       },
       (error) => {
@@ -71,21 +73,17 @@ export class EntrepreneurshipListComponent implements OnInit {
       }
     );
   }
-
-
-
+  
   getProgressWidth(goal: number, collected: number): number {
-    if (!goal) return 0; // Evita división por cero
-    const progress = Math.min((collected / goal) * 100, 100); // Limita el progreso al 100%
-    return Math.round(progress); // Redondea el progreso al entero más cercano
+    if (!goal) return 0; 
+    const progress = Math.min((collected / goal) * 100, 100); 
+    return Math.round(progress); 
   }
 
-  // Navegación a los detalles de un emprendimiento
   navigateToDetails(id: number | null): void {
     this.router.navigate([`/entrepreneurships/${id}`]);
   }
 
-  // Eliminación de un emprendimiento
   deleteEntrepreneurship(id: number | null): void {
     this.entrepreneurshipService.deleteEntrepreneurship(id).subscribe(() => {
       this.entrepreneurships = this.entrepreneurships.filter(
@@ -94,10 +92,9 @@ export class EntrepreneurshipListComponent implements OnInit {
     });
   }
 
-  // Detecta cuando el usuario llega al final de la página
   @HostListener('window:scroll', ['$event'])
   onScroll(): void {
-    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 60 && !this.isLoading && this.hasMore) {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 120 && !this.isLoading && this.hasMore) {
       this.loadEntrepreneurships();
     }
   }

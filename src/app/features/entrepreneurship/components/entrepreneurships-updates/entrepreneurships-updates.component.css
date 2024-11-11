@@ -1,42 +1,202 @@
-.update-form {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-  }
-  
-  .update-form label {
-    display: block;
-    margin: 10px 0 5px;
-  }
-  
-  .update-form input,
-  .update-form textarea {
-    width: 100%;
-    padding: 8px;
-    margin: 5px 0 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .update-form button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .update-form button:hover {
-    background-color: #45a049;
-  }
-  
-  .loading-spinner {
-    text-align: center;
-    font-size: 20px;
-    color: #007bff;
-  }
-  
+/* Estilo para el contenedor principal de los emprendimientos */
+.entrepreneurships-container {
+  margin: 20px auto; /* Margen de ambos lados */
+  width: 80%; /* Ancho del contenedor */
+  max-width: 1200px; /* Max-width para limitar el tamaño en pantallas grandes */
+  background-color: white; /* Fondo blanco */
+  padding: 20px; /* Padding para separar los elementos del borde */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  border: 2px solid #f0f0f0; /* Borde gris claro */
+  transition: all 0.3s ease; /* Transición suave */
+}
+
+.entrepreneurships-container:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al pasar el ratón */
+  border-color: #3399bb; /* Cambio de color del borde al pasar el ratón */
+}
+
+.no-entrepreneurships-message {
+  font-size: 1.2rem;
+  color: #e74c3c;
+  text-align: center;
+  margin-top: 20px;
+}
+
+
+/* Estilos para la cabecera de la lista */
+.header {
+  text-align: center;
+  background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%);
+  color: white;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  font-weight: 400;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+/* Estilo para las tarjetas de emprendimiento */
+.entrepreneurship-card {
+  background-color: #fff;
+  padding: 20px;
+  margin: 10px 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.entrepreneurship-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.entrepreneurship-card h4 {
+  font-size: 1.6rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.entrepreneurship-card p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.entrepreneurship-card button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.entrepreneurship-card button:hover {
+  background-color: #0056b3;
+}
+
+/* Estilo para el formulario de edición */
+form {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+form h3 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+form div {
+  margin-bottom: 15px;
+}
+
+form label {
+  display: block;
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+form input,
+form select,
+form textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+form textarea {
+  resize: vertical;
+}
+
+form p {
+  color: #e74c3c;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+form button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+form button:hover:not(:disabled) {
+  background-color: #218838;
+}
+
+form button[type="button"] {
+  background-color: #dc3545;
+  margin-left: 10px;
+}
+
+form button[type="button"]:hover {
+  background-color: #c82333;
+}
+
+/* Estilo para la sección de validaciones */
+form div > div {
+  margin-top: 5px;
+  font-size: 0.9rem;
+  color: #e74c3c;
+}
+
+/* Estilo para los elementos de la lista de emprendimientos */
+.entrepreneurship-card + .entrepreneurship-card {
+  margin-top: 20px;
+}
+
+.entrepreneurship-card + .entrepreneurship-card p {
+  font-size: 1rem;
+  color: #777;
+}
+
+.video-preview-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.video-preview {
+  width: 200px; /* Ajusta el tamaño según tus necesidades */
+  height: auto;
+  margin-right: 10px;
+}
+
+button {
+  margin-left: 10px;
+  cursor: pointer;
+}

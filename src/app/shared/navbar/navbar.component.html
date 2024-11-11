@@ -1,15 +1,12 @@
 <nav class="navbar">
-  <!-- Logo centrado en el navbar -->
   <a routerLink="home" class="navbar-logo">
     <img src="https://res.cloudinary.com/dyho1ydzl/image/upload/v1731126682/logo_CC_cximnl.jpg" alt="Logo" />
   </a>
 
-  <!-- Menú de navegación -->
   <ul class="navbar-menu">
     <li><a routerLink="home">Home</a></li>
     <li><a routerLink="profile">Mi perfil</a></li>
 
-    <!-- Mostrar opciones según el estado del usuario -->
     <ng-container *ngIf="!activeUser; else loggedIn">
       <li><a routerLink="login">Iniciar Sesión</a></li>
       <li><a routerLink="sign-in">Registrarse</a></li>
@@ -19,7 +16,6 @@
     </ng-template>
   </ul>
 
-  <!-- Botón de agregar emprendimiento -->
   <button class="add-button" routerLink="add-entrepreneurship">
     Agregar Emprendimiento
   </button>

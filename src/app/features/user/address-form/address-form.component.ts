@@ -26,7 +26,6 @@ export class AddressFormComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    // Emitir cada vez que el formulario cambie
     this.addressForm.valueChanges.subscribe(() => this.emitAddress());
   }
 
@@ -40,7 +39,7 @@ export class AddressFormComponent implements OnInit {
         province: formValue.province || '',
         type: formValue.type || ''
       };
-      this.address.emit(address);  // Emitir la dirección automáticamente
+      this.address.emit(address);  
     }
   }
 }

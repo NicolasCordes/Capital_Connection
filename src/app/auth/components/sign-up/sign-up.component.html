@@ -47,7 +47,8 @@
       <label for="dateOfBirth">Fecha de Nacimiento</label>
       <input type="date" id="dateOfBirth" formControlName="dateOfBirth" class="input-field">
       <div *ngIf="form.controls['dateOfBirth'].touched && form.controls['dateOfBirth'].invalid" class="error-msg">
-        La fecha de nacimiento es obligatoria.
+        <span *ngIf="form.controls['dateOfBirth'].hasError('required')">La fecha de nacimiento es obligatoria.</span>
+        <span *ngIf="form.controls['dateOfBirth'].hasError('ageInvalid')">Debes ser mayor de 16 años.</span>
       </div>
     </section>
 

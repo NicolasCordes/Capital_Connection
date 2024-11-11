@@ -28,7 +28,6 @@ export class LoginComponent {
     this.authService.login(username!, password!).subscribe({
       next: (loggedIn) => {
         if (loggedIn) {
-          alert('BIEN')
           this.router.navigate(['/']);
         } else {
           console.log('error en las credenciales');

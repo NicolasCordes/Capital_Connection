@@ -126,6 +126,18 @@ input[type="file"] {
   padding: 8px;  /* Aumenta el padding interno */
   font-size: 1.1rem;  /* Aumenta el tamaño de la fuente */
 }
+.video-preview-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.video-preview {
+  width: 200px; /* Ajusta el tamaño según tus necesidades */
+  height: auto;
+  margin-right: 10px;
+}
+
 
 /* Respuesta a pantallas pequeñas */
 @media (max-width: 768px) {

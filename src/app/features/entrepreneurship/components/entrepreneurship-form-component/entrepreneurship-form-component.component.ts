@@ -19,9 +19,8 @@ export class EntrepreneurshipFormComponent implements OnInit {
   entrepreneurshipForm: FormGroup;
   activeUser: ActiveUser | undefined;
   userType: string = 'Guest';
-  authService= inject(AuthService)
+  authService = inject(AuthService);
 
-   
   constructor(
     private fb: FormBuilder,
     private entrepreneurshipService: EntrepreneurshipService,
@@ -32,9 +31,9 @@ export class EntrepreneurshipFormComponent implements OnInit {
       description: ['', Validators.required],
       goal: [0, [Validators.required, Validators.min(1)]],
       category: ['', Validators.required],
-      images: this.fb.array([], this.imagesRequiredValidator()), // FormArray para almacenar URLs de imágenes
-      videos: this.fb.array([]), // FormArray para almacenar URLs de videos
-      idUser: this.activeUser?.id, // FormArray para almacenar URLs de videos
+      images: this.fb.array([], this.imagesRequiredValidator()),
+      videos: this.fb.array([]),
+      idUser: this.activeUser?.id,
     });
   }
 
@@ -46,59 +45,55 @@ export class EntrepreneurshipFormComponent implements OnInit {
     });
   }
 
-  imagesRequiredValidator(): ValidatorFn {
+  imagesRequiredValidator() {
     return (control: AbstractControl): ValidationErrors | null => {
-      // Verifica si el control es un FormArray y si no tiene elementos
       if (control instanceof FormArray && control.length === 0) {
         return { 'imagesRequired': true };
       }
-      return null; // No hay error si tiene imágenes
+      return null;
     };
   }
 
-  // Getter para el FormArray de imágenes
-  get imagesFormArray(): FormArray {
+  get imagesArray() {
     return this.entrepreneurshipForm.get('images') as FormArray;
   }
 
-  get videosFormArray(): FormArray {
+  get videosArray() {
     return this.entrepreneurshipForm.get('videos') as FormArray;
   }
-  // Método para recibir las URLs de imágenes desde el componente de carga de imágenes
+
   onImagesUploaded(imageUrls: string[]): void {
-    this.imagesFormArray.clear(); // Limpia el array antes de agregar nuevas URLs
-    imageUrls.forEach(url => {
-      this.imagesFormArray.push(new FormControl(url)); // Agrega cada URL al FormArray
-      console.log("Si se guardo")
-    });
+    imageUrls.forEach(url => this.imagesArray.push(this.fb.control(url)));
   }
 
-  onVideosUploaded(videosUrls: string[]): void {
-    this.videosFormArray.clear(); // Limpia el array antes de agregar nuevas URLs
-    videosUrls.forEach(url => {
-      this.videosFormArray.push(new FormControl(url)); // Agrega cada URL al FormArray
-      console.log("Si se guardo")
-    });
+  onVideosUploaded(videoUrls: string[]): void {
+    videoUrls.forEach(url => this.videosArray.push(this.fb.control(url)));
   }
 
-  // Método para agregar el emprendimiento
+  removeImage(index: number): void {
+    this.imagesArray.removeAt(index);
+  }
+
+  removeVideo(index: number): void {
+    this.videosArray.removeAt(index);
+  }
+
   addEntrepreneurship(): void {
     if (this.entrepreneurshipForm.valid) {
       let ent = this.entrepreneurshipForm.getRawValue();
-      ent.idUser = this.activeUser?.id   
-     ent.collected = 1; 
-      console.log('Emprendimiento a enviar:', ent); // Verifica las URLs de las imágenes
-      console.log(ent);
+      ent.idUser = this.activeUser?.id; 
+      ent.collected = 1; 
+      console.log('Emprendimiento a enviar:', ent);
       this.entrepreneurshipService
         .postEntrepreneurship(ent)
         .subscribe({
-          next:()=>{
+          next: () => {
             this.router.navigate(['/entrepreneurships']);
-          }, error:(e:Error)=>{
+          },
+          error: (e: Error) => {
             console.log(e);
           }
         });
     }
   }
 }
-

@@ -7,11 +7,14 @@ import { EntrepreneurshipService } from '../../entrepreneurship/services/entrepr
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { Donation } from '../../donation/models/donation.model';
+import { FavoriteListComponent } from "../../favorite-list/components/list-favorite/favorite-list.component";
+import { DonationPageComponent } from '../../../pages/donation-page/donation-page.component';
+import { EntrepreneurshipsUpdatesComponent } from '../../entrepreneurship/components/entrepreneurships-updates/entrepreneurships-updates.component';
 
 @Component({
   selector: 'app-profile-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FavoriteListComponent,DonationPageComponent,EntrepreneurshipsUpdatesComponent],
   templateUrl: './profile-list.component.html',
   styleUrls: ['./profile-list.component.css']
 })
@@ -20,8 +23,11 @@ export class ProfileListComponent implements OnInit {
   activeUser: ActiveUser | undefined;
   donateds: Donation[] = [];
   donatedEntrepreneurships: Entrepreneurship[] = [];
-  createdEntrepreneurships: Entrepreneurship[] = []; // Nueva propiedad para los emprendimientos creados por el usuario
-  currentSection: string = ''; // Nueva propiedad para gestionar la sección activa
+  createdEntrepreneurships: Entrepreneurship[] = []; 
+  currentSection: string = ''; 
+  favorites: boolean = false;
+  donations: boolean = false;
+  myentre: boolean = false;
 
   authService = inject(AuthService);
   donationService = inject(DonationService);
@@ -35,56 +41,49 @@ export class ProfileListComponent implements OnInit {
     });
   }
 
-  // Método para cambiar la sección activa (Donaciones o Emprendimientos)
-  showSection(section: string) {
-    this.currentSection = section;
+ 
 
-    // Si la sección seleccionada es 'donations', cargamos las donaciones del usuario
-    if (section === 'donations' && this.activeUser) {
-      this.loadDonatedEntrepreneurships(this.activeUser.id);
-    }
-  }
 
-  // Cargar los emprendimientos a los que el usuario ha donado
-  loadDonatedEntrepreneurships(userId: string) {
-    this.donationService.getDonationsByUserId(userId).subscribe(donations => {
-      this.donateds = donations;
-      console.log(donations);
-      const entrepreneurshipIds = donations.map(donation => donation.idEntrepreneurship).filter(id => id !== undefined);
-
-      // Cargar cada emprendimiento por su id
-      this.donatedEntrepreneurships = []; // Limpiamos la lista antes de cargar los nuevos emprendimientos
-      entrepreneurshipIds.forEach(id => {
-        this.entrepreneurshipService.getEntrepreneurshipById(id!).subscribe(entrepreneurship => {
-          this.donatedEntrepreneurships.push(entrepreneurship);
-        });
-      });
-    });
-  }
-
-  // Navegar a los detalles de un emprendimiento
   navigateToDetails(id: number | undefined): void {
     if (id) {
       this.router.navigate([`/entrepreneurships/${id}`]);
     }
   }
 
-  // Método para redirigir a la ruta de favoritos del usuario activo
+ 
+goToDonations(): void {
+  if(this.donations === false){
+   
+    this.donations = true;
+    console.log(this.donations);
+  }else{
+    this.donations = false;
+  }
+  this.favorites = false;
+  this.myentre = false;
+
+}
+  
   goToFavorites(): void {
-    if (this.activeUser) {
-      this.router.navigate([`/favorites/${this.activeUser.id}`]);  // Redirige a la ruta de favoritos
-    } else {
-      console.error('No active user found');
+    if(this.favorites === false){
+      console.log(this.favorites);
+      this.favorites = true;
+    }else{
+      this.favorites = false;
     }
+    this.donations = false;
+    this.myentre = false;
   }
 
-  // Método para redirigir a la ruta de mis emprendimientos del usuario activo
+
   goToMyEntrepreneurships(): void {
-    if (this.activeUser) {
-      console.log("User ID:", this.activeUser.id); // Verifica que el id esté presente
-      this.router.navigate([`/update-entrepreneurships/${this.activeUser.id}`]);
-    } else {
-      console.error('No active user found');
+    if(this.myentre === false){
+      console.log(this.myentre);
+      this.myentre = true;
+    }else{
+      this.myentre = false;
     }
+    this.favorites = false;
+    this.donations = false;
   }
 }

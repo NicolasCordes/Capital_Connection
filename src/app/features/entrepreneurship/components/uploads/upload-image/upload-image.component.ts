@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, inject, Output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -20,98 +20,96 @@ import { MediaUploadService } from '../../../services/media-upload.service';
 })
 export class UploadImageComponent {
   @Output() imagesUploaded = new EventEmitter<string[]>();
-
+  cargado = false;
   imageControl: FormControl;
-  imageForm: FormGroup;
+  imageForm: FormGroup; // FormGroup adicional para manejar el formulario completo
   isUploading = false;
   emitido = false;
 
   constructor(
     private fb: FormBuilder,
-    private mediaUploadService: MediaUploadService
+    private mediaUploadService: MediaUploadService,
+    private cdr: ChangeDetectorRef 
   ) {
-    // Inicializamos el FormControl y FormGroup para manejar las imágenes seleccionadas
     this.imageControl = new FormControl([]);
     this.imageForm = this.fb.group({
       imageControl: this.imageControl
     });
   }
-
-  // Método para manejar la selección de archivos de imagen
   onFilesSelected(event: any): void {
     const newFiles = Array.from(event.target.files) as File[];
     const currentFiles = this.imageControl.value || [];
 
-    // Combinamos los nuevos archivos con los ya existentes sin eliminar los anteriores
     const allFiles = [...currentFiles, ...newFiles];
 
-    // Solo actualizamos el FormControl si hay un cambio en los archivos
     if (allFiles.length > currentFiles.length) {
       this.imageControl.setValue(allFiles);
     }
 
-    // Restablecemos el input de archivos para permitir la selección repetida
     this.resetFileInput(event.target);
 
     console.log('Archivos en imageControl:', this.imageControl.value);
   }
 
-  // Método para restablecer el input de archivo
   resetFileInput(inputElement: HTMLInputElement) {
-    inputElement.value = ''; // Limpiamos el valor del input
+    inputElement.value = ''; 
   }
 
-  // Método para eliminar un archivo de la lista
   removeFile(index: number): void {
     const currentFiles = this.imageControl.value;
-    currentFiles.splice(index, 1); // Eliminamos el archivo seleccionado
-    this.imageControl.setValue([...currentFiles]); // Actualizamos el FormControl
+    currentFiles.splice(index, 1); 
+    this.imageControl.setValue([...currentFiles]);
   }
 
-  // Método para subir las imágenes seleccionadas
   uploadImages(): void {
-    this.isUploading = true; // Indicamos que la carga está en progreso
-    const imageFiles = this.imageControl.value as File[];
+    const form = this.imageForm.getRawValue();
+
+    if (!form?.imageControl || form.imageControl.length === 0) {
+      console.log("No se seleccionaron imágenes.");
+      return; 
+    }
+
+    const imageFiles = form.imageControl as File[];
     const uploadedImageUrls: string[] = [];
 
-    console.log('Contenido de imageControl:', this.imageControl.value);
+    this.isUploading = true;
+    const uploadPromises = imageFiles.map((file: File) => {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('upload_preset', 'capital-connection-preset');
+      formData.append('cloud_name', 'dyho1ydzl');
 
-    if (imageFiles && imageFiles.length > 0) {
-      // Creamos un array de promesas para subir las imágenes de manera paralela
-      const uploadPromises = imageFiles.map((file: File) => {
-        const formData = new FormData();
-        formData.append('file', file);
-        formData.append('upload_preset', 'capital-connection-preset');
-        formData.append('cloud_name', 'dyho1ydzl');
-
-        // Retornamos una promesa para cada archivo de imagen
-        return new Promise<void>((resolve, reject) => {
-          this.emitido = true;
-          this.mediaUploadService.uploadImage(formData).subscribe({
-            next: (response) => {
-              uploadedImageUrls.push(response.secure_url); // Guardamos la URL de la imagen subida
-              resolve();
-            },
-            error: (error) => {
-              console.error('Error al cargar la imagen', error);
-              reject(error);
-            }
-          });
+      return new Promise<void>((resolve, reject) => {
+        this.emitido = true;
+        this.mediaUploadService.uploadImage(formData).subscribe({
+          next: (response) => {
+            uploadedImageUrls.push(response.secure_url);
+            resolve();
+          },
+          error: (error) => {
+            console.error('Error al cargar la imagen', error);
+            reject(error);
+          }
         });
       });
+    });
 
-      // Esperamos a que todas las promesas se resuelvan
-      Promise.all(uploadPromises)
-        .then(() => {
-          this.isUploading = false; // Finalizamos la carga
-          console.log(uploadedImageUrls);
-          this.imagesUploaded.emit(uploadedImageUrls); // Emitimos las URLs de las imágenes cargadas
-          this.imageControl.reset(); // Restablecemos el FormControl
-        })
-        .catch((error) => {
-          console.error('Error al subir las imágenes', error);
-          this.isUploading = false; // Finalizamos la carga en caso de error
-        });
-    }
+    Promise.all(uploadPromises)
+      .then(() => {
+        this.isUploading = false;
+        this.imagesUploaded.emit(uploadedImageUrls);
+        this.imageControl.reset();
+        this.imageControl.markAsPristine();
+        this.imageControl.markAsUntouched();
+        this.cdr.detectChanges();
+      })
+      .catch((error) => {
+        console.error('Error al subir las imágenes', error);
+        this.isUploading = false;
+      })
+      .finally(() => {
+        this.cargado = true;
+        this.emitido = false;
+      });
   }
 }

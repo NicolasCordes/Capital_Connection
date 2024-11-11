@@ -28,7 +28,7 @@ export class UserFormComponent {
     wallet: ['', Validators.required],
     yearsOfExperience: ['', Validators.required],
     industry: ['', Validators.required],
-    address: this.fb.group({  // Agregar un grupo de dirección
+    address: this.fb.group({  
       street: [''],
       number: [''],
       locality: [''],
@@ -50,10 +50,8 @@ export class UserFormComponent {
   }
   isAddressFilled(): boolean {
     const address = this.userForm.get('address')?.value;
-    // Verificar que todos los campos de la dirección estén llenos
     return address && address.street && address.number && address.locality && address.province && address.type;
   }
-  // Getter para el formulario de dirección
   get addressForm() {
     return this.userForm.get('address') as FormGroup;
   }

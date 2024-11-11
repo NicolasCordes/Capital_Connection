@@ -1,67 +1,110 @@
-/* Estilos generales para la lista de favoritos */
-h2 {
-    font-size: 2rem;
-    color: #333;
-    margin-bottom: 20px;
-    text-align: center;
+/* Estilo para el contenedor principal */
+.favorites-container {
+  margin: 20px auto; /* Margen de ambos lados */
+  width: 80%; /* Ancho del contenedor */
+  max-width: 1200px; /* Max-width para limitar el tamaño en pantallas grandes */
+  background-color: white; /* Fondo blanco */
+  padding: 20px; /* Padding para separar los elementos del borde */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  border: 2px solid #f0f0f0; /* Borde gris claro */
+  transition: all 0.3s ease; /* Transición suave */
+}
+
+.no-favorite-message {
+  font-size: 1.2rem;
+  color: #e74c3c;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.favorites-container:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al pasar el ratón */
+  border-color: #3399bb; /* Cambio de color del borde al pasar el ratón */
+}
+
+/* Estilos para la cabecera de la lista */
+.header {
+  text-align: center;
+  background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%);
+  color: white;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  font-weight: 400;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+/* Estilos para la lista */
+ul {
+  list-style-type: none; /* Elimina los puntos de la lista */
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Espacio entre cada ítem de la lista */
+}
+
+/* Estilos para cada ítem de la lista de favoritos */
+li {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+li:hover {
+  transform: translateY(-5px); /* Efecto de elevación al pasar el ratón */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo para los títulos de cada favorito */
+h3 {
+  font-size: 1.5rem;
+  color: #007bff;
+  margin: 0;
+  font-weight: bold;
+}
+
+/* Estilo para la descripción de cada favorito */
+p {
+  font-size: 1rem;
+  color: #555;
+  margin-top: 10px;
+}
+
+/* Responsividad: hacer que la lista ocupe el 100% del ancho en pantallas pequeñas */
+@media (max-width: 600px) {
+  .favorites-container {
+    width: 90%; /* Ajustar el ancho para pantallas más pequeñas */
+    padding: 15px; /* Reducir el padding */
   }
-  
+
+  .header h1 {
+    font-size: 2rem; /* Reducir tamaño del título */
+  }
+
   ul {
-    list-style-type: none; /* Elimina los puntos de la lista */
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 20px; /* Espacio entre cada ítem de la lista */
+    padding-left: 10px;
+    padding-right: 10px;
   }
-  
-  /* Estilos para cada ítem de la lista de favoritos */
+
   li {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease-in-out; /* Transición suave para efectos hover */
+    padding: 10px;
   }
-  
-  li:hover {
-    transform: translateY(-5px); /* Efecto de elevación al pasar el ratón */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Estilo para los títulos de cada favorito */
+
   h3 {
-    font-size: 1.5rem;
-    color: #007bff;
-    margin: 0;
-    font-weight: bold;
+    font-size: 1.2rem;
   }
-  
-  /* Estilo para la descripción de cada favorito */
+
   p {
-    font-size: 1rem;
-    color: #555;
-    margin-top: 10px;
+    font-size: 0.9rem;
   }
-  
-  /* Responsividad: hacer que la lista ocupe el 100% del ancho en pantallas pequeñas */
-  @media (max-width: 600px) {
-    ul {
-      padding-left: 10px;
-      padding-right: 10px;
-    }
-  
-    li {
-      padding: 10px;
-    }
-  
-    h3 {
-      font-size: 1.2rem;
-    }
-  
-    p {
-      font-size: 0.9rem;
-    }
-  }
-  
+}

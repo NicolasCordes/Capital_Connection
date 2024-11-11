@@ -1,7 +1,16 @@
-<h2>Lista de Favoritos</h2>
-<ul>
-  <li *ngFor="let favorite of userFavorites">
-    <h3>{{ favorite.name }}</h3>
-    <p>{{ favorite.description }}</p>
-  </li>
-</ul>
+<div class="favorites-container">
+  <div class="header">
+    <h1>Lista de Favoritos</h1>
+  </div>
+  <div *ngIf="userFavorites.length === 0">
+    <p class="no-favorite-message">No tienes emprendimientos en la lista de favoritos.</p>
+  </div>
+  <ul>
+    <li *ngFor="let favorite of userFavorites">
+
+        <h3>{{ favorite.name }}</h3>
+        <p>{{ favorite.description }}</p>
+      
+    </li>
+  </ul>
+</div>

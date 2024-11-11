@@ -1,26 +1,46 @@
 <form [formGroup]="videoForm" (ngSubmit)="uploadVideo()">
-  <mat-form-field appearance="fill">
+
+  <mat-form-field >
     <mat-label>Cargar video</mat-label>
     <ngx-mat-dropzone>
-      <input type="file" fileInput [formControl]="videoControl" multiple (change)="onFilesSelected($event)" />
+      <input
+        type="file"
+        fileInput
+        [formControl]="videoControl"
+        multiple
+        (change)="onFilesSelected($event)"
+      />
     </ngx-mat-dropzone>
-    <mat-error *ngIf="videoControl.hasError('required') && videoControl.touched">
-      El video es requerido.
-    </mat-error>
+
   </mat-form-field>
 
-  <div *ngIf="videoControl.value.length > 0">
+  <!-- Aseguramos que videoControl.value no sea null antes de verificar su longitud -->
+  <div *ngIf="videoControl.value && videoControl.value.length > 0">
     <h3>Videos seleccionados:</h3>
     <div *ngFor="let file of videoControl.value; let i = index" class="video-preview">
-      <!-- Aquí puedes mostrar una miniatura o información sobre el video -->
       <span>{{ file.name }} ({{ file.type }})</span>
-      <button type="button" class="remove-video" (click)="removeFile(i)" *ngIf="!emitido" aria-label="Eliminar video">Eliminar</button>
+      <button
+        type="button"
+        class="remove-video"
+        (click)="removeFile(i)"
+        *ngIf="!emitido"
+        aria-label="Eliminar video"
+      >
+        Eliminar
+      </button>
     </div>
   </div>
 
   <div *ngIf="isUploading" class="isUploading">Cargando video...</div>
 
-  <button mat-raised-button color="primary" type="submit" [disabled]="isUploading || !videoForm.valid" aria-label="Subir videos">
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="isUploading || !videoForm.valid"
+    aria-label="Subir videos"
+  >
     Subir videos
   </button>
+
 </form>

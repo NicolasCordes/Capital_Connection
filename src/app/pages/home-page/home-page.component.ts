@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { filter, map, Subscription } from 'rxjs';
 import { AuthService } from '../../auth/services/service.service';
 import { EntrepreneurshipService } from '../../features/entrepreneurship/services/entrepreneurship.service';
 import { Entrepreneurship } from '../../features/entrepreneurship/models/entrepreneurship.model';
@@ -17,8 +17,8 @@ export class HomePageComponent implements OnInit, OnDestroy {
   username = 'invitado';
   private sub?: Subscription;
   entrepreneurships: Entrepreneurship[] = [];
-  currentIndex = 0; // Indice actual del slider
-  carouselTransform = 'translateX(0)'; // Control del desplazamiento del slider
+  currentIndex = 0; 
+  carouselTransform = 'translateX(0)'; 
 
   constructor(
     private authService: AuthService,
@@ -26,17 +26,19 @@ export class HomePageComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    // Obtener entrepreneurships de la API
-    this.entrepreneurshipService.getEntrepreneurship(0, 9).subscribe({
-      next: (response) => {
-        this.entrepreneurships = response.content;
-      },
-      error: (err) => {
-        console.error('Error al obtener entrepreneurships', err);
-      },
+    
+   this.entrepreneurshipService.getEntrepreneurship(0, 9).subscribe({
+  next: (response) => {
+    this.entrepreneurships = response.content.filter((entrepreneurship: Entrepreneurship) => entrepreneurship.activated === true);
+    
+    this.entrepreneurships.forEach(entre => {
+      console.log(entre);
     });
-
-    // Suscripción al servicio de autenticación
+  },
+  error: (err) => {
+    console.error('Error al obtener entrepreneurships', err);
+  },
+});
     this.sub = this.authService.auth().subscribe({
       next: (activeUser) => {
         if (activeUser) {
@@ -53,21 +55,20 @@ export class HomePageComponent implements OnInit, OnDestroy {
   }
 
   getProgressWidth(goal: number, collected: number): number {
-    if (!goal) return 0; // Evita división por cero
-    const progress = Math.min((collected / goal) * 100, 100); // Limita el progreso al 100%
-    return Math.round(progress); // Redondea el progreso al entero más cercano
+    if (!goal) return 0; 
+    const progress = Math.min((collected / goal) * 100, 100); 
+    return Math.round(progress); 
   }
 
   moveSlider(direction: 'left' | 'right'): void {
     const totalSlides = this.entrepreneurships.length;
-    const slidesVisible = 3; // Cambiado de 5 a 3
+    const slidesVisible = 3; 
     if (direction === 'left') {
       this.currentIndex = (this.currentIndex - slidesVisible + totalSlides) % totalSlides;
     } else {
       this.currentIndex = (this.currentIndex + slidesVisible) % totalSlides;
     }
 
-    // Actualiza el transform del contenedor del slider para mover las tarjetas
     this.carouselTransform = `translateX(-${this.currentIndex * (100 / slidesVisible)}%)`;
   }
 }

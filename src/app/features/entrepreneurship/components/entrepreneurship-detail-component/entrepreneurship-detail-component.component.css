@@ -26,8 +26,14 @@ p {
   padding: 20px 0;
   margin-bottom: 0; 
 }
+.follow-btn-container {
+  display: flex;
+  justify-content: flex-end; /* Esto moverá el botón a la derecha */
+  margin-top: 20px; /* Espacio entre los detalles y el botón */
+}
+
 .follow-btn {
-  background-color: #b3d9e6; 
+  background-color: #e6f2ff; /* Color del fondo del botón */
   border: 2px solid #3399bb;
   color: #3399bb;
   padding: 10px 20px;
@@ -36,35 +42,18 @@ p {
   border-radius: 5px;
   display: inline-flex;
   align-items: center;
-  justify-content: center; 
+  justify-content: center;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
+  margin-top: 20px;
 }
 
-.follow-btn {
-  
-  background-color: #e6f2ff; /* Color del fondo del botón */
-  border: 2px solid #3399bb; /* Borde azul */
-  color: #3399bb; /* Color del texto */
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: 500;
-  border-radius: 5px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center; /* Alinea el texto */
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* Cambio de color del botón cuando se pasa el ratón */
 .follow-btn:hover {
-  background-color: #b3d9e6; /* Fondo más suave al pasar el ratón */
-  color: #3399bb; /* Texto azul al pasar el ratón */
-  border-color: #3399bb; /* Borde azul al pasar el ratón */
+  background-color: #b3d9e6;
+  color: #3399bb;
+  border-color: #3399bb;
 }
 
-/* Elimina el contorno del botón cuando está enfocado */
 .follow-btn:focus {
   outline: none;
 }
@@ -164,9 +153,9 @@ p {
 /* Carrusel */
 .carousel-container {
   position: relative;
-  width: 50%; /* El tamaño del carrusel es el 50% */
-  height: 500px;
-  overflow: hidden;
+  width: 50%; /* Asegura que el carrusel ocupa el 50% del contenedor */
+  height: 500px; /* Ajusta la altura si es necesario */
+  overflow: hidden; /* Evita que las imágenes se desborden */
   border-radius: 8px;
   color: white;
 }
@@ -184,8 +173,10 @@ p {
 .carousel-slide-content video {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;   /* Asegura que la imagen se ajuste al contenedor sin hacer zoom ni recortar */
+  object-position: center; /* Centra la imagen dentro del contenedor */
   border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 172, 193, 0.5); /* Sombras turquesa */
 }
 
 .carousel-arrow {

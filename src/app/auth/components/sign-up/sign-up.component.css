@@ -1,86 +1,102 @@
+/* Contenedor principal del formulario */
 .form-container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   font-family: Arial, sans-serif;
 }
 
+/* Título del formulario */
 .form-title {
-  font-size: 1.5em;
-  margin-bottom: 20px;
+  font-size: 1.8rem;
   color: #333;
   text-align: center;
-}
-
-.form-group {
-  margin-bottom: 15px;
-}
-
-.form-group label {
-  display: block;
+  margin-bottom: 1.5rem;
   font-weight: bold;
-  margin-bottom: 5px;
-  color: #555;
 }
 
+/* Grupo de campos con espacio entre elementos */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.2rem;
+}
+
+/* Etiquetas de los campos */
+.form-group label {
+  margin-bottom: 0.3rem;
+  font-weight: bold;
+  color: #444;
+}
+
+/* Campos de entrada */
 .input-field {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1em;
-  transition: border-color 0.3s ease;
+  padding: 0.8rem;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  color: #333;
+  transition: border-color 0.3s;
 }
 
+/* Ajuste del campo de selección (select) */
+select.input-field {
+  appearance: none;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23333' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") no-repeat right 0.75rem center;
+  background-size: 0.65em auto;
+  padding-right: 2rem; /* Espacio para el icono */
+}
+
+/* Efecto de enfoque (focus) en campos de entrada */
 .input-field:focus {
   border-color: #007bff;
   outline: none;
 }
 
+/* Mensajes de error */
+.error-msg {
+  color: #e63946;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  font-weight: bold;
+  padding-left: 0.2rem;
+}
+
+/* Botón de envío */
 .submit-btn {
   width: 100%;
-  padding: 12px;
-  font-size: 1em;
+  padding: 0.8rem;
+  font-size: 1rem;
+  font-weight: bold;
   color: #fff;
   background-color: #007bff;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s;
+  margin-top: 1rem;
 }
 
-.submit-btn:disabled {
-  background-color: #aaa;
-  cursor: not-allowed;
-}
-
-.submit-btn:hover:not(:disabled) {
+.submit-btn:hover {
   background-color: #0056b3;
 }
 
-.error-msg {
-  font-size: 0.875em;
-  color: #d9534f;
-  margin-top: 5px;
+.submit-btn:disabled {
+  background-color: #a1a1a1;
+  cursor: not-allowed;
 }
 
-.address-form .form-group {
-  margin-bottom: 15px;
+/* Ajustes del contenedor de direcciones */
+app-address-form {
+  margin-top: 1.5rem;
 }
 
-.address-form .form-control {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+/* Estilo de los fieldset para centrado visual */
+fieldset {
+  border: none;
+  padding: 0;
 }
 
-.address-form .error-message {
-  color: #d9534f;
-  font-size: 0.875em;
-  margin-top: 5px;
-}

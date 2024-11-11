@@ -5,11 +5,12 @@ export interface Entrepreneurship {
   idUser: string;
   name: string;
   description: string;
-  goal: number; // objetivo financiero
+  goal: number;
   category: string;
-  images: string[]; // URLs de imágenes
-  videos: string[]; // URLs de videos
-  collected?: number; // total recaudado
+  images: string[]; 
+  videos: string[]; 
+  collected?: number; 
+  activated?: boolean;
 }
 
 export interface PageResponse {
