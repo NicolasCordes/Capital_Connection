@@ -14,6 +14,10 @@ export class EntrepreneurshipService {
     return this.http.get<PageResponse>(`${this.urlBase}?page=${page}&size=${size}`);
   }
 
+  getEntrepreneurshipsActives(page: number, size: number): Observable<PageResponse> {
+    return this.http.get<PageResponse>(`${this.urlBase}/active?page=${page}&size=${size}`);
+  }
+
   getEntrepreneurshipById(id: number): Observable<Entrepreneurship> {
     return this.http.get<Entrepreneurship>(`${this.urlBase}/${id}`);
   }

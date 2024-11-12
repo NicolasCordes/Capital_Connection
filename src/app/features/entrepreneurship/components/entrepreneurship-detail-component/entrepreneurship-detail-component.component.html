@@ -2,17 +2,17 @@
   <!-- Título principal -->
   <div class="header">
     <h2>{{ currentEntrepreneurship.name }}</h2>
-    
+
     </div>
   </div>
   <div *ngIf="entrepreneurship as currentEntrepreneurship">
     <div class="progress-bar-container">
-      <div 
-        class="progress-bar" 
+      <div
+        class="progress-bar"
         [style.width]="getProgressWidth(entrepreneurship.goal, (entrepreneurship.collected || 0) - 1) + '%'"
       ></div>
-      <div 
-        class="progress-bar-text" 
+      <div
+        class="progress-bar-text"
         [style.color]="getProgressColor(entrepreneurship.goal, (entrepreneurship.collected || 0) - 1)"
       >
         {{ getProgressWidth(entrepreneurship.goal, (entrepreneurship.collected || 0) - 1) }}%
@@ -24,7 +24,6 @@
       <!-- Carrusel de imágenes y videos a la izquierda -->
       <div class="carousel-container">
         <div class="carousel-slide">
-          <!-- Mostrar imagen o video según corresponda -->
           <ng-container *ngIf="isImage(combinedMediaArray[currentIndex])">
             <img [src]="combinedMediaArray[currentIndex]" alt="media" class="carousel-media">
           </ng-container>
@@ -75,5 +74,5 @@
     <div class="reviews">
       <app-reviews-list-component [id]="currentEntrepreneurship.id || 0" [update]="update"></app-reviews-list-component>
     </div>
-  
+
 </div>

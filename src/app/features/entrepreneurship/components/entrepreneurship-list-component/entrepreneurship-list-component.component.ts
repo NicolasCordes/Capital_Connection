@@ -18,15 +18,15 @@ import { ActiveUser } from '../../../../auth/types/account-data';
 })
 export class EntrepreneurshipListComponent implements OnInit {
   entrepreneurships: Entrepreneurship[] = [];
-  page = 0;             
-  size = 12;              
-  isLoading = false;       
-  hasMore = true;    
+  page = 0;
+  size = 12;
+  isLoading = false;
+  hasMore = true;
   activeUser: ActiveUser | undefined;
   userType: string = 'Guest';
   authService= inject(AuthService)
 
-   
+
 
   constructor(
     private entrepreneurshipService: EntrepreneurshipService,
@@ -35,7 +35,7 @@ export class EntrepreneurshipListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
- 
+
     this.authService.auth().subscribe((user) => {
       this.activeUser = user;
       this.userType = user ? 'Registered User' : 'Guest';
@@ -43,28 +43,33 @@ export class EntrepreneurshipListComponent implements OnInit {
     this.loadEntrepreneurships();
   }
   loadEntrepreneurships(): void {
+    // Verifica si ya se está cargando o si no hay más datos para cargar
     if (this.isLoading || !this.hasMore) return;
+
+    // Marca el inicio de la carga
     this.isLoading = true;
-  
-    this.entrepreneurshipService.getEntrepreneurship(this.page, this.size).subscribe(
+
+    // Llama al servicio para obtener los emprendimientos activados de forma paginada
+    this.entrepreneurshipService.getEntrepreneurshipsActives(this.page, this.size).subscribe(
       (data) => {
         console.log('Datos recibidos de la API:', data);
-  
+
+        // Verifica que la respuesta contenga datos de emprendimientos activados
         if (data && data.content) {
-          const filteredEntrepreneurships = data.content.filter((entrepreneurship: Entrepreneurship) => entrepreneurship.activated === true);
-  
-          console.log('Emprendimientos filtrados:', filteredEntrepreneurships);
-  
-          this.entrepreneurships = [...this.entrepreneurships, ...filteredEntrepreneurships];
-  
+          // Agrega los nuevos emprendimientos activados al array existente
+          this.entrepreneurships = [...this.entrepreneurships, ...data.content];
+
+          // Actualiza `hasMore` basado en si se alcanzó el límite de elementos en la respuesta
           this.hasMore = data.content.length === this.size;
-  
+
+          // Si hay más elementos, incrementa el número de página
           if (this.hasMore) this.page++;
-  
         } else {
+          // Si no hay contenido, marca que no hay más elementos para cargar
           this.hasMore = false;
         }
-  
+
+        // Marca el fin de la carga
         this.isLoading = false;
       },
       (error) => {
@@ -73,11 +78,11 @@ export class EntrepreneurshipListComponent implements OnInit {
       }
     );
   }
-  
+
   getProgressWidth(goal: number, collected: number): number {
-    if (!goal) return 0; 
-    const progress = Math.min((collected / goal) * 100, 100); 
-    return Math.round(progress); 
+    if (!goal) return 0;
+    const progress = Math.min((collected / goal) * 100, 100);
+    return Math.round(progress);
   }
 
   navigateToDetails(id: number | null): void {

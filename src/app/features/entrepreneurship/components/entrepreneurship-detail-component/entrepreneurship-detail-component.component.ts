@@ -37,7 +37,7 @@ export class EntrepreneurshipDetailComponent implements OnInit {
   isEditing = false;
   entrepreneurship: Entrepreneurship | null = null;
 
-  userId: string | null = null; 
+  userId: string | null = null;
   id: number = 0;
   reviews: Review[] = [];
   update: boolean = false;
@@ -163,8 +163,8 @@ export class EntrepreneurshipDetailComponent implements OnInit {
       const updatedEntrepreneurship: Entrepreneurship = {
         ...this.entrepreneurship,
         ...this.entrepreneurshipForm.value,
-        images: this.images.value,  
-        videos: this.videos.value  
+        images: this.images.value,
+        videos: this.videos.value
       };
 
       console.log('Updated Entrepreneurship:', updatedEntrepreneurship);
@@ -196,10 +196,10 @@ export class EntrepreneurshipDetailComponent implements OnInit {
   }
 
     addToFavorites(): void {
-  
+
       if (this.activeUser) {
-        const userId = this.activeUser.id; 
-  
+        const userId = this.activeUser.id;
+
         this.favoriteListService.addFavorite(userId, this.id)
           .subscribe(
             response => {
@@ -213,7 +213,7 @@ export class EntrepreneurshipDetailComponent implements OnInit {
         console.error('El usuario no está autenticado.');
       }
     }
-  
+
 
   onDonationAdded(donation: Donation): void {
     if (this.entrepreneurship?.id) {
@@ -225,15 +225,15 @@ export class EntrepreneurshipDetailComponent implements OnInit {
 
       this.donationService.postDonation(donation).subscribe({
         next: (donationResponse: Donation) => {
-   
+
           if (this.entrepreneurship) {
             const donationAmount = Number(donationResponse.amount);
             let collect: number = 0;
             collect = this.entrepreneurship.collected ?? 0;
             console.log('Nueva cantidad recaudada:', collect);
-          
+
               collect += donationAmount;
-           
+
             this.entrepreneurship.collected = collect;
 
 
@@ -259,12 +259,12 @@ export class EntrepreneurshipDetailComponent implements OnInit {
   getProgressWidth(goal: number, collected: number): number {
     if (goal <= 0) return 0;
     const progress = (collected / goal) * 100;
-    return Math.min(Math.round(progress), 100); 
+    return Math.min(Math.round(progress), 100);
   }
-  
+
   getProgressColor(goal: number, collected: number): string {
     const progress = this.getProgressWidth(goal, collected);
-    return progress >= 50 ? 'white' : 'black'; 
+    return progress >= 50 ? 'white' : 'black';
   }
 
 

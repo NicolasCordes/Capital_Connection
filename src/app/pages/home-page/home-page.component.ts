@@ -17,8 +17,8 @@ export class HomePageComponent implements OnInit, OnDestroy {
   username = 'invitado';
   private sub?: Subscription;
   entrepreneurships: Entrepreneurship[] = [];
-  currentIndex = 0; 
-  carouselTransform = 'translateX(0)'; 
+  currentIndex = 0;
+  carouselTransform = 'translateX(0)';
 
   constructor(
     private authService: AuthService,
@@ -26,11 +26,11 @@ export class HomePageComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    
-   this.entrepreneurshipService.getEntrepreneurship(0, 9).subscribe({
+
+   this.entrepreneurshipService.getEntrepreneurshipsActives(0, 9).subscribe({
   next: (response) => {
-    this.entrepreneurships = response.content.filter((entrepreneurship: Entrepreneurship) => entrepreneurship.activated === true);
-    
+    this.entrepreneurships = response.content
+
     this.entrepreneurships.forEach(entre => {
       console.log(entre);
     });
@@ -55,14 +55,14 @@ export class HomePageComponent implements OnInit, OnDestroy {
   }
 
   getProgressWidth(goal: number, collected: number): number {
-    if (!goal) return 0; 
-    const progress = Math.min((collected / goal) * 100, 100); 
-    return Math.round(progress); 
+    if (!goal) return 0;
+    const progress = Math.min((collected / goal) * 100, 100);
+    return Math.round(progress);
   }
 
   moveSlider(direction: 'left' | 'right'): void {
     const totalSlides = this.entrepreneurships.length;
-    const slidesVisible = 3; 
+    const slidesVisible = 3;
     if (direction === 'left') {
       this.currentIndex = (this.currentIndex - slidesVisible + totalSlides) % totalSlides;
     } else {
