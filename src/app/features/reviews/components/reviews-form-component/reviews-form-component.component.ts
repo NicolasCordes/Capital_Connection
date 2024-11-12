@@ -51,7 +51,7 @@ export class ReviewsFormComponentComponent implements OnInit{
       const newReview: Review = {
         ...this.reviewForm.value,
         idUser: this.activeUser?.id,
-        idEntrepreneurship: this.entrepreneurship,
+        idEntrepreneurship: this.entrepreneurship?.id,
         username: this.activeUser?.username
       };
 
