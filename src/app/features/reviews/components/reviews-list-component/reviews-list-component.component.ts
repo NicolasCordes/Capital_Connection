@@ -10,13 +10,13 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 @Component({
   selector: 'app-reviews-list-component',
   standalone: true,
-  imports: [CommonModule, ReviewsFormComponentComponent,ReactiveFormsModule],  
+  imports: [CommonModule, ReviewsFormComponentComponent,ReactiveFormsModule],
   templateUrl: './reviews-list-component.component.html',
   styleUrls: ['./reviews-list-component.component.css']
 })
 export class ReviewsListComponentComponent implements OnInit, OnChanges {
   reviews: Review[] = [];
-  averageRating: number = 0;  
+  averageRating: number = 0;
   @Input() id!: number;
   @Input() update!: boolean;
 
@@ -52,10 +52,10 @@ export class ReviewsListComponentComponent implements OnInit, OnChanges {
   }
 
   loadReviews(): void {
-    this.reviewService.getReviewById(this.id).subscribe({
+    this.reviewService.getReviewByEntrepreneurshipId(this.id).subscribe({
       next: (reviews) => {
         this.reviews = reviews;
-        this.calculateAverageRating(); 
+        this.calculateAverageRating();
         console.log('Reseñas cargadas:', reviews);
       },
       error: (err) => {
@@ -85,12 +85,12 @@ export class ReviewsListComponentComponent implements OnInit, OnChanges {
     });
   }
 
-  
+
   deleteReview(idR: number) {
     this.reviewService.deleteReview(idR).subscribe((isDeleted) => {
       if (isDeleted) {
         this.reviews = this.reviews.filter(review => review.id !== idR);
-        this.calculateAverageRating(); 
+        this.calculateAverageRating();
         console.log('Reseña eliminada');
       }
     });

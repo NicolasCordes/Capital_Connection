@@ -15,7 +15,7 @@ import { Entrepreneurship } from '../../../entrepreneurship/models/entrepreneurs
 })
 export class FavoriteListComponent implements OnInit {
   @Input({required: true}) userId!: string | undefined;
-  userFavorites: Entrepreneurship[] = [];  
+  userFavorites: Entrepreneurship[] = [];
   activeUser: ActiveUser | undefined;
   userType: string = 'Guest';
 
@@ -30,7 +30,7 @@ export class FavoriteListComponent implements OnInit {
     });
 
     if(this.userId)
-      this.favoriteListService.getUserFavorites(this.userId).subscribe(favorites => {
+      this.favoriteListService.getUserFavoritesDetails(this.userId).subscribe(favorites => {
         this.userFavorites = favorites.filter((fav: Entrepreneurship) => fav.activated === true);
       });
   }

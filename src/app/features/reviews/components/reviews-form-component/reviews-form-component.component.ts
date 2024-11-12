@@ -10,15 +10,15 @@ import { ActiveUser } from '../../../../auth/types/account-data';
 @Component({
   selector: 'app-reviews-form-component',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],  
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './reviews-form-component.component.html',
   styleUrls: ['./reviews-form-component.component.css']
 })
 export class ReviewsFormComponentComponent implements OnInit{
   @Input() entrepreneurship!: Entrepreneurship | null;
   @Input() editingReview: Review | null = null;
-  @Output() reviewCreated = new EventEmitter<Review>(); 
-  @Output() reviewUpdated = new EventEmitter<Review>(); 
+  @Output() reviewCreated = new EventEmitter<Review>();
+  @Output() reviewUpdated = new EventEmitter<Review>();
   reviewForm: FormGroup;
 
   activeUser: ActiveUser | undefined;
@@ -48,30 +48,13 @@ export class ReviewsFormComponentComponent implements OnInit{
 
   submitReview(): void {
     if (this.reviewForm.valid) {
-      const newReview: Review = { 
+      const newReview: Review = {
         ...this.reviewForm.value,
         idUser: this.activeUser?.id,
-        idEntrepreneurship: this.entrepreneurship?.id || 0,
+        idEntrepreneurship: this.entrepreneurship,
         username: this.activeUser?.username
       };
 
-      if (this.editingReview) {
-        newReview.idEntrepreneurship = this.editingReview.idEntrepreneurship
-        newReview.id = this.editingReview.id; 
-        console.log(newReview);
-
-        this.reviewService.updateReview(this.editingReview.id,newReview).subscribe(
-          (updatedReview) => {
-            console.log(updatedReview);
-
-            this.reviewUpdated.emit(updatedReview);
-            this.reviewForm.reset({ stars: 5 });
-          },
-          (error) => {
-            console.error('Error al actualizar la reseña', error);
-          }
-        );
-      } else {
         this.reviewService.postReview(newReview).subscribe(
           (review) => {
             this.reviewCreated.emit(review);
@@ -83,7 +66,7 @@ export class ReviewsFormComponentComponent implements OnInit{
         );
       }
     }
-  }
+
 
   setRating(value: number): void {
     this.reviewForm.get('stars')?.setValue(value);

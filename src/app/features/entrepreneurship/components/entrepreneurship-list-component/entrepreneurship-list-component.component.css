@@ -69,7 +69,7 @@
   border-radius: 15px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, background-color 0.3s ease;
   display: flex;
   flex-direction: column;
   width: 320px;
@@ -94,9 +94,7 @@
   height: 100%;
   object-fit: contain;
 }
-.imgF{
-  object-fit: cover;
-}
+
 /* Contenido dentro de la card */
 .card-content {
   padding: 20px;
@@ -104,6 +102,7 @@
   flex-direction: column;
   justify-content: space-between;
   flex-grow: 1;
+
 }
 
 .card-content h3,

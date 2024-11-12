@@ -48,10 +48,26 @@ p {
   margin-top: 20px;
 }
 
+/* Hover efecto */
 .follow-btn:hover {
   background-color: #b3d9e6;
   color: #3399bb;
   border-color: #3399bb;
+}
+
+/* Estado deshabilitado */
+.follow-btn:disabled {
+  background-color: #cccccc; /* Fondo gris */
+  color: #999999; /* Texto gris */
+  border-color: #999999; /* Borde gris */
+  cursor: not-allowed; /* Cursor no permitido */
+}
+
+/* Remover hover cuando está deshabilitado */
+.follow-btn:disabled:hover {
+  background-color: #cccccc;
+  color: #999999;
+  border-color: #999999;
 }
 
 .follow-btn:focus {
@@ -261,5 +277,31 @@ p {
   .carousel-arrow {
     font-size: 2rem;
     padding: 10px;
+  }
+}
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Esto asegura que el spinner esté centrado incluso si el contenido es poco */
+  width: 100%; /* Asegura que ocupe todo el ancho disponible */
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 5px solid rgba(0, 0, 0, 0.1);
+  border-top-color: #3498db; /* Cambia el color aquí */
+  border-radius: 50%;
+  animation: spin 1.5s linear infinite;
+}
+
+/* Animación para girar el spinner */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

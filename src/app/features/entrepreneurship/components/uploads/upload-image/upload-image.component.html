@@ -15,20 +15,6 @@
   </mat-form-field>
 
   <!-- Aseguramos que imageControl.value no sea null antes de verificar su longitud -->
-  <div *ngIf="imageControl.value && imageControl.value.length > 0">
-    <h3>Imágenes seleccionadas:</h3>
-    <div *ngFor="let file of imageControl.value; let i = index" class="image-preview">
-      <button
-        type="button"
-        class="remove-image"
-        (click)="removeFile(i)"
-        *ngIf="!emitido"
-        aria-label="Eliminar imagen"
-      >
-        Eliminar
-      </button>
-    </div>
-  </div>
 
   <div *ngIf="isUploading" class="isUploading">Cargando imágenes...</div>
 

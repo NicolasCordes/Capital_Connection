@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Entrepreneurship } from '../../entrepreneurship/models/entrepreneurship.model';
-import { forkJoin, Observable, of, switchMap } from 'rxjs';
+import { BehaviorSubject, forkJoin, Observable, of, switchMap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -8,40 +8,55 @@ import { HttpClient } from '@angular/common/http';
 })
 export class FavoriteListService {
   private baseUrl2 = 'http://localhost:8080';
-  private baseUrl = 'http://localhost:3000'; 
+  private baseUrl = 'http://localhost:3000';
+  private favoritesSubject: BehaviorSubject<number[]> = new BehaviorSubject<number[]>([]);
 
   constructor(private http: HttpClient) {}
 
-  addFavorite(userId: string, entrepreneurshipId: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/accounts/${userId}`).pipe(
-      switchMap(user => {
-        if (user.favorites && user.favorites.includes(entrepreneurshipId)) {
-          return of(null);
-        }
-
-        const updatedFavorites = [...user.favorites, entrepreneurshipId];
-        return this.http.put(`${this.baseUrl}/accounts/${userId}`, { ...user, favorites: updatedFavorites });
-      })
-    );
+  initializeFavorites(userId: string): void {
+    this.http.get<any>(`${this.baseUrl}/accounts/${userId}`).subscribe(user => {
+      this.favoritesSubject.next(user.favorites || []);
+    });
   }
 
-  getUserFavorites(userId: string): Observable<Entrepreneurship[]> {
-    return this.http.get<any>(`${this.baseUrl}/accounts/${userId}`).pipe(
-      switchMap(user => {
-        if (user.favorites && user.favorites.length > 0) {
-            const requests: Observable<Entrepreneurship>[] = user.favorites.map((favId: number) =>
-            this.http.get<Entrepreneurship>(`${this.baseUrl2}/entrepreneurships/${favId}`)
-            );
+  get favorites$(): Observable<number[]> {
+    return this.favoritesSubject.asObservable();
+  }
 
+  isFavorite(entrepreneurshipId: number): boolean {
+    return this.favoritesSubject.getValue().includes(entrepreneurshipId);
+  }
+
+  addFavorite(userId: string, entrepreneurshipId: number): Observable<any> {
+    const currentFavorites = this.favoritesSubject.getValue();
+    if (!currentFavorites.includes(entrepreneurshipId)) {
+      const updatedFavorites = [...currentFavorites, entrepreneurshipId];
+      this.favoritesSubject.next(updatedFavorites);
+      return this.http.put(`${this.baseUrl}/accounts/${userId}`, { favorites: updatedFavorites });
+    }
+    return of(null); // Si ya está en favoritos, no hacer nada
+  }
+
+  removeFavorite(userId: string, entrepreneurshipId: number): Observable<any> {
+    const currentFavorites = this.favoritesSubject.getValue();
+    if (currentFavorites.includes(entrepreneurshipId)) {
+      const updatedFavorites = currentFavorites.filter(favId => favId !== entrepreneurshipId);
+      this.favoritesSubject.next(updatedFavorites);
+      return this.http.put(`${this.baseUrl}/accounts/${userId}`, { favorites: updatedFavorites });
+    }
+    return of(null); // Si no está en favoritos, no hacer nada
+  }
+
+  getUserFavoritesDetails(userId: string): Observable<Entrepreneurship[]> {
+    return this.favorites$.pipe(
+      switchMap(favoriteIds => {
+        if (favoriteIds.length > 0) {
+          const requests = favoriteIds.map(id => this.http.get<Entrepreneurship>(`${this.baseUrl2}/entrepreneurships/${id}`));
           return forkJoin(requests);
         } else {
-          return new Observable<Entrepreneurship[]>(observer => observer.next([]));
+          return of([]); // Si no hay favoritos, devolver un array vacío
         }
       })
     );
-  }
-
-  getEntrepreneurshipById(id: number): Observable<Entrepreneurship> {
-    return this.http.get<Entrepreneurship>(`${this.baseUrl}/entrepreneurships/${id}`);
   }
 }

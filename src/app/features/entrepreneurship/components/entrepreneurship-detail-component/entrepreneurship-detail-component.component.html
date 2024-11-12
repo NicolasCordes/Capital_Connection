@@ -1,4 +1,9 @@
-<div *ngIf="entrepreneurship as currentEntrepreneurship">
+<div *ngIf="isLoading" class="loading-container">
+  <div class="spinner"></div>
+</div>
+
+<div *ngIf="!isLoading">
+  <div *ngIf="entrepreneurship as currentEntrepreneurship">
   <!-- Título principal -->
   <div class="header">
     <h2>{{ currentEntrepreneurship.name }}</h2>
@@ -15,7 +20,7 @@
         class="progress-bar-text"
         [style.color]="getProgressColor(entrepreneurship.goal, (entrepreneurship.collected || 0) - 1)"
       >
-        {{ getProgressWidth(entrepreneurship.goal, (entrepreneurship.collected || 0) - 1) }}%
+        {{ getProgressWidth(entrepreneurship.goal, (entrepreneurship.collected || 0)- 1) }}%
       </div>
     </div>
   <!-- Contenedor principal con Slider a la izquierda y Detalles a la derecha -->
@@ -55,9 +60,16 @@
     </div>
 
      <!-- Botón de agregar a favoritos -->
-<button mat-button class="follow-btn" (click)="addToFavorites()" [disabled]="userType === 'Guest'">
-  Agregar a Favoritos
-</button>
+      @if(!isFavorite){
+        <button mat-button class="follow-btn" (click)="addToFavorites()" [disabled]="userType === 'Guest'">
+          Agregar a Favoritos
+        </button>
+      }@else {
+        <button mat-button class="follow-btn" (click)="DeleteFavorites()" [disabled]="userType === 'Guest'">
+          Eliminar de Favoritos
+        </button>
+      }
+
 
     <!-- Formulario de Reseña -->
     <div class="reviews-title">
@@ -75,4 +87,5 @@
       <app-reviews-list-component [id]="currentEntrepreneurship.id || 0" [update]="update"></app-reviews-list-component>
     </div>
 
+  </div>
 </div>

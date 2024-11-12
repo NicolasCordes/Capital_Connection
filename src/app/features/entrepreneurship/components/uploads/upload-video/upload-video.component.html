@@ -15,21 +15,7 @@
   </mat-form-field>
 
   <!-- Aseguramos que videoControl.value no sea null antes de verificar su longitud -->
-  <div *ngIf="videoControl.value && videoControl.value.length > 0">
-    <h3>Videos seleccionados:</h3>
-    <div *ngFor="let file of videoControl.value; let i = index" class="video-preview">
-      <span>{{ file.name }} ({{ file.type }})</span>
-      <button
-        type="button"
-        class="remove-video"
-        (click)="removeFile(i)"
-        *ngIf="!emitido"
-        aria-label="Eliminar video"
-      >
-        Eliminar
-      </button>
-    </div>
-  </div>
+
 
   <div *ngIf="isUploading" class="isUploading">Cargando video...</div>
 

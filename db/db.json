@@ -61,24 +61,10 @@
       "favorites": []
     },
     {
-      "id": "87c5",
-      "username": "julipelle",
-      "password": "Y3P6pvPTdDo56c9jb/qkM5Ot2vn/Zz8IUh26oK84k7I=",
-      "email": "pellegrinijulian@gmail.com",
-      "name": "Julian",
-      "surname": "Pellegrini",
-      "dateOfBirth": "2004-12-14",
-      "yearsOfExperience": 2,
-      "industry": "alimentacion",
-      "wallet": 0,
-      "address": {
-        "street": "Don bosco",
-        "number": 1800,
-        "locality": "Mar del plata",
-        "province": "Buenos Aires",
-        "type": "Home"
-      },
-      "favorites": []
+      "favorites": [
+        2
+      ],
+      "id": "87c5"
     }
   ],
   "users": [],
