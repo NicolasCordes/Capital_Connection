@@ -1,20 +1,21 @@
-import { Component, inject, OnInit } from '@angular/core'; 
-import { AuthService } from '../../../auth/services/service.service';
-import { ActiveUser } from '../../../auth/types/account-data';
-import { Entrepreneurship } from '../../entrepreneurship/models/entrepreneurship.model';
-import { DonationService } from '../../donation/services/donation.service';
-import { EntrepreneurshipService } from '../../entrepreneurship/services/entrepreneurship.service';
-import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
-import { Donation } from '../../donation/models/donation.model';
+import { CommonModule } from "@angular/common";
+import { Component, OnInit, inject } from "@angular/core";
+import { Router } from "@angular/router";
+import { AuthService } from "../../../services/auth.service";
+import { DonationService } from "../../../services/donation.service";
+import { EntrepreneurshipService } from "../../../services/entrepreneurship.service";
+import { ActiveUser } from "../../../types/account-data";
+import { Donation } from "../../../types/donation.model";
+import { Entrepreneurship } from "../../../types/entrepreneurship.model";
+import { DonationListComponent } from "../../donation/components/donation-list/donation-list.component";
 import { FavoriteListComponent } from "../../favorite-list/components/list-favorite/favorite-list.component";
-import { DonationPageComponent } from '../../../pages/donation-page/donation-page.component';
-import { EntrepreneurshipsUpdatesComponent } from '../../entrepreneurship/components/entrepreneurships-updates/entrepreneurships-updates.component';
+import { EntrepreneurshipsUpdatesComponent } from "../../entrepreneurship/components/entrepreneurships-updates/entrepreneurships-updates.component";
+
 
 @Component({
   selector: 'app-profile-list',
   standalone: true,
-  imports: [CommonModule, FavoriteListComponent,DonationPageComponent,EntrepreneurshipsUpdatesComponent],
+  imports: [CommonModule, FavoriteListComponent,DonationListComponent,EntrepreneurshipsUpdatesComponent],
   templateUrl: './profile-list.component.html',
   styleUrls: ['./profile-list.component.css']
 })
@@ -23,8 +24,8 @@ export class ProfileListComponent implements OnInit {
   activeUser: ActiveUser | undefined;
   donateds: Donation[] = [];
   donatedEntrepreneurships: Entrepreneurship[] = [];
-  createdEntrepreneurships: Entrepreneurship[] = []; 
-  currentSection: string = ''; 
+  createdEntrepreneurships: Entrepreneurship[] = [];
+  currentSection: string = '';
   favorites: boolean = false;
   donations: boolean = false;
   myentre: boolean = false;
@@ -41,7 +42,7 @@ export class ProfileListComponent implements OnInit {
     });
   }
 
- 
+
 
 
   navigateToDetails(id: number | undefined): void {
@@ -50,10 +51,10 @@ export class ProfileListComponent implements OnInit {
     }
   }
 
- 
+
 goToDonations(): void {
   if(this.donations === false){
-   
+
     this.donations = true;
     console.log(this.donations);
   }else{
@@ -63,7 +64,7 @@ goToDonations(): void {
   this.myentre = false;
 
 }
-  
+
   goToFavorites(): void {
     if(this.favorites === false){
       console.log(this.favorites);

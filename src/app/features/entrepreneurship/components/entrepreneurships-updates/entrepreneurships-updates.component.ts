@@ -1,13 +1,13 @@
   import { Component, inject, OnInit } from '@angular/core';
-  import { EntrepreneurshipService } from '../../services/entrepreneurship.service';
   import { ActivatedRoute, Router } from '@angular/router';
-  import { Entrepreneurship } from '../../models/entrepreneurship.model';
   import { AbstractControl, FormArray, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-  import { AuthService } from '../../../../auth/services/service.service';
+  import { AuthService } from '../../../../services/auth.service';
   import { CommonModule } from '@angular/common';
-  import { ActiveUser } from '../../../../auth/types/account-data';
+  import { ActiveUser } from '../../../../types/account-data';
   import { UploadVideoComponent } from "../uploads/upload-video/upload-video.component";
   import { UploadImageComponent } from "../uploads/upload-image/upload-image.component";
+  import { EntrepreneurshipService } from '../../../../services/entrepreneurship.service';
+import { Entrepreneurship } from '../../../../types/entrepreneurship.model';
 
   @Component({
     selector: 'app-entrepreneurships-updates',

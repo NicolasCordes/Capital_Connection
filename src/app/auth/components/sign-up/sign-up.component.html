@@ -5,9 +5,14 @@
     <section class="form-group">
       <label for="email">Correo electrónico</label>
       <input type="text" id="email" formControlName="email" class="input-field">
+
       @if (form.controls['email'].touched) {
-        <span *ngIf="form.controls['email'].hasError('required')" class="error-msg">El email es obligatorio</span>
-        <span *ngIf="form.controls['email'].hasError('email')" class="error-msg">El email no es válido</span>
+        @if (form.controls['email'].hasError('required')) {
+          <span class="error-msg">El email es obligatorio</span>
+        }
+        @if (form.controls['email'].hasError('email')) {
+          <span class="error-msg">El email no es válido</span>
+        }
       }
     </section>
 
@@ -37,7 +42,11 @@
 
     <section class="form-group">
       <label for="password">Contraseña</label>
-      <input type="password" id="password" formControlName="password" class="input-field">
+      <input #password type="password" id="password" formControlName="password" class="input-field">
+      <button type="button" (click)="onRevealPassword(password)" class="reveal-btn">
+        👁️
+      </button>
+
 
       @if (form.controls['password'].hasError('required') && (form.controls['password'].touched || submitPress)) {
         <div class="error-msg">

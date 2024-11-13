@@ -1,0 +1,91 @@
+<div *ngIf="isLoading" class="loading-container">
+  <div class="spinner"></div>
+</div>
+
+<div *ngIf="!isLoading">
+  <div *ngIf="entrepreneurship as currentEntrepreneurship">
+  <!-- Título principal -->
+  <div class="header">
+    <h2>{{ currentEntrepreneurship.name }}</h2>
+
+    </div>
+  </div>
+  <div *ngIf="entrepreneurship as currentEntrepreneurship">
+    <div class="progress-bar-container">
+      <div
+        class="progress-bar"
+        [style.width]="getProgressWidth(entrepreneurship.goal, (entrepreneurship.collected || 0) - 1) + '%'"
+      ></div>
+      <div
+        class="progress-bar-text"
+        [style.color]="getProgressColor(entrepreneurship.goal, (entrepreneurship.collected || 0) - 1)"
+      >
+        {{ getProgressWidth(entrepreneurship.goal, (entrepreneurship.collected || 0)- 1) }}%
+      </div>
+    </div>
+  <!-- Contenedor principal con Slider a la izquierda y Detalles a la derecha -->
+  <div class="content">
+    <div class="entrepreneurship-wrapper">
+      <!-- Carrusel de imágenes y videos a la izquierda -->
+      <div class="carousel-container">
+        <div class="carousel-slide">
+          <ng-container *ngIf="isImage(combinedMediaArray[currentIndex])">
+            <img [src]="combinedMediaArray[currentIndex]" alt="media" class="carousel-media">
+          </ng-container>
+
+          <ng-container *ngIf="isVideo(combinedMediaArray[currentIndex])">
+            <video [src]="combinedMediaArray[currentIndex]" controls class="carousel-media"></video>
+          </ng-container>
+        </div>
+
+        <!-- Flechas de navegación fuera del contenedor del carrusel -->
+        <div class="carousel-arrows">
+          <div class="carousel-arrow carousel-arrow-left" (click)="previousSlide()">&lt;</div>
+          <div class="carousel-arrow carousel-arrow-right" (click)="nextSlide()">&gt;</div>
+        </div>
+      </div>
+
+      <!-- Detalles del emprendimiento a la derecha -->
+      <div class="entrepreneurship-details">
+        <p><strong>Descripción:</strong> {{ currentEntrepreneurship.description }}</p>
+        <p><strong>Objetivo Financiero:</strong> {{ currentEntrepreneurship.goal | currency }}</p>
+        <p><strong>Categoría:</strong> {{ currentEntrepreneurship.category }}</p>
+
+        <!-- Donaciones -->
+        <div class="donations">
+          <h3 style="color: black;">Agregar Donación</h3>
+          <app-donation-form (donationAdded)="onDonationAdded($event)"></app-donation-form>
+        </div>
+      </div>
+    </div>
+
+     <!-- Botón de agregar a favoritos -->
+      @if(!isFavorite){
+        <button mat-button class="follow-btn" (click)="addToFavorites()" [disabled]="userType === 'Guest'">
+          Agregar a Favoritos
+        </button>
+      }@else {
+        <button mat-button class="follow-btn" (click)="DeleteFavorites()" [disabled]="userType === 'Guest'">
+          Eliminar de Favoritos
+        </button>
+      }
+
+
+    <!-- Formulario de Reseña -->
+    <div class="reviews-title">
+      <h3 style="color: black;">Agregar una Reseña</h3>
+    </div>
+    <div class="reviews-form">
+      <app-reviews-form (reviewCreated)="addReview($event)" [entrepreneurship]="currentEntrepreneurship"></app-reviews-form>
+    </div>
+
+    <!-- Reseñas del emprendimiento -->
+    <div class="reviews-title">
+      <h3 style="color: black;">Reseñas</h3>
+    </div>
+    <div class="reviews">
+      <app-reviews-list [id]="currentEntrepreneurship.id || 0" [update]="update"></app-reviews-list>
+    </div>
+
+  </div>
+</div>

@@ -1,11 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { AccountData } from '../../types/account-data';
-import { AuthService } from '../../services/service.service';
+import { AccountData } from '../../../types/account-data';
 import { CommonModule } from '@angular/common';
-import { Address } from '../../../features/user/models/address.model';
+import { Address } from '../../../types/address.model';
 import { AddressFormComponent } from "../../../features/user/address-form/address-form.component";
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -89,8 +89,13 @@ export class SignupComponent {
     });
   }
 
+
   onRevealPassword(pwInput: HTMLInputElement) {
-    pwInput.type = pwInput.type === 'password' ? 'text' : 'password';
+    if (pwInput.type == 'password') {
+      pwInput.type = 'text';
+    } else {
+      pwInput.type = 'password';
+    }
   }
 
   updateAddress(address: Address) {

@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { filter, map, Subscription } from 'rxjs';
-import { AuthService } from '../../auth/services/service.service';
-import { EntrepreneurshipService } from '../../features/entrepreneurship/services/entrepreneurship.service';
-import { Entrepreneurship } from '../../features/entrepreneurship/models/entrepreneurship.model';
+import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { EntrepreneurshipService } from '../../services/entrepreneurship.service';
+import { Entrepreneurship } from '../../types/entrepreneurship.model';
 
 @Component({
   selector: 'app-home-page',

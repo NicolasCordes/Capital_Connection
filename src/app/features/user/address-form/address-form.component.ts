@@ -2,7 +2,7 @@ import { CommonModule } from "@angular/common";
 import { Component, Output, EventEmitter, OnInit } from "@angular/core";
 import { ReactiveFormsModule, FormBuilder, Validators } from "@angular/forms";
 import { RouterModule } from "@angular/router";
-import { Address } from "../models/address.model";
+import { Address } from "../../../types/address.model";
 
 @Component({
   selector: 'app-address-form',
@@ -39,7 +39,7 @@ export class AddressFormComponent implements OnInit {
         province: formValue.province || '',
         type: formValue.type || ''
       };
-      this.address.emit(address);  
+      this.address.emit(address);
     }
   }
 }

@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { AuthService } from '../../auth/services/service.service';
+import { RouterModule } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
-import { ActiveUser } from '../../auth/types/account-data';
+import { ActiveUser } from '../../types/account-data';
 
 @Component({
   selector: 'app-navbar',

@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
-import { MediaUploadService } from '../../../services/media-upload.service';
+import { MediaUploadService } from '../../../../../services/media-upload.service';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -20,14 +20,14 @@ export class UploadVideoComponent {
   @Output() videosUploaded = new EventEmitter<string[]>();
   cargado=false;
   videoControl: FormControl;
-  videoForm: FormGroup; 
+  videoForm: FormGroup;
   isUploading = false;
   emitido = false;
 
   constructor(
     private fb: FormBuilder,
     private mediaUploadService: MediaUploadService,
-    private cdr: ChangeDetectorRef  
+    private cdr: ChangeDetectorRef
 
   ) {
     this.videoControl = new FormControl([]);
@@ -52,33 +52,33 @@ export class UploadVideoComponent {
   }
 
   resetFileInput(inputElement: HTMLInputElement) {
-    inputElement.value = ''; 
+    inputElement.value = '';
   }
 
   removeFile(index: number): void {
     const currentFiles = this.videoControl.value;
-    currentFiles.splice(index, 1); 
-    this.videoControl.setValue([...currentFiles]); 
+    currentFiles.splice(index, 1);
+    this.videoControl.setValue([...currentFiles]);
   }
 
   uploadVideo(): void {
     const form = this.videoForm.getRawValue();
-    
+
     if (!form?.videoControl || form.videoControl.length === 0) {
       console.log("No se seleccionaron videos.");
       return;
     }
-  
+
     const videoFiles = form.videoControl as File[];
     const uploadedVideoUrls: string[] = [];
-  
+
     this.isUploading = true;
     const uploadPromises = videoFiles.map((file: File) => {
       const formData = new FormData();
       formData.append('file', file);
       formData.append('upload_preset', 'capital-connection-preset');
       formData.append('cloud_name', 'dyho1ydzl');
-  
+
       return new Promise<void>((resolve, reject) => {
         this.emitido = true;
         this.mediaUploadService.uploadVideo(formData).subscribe({
@@ -93,7 +93,7 @@ export class UploadVideoComponent {
         });
       });
     });
-  
+
     Promise.all(uploadPromises)
       .then(() => {
         this.isUploading = false;
@@ -112,5 +112,5 @@ export class UploadVideoComponent {
         this.emitido = false;
       });
   }
-  
+
 }

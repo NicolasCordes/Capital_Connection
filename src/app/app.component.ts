@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './shared/navbar/navbar.component';
-import { AuthService } from './auth/services/service.service';
-import { ActiveUser } from './auth/types/account-data';
+import { AuthService } from './services/auth.service';
+import { ActiveUser } from './types/account-data';
 
 @Component({
   selector: 'app-root',

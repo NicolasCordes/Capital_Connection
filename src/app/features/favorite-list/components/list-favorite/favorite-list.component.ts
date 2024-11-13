@@ -1,10 +1,10 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { FavoriteListService } from '../../services/favorite-list.service';
-import { AuthService } from '../../../../auth/services/service.service';
-import { ActiveUser } from '../../../../auth/types/account-data';
-import { Entrepreneurship } from '../../../entrepreneurship/models/entrepreneurship.model';
+import { AuthService } from '../../../../services/auth.service';
+import { ActiveUser } from '../../../../types/account-data';
+import { FavoriteListService } from '../../../../services/favorite-list.service';
+import { Entrepreneurship } from '../../../../types/entrepreneurship.model';
 
 @Component({
   selector: 'app-favorite-list',

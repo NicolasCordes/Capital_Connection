@@ -7,8 +7,7 @@ import { DropzoneCdkModule } from '@ngx-dropzone/cdk';
 import { DropzoneMaterialModule } from '@ngx-dropzone/material';
 import { MatChipsModule } from '@angular/material/chips';
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { EntrepreneurshipService } from '../../../services/entrepreneurship.service';
-import { MediaUploadService } from '../../../services/media-upload.service';
+import { MediaUploadService } from '../../../../../services/media-upload.service';
 
 
 @Component({
@@ -29,7 +28,7 @@ export class UploadImageComponent {
   constructor(
     private fb: FormBuilder,
     private mediaUploadService: MediaUploadService,
-    private cdr: ChangeDetectorRef 
+    private cdr: ChangeDetectorRef
   ) {
     this.imageControl = new FormControl([]);
     this.imageForm = this.fb.group({
@@ -52,12 +51,12 @@ export class UploadImageComponent {
   }
 
   resetFileInput(inputElement: HTMLInputElement) {
-    inputElement.value = ''; 
+    inputElement.value = '';
   }
 
   removeFile(index: number): void {
     const currentFiles = this.imageControl.value;
-    currentFiles.splice(index, 1); 
+    currentFiles.splice(index, 1);
     this.imageControl.setValue([...currentFiles]);
   }
 
@@ -66,7 +65,7 @@ export class UploadImageComponent {
 
     if (!form?.imageControl || form.imageControl.length === 0) {
       console.log("No se seleccionaron imágenes.");
-      return; 
+      return;
     }
 
     const imageFiles = form.imageControl as File[];
