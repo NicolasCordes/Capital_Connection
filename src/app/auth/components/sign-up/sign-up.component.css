@@ -49,9 +49,6 @@
   margin: 0;
 }
 
-.input-field[type=number] {
-  -moz-appearance: textfield; /* Para Firefox */
-}
 
 /* Mensajes de error */
 .error-msg {

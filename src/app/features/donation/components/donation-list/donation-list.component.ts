@@ -22,7 +22,6 @@ export class DonationListComponent implements OnInit {
   activeUser: ActiveUser | undefined;
   donateds: Donation[] = [];
   donatedEntrepreneurships: Entrepreneurship[] = [];
-  createdEntrepreneurships: Entrepreneurship[] = []; // Nueva propiedad para los emprendimientos creados por el usuario
 
   authService = inject(AuthService);
   donationService = inject(DonationService);

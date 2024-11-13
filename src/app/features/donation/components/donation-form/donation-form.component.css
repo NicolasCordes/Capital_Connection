@@ -24,9 +24,6 @@ form {
     font-size: 1rem;
   }
   
-  input[type="number"], input[type="date"] {
-    -moz-appearance: textfield;
-  }
   
   button {
     width: 100%;

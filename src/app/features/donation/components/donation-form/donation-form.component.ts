@@ -13,23 +13,24 @@ import { DonationService } from '../../../../services/donation.service';
   styleUrl: './donation-form.component.css'
 })
 export class DonationFormComponent implements OnInit{
-
+  @Output() donationAdded: EventEmitter<Donation> = new EventEmitter();
   activeUser: ActiveUser | undefined;
   userType: string = 'Guest';
   authService= inject(AuthService)
 
   ngOnInit(): void {
-    this.authService.auth().subscribe((user) => {
+    this.authService.auth().subscribe({
+      next:(user: ActiveUser | undefined) => {
       this.activeUser = user;
       this.userType = user ? 'Registered User' : 'Guest';
-    });
+    }, error:(e:Error)=>{
+      console.log(e.message);
+    }});
   }
   donationForm = this.fb.group({
     amount: [0, [Validators.required, Validators.min(1)]],
 
   });
-
-  @Output() donationAdded: EventEmitter<Donation> = new EventEmitter();
 
   constructor(private fb: FormBuilder, private donationService: DonationService) {}
 
@@ -42,12 +43,8 @@ export class DonationFormComponent implements OnInit{
         idUser: this.activeUser?.id
       };
 
-
-
         this.donationAdded.emit(newDonation);
-
         this.donationForm.reset();
-
     }
   }
 }

@@ -1,4 +1,3 @@
-
 export interface Entrepreneurship {
   id?: number;
   idUser: string;

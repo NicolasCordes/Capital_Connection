@@ -63,26 +63,19 @@ export class EntrepreneurshipDetailComponent implements OnInit {
     this.authService.auth().subscribe((user) => {
       this.activeUser = user;
       this.userType = user ? 'Registered User' : 'Guest';
+      if (this.userType === 'Registered User' && this.activeUser?.id) {
+        this.userId = this.activeUser.id;
+        this.favoriteListService.initializeFavorites(this.activeUser.id);
 
-      if (this.userType === 'Registered User') {
-        if (this.activeUser?.id) {
-          this.userId = this.activeUser.id;
+        this.favoriteListService.favorites$.subscribe((favorites) => {
+          this.isFavorite = favorites.includes(this.id);
 
-                  setTimeout(() => {
-            if(this.activeUser?.id)
-            this.favoriteListService.getUserFavoritesDetails(this.activeUser.id).subscribe((favorites) => {
-              this.isFavorite = favorites.some(fav => fav.id === this.id);
-              this.isLoading = false
-              window.scrollTo(0, 0);
-            });
-          }, 1000);
-        }
+          window.scrollTo(0, 0);
+        });
+        this.isLoading = false;
       } else {
-        // Si no es un usuario registrado, también desactivar el spinner
         this.isLoading = false;
         window.scrollTo(0, 0);
-
-
       }
     });
 
@@ -205,42 +198,39 @@ export class EntrepreneurshipDetailComponent implements OnInit {
     }
   }
 
-    addToFavorites(): void {
+  addToFavorites(): void {
+    if (this.activeUser) {
+      const userId = this.activeUser.id;
+      this.favoriteListService.addFavorite(userId, this.id).subscribe({
+        next:(response) => {
+          this.isFavorite = true; // Aquí puedes actualizar isFavorite directamente
 
-      if (this.activeUser) {
-        const userId = this.activeUser.id;
-        this.favoriteListService.addFavorite(userId, this.id)
-          .subscribe(
-            response => {
-              this.isFavorite=true;
-            },
-            error => {
-              console.error('Error al agregar a favoritos', error);
-            }
-          );
-      } else {
-        console.error('El usuario no está autenticado.');
-      }
+        },error:(error:Error) => {
+          console.error('Error al agregar a favoritos', error);
+        }}
+      );
+    } else{
+      console.log('Usuario no autorizado');
     }
+  }
 
-    DeleteFavorites():void{
-
-      if (this.activeUser) {
-        const userId = this.activeUser.id;
-        this.favoriteListService.removeFavorite(userId, this.id)
-          .subscribe({
-            next:() => {
-              this.isFavorite=false;
-            },
-            error:(error:Error) => {
-              console.error('Error al eliminar de favoritos', error);
-            }
-          }
-          );
-      } else {
-        console.error('El usuario no está autenticado.');
-      }
+  DeleteFavorites(): void {
+    if (this.activeUser) {
+      const userId = this.activeUser.id;
+      this.favoriteListService.removeFavorite(userId, this.id).subscribe(
+        () => {
+          this.isFavorite = false; // Actualiza el estado de isFavorite
+        },
+        error => {
+          console.error('Error al eliminar de favoritos', error);
+        }
+      );
+    } else {
+      console.error('El usuario no está autenticado.');
     }
+  }
+
+  
 
   onDonationAdded(donation: Donation): void {
     if (this.entrepreneurship?.id) {
