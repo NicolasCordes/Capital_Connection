@@ -59,3 +59,47 @@ h3 {
 .address-form select.form-control:focus {
   border-color: #007bff;
 }
+
+.select-container {
+  position: relative;
+  width: 100%;
+}
+
+.select-container select {
+  width: 100%;
+  padding: 10px 40px 10px 10px; /* Espacio para la flecha */
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  appearance: none;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.select-container select:focus {
+  border-color: #007bff;
+}
+
+.select-arrow {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #333; /* Flecha hacia abajo */
+  pointer-events: none; /* Asegura que la flecha no interfiera con la selección */
+}
+
+/* Para cambiar el color o agregar un efecto cuando el select está deshabilitado o no es válido */
+.select-container select:disabled,
+.select-container select:invalid {
+  background-color: #f5f5f5;
+  color: #aaa;
+  cursor: not-allowed;
+}

@@ -13,6 +13,8 @@ import { ActiveUser } from '../../auth/types/account-data';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent implements OnInit {
+
+
   activeUser: ActiveUser | undefined;
 
   constructor(private authService: AuthService) {}

@@ -59,26 +59,19 @@
   background-color: #43a047;
 }
 
-/* Responsive design */
-@media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .navbar-menu {
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
-  }
-
-  .navbar-logo img {
-    margin-bottom: 10px;
-  }
-
-  .add-button {
-    align-self: center;
-    width: 100%;
-    margin-top: 10px;
-  }
+/* Botón del menú para móvil */
+.navbar-toggle {
+  display: none;  /* No se muestra en pantallas grandes */
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }
+
+.navbar-toggle-icon {
+  width: 30px;
+  height: 3px;
+  background-color: #fff;
+  margin: 6px auto;
+  transition: transform 0.3s ease;
+}
+

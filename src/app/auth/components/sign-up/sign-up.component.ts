@@ -16,11 +16,16 @@ import { AddressFormComponent } from "../../../features/user/address-form/addres
 })
 export class SignupComponent {
 
+  submitPress = false;
   private formBuilder = inject(FormBuilder);
 
   form = this.formBuilder.group({
     username: ['', [Validators.required, Validators.minLength(4)]],
-    password: ['', [Validators.required, Validators.minLength(6)]],
+    password: ['', [
+      Validators.required,
+      Validators.minLength(8),
+      Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).+$/)
+    ]],
     email: ['', [Validators.required, Validators.email]],
     name: ['', Validators.required],
     surname: ['', Validators.required],
@@ -28,7 +33,7 @@ export class SignupComponent {
     yearsOfExperience: [0, [Validators.required, Validators.min(0)]],
     industry: ['', Validators.required],
     wallet: [{ value: 0, disabled: true }],
-  
+
     address: this.formBuilder.group({
       street: ['', Validators.required],
       number: [0, Validators.required],
@@ -39,15 +44,15 @@ export class SignupComponent {
   });
 
   constructor(private authService: AuthService, private router: Router) { }
- 
+
   ageValidator(control: any): { [key: string]: boolean } | null {
     const birthDate = new Date(control.value);
     const currentDate = new Date();
-    
+
     // Calcular la edad
     let age = currentDate.getFullYear() - birthDate.getFullYear();
     const monthDifference = currentDate.getMonth() - birthDate.getMonth();
-    
+
     // Si la fecha de nacimiento aún no ha llegado este año, restar un año
     if (monthDifference < 0 || (monthDifference === 0 && currentDate.getDate() < birthDate.getDate())) {
       age--;
@@ -62,14 +67,13 @@ export class SignupComponent {
   }
 
   onSubmit() {
+    this.submitPress=true;
     if (this.form.invalid) return;
-
-
 
     const user = {
       ...this.form.getRawValue(),
-      wallet: 0, 
-      favorites: [] 
+      wallet: 0,
+      favorites: []
     } as AccountData;
 
     this.authService.signup(user).subscribe({

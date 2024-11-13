@@ -32,28 +32,25 @@
   color: #444;
 }
 
-/* Campos de entrada */
 .input-field {
-  padding: 0.8rem;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
   border-radius: 5px;
-  border: 1px solid #ddd;
-  font-size: 1rem;
-  color: #333;
-  transition: border-color 0.3s;
+  appearance: none; /* Elimina los botones de incremento y decremento */
+  -webkit-appearance: none; /* Elimina en navegadores basados en WebKit (como Safari y Chrome) */
+  -moz-appearance: textfield; /* Elimina en Firefox */
 }
 
-/* Ajuste del campo de selección (select) */
-select.input-field {
-  appearance: none;
-  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23333' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") no-repeat right 0.75rem center;
-  background-size: 0.65em auto;
-  padding-right: 2rem; /* Espacio para el icono */
+.input-field::-webkit-outer-spin-button,
+.input-field::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
-/* Efecto de enfoque (focus) en campos de entrada */
-.input-field:focus {
-  border-color: #007bff;
-  outline: none;
+.input-field[type=number] {
+  -moz-appearance: textfield; /* Para Firefox */
 }
 
 /* Mensajes de error */
@@ -100,3 +97,53 @@ fieldset {
   padding: 0;
 }
 
+.select-container {
+  position: relative;
+  width: 100%;
+}
+
+.select-container select {
+  width: 100%;
+  padding: 10px 40px 10px 10px; /* Espacio para la flecha */
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  appearance: none;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.select-container select:focus {
+  border-color: #007bff;
+}
+
+.select-arrow {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #333; /* Flecha hacia abajo */
+  pointer-events: none; /* Asegura que la flecha no interfiera con la selección */
+}
+
+/* Para cambiar el color o agregar un efecto cuando el select está deshabilitado o no es válido */
+.select-container select:disabled,
+.select-container select:invalid {
+  background-color: #f5f5f5;
+  color: #aaa;
+  cursor: not-allowed;
+}
+
+/* Estilo del mensaje de error */
+.error-msg {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}

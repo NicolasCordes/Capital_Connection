@@ -1,12 +1,10 @@
-import { Entrepreneurship } from "../../entrepreneurship/models/entrepreneurship.model";
 
 export interface Review {
     id: number;
     idUser:string;
     reviewText: string;
-    stars: number; 
+    stars: number;
     idEntrepreneurship: number;
     username: string;
 
   }
-  
