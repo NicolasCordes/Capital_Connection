@@ -22,6 +22,8 @@ export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) { }
 
   onLogin() {
+
+
     if (this.form.invalid) return;
 
     const { username, password } = this.form.getRawValue();
@@ -36,6 +38,8 @@ export class LoginComponent {
       error: console.log
     });
   }
+
+
 
   onRevealPassword(pwInput: HTMLInputElement) {
     if (pwInput.type == 'password') {

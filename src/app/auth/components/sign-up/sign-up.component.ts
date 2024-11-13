@@ -68,7 +68,7 @@ export class SignupComponent {
 
   onSubmit() {
     this.submitPress=true;
-    if (this.form.invalid) return;
+    if (this.form.invalid){ console.log(this.form.getRawValue()); return}
 
     const user = {
       ...this.form.getRawValue(),
@@ -78,7 +78,6 @@ export class SignupComponent {
 
     this.authService.signup(user).subscribe({
       next: () => {
-        alert('Usuario agregado');
         this.router.navigate(['/']);
       },
       error: (error) => {

@@ -14,6 +14,7 @@ export class AuthService {
   private baseUrl = 'http://localhost:3000/accounts';
   public estoyLogeado: boolean = !!localStorage.getItem("token");
 
+
   constructor(
     private http: HttpClient,
     private tokenService: TokenService
@@ -109,5 +110,5 @@ export class AuthService {
       }),
     );
   }
-  
+
 }

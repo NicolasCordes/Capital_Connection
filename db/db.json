@@ -1,117 +1,85 @@
 {
   "accounts": [
     {
-      "favorites": [
-        5,
-        6
-      ],
-      "id": "8473"
-    },
-    {
-      "id": "e15c",
-      "username": "julipelle",
-      "password": "Y3P6pvPTdDo56c9jb/qkM5Ot2vn/Zz8IUh26oK84k7I=",
-      "email": "julianpellegrini@gmail.com",
-      "name": "Julian",
-      "surname": "Pellegrini",
-      "dateOfBirth": "2004-12-12",
-      "yearsOfExperience": 5,
-      "industry": "salud",
+      "id": "8473",
+      "username": "santifidelibus",
+      "password": "cAj5gn5Hdb2JbyBK83s6XtWzHdmkLNWhU5W8XQgySW4=",
+      "email": "santif@gmail.com",
+      "name": "Santiago German",
+      "surname": "Fidelibus",
+      "dateOfBirth": "2003-12-16",
+      "yearsOfExperience": 2,
+      "industry": "alimentacion",
       "wallet": 0,
       "address": {
-        "street": "Don bosco",
-        "number": 1813,
-        "locality": "Mar del plata",
+        "street": "David Ortega ",
+        "number": 1441,
+        "locality": "MAR DEL PLATA",
         "province": "Buenos Aires",
         "type": "Home"
       },
       "favorites": []
     },
     {
-      "favorites": [
-        3,
-        1
-      ],
-      "id": "12e8"
-    },
-    {
       "id": "f91f",
       "username": "nicopalacios",
-      "password": "fn/DV/wjdJ9bY/ZTLIW1Zg+EDQy5AekBfC+xEOFIZ4E=",
-      "email": "nicopalacios@gmail.com",
+      "password": "KLVavqs0K1dMActLc6QMCtBfiUqBQ2uj4LRpIsOPGFU=",
+      "email": "nicopalacioscalvi@gmail.com",
       "name": "Nicolas",
-      "surname": "Palacios",
-      "dateOfBirth": "2003-11-15",
-      "yearsOfExperience": 10,
-      "industry": "sostenibilidad",
+      "surname": "Palacios Calvi",
+      "dateOfBirth": "2003-09-16",
+      "yearsOfExperience": 3,
+      "industry": "alimentacion",
       "wallet": 0,
       "address": {
         "street": "Mansilla",
-        "number": 3512,
-        "locality": "Miramar",
+        "number": 4543,
+        "locality": "MAR DEL PLATA",
         "province": "Buenos Aires",
-        "type": "Other"
+        "type": "Home"
+      },
+      "favorites": []
+    },
+    {
+      "id": "12e8",
+      "username": "nicocordes",
+      "password": "KLVavqs0K1dMActLc6QMCtBfiUqBQ2uj4LRpIsOPGFU=",
+      "email": "nicolascordes1@gmail.com",
+      "name": "Nicolas Leonel",
+      "surname": "Cordes",
+      "dateOfBirth": "2003-09-20",
+      "yearsOfExperience": 7,
+      "industry": "salud",
+      "wallet": 0,
+      "address": {
+        "street": "Dellaplane",
+        "number": 5068,
+        "locality": "MAR DEL PLATA",
+        "province": "Buenos Aires",
+        "type": "Home"
+      },
+      "favorites": []
+    },
+    {
+      "id": "e15c",
+      "username": "julipelle",
+      "password": "8bbqcgnUslOcGHDK0kv8MUfoTvhJSCKrN5vgb9JjwPQ=",
+      "email": "pellegrinijulianmauro@gmail.com",
+      "name": "Julian Mauro",
+      "surname": "Pellegrini",
+      "dateOfBirth": "2004-01-26",
+      "yearsOfExperience": 5,
+      "industry": "tecnologia",
+      "wallet": 0,
+      "address": {
+        "street": "don bosco",
+        "number": 2748,
+        "locality": "MAR DEL PLATA",
+        "province": "Buenos Aires",
+        "type": "Home"
       },
       "favorites": []
     }
   ],
-  "users": [],
-  "donations": [
-    {
-      "id": "52ef",
-      "amount": "20000",
-      "date": "2024-11-12T22:42:38.674Z",
-      "idUser": "e15c",
-      "idEntrepreneurship": 1
-    },
-    {
-      "id": "d653",
-      "amount": "10000",
-      "date": "2024-11-12T22:55:54.383Z",
-      "idUser": "e15c",
-      "idEntrepreneurship": 2
-    },
-    {
-      "id": "58e4",
-      "amount": "32000",
-      "date": "2024-11-12T22:59:03.821Z",
-      "idUser": "12e8",
-      "idEntrepreneurship": 3
-    },
-    {
-      "id": "5f11",
-      "amount": "21000",
-      "date": "2024-11-12T23:01:04.800Z",
-      "idUser": "12e8",
-      "idEntrepreneurship": 1
-    },
-    {
-      "id": "fb1a",
-      "amount": "32000",
-      "date": "2024-11-12T23:02:54.916Z",
-      "idUser": "f91f",
-      "idEntrepreneurship": 4
-    },
-    {
-      "id": "a174",
-      "amount": "12000",
-      "date": "2024-11-12T23:04:30.698Z",
-      "idUser": "f91f",
-      "idEntrepreneurship": 2
-    },
-    {
-      "id": "33d7",
-      "amount": "10200",
-      "date": "2024-11-12T23:07:49.110Z",
-      "idUser": "8473",
-      "idEntrepreneurship": 5
-    },
-    {
-      "id": "82c4",
-      "amount": "5000",
-      "date": "2024-11-12T23:08:51.565Z",
-      "idUser": "8473",
-      "idEntrepreneurship": 6
-    }
-  ]
+  "donations": []
 }
