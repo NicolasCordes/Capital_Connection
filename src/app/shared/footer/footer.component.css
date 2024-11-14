@@ -1,173 +1,78 @@
-/* Footer Container to Center the Footer */
+/* Estilos del pie de página */
 .footer-container {
+    width: 100%;
+    background-color: #1a1a1a; /* Color oscuro para el pie de página */
+    color: #f0f8ff; /* Color claro para contraste */
+    padding: 2rem 0; /* Espaciado en el pie de página */
+  }
+  
+  .site-footer .container {
+    max-width: 1200px;
+    margin: 0 auto;
     display: flex;
-    justify-content: center;
-    background-color: #0f0f0f; /* Fondo negro */
-    padding: 40px 0;
-}
-
-/* Footer Styles */
-.site-footer {
-    background-color: #0f0f0f; /* Fondo negro */
-    color: #c7c7c7;
-    padding: 50px 0;
-    font-family: Arial, sans-serif;
-    max-width: 1200px; /* Ancho máximo del footer */
-    width: 90%; /* Ancho relativo para que se ajuste a la pantalla */
-    border-radius: 10px; /* Bordes redondeados */
-}
-
-/* Logo */
-.footer-logo img {
-    height: 50px;
-    width: auto;
-    transition: transform 0.2s ease-in-out;
-}
-.footer-logo img:hover {
-    transform: scale(1.1);
-}
-
-/* Footer Content Area */
-.footer-content-area .container {
-    display: flex;
-    justify-content: space-around; /* Distribuye el espacio de manera uniforme */
     flex-wrap: wrap;
-    gap: 20px;
-}
-
-.footer-widget {
-    flex: 1;
-    min-width: 200px;
-    text-align: center; /* Alinea el contenido de cada widget al centro */
-}
-
-.logo-widget .logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.logo-widget h3 {
-    font-size: 1.5rem;
-    color: #fff;
-    margin: 0;
-}
-
-.footer-widget h3 {
-    font-size: 1.2rem;
-    margin-bottom: 15px;
-    color: #fff;
-}
-
-.footer-widget {
-    text-align: left;
-}
-
-.footer-widget p,
-.footer-widget ul li a {
-    font-size: 0.9rem;
-    line-height: 1.5;
-    color: #c7c7c7;
-    text-decoration: none;
-}
-
-.footer-widget ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.footer-widget ul li {
-    margin-bottom: 10px;
-}
-
-.newsletter {
-    margin-top: 15px;
-}
-
-.newsletter-form {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.newsletter-form input {
-    padding: 10px;
-    border: 1px solid #c7c7c7;
-    border-radius: 5px;
-    outline: none;
-    background-color: transparent;
-    color: #c7c7c7;
-}
-
-.newsletter-form button {
-    background-color: #3399bb;
-    color: #fff;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 1rem;
-}
-
-.contact-widget ul li {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 0.9rem;
-    color: #c7c7c7;
-}
-
-.contact-widget .icon {
-    font-size: 1.2rem;
-    color: #3399bb;
-}
-
-/* Footer Bottom */
-.footer-bottom {
-    display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding-top: 20px;
-    border-top: 1px solid #1a2d3d;
-    margin-top: 30px;
-    font-size: 0.8rem;
-}
-
-.footer-bottom p {
-    margin: 0;
-}
-
-.footer-bottom span {
-    color: #3399bb;
-}
-
-.social-links a {
-    margin-right: 10px;
-    color: #c7c7c7;
+    align-items: flex-start;
+    padding: 0 1.5rem;
+  }
+  
+  .footer-widget {
+    margin-bottom: 2rem;
+    width: 100%;
+    max-width: 250px;
+  }
+  
+  .footer-widget h3 {
     font-size: 1.2rem;
+    color: #f0f8ff;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #4dd0e1; /* Línea de separación debajo del título */
+    padding-bottom: 0.5rem;
+  }
+  
+  .footer-widget ul {
+    list-style: none;
+  }
+  
+  .footer-widget ul li {
+    margin-bottom: 0.8rem;
+  }
+  
+  .footer-widget ul li a {
     text-decoration: none;
-}
-
-.social-links a:hover {
-    color: #3399bb;
-}
-
-/* Responsive Design for Mobile */
-@media (max-width: 768px) {
-    .footer-content-area .container {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-
-    .footer-widget {
-        margin-bottom: 20px;
-    }
-    
-    .footer-bottom {
-        flex-direction: column;
-        gap: 10px;
-        text-align: center;
-    }
-}
+    color: #dcdcdc;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+  }
+  
+  .footer-widget ul li a:hover {
+    color: #4dd0e1; /* Cambia el color al pasar el cursor */
+  }
+  
+  .footer-widget.logo-widget .logo img {
+    width: 80px;
+    height: auto;
+    margin-bottom: 0.5rem;
+  }
+  
+  .footer-widget.logo-widget h3 {
+    font-size: 1.5rem;
+    color: #ffffff;
+  }
+  
+  .footer-bottom {
+    text-align: center;
+    padding: 1rem;
+    background-color: #111;
+    color: #aaaaaa;
+    font-size: 0.9rem;
+  }
+  
+  .footer-bottom p {
+    margin: 0;
+  }
+  
+  .footer-bottom span {
+    color: #4dd0e1;
+  }
+  

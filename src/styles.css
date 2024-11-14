@@ -6,28 +6,43 @@
   font-family: 'Arial', sans-serif;
 }
 
+
+
 html, body {
-  height: 100%;  /* Aseguramos que el html y el body ocupen el 100% de la altura */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  background-color: #0f2027; /* Fondo base oscuro */
-  color: #f0f8ff; /* Texto en azul claro para contraste */
+  background-color: #0f2027;
+  color: #f0f8ff;
   font-family: 'Arial', sans-serif;
-  margin: 0;
-  padding: 0;
-  overflow-y: scroll;  /* Habilitar scroll vertical */
+  overflow-y: scroll;
   position: relative;
   background: linear-gradient(45deg,
-    rgba(0, 128, 128, 0.2), /* aqua */
-    rgba(70, 130, 180, 0.2), /* azul acero */
-    rgba(135, 206, 235, 0.2), /* azul cielo */
-    rgba(173, 216, 230, 0.2), /* azul claro */
-    rgba(240, 255, 255, 0.2) /* blanco aqua */
+    rgba(0, 128, 128, 0.2),
+    rgba(70, 130, 180, 0.2),
+    rgba(135, 206, 235, 0.2),
+    rgba(173, 216, 230, 0.2),
+    rgba(240, 255, 255, 0.2)
   );
   background-size: 400% 400%;
   animation: gradientBackground 20s ease infinite;
 }
+footer{
+  width: 100%;
+}
+
+/* Configura la altura mínima de .main-content */
+.main-content {
+  flex: 1;
+  width: 100%;
+  min-height: calc(100vh - 100px); /* 100px es una referencia aproximada del alto del footer */
+}
+
 
 @keyframes gradientBackground {
   0% {
@@ -40,3 +55,5 @@ body {
     background-position: 0% 50%;
   }
 }
+
+

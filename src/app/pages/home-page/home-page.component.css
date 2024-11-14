@@ -4,6 +4,7 @@
 body {
   margin: 0;
   font-family: 'Lato', sans-serif;
+  background-color: white;
 }
 
 h1 {
@@ -64,6 +65,7 @@ p {
 .content {
   position: relative;
   padding: 40px 20px;
+  padding-top: 0;
   background-color: #f9f9f9;
   text-align: center;
 }
@@ -71,8 +73,13 @@ p {
 .content-title {
   position: relative;
   padding: 40px 20px;
+  padding-bottom: 0;
   background-color: #f9f9f9;
   text-align: center;
+}
+
+.slider-class {
+  background-color: white;
 }
 
 .content h2 {
@@ -86,6 +93,7 @@ p {
 .carousel-container {
   width: 90%; /* Puede ajustarlo si es necesario */
   margin: 20px auto;
+  padding-bottom: 40px;
   text-align: center;
   overflow: hidden;
 }
@@ -140,6 +148,7 @@ p {
   font-weight: 600;
   text-align: center;
 }
+
 
 .carousel-slide-content p {
   font-size: 1rem;

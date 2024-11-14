@@ -34,4 +34,21 @@ export class FavoriteListComponent implements OnInit {
         this.userFavorites = favorites.filter((fav: Entrepreneurship) => fav.activated === true);
       });
   }
+
+  DeleteFavorites(id:number | undefined): void {
+
+    if (id && this.userId) {
+
+      this.favoriteListService.removeFavorite(this.userId, id).subscribe(
+        () => {
+          this.userFavorites.splice(this.userFavorites.findIndex(f => f.id === id && f.idUser === this.userId),1)
+        },
+        error => {
+          console.error('Error al eliminar de favoritos', error);
+        }
+      );
+    } else {
+      console.error('El usuario no está autenticado.');
+    }
+  }
 }

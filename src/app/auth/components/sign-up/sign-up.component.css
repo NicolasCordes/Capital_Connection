@@ -1,3 +1,4 @@
+
 /* Contenedor principal del formulario */
 .form-container {
   max-width: 500px;
@@ -7,6 +8,8 @@
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   font-family: Arial, sans-serif;
+  
+  
 }
 
 /* Título del formulario */
@@ -144,3 +147,29 @@ fieldset {
   font-size: 12px;
   margin-top: 5px;
 }
+
+.reveal-btn {
+  background: none;
+  border: none;
+  color: #007bff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-top: -2.2rem;
+  margin-left: auto;
+  padding: 0;
+  transition: color 0.3s;
+}
+
+.reveal-btn:hover {
+  color: #0056b3;
+}
+
+
+
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;  
+  gap: 20px; 
+}
+

@@ -18,9 +18,7 @@
         "province": "Buenos Aires",
         "type": "Home"
       },
-      "favorites": [
-        2
-      ]
+      "favorites": []
     },
     {
       "id": "f91f",
@@ -40,7 +38,9 @@
         "province": "Buenos Aires",
         "type": "Home"
       },
-      "favorites": []
+      "favorites": [
+        2
+      ]
     },
     {
       "id": "12e8",
@@ -83,5 +83,13 @@
       "favorites": []
     }
   ],
-  "donations": []
+  "donations": [
+    {
+      "id": "6cab",
+      "amount": "45000",
+      "date": "2024-11-14T22:03:55.180Z",
+      "idUser": "f91f",
+      "idEntrepreneurship": 7
+    }
+  ]
 }

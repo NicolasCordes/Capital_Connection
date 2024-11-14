@@ -9,8 +9,9 @@
   <div *ngFor="let entrepreneurship of createdEntrepreneurships">
     @if(entrepreneurship.activated===true){
       <div class="entrepreneurship-card">
-      <h4>{{ entrepreneurship.name }}</h4>
+      <h3 class="name-entrepreneurship">{{ entrepreneurship.name }}</h3>
       <p>{{ entrepreneurship.description }}</p>
+      <button (click)="navigateToDetails(entrepreneurship.id)">Ver</button>
       <button (click)="editEntrepreneurship(entrepreneurship)">Editar</button>
       <button (click)="deleteEntrepreneurship(entrepreneurship)">Eliminar</button>
     </div>

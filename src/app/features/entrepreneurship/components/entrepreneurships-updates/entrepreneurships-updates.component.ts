@@ -22,7 +22,7 @@ import { Entrepreneurship } from '../../../../types/entrepreneurship.model';
   editingEntrepreneurship: Entrepreneurship | null = null;
   activeUser: ActiveUser | undefined;
   userType: string = 'Guest';
-
+  router = inject(Router);
   entrepreneurshipService = inject(EntrepreneurshipService);
   fb = inject(FormBuilder);
   authService = inject(AuthService);
@@ -142,4 +142,10 @@ import { Entrepreneurship } from '../../../../types/entrepreneurship.model';
       });
     }
   }
+
+
+  navigateToDetails(id: number | undefined): void {
+    this.router.navigate([`/entrepreneurships/${id}`]);
+  }
+
 }

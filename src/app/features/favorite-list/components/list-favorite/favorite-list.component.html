@@ -10,7 +10,9 @@
 
         <h3>{{ favorite.name }}</h3>
         <p>{{ favorite.description }}</p>
-      
+        <button mat-button class="follow-btn" (click)="DeleteFavorites(favorite.id)" [disabled]="userType === 'Guest'">
+          Eliminar
+        </button>
     </li>
   </ul>
 </div>

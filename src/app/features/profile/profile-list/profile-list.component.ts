@@ -79,7 +79,6 @@ goToDonations(): void {
 
   goToMyEntrepreneurships(): void {
     if(this.myentre === false){
-      console.log(this.myentre);
       this.myentre = true;
     }else{
       this.myentre = false;

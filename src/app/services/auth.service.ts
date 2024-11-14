@@ -112,4 +112,25 @@ export class AuthService {
     );
   }
 
+
+  checkIfUsernameExists(username: string): Observable<boolean> {
+    return this.http.get<AccountData[]>(`${this.baseUrl}?username=${username}`).pipe(
+      map(users => {
+        return users.some(user => user.username === username );
+      }),
+      catchError(() => of(false)) 
+    );
+  }
+
+  
+  checkIfEmailExists(email: string): Observable<boolean> {
+    return this.http.get<AccountData[]>(`${this.baseUrl}?email=${email}`).pipe(
+      map(users => {
+        return users.some(user =>  user.email === email);
+      }),
+      catchError(() => of(false)) 
+    );
+  }
+
+  
 }

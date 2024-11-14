@@ -22,6 +22,8 @@ export class DonationListComponent implements OnInit {
   activeUser: ActiveUser | undefined;
   donateds: Donation[] = [];
   donatedEntrepreneurships: Entrepreneurship[] = [];
+  modalMessage: string = '';
+  isModalVisible: boolean = false;
 
   authService = inject(AuthService);
   donationService = inject(DonationService);
@@ -65,5 +67,18 @@ export class DonationListComponent implements OnInit {
         });
       }
     });
+  }
+
+  navigateToDetails(id: number | undefined, isActive:boolean | undefined): void {
+    if(isActive){
+      this.router.navigate([`/entrepreneurships/${id}`]);
+    }else{
+      this.modalMessage = 'El emprendimiento ha sido eliminado';
+      this.isModalVisible = true; 
+    }
+  }
+
+  closeModal(): void {
+    this.isModalVisible = false; 
   }
 }

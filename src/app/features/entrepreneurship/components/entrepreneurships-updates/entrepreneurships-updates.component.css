@@ -83,6 +83,13 @@
   background-color: #0056b3;
 }
 
+.name-entrepreneurship {
+    font-size: 1.5rem;
+    color: #007bff;
+    margin: 0;
+    font-weight: bold;
+}
+
 /* Estilo para el formulario de edición */
 form {
   background-color: #f9f9f9;
