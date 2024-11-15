@@ -1,6 +1,6 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../../services/auth.service';
 import { ActiveUser } from '../../../../types/account-data';
 import { FavoriteListService } from '../../../../services/favorite-list.service';
@@ -15,13 +15,15 @@ import { Entrepreneurship } from '../../../../types/entrepreneurship.model';
 })
 export class FavoriteListComponent implements OnInit {
   @Input({required: true}) userId!: string | undefined;
-  userFavorites: Entrepreneurship[] = [];  
+  userFavorites: Entrepreneurship[] = [];
   activeUser: ActiveUser | undefined;
   userType: string = 'Guest';
 
   authService = inject(AuthService);
   favoriteListService = inject(FavoriteListService);
   route = inject(ActivatedRoute);
+  router = inject(Router);
+
 
   ngOnInit(): void {
     this.authService.auth().subscribe((user) => {
@@ -50,5 +52,9 @@ export class FavoriteListComponent implements OnInit {
     } else {
       console.error('El usuario no está autenticado.');
     }
+  }
+
+  navigateToDetails(id: number | undefined): void {
+      this.router.navigate([`/entrepreneurships/${id}`]);
   }
 }

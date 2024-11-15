@@ -19,6 +19,7 @@ export class DonationFormComponent implements OnInit{
   authService= inject(AuthService)
 
   ngOnInit(): void {
+
     this.authService.auth().subscribe({
       next:(user: ActiveUser | undefined) => {
       this.activeUser = user;

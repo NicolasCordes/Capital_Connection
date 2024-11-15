@@ -32,7 +32,7 @@ import { Entrepreneurship } from '../../../../types/entrepreneurship.model';
       name: ['', Validators.required],
       description: ['', Validators.required],
       category: ['', Validators.required],
-      images: this.fb.array([]),
+      images: this.fb.array([], this.minimumLengthArray(1)),
       videos: this.fb.array([])
     });
   }
@@ -115,9 +115,7 @@ import { Entrepreneurship } from '../../../../types/entrepreneurship.model';
     if (isPersistedImage && this.editingEntrepreneurship) {
       const updatedImages = this.imagesArray.value;
       const updatedEntrepreneurship = { ...this.editingEntrepreneurship, images: updatedImages };
-      if(this.editingEntrepreneurship.id)
-      this.entrepreneurshipService.updateEntrepreneurship(this.editingEntrepreneurship.id, updatedEntrepreneurship)
-        .subscribe(() => this.loadCreatedEntrepreneurships());
+
     }
   }
 
@@ -129,9 +127,7 @@ import { Entrepreneurship } from '../../../../types/entrepreneurship.model';
     if (isPersistedVideo && this.editingEntrepreneurship) {
       const updatedVideos = this.videosArray.value;
       const updatedEntrepreneurship = { ...this.editingEntrepreneurship, videos: updatedVideos };
-      if(this.editingEntrepreneurship.id)
-      this.entrepreneurshipService.updateEntrepreneurship(this.editingEntrepreneurship.id, updatedEntrepreneurship)
-        .subscribe(() => this.loadCreatedEntrepreneurships());
+
     }
   }
 
@@ -143,6 +139,14 @@ import { Entrepreneurship } from '../../../../types/entrepreneurship.model';
     }
   }
 
+  minimumLengthArray(minLength: number): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if (control instanceof FormArray) {
+        return control.length >= minLength ? null : { minLengthArray: { requiredLength: minLength, actualLength: control.length } };
+      }
+      return null;
+    };
+  }
 
   navigateToDetails(id: number | undefined): void {
     this.router.navigate([`/entrepreneurships/${id}`]);

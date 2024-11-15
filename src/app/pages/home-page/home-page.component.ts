@@ -26,6 +26,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
 
    this.entrepreneurshipService.getEntrepreneurshipsActives(0, 9).subscribe({
   next: (response) => {
