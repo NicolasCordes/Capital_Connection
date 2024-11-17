@@ -1,55 +1,94 @@
-# CapitalConnection
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.10.
+# Capital Connection
 
-## Development Server
+Capital Connection es un proyecto de crowdfunding desarrollado con **Angular**, **TypeScript**, **HTML** y **CSS**. A continuación, encontrarás las instrucciones necesarias para levantar el entorno de desarrollo y configurar correctamente la aplicación.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Requisitos previos
 
-## Code Scaffolding
+Antes de comenzar, asegúrate de tener instalados en tu equipo:
+- **Node.js** (versión recomendada: 16 o superior)
+- **npm** (gestor de paquetes de Node.js)
+- **Angular CLI**
+- **Java 21** (para la API)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Instalación y configuración
 
-## Build
+### 1. Clonar el repositorio
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Descarga o clona este repositorio utilizando el siguiente comando:
 
-## Running Unit Tests
+```
+git clone https://github.com/NicolasCordes/Capital_Connection.git
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### 2. Abrir el proyecto
 
-## Running End-to-End Tests
+Abre el proyecto en **Visual Studio Code (VSC)** o tu editor de código preferido.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### 3. Instalar dependencias
 
-## Further Help
+Dentro del directorio del proyecto, instala las dependencias de Node.js ejecutando:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli).
+```
+npm install
+```
 
-## Installation
+### 4. Instalar JSON Server
 
-1. Clone the repository:
+JSON Server es necesario para simular un backend local. Instálalo de manera global ejecutando:
 
-   git clone https://github.com/NicolasCordes/Capital_Connection.git
-   
-2. Navigate to the project directory:
-  
-   cd Capital_Connection
-   
-3. Install dependencies:
-   
-   npm install
+```
+npm install -g json-server
+```
 
-## Contributions
+### 5. Configurar y levantar JSON Server
 
-Contributions are welcome. Please follow these steps to contribute:
+Ejecuta el siguiente comando para iniciar el JSON Server utilizando el archivo `db.json`:
 
-1. Fork the project.
-2. Create a branch for your feature (`git checkout -b feature/AmazingFeature`).
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`).
-4. Push to the branch (`git push origin feature/AmazingFeature`).
-5. Open a Pull Request.
+```
+json-server db/db.json
+```
 
-## License
+### 6. Levantar la aplicación Angular
 
-This project is licensed under the MIT License. See the `LICENSE` file for more details.
+En una terminal separada, inicia el servidor de desarrollo de Angular con:
+
+```
+ng serve
+```
+
+La aplicación estará disponible en [http://localhost:4200](http://localhost:4200).
+
+### 7. Instalar y configurar la API
+
+La aplicación utiliza **CrowdNet API**, desarrollada en **Java con Spring Boot**. Sigue estos pasos:
+
+1. Clona el repositorio de la API desde el siguiente enlace:
+   [CrowdNet API](https://github.com/julianpelle/CrowdNet-API)
+2. Sigue las instrucciones en el archivo `README.md` del repositorio para instalar y ejecutar la API.
+
+### 8. ¡Listo!
+
+Con estos pasos, el proyecto estará funcionando correctamente.
+
+---
+
+## Sobre Nosotros
+
+Somos estudiantes de la **Tecnicatura Universitaria en Programación** en la **Universidad Tecnológica Nacional (UTN)**. A continuación, te compartimos más sobre nosotros:
+
+- **Nicolás Cordes**  
+  [GitHub](https://github.com/NicolasCordes)
+
+- **Santiago Fidelibus**  
+  [GitHub](https://github.com/SantiagoFidelibus)
+
+- **Nicolás Palacios Calvi**  
+  [GitHub](https://github.com/NicolasPalaciosCalvi)
+
+- **Julián Pellegrini**  
+  [GitHub](https://github.com/julianpelle)
+
+---
+
+¡Gracias por interesarte en Capital Connection! 😊
