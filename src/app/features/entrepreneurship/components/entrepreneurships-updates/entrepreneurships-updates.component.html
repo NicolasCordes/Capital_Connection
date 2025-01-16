@@ -1,0 +1,68 @@
+<div class="entrepreneurships-container">
+  <div class="header">
+    <h1>Mis Emprendimientos</h1>
+  </div>
+  <div *ngIf="createdEntrepreneurships.length === 0">
+    <p class="no-entrepreneurships-message">No tienes emprendimientos.</p>
+  </div>
+
+  <div *ngFor="let entrepreneurship of createdEntrepreneurships">
+    @if(entrepreneurship.isActivated===true){
+      <div class="entrepreneurship-card">
+      <h3 class="name-entrepreneurship">{{ entrepreneurship.name }}</h3>
+      <p>{{ entrepreneurship.description }}</p>
+      <button (click)="navigateToDetails(entrepreneurship.id)">Ver</button>
+      <button (click)="editEntrepreneurship(entrepreneurship)">Editar</button>
+      <button (click)="deleteEntrepreneurship(entrepreneurship)">Eliminar</button>
+    </div>
+}
+
+    <!-- Formulario de edición -->
+    <div *ngIf="editingEntrepreneurship === entrepreneurship">
+      <h3 style="color: black;">Editar Emprendimiento</h3>
+      <form [formGroup]="editForm" (ngSubmit)="saveChanges()">
+
+        <!-- Nombre -->
+        <label for="name">Nombre</label>
+        <input id="name" formControlName="name" required />
+
+        <!-- Descripción -->
+        <label for="description">Descripción</label>
+        <textarea id="description" formControlName="description" rows="5" cols="50" required></textarea>
+
+        <!-- Categoría -->
+        <label for="category">Categoría</label>
+        <select id="category" formControlName="category" required>
+          <option value="" disabled>Seleccione una categoría</option>
+          <option value="tecnologia">Tecnología</option>
+          <option value="salud">Salud</option>
+          <option value="educacion">Educación</option>
+          <option value="sostenibilidad">Sostenibilidad</option>
+          <option value="alimentacion">Alimentación</option>
+        </select>
+
+        <!-- Cargar y ver imágenes -->
+        <app-upload-image (imagesUploaded)="onImagesUploaded($event)"></app-upload-image>
+        <div formArrayName="images">
+          <div *ngFor="let image of imagesArray.controls; let i = index">
+            <img [src]="image.value" alt="Imagen seleccionada" class="video-preview" />
+            <button type="button" (click)="removeImage(i, true)">Eliminar</button>
+          </div>
+        </div>
+
+        <!-- Cargar y ver videos -->
+        <app-upload-video (videosUploaded)="onVideosUploaded($event)"></app-upload-video>
+        <div formArrayName="videos">
+          <div *ngFor="let video of videosArray.controls; let i = index">
+            <video [src]="video.value" controls class="video-preview"></video>
+            <button type="button" (click)="removeVideo(i, true)">Eliminar</button>
+          </div>
+        </div>
+
+        <!-- Botones -->
+        <button type="submit" [disabled]="editForm.invalid">Guardar cambios</button>
+        <button type="button" (click)="cancelEdit()">Cancelar</button>
+      </form>
+    </div>
+  </div>
+</div>

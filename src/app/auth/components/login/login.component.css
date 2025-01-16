@@ -1,0 +1,102 @@
+/* Contenedor principal */
+.login-form {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 10px;
+  background-color: #f8f9fa;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+.login-form fieldset {
+  border: none;
+  padding: 0;
+}
+
+.login-form legend {
+  font-size: 1.5rem;
+  color: #333;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+}
+
+/* Grupo de inputs */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.2rem;
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
+  color: #555;
+  font-weight: bold;
+}
+
+/* Estilo del input */
+.login-form input[type="text"],
+.login-form input[type="password"] {
+  padding: 0.8rem;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  color: #333;
+  transition: border-color 0.3s;
+}
+
+.login-form input[type="text"]:focus,
+.login-form input[type="password"]:focus {
+  border-color: #0056b3;
+  outline: none;
+}
+
+/* Botón para revelar contraseña */
+.reveal-btn {
+  background: none;
+  border: none;
+  color: #007bff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-top: -2.2rem;
+  margin-left: auto;
+  padding: 0;
+  transition: color 0.3s;
+}
+
+.reveal-btn:hover {
+  color: #0056b3;
+}
+
+/* Botón de envío */
+.submit-btn {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #0056b3;
+}
+
+.submit-btn:disabled {
+  background-color: #a1a1a1;
+  cursor: not-allowed;
+}
+
+/* Personalización de la sección de contraseña */
+.password-group {
+  position: relative;
+}
+
+.password-group input[type="password"] {
+  padding-right: 2.5rem;
+}

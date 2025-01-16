@@ -1,0 +1,143 @@
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-container">
+  <fieldset>
+  
+    <legend class="form-title">Registrarse</legend>
+    <section class="form-group">
+      <label for="email">Correo electrónico</label>
+      <input type="text" id="email" formControlName="email" class="input-field">
+      
+      @if (form.controls['email'].touched ||  submitPress) {
+        @if (form.controls['email'].hasError('required')) {
+          <span class="error-msg">El email es obligatorio</span>
+        }
+        @if (form.controls['email'].hasError('email')) {
+          <span class="error-msg">El email no es válido</span>
+        }
+        @if (form.controls['email'].hasError('emailExists') && form.controls['email'].touched ) {
+          <div class="error-msg">El correo electrónico ya está registrado.</div>
+        }
+      }
+    </section>
+    
+    <section class="form-group">
+      <label for="username">Nombre de Usuario</label>
+      <input type="text" id="username" formControlName="username" class="input-field">
+      @if (form.controls['username'].touched || form.controls['username'].invalid || submitPress) {
+        @if (form.controls['username'].hasError('required')) {
+          <div class="error-msg">El nombre de usuario es obligatorio</div>
+        }
+        @if (form.controls['username'].hasError('minlength')) {
+          <div class="error-msg">El nombre de usuario debe tener al menos 4 caracteres</div>
+        }
+        @if (form.controls['username'].hasError('usernameExists')) {
+          <div class="error-msg">El nombre de usuario ya está en uso.</div>
+        }
+      }
+    </section>
+
+    <section class="form-group">
+      <label for="name">Nombre</label>
+      <input type="text" id="name" formControlName="name" class="input-field">
+      @if (form.controls['name'].touched && form.controls['name'].invalid) {
+        <div class="error-msg">El nombre es obligatorio.</div>
+      }
+    </section>
+
+    <section class="form-group">
+      <label for="surname">Apellido</label>
+      <input type="text" id="surname" formControlName="surname" class="input-field">
+      @if (form.controls['surname'].touched && form.controls['surname'].invalid) {
+        <div class="error-msg">El apellido es obligatorio.</div>
+      }
+    </section>
+
+    <section class="form-group">
+      <label for="password">Contraseña</label>
+      <input #password type="password" id="password" formControlName="password" class="input-field">
+      <button type="button" (click)="onRevealPassword(password)" class="reveal-btn">
+        👁️
+      </button>
+    
+      <!-- Validación para contraseña requerida -->
+      @if (form.controls['password'].hasError('required') && (form.controls['password'].touched || submitPress)) {
+        <div class="error-msg">
+          La contraseña es obligatoria.
+        </div>
+      }
+    
+      <!-- Validación para longitud mínima de contraseña -->
+      @if (form.controls['password'].hasError('minlength') && (form.controls['password'].touched || submitPress)) {
+        <div class="error-msg">
+          La contraseña debe tener al menos 8 caracteres.
+        </div>
+      }
+    
+      <!-- Validación para patrón de contraseña (mayúscula, minúscula y especial) -->
+      @if (form.controls['password'].hasError('pattern') && submitPress) {
+        <div class="error-msg">
+          La contraseña debe incluir una mayúscula, una minúscula y un carácter especial.
+        </div>
+      }
+    </section>
+    
+    <section class="form-group">
+      <label for="confirmPassword">Confirmar Contraseña</label>
+      <input #confirmPasswordField type="password" id="confirmPassword" formControlName="confirmPassword" class="input-field">
+      <button type="button" (click)="onRevealPassword(confirmPasswordField)" class="reveal-btn">
+        👁️
+      </button>
+    
+      <!-- Validación para confirmación de contraseña requerida -->
+      @if (form.controls['confirmPassword'].hasError('required') && (form.controls['confirmPassword'].touched || submitPress)) {
+        <div class="error-msg">La confirmación de la contraseña es obligatoria.</div>
+      }
+    
+      <!-- Validación para contraseñas no coincidentes -->
+      @if (form.hasError('match') && (form.controls['confirmPassword'].touched || submitPress)) {
+        <div class="error-msg">Las contraseñas no coinciden.</div>
+      }
+    </section>
+    
+    <section class="form-group">
+      <label for="dateOfBirth">Fecha de Nacimiento</label>
+      <input type="date" id="dateOfBirth" formControlName="dateOfBirth" class="input-field">
+
+      @if (form.controls['dateOfBirth'].touched && form.controls['dateOfBirth'].invalid) {
+        <div class="error-msg">
+          La fecha de nacimiento es obligatoria.
+        </div>
+      }
+    </section>
+
+    <section class="form-group">
+      <label for="yearsOfExperience">Años de Experiencia</label>
+      <input type="number" id="yearsOfExperience" formControlName="yearsOfExperience" class="input-field">
+      @if (form.controls['yearsOfExperience'].touched && form.controls['yearsOfExperience'].invalid) {
+        <div class="error-msg">Los años de experiencia son obligatorios.</div>
+      }
+    </section>
+
+    <section class="form-group">
+      <label for="industry">Industria</label>
+      <div class="select-container">
+        <select id="industry" formControlName="industry" class="input-field">
+          <option value="tecnologia">Tecnología</option>
+          <option value="salud">Salud</option>
+          <option value="educacion">Educación</option>
+          <option value="sostenibilidad">Sostenibilidad</option>
+          <option value="alimentacion">Alimentación</option>
+        </select>
+        <div class="select-arrow"></div> 
+      </div>
+      @if (form.controls['industry'].touched && form.controls['industry'].invalid) {
+        <div class="error-msg">La industria es obligatoria.</div>
+      }
+    </section>
+
+
+    <app-address-form (address)="updateAddress($event)"></app-address-form>
+
+    <button type="submit" class="submit-btn">Enviar</button>
+  </fieldset>
+</form>

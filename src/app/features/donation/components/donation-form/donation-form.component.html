@@ -1,0 +1,5 @@
+<form [formGroup]="donationForm" (ngSubmit)="onSubmit()">
+    <label for="amount">Cantidad:</label>
+    <input id="amount" formControlName="amount" type="number" />
+    <button type="submit" [disabled]="!donationForm.valid || userType === 'Guest'">Agregar Donación</button>
+  </form>

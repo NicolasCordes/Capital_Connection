@@ -1,0 +1,32 @@
+<form [formGroup]="videoForm" (ngSubmit)="uploadVideo()">
+
+  <mat-form-field >
+    <mat-label>Cargar video</mat-label>
+    <ngx-mat-dropzone>
+      <input
+        type="file"
+        fileInput
+        [formControl]="videoControl"
+        multiple
+        (change)="onFilesSelected($event)"
+      />
+    </ngx-mat-dropzone>
+
+  </mat-form-field>
+
+  <!-- Aseguramos que videoControl.value no sea null antes de verificar su longitud -->
+
+
+  <div *ngIf="isUploading" class="isUploading">Cargando video...</div>
+
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="isUploading || !videoForm.valid"
+    aria-label="Subir videos" class="button"
+  >
+    Subir videos
+  </button>
+
+</form>

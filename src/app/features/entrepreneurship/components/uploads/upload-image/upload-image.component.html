@@ -1,0 +1,31 @@
+<form [formGroup]="imageForm" (ngSubmit)="uploadImages()">
+
+  <mat-form-field>
+    <mat-label>Cargar imágenes</mat-label>
+    <ngx-mat-dropzone>
+      <input
+        type="file"
+        fileInput
+        [formControl]="imageControl"
+        multiple
+        accept="image/*"
+        (change)="onFilesSelected($event)"
+      />
+    </ngx-mat-dropzone>
+  </mat-form-field>
+
+  <!-- Aseguramos que imageControl.value no sea null antes de verificar su longitud -->
+
+  <div *ngIf="isUploading" class="isUploading">Cargando imágenes...</div>
+
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="isUploading || !imageForm.valid"
+    aria-label="Subir imágenes"  class="button"
+  >
+    Subir imágenes
+  </button>
+
+</form>

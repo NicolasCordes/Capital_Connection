@@ -1,0 +1,21 @@
+
+<div class="header">
+  <h1>{{ activeUser?.username }}</h1>
+</div>
+
+<div class="button-group">
+  <button mat-button class="follow-btn" (click)="goToFavorites()">Ver favoritos</button>
+  <button class="follow-btn" (click)="goToDonations()">Mis Donaciones</button>
+  <button class="follow-btn" (click)="goToMyEntrepreneurships()">Mis Emprendimientos</button>
+</div>
+
+@if(favorites){
+  <app-favorite-list [userId]="activeUser?.id"></app-favorite-list>
+}
+@else if(donations){
+  <app-donation-list> </app-donation-list>
+}
+@else if(myentre){
+  <app-entrepreneurships-updates></app-entrepreneurships-updates>
+}
+

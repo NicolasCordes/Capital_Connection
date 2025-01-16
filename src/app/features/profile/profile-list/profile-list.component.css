@@ -1,0 +1,93 @@
+/* Estilos generales para los encabezados */
+h1, h2 {
+  font-weight: 300;
+  letter-spacing: 2px;
+  font-size: 48px;
+  color: white;
+}
+
+p {
+  letter-spacing: 1px;
+  font-size: 14px;
+  color: #333333;
+}
+
+/* Estilos para el header */
+.header {
+  position: relative;
+  text-align: center;
+  background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%);
+  color: white;
+  padding: 60px 0; /* Aumentamos el padding para dar espacio al texto */
+  margin-bottom: 20px; 
+}
+
+.header h1 {
+  font-size: 60px; /* Tamaño más grande para el nombre */
+  font-weight: 400; /* Fuente más ligera para el nombre */
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.header p {
+  font-size: 20px;
+  color: #ffffff; /* Texto blanco para contraste */
+  margin-bottom: 20px; 
+}
+
+/* Estilos generales para los botones */
+.follow-btn {
+  background-color: #e6f2ff; /* Color del fondo del botón */
+  border: 2px solid #3399bb; /* Borde azul */
+  color: #3399bb; /* Color del texto */
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center; /* Alinea el texto */
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Cambio de color del botón cuando se pasa el ratón */
+.follow-btn:hover {
+  background-color: #b3d9e6; /* Fondo más suave al pasar el ratón */
+  color: #3399bb; /* Texto azul al pasar el ratón */
+  border-color: #3399bb; /* Borde azul al pasar el ratón */
+}
+
+/* Elimina el contorno del botón cuando está enfocado */
+.follow-btn:focus {
+  outline: none;
+}
+
+/* Estilo para agrupar los botones de la sección */
+.button-group {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px; /* Espacio entre los botones */
+  justify-content: center; /* Centra los botones */
+}
+
+.button-group button {
+  flex: 1; /* Los botones se distribuyen de manera equitativa */
+  max-width: 200px; /* Limita el ancho máximo */
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+  .header h1 {
+    font-size: 40px; /* Reducimos el tamaño del nombre en pantallas pequeñas */
+  }
+
+  .header p {
+    font-size: 16px; /* Reducimos el tamaño de la descripción */
+  }
+
+  .follow-btn {
+    font-size: 14px; /* Reducimos el tamaño del botón */
+    padding: 8px 20px; /* Reducimos el padding del botón */
+  }
+}

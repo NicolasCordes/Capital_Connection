@@ -1,0 +1,112 @@
+/* Estilos para el formulario */
+form {
+  background-color: white; /* Fondo blanco */
+  padding: 15px; /* Menos padding para reducir el espacio interno */
+  border: 2px solid #f0f0f0; /* Borde gris clarito */
+  border-radius: 8px; /* Bordes redondeados */
+  max-width: 400px;
+  margin-bottom: 20px;
+  transition: border-color 0.3s ease; /* Transición suave para el borde */
+}
+
+/* Estilo cuando se pasa el ratón por encima */
+form:hover {
+  border-color: #3399bb; /* Cambia el color del borde a azul */
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #333;
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 5px;
+}
+
+input[type="number"] {
+  width: 50px;
+}
+
+textarea {
+  resize: vertical;
+  height: 80px;
+}
+
+  /* Estilos generales para el botón de enviar reseña */
+button[type="submit"] {
+  background-color: #e6f2ff; /* Color del fondo del botón */
+  border: 2px solid #3399bb; /* Borde azul */
+  color: #3399bb; /* Color del texto */
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center; /* Alinea el texto */
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Estilo cuando el botón está habilitado y se pasa el ratón por encima */
+button[type="submit"]:hover:enabled {
+  background-color: #b3d9e6; /* Fondo más suave al pasar el ratón */
+  color: #3399bb; /* Texto azul al pasar el ratón */
+  border-color: #3399bb; /* Borde azul al pasar el ratón */
+}
+
+/* Elimina el contorno del botón cuando está enfocado */
+button[type="submit"]:focus {
+  outline: none;
+}
+
+/* Estilo para cuando el botón está deshabilitado */
+button[type="submit"]:disabled {
+  background-color: #ccc; /* Fondo gris cuando está deshabilitado */
+  border: 2px solid #aaa; /* Borde gris cuando está deshabilitado */
+  color: #888; /* Texto gris cuando está deshabilitado */
+  cursor: not-allowed; /* Cursor no permitido */
+}
+
+/* Estilo para agrupar los botones de la sección */
+.button-group {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px; /* Espacio entre los botones */
+  justify-content: center; /* Centra los botones */
+}
+
+.button-group button {
+  flex: 1; /* Los botones se distribuyen de manera equitativa */
+  max-width: 200px; /* Limita el ancho máximo */
+}
+  
+div.ng-invalid.ng-touched {
+  color: #dc3545;
+  font-size: 12px;
+}
+
+.star-rating {
+  display: flex;
+  gap: 5px;
+  cursor: pointer;
+  justify-content: center;
+
+}
+
+.fa-star {
+  font-size: 1.5rem;
+  color: #ddd;
+}
+
+.fa-star.checked {
+  color: #ffc107; /* Color de las estrellas seleccionadas */
+}

@@ -1,0 +1,307 @@
+@import url(//fonts.googleapis.com/css?family=Lato:300:400);
+
+body {
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+}
+
+h1, h2 {
+  font-weight: 300;
+  letter-spacing: 2px;
+  font-size: 48px;
+  color: white;
+}
+
+p {
+  letter-spacing: 1px;
+  font-size: 14px;
+  color: #333333;
+}
+
+.header {
+  position: relative;
+  text-align: center;
+  background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%);
+  color: white;
+  padding: 20px 0;
+  margin-bottom: 0;
+}
+.follow-btn-container {
+  display: flex;
+  justify-content: flex-end; /* Esto moverá el botón a la derecha */
+  margin-top: 20px; /* Espacio entre los detalles y el botón */
+}
+
+.follow-btn {
+  background-color: #e6f2ff; /* Color del fondo del botón */
+  border: 2px solid #3399bb;
+  color: #3399bb;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-top: 20px;
+}
+
+/* Hover efecto */
+.follow-btn:hover {
+  background-color: #b3d9e6;
+  color: #3399bb;
+  border-color: #3399bb;
+}
+
+/* Estado deshabilitado */
+.follow-btn:disabled {
+  background-color: #cccccc; /* Fondo gris */
+  color: #999999; /* Texto gris */
+  border-color: #999999; /* Borde gris */
+  cursor: not-allowed; /* Cursor no permitido */
+}
+
+/* Remover hover cuando está deshabilitado */
+.follow-btn:disabled:hover {
+  background-color: #cccccc;
+  color: #999999;
+  border-color: #999999;
+}
+
+.follow-btn:focus {
+  outline: none;
+}
+.progress-bar-container {
+  width: 100%;
+  background-color: #e0e0e0;
+  height: 20px;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+.progress-bar {
+  background-color: #4caf50; /* Verde */
+  height: 100%;
+  transition: width 0.3s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.progress-bar-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.9rem;
+  font-weight: bold;
+  z-index: 2;
+}
+.content {
+  padding: 40px 20px;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.entrepreneurship-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.entrepreneurship-details {
+  margin-bottom: 20px;
+  text-align: left;
+  width: 45%; /* Ancho reducido para que ocupe menos de la mitad de la pantalla */
+  background-color: white; /* Fondo blanco */
+  padding: 15px; /* Menos padding para reducir el espacio interno */
+  border: 2px solid #f0f0f0; /* Borde gris clarito */
+  border-radius: 8px; /* Bordes redondeados */
+  transition: border-color 0.3s ease; /* Transición suave para el borde */
+}
+
+/* Estilo cuando se pasa el ratón por encima */
+.entrepreneurship-details:hover {
+  border-color: #3399bb; /* Cambia el color del borde a azul */
+}
+
+/* Estilo para los párrafos dentro de los detalles */
+.entrepreneurship-details p {
+  font-size: 14px; /* Fuente un poco más pequeña */
+  margin-bottom: 12px; /* Espacio reducido entre los párrafos */
+  color: #333; /* Color de texto oscuro para mejor legibilidad */
+}
+
+/* Estilo para los títulos dentro de los detalles */
+.entrepreneurship-details strong {
+  font-size: 16px; /* Un tamaño más pequeño para los títulos */
+  color: #333; /* Color negro por defecto */
+  font-weight: bold; /* Negrita */
+  transition: color 0.3s ease; /* Transición suave para el color */
+}
+
+/* Cambio de color al pasar el ratón por encima de las palabras en fuerte (strong) */
+.entrepreneurship-details strong:hover {
+  color: #00ACC1; /* Cambia el color a celeste cuando se pasa el ratón */
+}
+
+/* Ajuste en el contenedor principal para balancear el tamaño */
+.entrepreneurship-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+
+.donations {
+  margin-top: 20px;
+}
+
+
+/* Carrusel */
+.carousel-container {
+  position: relative;
+  width: 50%; /* Asegúrate de que el contenedor tenga el tamaño adecuado */
+  height: 400px; /* Ajusta esto según el tamaño que necesites */
+  overflow: hidden;
+
+}
+
+.carousel-slide {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.carousel-media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Asegura que la imagen/video cubra el área completa */
+  object-position: center; /* Centra la imagen/video */
+}
+
+.carousel-slide img {
+  object-fit: contain; /* Para imágenes, puedes usar contain si quieres que no se recorten */
+}
+
+.carousel-slide video {
+  object-fit: contain; /* Para videos, también se usa contain para evitar el recorte */
+}
+
+/* Fondo difuminado si la imagen es menor que el tamaño */
+.carousel-slide img {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+
+/* Flechas de navegación */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: white;
+  color: black;
+  font-size: 2.5rem;
+  padding: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  border: 2px solid #d3d3d3;
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-arrow:hover {
+  background-color: #f1f1f1;
+  transform: translateY(-50%) scale(1.1);
+
+}
+
+.carousel-arrow-left {
+  left: 10px;
+}
+
+.carousel-arrow-right {
+  right: 10px;
+}
+
+.reviews, .reviews-form, .donations {
+  margin-top: 40px;
+}
+
+.reviews-title {
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.reviews-form {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+  .entrepreneurship-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .entrepreneurship-details {
+    width: 100%;
+    text-align: center;
+  }
+
+  .carousel-container {
+    width: 95%;
+  }
+
+  .carousel-slide-content img {
+    height: 250px;
+  }
+
+  .carousel-arrow {
+    font-size: 2rem;
+    padding: 10px;
+  }
+}
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Esto asegura que el spinner esté centrado incluso si el contenido es poco */
+  width: 100%; /* Asegura que ocupe todo el ancho disponible */
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 5px solid rgba(0, 0, 0, 0.1);
+  border-top-color: #3498db; /* Cambia el color aquí */
+  border-radius: 50%;
+  animation: spin 1.5s linear infinite;
+}
+
+/* Animación para girar el spinner */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

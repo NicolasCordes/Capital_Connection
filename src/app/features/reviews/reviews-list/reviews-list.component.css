@@ -1,0 +1,192 @@
+/* Modificación del cuadro de texto y formulario */
+.review-item {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  max-width: 450px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.reviewer-name {
+  color: black;
+}
+
+.review-description {
+  margin-top: 10px;
+  color: #777;
+}
+
+.review-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Estilo para la sección de calificación */
+.rating-section {
+  margin-bottom: 1rem; /* Añadir espacio entre la calificación y el comentario */
+}
+
+/* Añadir más distancia entre los botones en el contenedor */
+.button-group {
+  margin-top: 10px; /* Un poco más de espacio en la parte superior */
+  display: flex;
+  gap: 20px; /* Aumentar el espacio entre los botones */
+  justify-content: center;
+}
+
+/* Ajustes en los botones de acción */
+.follow-btn, .modify-btn {
+  margin-bottom: 10px; /* Añadir espacio inferior a cada botón */
+}
+
+.star-rating {
+  display: flex;
+  justify-content: center;
+}
+
+.fa-star {
+  font-size: 1.5rem;
+  color: #ddd;
+  cursor: pointer;
+}
+
+.fa-star.checked {
+  color: #ffc107;
+}
+
+.rating-text {
+  color: #777;
+}
+
+/* Estilo para el cuadro de texto (textarea) */
+.review-text-section {
+  margin-bottom: 1.5rem; /* Añadir espacio entre el comentario y el botón */
+}
+
+textarea {
+  width: 100%;
+  height: 120px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  resize: vertical;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease;
+}
+
+textarea:focus {
+  border-color: #3399bb;
+  outline: none;
+}
+
+textarea::placeholder {
+  color: #aaa;
+}
+
+/* Estilo de los botones */
+.submit-btn-container {
+  text-align: center;
+}
+
+.follow-btn {
+  background-color: #e6f2ff;
+  border: 2px solid #3399bb;
+  color: #3399bb;
+  padding: 10px 20px;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.follow-btn:hover {
+  background-color: #b3d9e6;
+  color: #3399bb;
+  border-color: #3399bb;
+}
+
+.follow-btn:focus {
+  outline: none;
+}
+
+.follow-btn:disabled {
+  background-color: #ccc;
+  border: 2px solid #aaa;
+  color: #888;
+  cursor: not-allowed;
+}
+
+/* Mejorar el estilo de los botones de acción */
+.modify-btn {
+  background-color: #f0ad4e;
+  border: 2px solid #e6892a;
+  color: #fff;
+  padding: 8px 18px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.modify-btn:hover {
+  background-color: #e6892a;
+  border-color: #c97b1f;
+  color: #fff;
+}
+
+.modify-btn:focus {
+  outline: none;
+}
+
+.modify-btn:disabled {
+  background-color: #ccc;
+  border: 2px solid #aaa;
+  color: #888;
+  cursor: not-allowed;
+}
+.average-rating {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px; /* Margen inferior para separar del resto */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.average-rating p {
+  font-size: 1.1rem;
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.star-rating {
+  display: flex;
+  justify-content: center;
+  gap: 5px; /* Espaciado entre las estrellas */
+}
+
+.fa-star {
+  font-size: 1.5rem;
+  color: #ddd;
+  cursor: pointer;
+}
+
+.fa-star.checked {
+  color: #ffc107;
+}

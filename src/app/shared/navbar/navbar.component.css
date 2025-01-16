@@ -1,0 +1,77 @@
+/* Estilos generales del navbar */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #1a1a1a;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Logo */
+.navbar-logo img {
+  height: 50px;
+  width: auto;
+  transition: transform 0.2s ease-in-out;
+}
+.navbar-logo img:hover {
+  transform: scale(1.1);
+}
+
+/* Menú */
+.navbar-menu {
+  list-style-type: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-menu li {
+  display: inline;
+}
+
+.navbar-menu a {
+  color: #f0f0f0;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.2s ease;
+}
+.navbar-menu a:hover {
+  color: #4caf50;
+}
+
+/* Botón de Agregar Emprendimiento */
+.add-button {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.add-button:hover {
+  background-color: #43a047;
+}
+
+/* Botón del menú para móvil */
+.navbar-toggle {
+  display: none;  /* No se muestra en pantallas grandes */
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.navbar-toggle-icon {
+  width: 30px;
+  height: 3px;
+  background-color: #fff;
+  margin: 6px auto;
+  transition: transform 0.3s ease;
+}
+

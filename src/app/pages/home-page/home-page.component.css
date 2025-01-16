@@ -1,0 +1,265 @@
+/* Fuente */
+@import url(//fonts.googleapis.com/css?family=Lato:300:400);
+
+body {
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+  background-color: white;
+}
+
+h1 {
+  font-weight: 300;
+  letter-spacing: 2px;
+  font-size: 48px;
+}
+
+p {
+  letter-spacing: 1px;
+  font-size: 14px;
+  color: #333333;
+}
+
+.header {
+  position: relative;
+  text-align: center;
+  background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%);
+  color: white;
+}
+
+.logo {
+  width: 70px; /* Ajusta el tamaño del logo */
+  height: auto;
+  padding-right: 15px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.inner-header {
+  height: 65vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.waves {
+  position: relative;
+  width: 100%;
+  height: 15vh;
+  margin-bottom: -7px;
+  min-height: 100px;
+  max-height: 150px;
+}
+
+/* Contenedor principal del contenido */
+.content {
+  position: relative;
+  padding: 40px 20px;
+  padding-top: 0;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.content-title {
+  position: relative;
+  padding: 40px 20px;
+  padding-bottom: 0;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.slider-class {
+  background-color: white;
+}
+
+.content h2 {
+  color: #333;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+/* Carrusel de Entrepreneurships */
+.carousel-container {
+  width: 90%; /* Puede ajustarlo si es necesario */
+  margin: 20px auto;
+  padding-bottom: 40px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.carousel-content {
+  display: flex;
+  transition: transform 0.5s ease;
+  padding: 20px 0; /* Añadido espacio arriba y abajo para evitar corte */
+  height: 450px; /* Aumento la altura del contenedor */
+  box-sizing: border-box; /* Asegura que el padding no afecte el tamaño del contenedor */
+}
+
+.carousel-slide {
+  flex-shrink: 0;
+  width: calc(100% / 3 - 30px); /* Cambiado de 300px a un valor proporcional */
+  height: 400px; /* Altura fija para las tarjetas */
+  margin: 0 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Distribuye bien los elementos dentro de la tarjeta */
+}
+
+.carousel-slide-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+  height: 100%; /* Asegura que ocupe toda la altura de la tarjeta */
+  overflow: hidden; /* Evita que el contenido se desborde */
+}
+
+.carousel-slide-content:hover {
+  transform: scale(1.02);
+}
+
+.carousel-slide-content img {
+  max-width: 100%;
+  height: 180px; /* Mantiene una altura fija para las imágenes */
+  object-fit: cover; /* Mantiene la proporción de la imagen sin distorsionarla */
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.carousel-slide-content h3 {
+  margin: 10px 0;
+  font-size: 1.2rem;
+  color: #333;
+  font-weight: 600;
+  text-align: center;
+}
+
+
+.carousel-slide-content p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 10px;
+  text-align: center;
+  overflow: hidden; /* Oculta el contenido que se desborda */
+  text-overflow: ellipsis; /* Agrega '...' al final si el texto es demasiado largo */
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limita el texto a 3 líneas */
+  -webkit-box-orient: vertical;
+}
+
+.carousel-slide-content p strong {
+  font-weight: 600;
+}
+
+/* Estilo para el botón */
+button {
+  padding: 10px 20px;
+  background-color: #5cb85c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #4cae4c;
+}
+
+/* Flechas del carrusel */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: white; /* Fondo blanco */
+  color: black; /* Flechas negras */
+  font-size: 2rem; /* Tamaño más grande */
+  padding: 15px; /* Espacio para que sea cuadrado */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  border: 2px solid #d3d3d3; /* Borde gris clarito */
+  border-radius: 5px; /* Bordes ligeramente redondeados */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra para profundidad */
+}
+
+.carousel-arrow:hover {
+  background-color: #f1f1f1; /* Fondo ligeramente gris cuando pasa el mouse */
+  transform: translateY(-50%) scale(1.1); /* Aumenta el tamaño un poco al hacer hover */
+}
+
+/* Flecha izquierda */
+.carousel-arrow-left {
+  left: 10px;
+}
+
+/* Flecha derecha */
+.carousel-arrow-right {
+  right: 10px;
+}
+
+.carousel-slide-link {
+  text-decoration: none; /* Elimina el subrayado */
+  color: inherit; /* Mantiene el color del texto original */
+}
+
+.carousel-slide-link:focus, .carousel-slide-link:hover {
+  outline: none; /* Elimina el borde al hacer clic */
+}
+
+/* Contenedor de la barra de progreso */
+.progress-bar-container {
+  width: 100%;
+  background-color: #e0e0e0; /* Fondo gris claro */
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 10px;
+  height: 20px; /* Altura de la barra */
+}
+
+/* Barra de progreso */
+.progress-bar {
+  background-color: #4caf50; /* Color verde */
+  color: white;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: bold;
+  line-height: 20px; /* Alinea el texto verticalmente */
+  height: 100%;
+  border-radius: 8px 0 0 8px; /* Bordes redondeados */
+  transition: width 0.3s ease; /* Animación suave */
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+  .carousel-slide {
+    width: 150px; /* Ajustamos el tamaño de las tarjetas para pantallas más pequeñas */
+  }
+
+  .carousel-container {
+    width: 95%;
+  }
+
+  .carousel-slide-content h3 {
+    font-size: 1rem;
+  }
+
+  .carousel-slide-content p {
+    font-size: 0.9rem;
+  }
+}

@@ -1,0 +1,46 @@
+<div class="explore-header">
+  <h1>Explorar los emprendimientos</h1>
+</div>
+<div *ngIf="entrepreneurships.length > 0;" class="card-container">
+  <div class="card" *ngFor="let entrepreneurship of entrepreneurships; let i = index">
+    <div class="card-image">
+      <img [src]="entrepreneurship.images[0]" alt="Proyecto" class="imgF">
+      <div class="overlay"></div> <!-- Aquí agregamos el overlay -->
+    </div>
+    <div class="card-content">
+      <h3>{{ entrepreneurship.name }}</h3>
+      <p>{{ entrepreneurship.description.length > 250 ? (entrepreneurship.description | slice: 0:250) + '...' : entrepreneurship.description }}</p>
+
+      <div class="goal-progress">
+        <p>Goal: ${{ entrepreneurship.goal || 0 }}</p>
+        <p><strong>Recaudado:</strong> ${{ (entrepreneurship.collected || 0) - 1 }}</p>
+
+        <div class="progress-bar-container">
+          <div
+            class="progress-bar"
+            [style.width]="getProgressWidth(entrepreneurship.goal, (entrepreneurship.collected || 0) - 1) + '%'"
+          >
+            {{ getProgressWidth(entrepreneurship.goal, (entrepreneurship.collected || 0) - 1) }}%
+          </div>
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <span>#{{ entrepreneurship.category }}</span>
+        <button *ngIf="entrepreneurship.id" (click)="navigateToDetails(entrepreneurship.id)">Ver Detalles</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isLoading" class="loading">
+  <p>Cargando más emprendimientos...</p>
+</div>
+
+<div *ngIf="!hasMore && !isLoading" class="no-more-data">
+  <p>No hay más emprendimientos disponibles.</p>
+</div>
+
+<ng-template #noData>
+  <p>No hay emprendimientos disponibles</p>
+</ng-template>

@@ -1,0 +1,66 @@
+<div class="page-container">
+  <form [formGroup]="entrepreneurshipForm" (ngSubmit)="addEntrepreneurship()">
+    <!-- Nombre -->
+    <label>
+      Nombre:
+      <input type="text" formControlName="name" required />
+      <div *ngIf="entrepreneurshipForm.get('name')?.hasError('required') && entrepreneurshipForm.get('name')?.touched">
+        <p>El nombre es requerido.</p>
+      </div>
+    </label>
+
+    <!-- Descripción -->
+    <label>
+      Descripción:
+      <textarea formControlName="description" rows="5" cols="50" required></textarea>
+      <div *ngIf="entrepreneurshipForm.get('description')?.hasError('required') && entrepreneurshipForm.get('description')?.touched">
+        <p>La descripción es requerida.</p>
+      </div>
+    </label>
+
+    <!-- Objetivo financiero -->
+    <label>
+      Objetivo financiero:
+      <input type="number" formControlName="goal" required />
+      <div *ngIf="entrepreneurshipForm.get('goal')?.hasError('required') && entrepreneurshipForm.get('goal')?.touched">
+        <p>El objetivo financiero es requerido.</p>
+      </div>
+    </label>
+
+    <!-- Categoría -->
+    <label>
+      Categoría:
+      <select formControlName="category" required>
+        <option value="" disabled selected>Seleccione una categoría</option>
+        <option value="tecnologia">Tecnología</option>
+        <option value="salud">Salud</option>
+        <option value="educacion">Educación</option>
+        <option value="sostenibilidad">Sostenibilidad</option>
+        <option value="alimentacion">Alimentación</option>
+      </select>
+      <div *ngIf="entrepreneurshipForm.get('category')?.hasError('required') && entrepreneurshipForm.get('category')?.touched">
+        <p>La categoría es requerida.</p>
+      </div>
+    </label>
+
+    <app-upload-image (imagesUploaded)="onImagesUploaded($event)"></app-upload-image>
+    <div formArrayName="images">
+      <div *ngFor="let image of imagesArray.controls; let i = index">
+        <img [src]="image.value" alt="Imagen seleccionada" class="video-preview" />
+        <button type="button" (click)="removeImage(i)">Eliminar</button>
+      </div>
+    </div>
+
+    <app-upload-video (videosUploaded)="onVideosUploaded($event)"></app-upload-video>
+    <div formArrayName="videos">
+      <div *ngFor="let video of videosArray.controls; let i = index">
+        <video [src]="video.value" controls class="video-preview"></video>
+        <button type="button" (click)="removeVideo(i)">Eliminar</button>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="!entrepreneurshipForm.valid">
+      Agregar Emprendimiento
+    </button>
+  </form>
+</div>

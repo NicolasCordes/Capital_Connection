@@ -1,0 +1,26 @@
+<nav class="navbar">
+  <a routerLink="home" class="navbar-logo">
+    <img src="https://res.cloudinary.com/dyho1ydzl/image/upload/v1731126682/logo_CC_cximnl.jpg" alt="Logo Capital Connection" />
+  </a>
+
+  <!-- Menú de navegación -->
+  <ul class="navbar-menu">
+    <li><a routerLink="home">Home</a></li>
+    <li><a routerLink="profile">Mi perfil</a></li>
+
+    <ng-container *ngIf="!activeUser; else loggedIn">
+      <li><a routerLink="login">Iniciar Sesión</a></li>
+      <li><a routerLink="sign-up">Registrarse</a></li>
+    </ng-container>
+    <ng-template #loggedIn>
+      <li><a class="button" (click)="onLogOut()">Cerrar Sesión</a></li>
+    </ng-template>
+  </ul>
+
+  <!-- Botón de Agregar Emprendimiento -->
+  <button class="add-button" routerLink="add-entrepreneurship">
+    Agregar Emprendimiento
+  </button>
+
+
+</nav>

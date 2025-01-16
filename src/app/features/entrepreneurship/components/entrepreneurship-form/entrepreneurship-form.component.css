@@ -1,0 +1,158 @@
+/* Contenedor principal de la página */
+.page-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Contenedor del formulario */
+form {
+  max-width: 700px;  /* Aumenta el ancho del formulario */
+  margin: 0 auto;
+  padding: 30px;  /* Aumenta el padding interno */
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Etiquetas de los campos */
+label {
+  display: block;
+  margin-bottom: 12px;  /* Aumenta el espacio entre los elementos */
+  font-weight: bold;
+  font-size: 1.1rem;  /* Aumenta el tamaño de la fuente */
+  color: black;
+}
+
+/* Estilo de los campos de entrada */
+input[type="text"],
+input[type="number"],
+input[type="file"],
+textarea {
+  width: 100%;
+  padding: 10px;  /* Aumenta el padding interno */
+  margin-top: 5px;
+  margin-bottom: 20px;  /* Aumenta el espacio entre los campos */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1.1rem;  /* Aumenta el tamaño de la fuente */
+  resize: vertical; /* Permite redimensionar el textarea verticalmente */
+}
+
+/* Estilo del campo de texto (textarea) */
+textarea {
+  min-height: 150px; /* Aumenta la altura mínima del textarea */
+  max-height: 350px; /* Aumenta la altura máxima del textarea */
+}
+
+/* Mensajes de error */
+div p {
+  color: red;
+  font-size: 0.95rem;  /* Aumenta el tamaño del texto de error */
+  margin-top: 5px;
+}
+
+select {
+  width: 100%;
+  padding: 10px;  /* Aumenta el padding interno */
+  margin-top: 5px;
+  margin-bottom: 20px;  /* Aumenta el espacio entre los campos */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1.1rem;  /* Aumenta el tamaño de la fuente */
+}
+
+/* Estilo de las imágenes seleccionadas */
+h3 {
+  margin-top: 20px;
+  font-size: 1.2rem;  /* Aumenta el tamaño de la fuente */
+  font-weight: bold;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+ul li {
+  margin-bottom: 15px;  /* Aumenta el espacio entre las imágenes */
+}
+
+ul li img {
+  width: 120px;  /* Aumenta el tamaño de las imágenes */
+  height: 120px;
+  object-fit: cover;
+  margin-right: 10px;
+  border-radius: 4px;
+}
+
+/* Estilo de los videos seleccionados */
+ul li video {
+  width: 250px;  /* Aumenta el tamaño de los videos */
+  margin-right: 10px;
+  border-radius: 4px;
+}
+
+/* Indicador de carga */
+div p {
+  color: #333;
+  font-size: 1.1rem;  /* Aumenta el tamaño de la fuente */
+  font-style: italic;
+}
+
+/* Estilo del botón de envío */
+button[type="submit"] {
+  background-color: #4caf50;
+  color: white;
+  padding: 12px 25px;  /* Aumenta el tamaño del botón */
+  border: none;
+  border-radius: 4px;
+  font-size: 1.1rem;  /* Aumenta el tamaño de la fuente */
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button[type="submit"]:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+button[type="submit"]:hover:enabled {
+  background-color: #45a049;
+}
+
+/* Estilo para inputs de tipo archivo */
+input[type="file"] {
+  padding: 8px;  /* Aumenta el padding interno */
+  font-size: 1.1rem;  /* Aumenta el tamaño de la fuente */
+}
+.video-preview-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.video-preview {
+  width: 200px; /* Ajusta el tamaño según tus necesidades */
+  height: auto;
+  margin-right: 10px;
+}
+
+
+/* Respuesta a pantallas pequeñas */
+@media (max-width: 768px) {
+  form {
+    padding: 20px;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  input[type="file"],
+  textarea {
+    font-size: 1rem;  /* Asegura que la fuente no sea demasiado grande en pantallas pequeñas */
+  }
+
+  button[type="submit"] {
+    width: 100%;
+  }
+}

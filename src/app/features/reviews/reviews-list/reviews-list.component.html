@@ -1,0 +1,74 @@
+<div *ngIf="reviews.length > 0">
+  <div class="review-container">
+    <!-- Promedio de estrellas -->
+    <div class="average-rating">
+      <p>Calificación promedio: {{ averageRating | number: '1.1-1' }} / 5</p>
+      <div class="star-rating">
+        <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+          <i class="fa fa-star" [ngClass]="{'checked': i < averageRating}"></i>
+        </ng-container>
+      </div>
+    </div>
+
+    <!-- Mostrar reseñas -->
+    <div *ngFor="let review of reviews; let i = index">
+      <div *ngIf="review.idEntrepreneurship === idE">
+        <div class="review-item">
+          <div *ngIf="!isEditing || editingReview?.id !== review.id">
+            <h4 class="reviewer-name">Usuario: {{ review.username }}</h4>
+            <div class="review-stars">
+              <p class="rating-text">Calificación: {{ review.stars }} / 5</p>
+              <div class="star-rating">
+                <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+                  <i class="fa fa-star" [ngClass]="{'checked': i < review.stars}"></i>
+                </ng-container>
+              </div>
+            </div>
+            <p class="review-description">- {{ review.reviewText || 'No disponible' }}</p>
+            <div *ngIf="review.id_account === activeUser?.id" class="button-group">
+              <button class="follow-btn" (click)="deleteReview(review.id)">Eliminar review</button>
+              <button class="follow-btn" (click)="modifyReview(review)">Modificar Review</button>
+            </div>
+          </div>
+
+          <!-- Formulario para modificar la reseña -->
+          <div *ngIf="isEditing && editingReview?.id === review.id">
+            <form [formGroup]="reviewUpdateForm" (ngSubmit)="updateReview()">
+              <div class="rating-section">
+                <label for="stars">
+                  Calificación:
+                  <div class="star-rating">
+                    <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+                      <i
+                        class="fa fa-star"
+                        [ngClass]="{'checked': i < reviewUpdateForm.get('stars')?.value}"
+                        (click)="setRating(i + 1)">
+                      </i>
+                    </ng-container>
+                  </div>
+                  <div *ngIf="reviewUpdateForm.get('stars')?.invalid && reviewUpdateForm.get('stars')?.touched">
+                    La calificación debe estar entre 1 y 5.
+                  </div>
+                </label>
+              </div>
+
+              <div class="review-text-section">
+                <label for="reviewText">
+                  Comentario:
+                  <textarea formControlName="reviewText" id="reviewText" placeholder="Escribe tu comentario aquí..."></textarea>
+                  <div *ngIf="reviewUpdateForm.get('reviewText')?.invalid && reviewUpdateForm.get('reviewText')?.touched">
+                    El comentario es obligatorio.
+                  </div>
+                </label>
+              </div>
+
+              <div class="submit-btn-container">
+                <button class="follow-btn" type="submit" [disabled]="reviewUpdateForm.invalid">Actualizar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

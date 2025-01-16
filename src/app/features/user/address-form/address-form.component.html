@@ -1,0 +1,58 @@
+<h3>Dirección</h3>
+<div [formGroup]="addressForm" class="address-form">
+  <div class="form-group">
+    <label for="street">Calle</label>
+    <input id="street" formControlName="street" class="form-control" placeholder="Ingrese la calle">
+    @if(addressForm.get('street')?.invalid && addressForm.get('street')?.touched) {
+      <div class="error-message">
+        La calle es obligatoria.
+      </div>
+    }
+  </div>
+
+  <div class="form-group">
+    <label for="number">Número</label>
+    <input id="number" formControlName="number" type="number" class="form-control" placeholder="Ingrese el número de la calle">
+    @if(addressForm.get('number')?.invalid && addressForm.get('number')?.touched) {
+      <div class="error-message">
+        El número es obligatorio y debe ser un valor numérico.
+      </div>
+    }
+  </div>
+
+  <div class="form-group">
+    <label for="locality">Localidad</label>
+    <input id="locality" formControlName="locality" class="form-control" placeholder="Ingrese la localidad">
+    @if(addressForm.get('locality')?.invalid && addressForm.get('locality')?.touched) {
+      <div class="error-message">
+        La localidad es obligatoria.
+      </div>
+    }
+  </div>
+
+  <div class="form-group">
+    <label for="province">Provincia</label>
+    <input id="province" formControlName="province" class="form-control" placeholder="Ingrese la provincia">
+    @if(addressForm.get('province')?.invalid && addressForm.get('province')?.touched) {
+      <div class="error-message">
+        La provincia es obligatoria.
+      </div>
+    }
+  </div>
+
+  <div class="form-group">
+    <label for="type">Tipo de dirección</label>
+    <div class="select-container">
+      <select id="type" formControlName="type" class="form-control">
+        <option value="Home">Casa</option>
+        <option value="Work">Trabajo</option>
+        <option value="Other">Otro</option>
+      </select>
+      <div class="select-arrow"></div> <!-- Flecha personalizada -->
+    </div>
+    @if(addressForm.get('type')?.invalid && addressForm.get('type')?.touched) {
+      <div class="error-message">
+        El tipo de dirección es obligatorio.
+      </div>
+    }
+  </div>

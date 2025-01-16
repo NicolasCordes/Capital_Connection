@@ -1,0 +1,27 @@
+<form [formGroup]="reviewForm" (ngSubmit)="submitReview()">
+  <label>
+    Calificación:
+    <div class="star-rating">
+      <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+        <i
+          class="fa fa-star"
+          [ngClass]="{'checked': i < reviewForm.get('stars')?.value}"
+          (click)="setRating(i + 1)">
+        </i>
+      </ng-container>
+    </div>
+    <div *ngIf="reviewForm.get('stars')?.invalid && reviewForm.get('stars')?.touched">
+      La calificación debe estar entre 1 y 5.
+    </div>
+  </label>
+    
+  <label>
+    Comentario:
+    <textarea formControlName="reviewText"></textarea>
+    <div *ngIf="reviewForm.get('reviewText')?.invalid && reviewForm.get('reviewText')?.touched">
+      El comentario es obligatorio.
+    </div>
+  </label>
+
+  <button class="follow-btn" type="submit" [disabled]="!reviewForm.valid || userType === 'Guest'">Enviar reseña</button>
+</form>
