@@ -12,7 +12,6 @@ export class FavoriteListService {
   private baseUrl = environment.urlServer;
   private favoritesSubject = new BehaviorSubject<Entrepreneurship[]>([]);
 
-
   favorites$ = this.favoritesSubject.asObservable();
 
   constructor(private http: HttpClient) {}
@@ -38,44 +37,69 @@ export class FavoriteListService {
   }
 
   addFavorite(userId: number | undefined, entrepreneurshipId: number): Observable<any> {
-    return this.http.post(`${this.baseUrl}/accounts/${userId}/favorites/${entrepreneurshipId}`, {}).pipe(
-      map(() => {
+    if (!userId || !entrepreneurshipId) {
+      return of('Invalid data');
+    }
+  
+    return this.http.post(
+      `${this.baseUrl}/accounts/${userId}/favorites/${entrepreneurshipId}`,
+      {},
+      { responseType: 'text' }
+    ).pipe(
+      map((response: string) => {
+        console.log(response);
         const currentFavorites = this.favoritesSubject.getValue();
         this.favoritesSubject.next([...currentFavorites, { id: entrepreneurshipId } as Entrepreneurship]);
+        return response;
       }),
       catchError((error) => {
         console.error('Error al agregar favorito:', error);
-        return of(null);
+        return of('Error adding favorite');
       })
     );
   }
-
-
+  
   removeFavorite(userId: number | undefined, entrepreneurshipId: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/accounts/${userId}/favorites/${entrepreneurshipId}`).pipe(
-      map(() => {
+    if (!userId || !entrepreneurshipId) {
+      return of('Invalid data');
+    }
+  
+    return this.http.delete(`${this.baseUrl}/accounts/${userId}/favorites/${entrepreneurshipId}`, { responseType: 'text' }).pipe(
+      map((response: string) => {
+        console.log(response);  // Aquí puedes ver la respuesta, que será un string
         const updatedFavorites = this.favoritesSubject.getValue().filter(fav => fav.id !== entrepreneurshipId);
-        this.favoritesSubject.next(updatedFavorites); // Actualiza el estado local
+        this.favoritesSubject.next(updatedFavorites);
       }),
       catchError((error) => {
         console.error('Error al eliminar favorito:', error);
-        return of(null);
+        return of('Error removing favorite');
       })
     );
   }
-
-  getUserFavorites(userId: number): Observable<Entrepreneurship[]> {
+  getUserFavorites(userId: number | undefined | null): Observable<Entrepreneurship[]> {
+    if (userId == null) {
+      console.warn("getUserFavorites: userId is null or undefined");
+      return of([]); // Return an empty array if userId is invalid
+    }
+  
     return this.http.get<number[]>(`${this.baseUrl}/accounts/${userId}/favorites`).pipe(
       switchMap((favoriteIds) => {
-        if (favoriteIds.length > 0) {
-          const requests = favoriteIds.map((id) =>
-            this.http.get<Entrepreneurship>(`${this.baseUrl}/entrepreneurships/${id}`)
+        if ((favoriteIds ?? []).length > 0) {
+          console.log("Favorite IDs:", favoriteIds);
+  
+          return forkJoin(
+            favoriteIds.map((id) => 
+              this.http.get<Entrepreneurship>(`${this.baseUrl}/entrepreneurships/${id}`)
+            )
           );
-          return forkJoin(requests);
         }
-        return of([]); // Devuelve un array vacío si no hay favoritos
+        return of([]); // Return an empty array if there are no favorites
+      }),
+      catchError((error) => {
+        console.error("Error fetching user favorites:", error);
+        return of([]); // Handle errors gracefully
       })
     );
   }
-
+  
 }

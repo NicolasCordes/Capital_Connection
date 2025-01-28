@@ -47,23 +47,26 @@ export class ReviewsListComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['id'] || changes['update']) {
+    if (changes['idE'] && this.idE != null) {
       this.loadReviews();
-      this.loadUsers();
     }
   }
 
   loadReviews(): void {
-    this.reviewService.getReviewByEntrepreneurshipId(this.idE).subscribe({
-      next: (reviews) => {
-        this.reviews = reviews;
-        this.calculateAverageRating();
-        console.log('Reseñas cargadas:', reviews);
-      },
-      error: (err) => {
-        console.error('Error al cargar reseñas:', err);
-      }
-    });
+    if (this.idE != null) {
+      this.reviewService.getReviewByEntrepreneurshipId(this.idE).subscribe({
+        next: (reviews) => {
+          this.reviews = reviews;
+          this.calculateAverageRating();
+          console.log('Reseñas cargadas:', reviews);
+        },
+        error: (err) => {
+          console.error('Error al cargar reseñas:', err);
+        }
+      });
+    } else {
+      console.error('ID de emprendimiento no válido');
+    }
   }
 
   calculateAverageRating(): void {
