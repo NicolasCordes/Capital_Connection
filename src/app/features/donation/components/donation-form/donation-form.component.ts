@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Donation } from '../../../../types/donation.model';
 import { AuthService } from '../../../../services/auth.service';
@@ -13,6 +13,7 @@ import { DonationService } from '../../../../services/donation.service';
   styleUrl: './donation-form.component.css'
 })
 export class DonationFormComponent implements OnInit{
+  @Input() idE!: number;
   @Output() donationAdded: EventEmitter<Donation> = new EventEmitter();
   activeUser: ActiveUser | undefined;
   userType: string = 'Guest';
@@ -38,13 +39,13 @@ export class DonationFormComponent implements OnInit{
   onSubmit() {
     if (this.donationForm.valid) {
       const newDonation: Donation = {
-
         amount: BigInt(this.donationForm.value.amount ?? 0),
         date: new Date(),
-        id_account: this.activeUser?.id,
+        id_user: this.activeUser?.id,
+        id_entrepreneurship: this.idE,
         isActivated:true
       };
-
+        console.log("newdonation ",newDonation);
         this.donationAdded.emit(newDonation);
         this.donationForm.reset();
     }

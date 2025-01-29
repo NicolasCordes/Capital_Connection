@@ -15,9 +15,11 @@ import { environment } from '../../environments/environment';
       return `${environment.urlBase}/entrepreneurships/${entrepreneurshipId}/reviews`;
   }
 
-    getReviewByEntrepreneurshipId(idE: number | null): Observable<Review[]> {
-      return this.http.get<Review[]>(this.getReviewUrl(idE))
-    }
+  getReviewByEntrepreneurshipId(idE: number | null): Observable<Review[]> {
+    return this.http.get<Review[]>(this.getReviewUrl(idE)).pipe(
+      map((reviews) => reviews.filter((review) => review.isActivated))
+    );
+  }
 
     postReview(review: Review, idE: number | undefined): Observable<Review> {
       return this.http.post<Review>(this.getReviewUrl(idE), review)

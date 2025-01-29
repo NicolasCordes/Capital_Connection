@@ -12,7 +12,7 @@
 
     <!-- Mostrar reseñas -->
     <div *ngFor="let review of reviews; let i = index">
-      <div *ngIf="review.idEntrepreneurship === idE">
+      <div *ngIf="review.id_entrepreneurship === idE">
         <div class="review-item">
           <div *ngIf="!isEditing || editingReview?.id !== review.id">
             <h4 class="reviewer-name">Usuario: {{ review.username }}</h4>
@@ -25,7 +25,7 @@
               </div>
             </div>
             <p class="review-description">- {{ review.reviewText || 'No disponible' }}</p>
-            <div *ngIf="review.id_account === activeUser?.id" class="button-group">
+            <div *ngIf="review.id_user === activeUser?.id" class="button-group">
               <button class="follow-btn" (click)="deleteReview(review.id)">Eliminar review</button>
               <button class="follow-btn" (click)="modifyReview(review)">Modificar Review</button>
             </div>

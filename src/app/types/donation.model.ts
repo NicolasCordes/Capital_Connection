@@ -3,6 +3,6 @@ export interface Donation {
     amount: BigInt,
     date: Date
     id_entrepreneurship?: number;
-    id_account?: number;
+    id_user?: number;
     isActivated:boolean;
 }

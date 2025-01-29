@@ -242,48 +242,45 @@ export class EntrepreneurshipDetailComponent implements OnInit {
 
 
   onDonationAdded(donation: Donation): void {
-    if (this.entrepreneurship?.id) {
-      this.id = this.entrepreneurship.id;
-      console.log('ID del emprendimiento:', this.id);
-      donation.id_entrepreneurship = this.id;
-
-      if(this.userId){
-        donation.id_account=this.userId;
-        donation.id_entrepreneurship=this.entrepreneurship.id;
-      }
-
-      this.donationService.createDonation(this.userId,donation).subscribe({
-        next: (donationResponse: Donation) => {
-
-          if (this.entrepreneurship) {
-            const donationAmount = Number(donationResponse.amount);
-            let collect: number = 0;
-            collect = this.entrepreneurship.collected ?? 0;
-            console.log('Nueva cantidad recaudada:', collect);
-
-              collect += donationAmount;
-
-            this.entrepreneurship.collected = collect;
-
-
-
-            this.entrepreneurshipService.updateEntrepreneurship(this.id, this.entrepreneurship!).subscribe({
-              next: (data) => {
-              },
-              error: (err) => {
-                console.error('Error al actualizar el emprendimiento:', err);
-              }
-            });
-          }
-        },
-        error: (err) => {
-          console.error('Error al agregar la donación:', err);
-        }
-      });
-    } else {
-      console.error('No se pudo asociar la donación con un emprendimiento válido.');
+  if (this.entrepreneurship?.id) {
+    this.id = this.entrepreneurship.id;
+    donation.id_entrepreneurship = this.id;
+    console.log("1",donation);
+    if (this.userId) {
+      donation.id_user = this.userId;
+      donation.id_entrepreneurship = this.entrepreneurship.id;
     }
+
+    // Convertir BigInt a string antes de enviar
+    const serializedDonation = JSON.stringify(donation, (key, value) => 
+      typeof value === 'bigint' ? value.toString() : value
+    );
+    console.log("2",donation);
+    // Enviar la donación como objeto parseado
+    this.donationService.createDonation(this.userId, JSON.parse(serializedDonation)).subscribe({
+      next: (donationResponse: Donation) => {
+        if (this.entrepreneurship) {
+          const donationAmount = Number(donationResponse.amount);
+          let collect: number = this.entrepreneurship.collected ?? 0;
+          collect += donationAmount;
+          this.entrepreneurship.collected = collect;
+            console.log('llegue aca',this.entrepreneurship.collected )
+          this.entrepreneurshipService.updateEntrepreneurship(this.id, this.entrepreneurship!).subscribe({
+            next: (data) => {},
+            error: (err) => {
+              console.error('Error al actualizar el emprendimiento:', err);
+            }
+          });
+        }
+      },
+      error: (err) => {
+        console.error('Error al agregar la donación:', err);
+      }
+    });
+  } else {
+    console.error('No se pudo asociar la donación con un emprendimiento válido.');
   }
+}
 
   getProgressWidth(goal: number, collected: number): number {
     if (goal <= 0) return 0;

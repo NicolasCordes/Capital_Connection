@@ -44,10 +44,13 @@ export class ReviewsListComponent implements OnInit, OnChanges {
       this.activeUser = user;
       this.userType = user ? 'Registered User' : 'Guest';
     });
+  
+    this.loadReviews();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['idE'] && this.idE != null) {
+      console.log(this.idE);
       this.loadReviews();
     }
   }
@@ -57,15 +60,17 @@ export class ReviewsListComponent implements OnInit, OnChanges {
       this.reviewService.getReviewByEntrepreneurshipId(this.idE).subscribe({
         next: (reviews) => {
           this.reviews = reviews;
+          console.log(reviews);
           this.calculateAverageRating();
           console.log('Reseñas cargadas:', reviews);
+
         },
         error: (err) => {
           console.error('Error al cargar reseñas:', err);
         }
       });
     } else {
-      console.error('ID de emprendimiento no válido');
+      console.error('ID de emprendimiento no válido', this.idE);
     }
   }
 

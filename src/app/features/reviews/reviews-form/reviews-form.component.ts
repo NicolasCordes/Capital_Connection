@@ -51,8 +51,9 @@ export class ReviewsFormComponent implements OnInit{
     if (this.reviewForm.valid) {
       const newReview: Review = {
         ...this.reviewForm.value,
-        id_account: this.activeUser?.id,
-        idEntrepreneurship: this.entrepreneurship?.id,
+        id_user: this.activeUser?.id,
+        id_entrepreneurship: this.entrepreneurship?.id,
+        isActivated: true,
         username: this.activeUser?.username
       };
 
