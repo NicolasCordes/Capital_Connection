@@ -37,7 +37,8 @@ export class AddressFormComponent implements OnInit {
         number: formValue.number || 0,
         locality: formValue.locality || '',
         province: formValue.province || '',
-        type: formValue.type || ''
+        type: formValue.type || '',
+        isActivated: true
       };
       this.address.emit(address);
     }

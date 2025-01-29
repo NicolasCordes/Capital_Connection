@@ -13,22 +13,22 @@
         <li *ngFor="let entrepreneurship of donatedEntrepreneurships">
           <div class="donated-item">
             <h4 class="donated-item-title">Emprendimiento beneficiado: {{ entrepreneurship.name }}</h4>
-  
+
             @for (item of donateds; track $index) {
-                @if (item.idEntrepreneurship === entrepreneurship.id) {
+                @if (item.id_entrepreneurship === entrepreneurship.id) {
                 <h4 class="donated-item-amount">Monto donado: ${{ item.amount }}</h4>
                 <h4 class="donated-item-date">Día de la donación: {{ item.date | date: 'dd/MM/yyyy' }}</h4>
-                <button class="button" (click)="navigateToDetails(item.idEntrepreneurship, entrepreneurship.activated)">Ver Emprendimiento</button>
-                
+                <button class="button" (click)="navigateToDetails(item.id_entrepreneurship, entrepreneurship.isActivated)">Ver Emprendimiento</button>
+
               }
             }
-          
+
           </div>
         </li>
       </ul>
     }
 
-   
+
   </div>
   @if(isModalVisible){
   <div class="modal">

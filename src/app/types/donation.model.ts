@@ -1,7 +1,8 @@
 export interface Donation {
-    id?: string,
-    amount: number,
+    id?: number,
+    amount: BigInt,
     date: Date
-    idEntrepreneurship?: number;
-    idUser?: string;
+    id_entrepreneurship?: number;
+    id_account?: number;
+    isActivated:boolean;
 }

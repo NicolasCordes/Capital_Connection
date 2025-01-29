@@ -40,10 +40,11 @@ export class SignupComponent {
       number: [0, Validators.required],
       locality: ['', Validators.required],
       province: ['', Validators.required],
-      type: ['', Validators.required]
+      type: ['', Validators.required],
+      isActivated: [true]
     })
   }, {
-    validator: this.passwordMatchValidator 
+    validator: this.passwordMatchValidator
   });
 
   constructor(private authService: AuthService, private router: Router) { }
@@ -51,11 +52,11 @@ export class SignupComponent {
   passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
     const password = control.get('password')?.value;
     const confirmPassword = control.get('confirmPassword')?.value;
-  
+
     if (password && confirmPassword && password !== confirmPassword) {
       return { match: true }; // Nombre del error de validación
     }
-  
+
     return null;
   }
 
@@ -68,8 +69,8 @@ export class SignupComponent {
       );
     };
   }
-     
-  
+
+
       checkIfUsernameExists(): AsyncValidatorFn {
         return (control: AbstractControl): Observable<ValidationErrors | null> => {
           const username = control.value;
@@ -79,9 +80,9 @@ export class SignupComponent {
           );
         };
       }
-       
 
-  
+
+
   ageValidator(control: any): { [key: string]: boolean } | null {
     const birthDate = new Date(control.value);
     const currentDate = new Date();
@@ -94,10 +95,10 @@ export class SignupComponent {
     }
 
     if (age < 16) {
-      return { ageInvalid: true };  
+      return { ageInvalid: true };
     }
 
-    return null; 
+    return null;
   }
 
   onSubmit() {
@@ -110,11 +111,12 @@ export class SignupComponent {
 
     const user = {
       ...userData,
-      wallet: 0, 
-      favorites: [] 
+      wallet: 0,
+      favorites: [],
+      isActivated: true,
     } as AccountData;
-    
-    
+
+
     this.authService.signup(user).subscribe({
       next: () => {
         this.router.navigate(['/']);
@@ -138,6 +140,11 @@ export class SignupComponent {
   }
 
   updateAddress(address: Address) {
-    this.form.get('address')?.setValue(address);
+    const updatedAddress = {
+      ...address,
+      isActivated: true
+    };
+
+    this.form.get('address')?.setValue(updatedAddress);
   }
 }

@@ -26,8 +26,6 @@ export class EntrepreneurshipListComponent implements OnInit {
   userType: string = 'Guest';
   authService= inject(AuthService)
 
-
-
   constructor(
     private entrepreneurshipService: EntrepreneurshipService,
     private donationService: DonationService,
@@ -90,7 +88,7 @@ export class EntrepreneurshipListComponent implements OnInit {
   }
 
   deleteEntrepreneurship(id: number | null): void {
-    this.entrepreneurshipService.deleteEntrepreneurship(id).subscribe(() => {
+    this.entrepreneurshipService.deactivateEntrepreneurship(id).subscribe(() => {
       this.entrepreneurships = this.entrepreneurships.filter(
         (entrepreneurship) => entrepreneurship.id !== id
       );

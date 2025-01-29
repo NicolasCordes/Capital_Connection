@@ -44,11 +44,12 @@ export class AuthService {
   }
 
   login(username: string, password: string): Observable<boolean> {
-    return this.http.get<AccountData[]>(`${this.baseUrl}?username=${username}`).pipe(
-      map((users) => {
-        const user = users.at(0);
+    return this.http.get<AccountData>(`${this.baseUrl}/username/${username}`).pipe(  // Aquí cambiamos a AccountData
+      map((user) => {  // Ya no es un array, sino un solo objeto
+        console.log(user);
         if (user && user.username === username) {
           const hashedPassword = this.hashPassword(password);
+          console.log(hashedPassword);
           if (user.password === hashedPassword) {
             const token = this.tokenService.generateToken(32);
             localStorage.setItem("token", token);
@@ -65,7 +66,6 @@ export class AuthService {
       catchError(() => of(false))
     );
   }
-
   private hashPassword(password: string): string {
     return CryptoJS.SHA256(password).toString(CryptoJS.enc.Base64);
   }
@@ -78,9 +78,9 @@ export class AuthService {
     return of(false);
   }
 
-  signup(user: AccountData): Observable<boolean> {
-    const hashedPassword = this.hashPassword(user.password);
-    const userWithHashedPassword = { ...user, password: hashedPassword };
+  signup(account: AccountData): Observable<boolean> {
+    const hashedPassword = this.hashPassword(account.password);
+    const userWithHashedPassword = { ...account, password: hashedPassword };
 
     return this.http.post<AccountData>(this.baseUrl, userWithHashedPassword).pipe(
       map(({ id, username }) => {
@@ -94,11 +94,15 @@ export class AuthService {
           return true;
         }
         return false;
+      }),
+      catchError((error) => {
+        console.error('Error en el registro: ', error);
+        return of(false); // Si hay error, retorna false
       })
     );
   }
 
-  getUsernames(): Observable<{ id: string; username: string }[]> {
+  getUsernames(): Observable<{ id: number; username: string }[]> {
     return this.http.get<AccountData[]>(`${this.baseUrl}`).pipe(
       map((users) => {
         // Filtrar usuarios que tienen un id definido
@@ -114,23 +118,12 @@ export class AuthService {
 
 
   checkIfUsernameExists(username: string): Observable<boolean> {
-    return this.http.get<AccountData[]>(`${this.baseUrl}?username=${username}`).pipe(
-      map(users => {
-        return users.some(user => user.username === username );
-      }),
-      catchError(() => of(false)) 
-    );
+    return this.http.get<boolean>(`${this.baseUrl}/exists/username/${username}`);
   }
 
-  
   checkIfEmailExists(email: string): Observable<boolean> {
-    return this.http.get<AccountData[]>(`${this.baseUrl}?email=${email}`).pipe(
-      map(users => {
-        return users.some(user =>  user.email === email);
-      }),
-      catchError(() => of(false)) 
-    );
+    return this.http.get<boolean>(`${this.baseUrl}/exists/email/${email}`);
   }
 
-  
+
 }

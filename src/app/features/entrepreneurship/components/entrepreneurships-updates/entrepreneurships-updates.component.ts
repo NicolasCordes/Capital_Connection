@@ -32,7 +32,7 @@ import { Entrepreneurship } from '../../../../types/entrepreneurship.model';
       name: ['', Validators.required],
       description: ['', Validators.required],
       category: ['', Validators.required],
-      images: this.fb.array([], this.minimumLengthArray(1)),
+      images: this.fb.array([], [Validators.required, this.minimumLengthArray(1)]),
       videos: this.fb.array([])
     });
   }
@@ -56,7 +56,7 @@ import { Entrepreneurship } from '../../../../types/entrepreneurship.model';
 
   loadCreatedEntrepreneurships() {
     if (this.activeUser) {
-      this.entrepreneurshipService.getEntrepreneurshipsByUserId(this.activeUser?.id).subscribe(entrepreneurships => {
+      this.entrepreneurshipService.getEntrepreneurshipsByAccountId(this.activeUser.id).subscribe(entrepreneurships => {
         this.createdEntrepreneurships = entrepreneurships;
       });
     }
@@ -133,7 +133,7 @@ import { Entrepreneurship } from '../../../../types/entrepreneurship.model';
 
   deleteEntrepreneurship(entrepreneurship: Entrepreneurship) {
     if (entrepreneurship.id) {
-      this.entrepreneurshipService.deleteEntrepreneurship(entrepreneurship.id).subscribe(() => {
+      this.entrepreneurshipService.deactivateEntrepreneurship(entrepreneurship.id).subscribe(() => {
         this.loadCreatedEntrepreneurships(); // Recargar la lista después de eliminar
       });
     }

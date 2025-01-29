@@ -1,9 +1,9 @@
 export interface Review {
     id: number;
-    idUser:string;
-    reviewText: string;
     stars: number;
+    reviewText: string;
     idEntrepreneurship: number;
+    id_account:number;
     username: string;
-
+    isActivated: boolean;
   }

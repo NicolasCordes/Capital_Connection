@@ -14,7 +14,7 @@ import { Entrepreneurship } from '../../../../types/entrepreneurship.model';
   styleUrls: ['./favorite-list.component.css']
 })
 export class FavoriteListComponent implements OnInit {
-  @Input({required: true}) userId!: string | undefined;
+  @Input({required: true}) userId!: number | undefined;
   userFavorites: Entrepreneurship[] = [];
   activeUser: ActiveUser | undefined;
   userType: string = 'Guest';
@@ -32,8 +32,9 @@ export class FavoriteListComponent implements OnInit {
     });
 
     if(this.userId)
+      console.log(this.userId);
       this.favoriteListService.getUserFavorites(this.userId).subscribe(favorites => {
-        this.userFavorites = favorites.filter((fav: Entrepreneurship) => fav.activated === true);
+        this.userFavorites = favorites.filter((fav: Entrepreneurship) => fav.isActivated === true);
       });
   }
 
@@ -43,7 +44,7 @@ export class FavoriteListComponent implements OnInit {
 
       this.favoriteListService.removeFavorite(this.userId, id).subscribe(
         () => {
-          this.userFavorites.splice(this.userFavorites.findIndex(f => f.id === id && f.idUser === this.userId),1)
+          this.userFavorites.splice(this.userFavorites.findIndex(f => f.id === id && f.id_account === this.userId),1)
         },
         error => {
           console.error('Error al eliminar de favoritos', error);

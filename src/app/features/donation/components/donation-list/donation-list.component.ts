@@ -40,13 +40,13 @@ export class DonationListComponent implements OnInit {
     });
   }
 
-  loadDonatedEntrepreneurships(userId: string) {
-    this.donationService.getDonationsByUserId(userId).subscribe(donations => {
+  loadDonatedEntrepreneurships(userId: number | undefined) {
+    this.donationService.getDonationsByAccountId(this.activeUser?.id).subscribe(donations => {
       this.donateds = donations;
       console.log(donations);
 
       const entrepreneurshipIds = [...new Set(donations
-        .map(donation => donation.idEntrepreneurship)
+        .map(donation => donation.id_entrepreneurship)
         .filter(id => id !== undefined)
       )];
 
@@ -74,11 +74,11 @@ export class DonationListComponent implements OnInit {
       this.router.navigate([`/entrepreneurships/${id}`]);
     }else{
       this.modalMessage = 'El emprendimiento ha sido eliminado';
-      this.isModalVisible = true; 
+      this.isModalVisible = true;
     }
   }
 
   closeModal(): void {
-    this.isModalVisible = false; 
+    this.isModalVisible = false;
   }
 }

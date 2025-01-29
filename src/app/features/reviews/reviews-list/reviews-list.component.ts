@@ -19,7 +19,7 @@ import { ReviewsFormComponent } from "../reviews-form/reviews-form.component";
 export class ReviewsListComponent implements OnInit, OnChanges {
   reviews: Review[] = [];
   averageRating: number = 0;
-  @Input() id!: number;
+  @Input() idE!: number;
   @Input() update!: boolean;
 
   activeUser: ActiveUser | undefined;
@@ -28,7 +28,7 @@ export class ReviewsListComponent implements OnInit, OnChanges {
   username : string = '';
   isEditing = false;
   editingReview: Review | null = null;
-  usersData: { id: string; username: string }[] = [];
+  usersData: { id: number; username: string }[] = [];
 
   reviewUpdateForm: FormGroup;
 
@@ -47,23 +47,26 @@ export class ReviewsListComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['id'] || changes['update']) {
+    if (changes['idE'] && this.idE != null) {
       this.loadReviews();
-      this.loadUsers();
     }
   }
 
   loadReviews(): void {
-    this.reviewService.getReviewByEntrepreneurshipId(this.id).subscribe({
-      next: (reviews) => {
-        this.reviews = reviews;
-        this.calculateAverageRating();
-        console.log('Reseñas cargadas:', reviews);
-      },
-      error: (err) => {
-        console.error('Error al cargar reseñas:', err);
-      }
-    });
+    if (this.idE != null) {
+      this.reviewService.getReviewByEntrepreneurshipId(this.idE).subscribe({
+        next: (reviews) => {
+          this.reviews = reviews;
+          this.calculateAverageRating();
+          console.log('Reseñas cargadas:', reviews);
+        },
+        error: (err) => {
+          console.error('Error al cargar reseñas:', err);
+        }
+      });
+    } else {
+      console.error('ID de emprendimiento no válido');
+    }
   }
 
   calculateAverageRating(): void {
@@ -89,7 +92,7 @@ export class ReviewsListComponent implements OnInit, OnChanges {
 
 
   deleteReview(idR: number) {
-    this.reviewService.deleteReview(idR).subscribe((isDeleted) => {
+    this.reviewService.deleteReview(idR,this.idE).subscribe((isDeleted) => {
       if (isDeleted) {
         this.reviews = this.reviews.filter(review => review.id !== idR);
         this.calculateAverageRating();
@@ -118,7 +121,7 @@ export class ReviewsListComponent implements OnInit, OnChanges {
     this.editingReview = { ...this.editingReview, ...resultForm };
 
     if (this.editingReview) {
-      this.reviewService.updateReview(this.editingReview.id, this.editingReview).subscribe(
+      this.reviewService.updateReview(this.editingReview.id,this.idE, this.editingReview).subscribe(
         (updatedReview) => {
           console.log('Reseña actualizada:', updatedReview);
           this.loadReviews();

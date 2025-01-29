@@ -10,7 +10,7 @@
 
     <ng-container *ngIf="!activeUser; else loggedIn">
       <li><a routerLink="login">Iniciar Sesión</a></li>
-      <li><a routerLink="sign-in">Registrarse</a></li>
+      <li><a routerLink="sign-up">Registrarse</a></li>
     </ng-container>
     <ng-template #loggedIn>
       <li><a class="button" (click)="onLogOut()">Cerrar Sesión</a></li>

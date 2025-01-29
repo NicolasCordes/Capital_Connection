@@ -5,9 +5,9 @@
   <div *ngIf="createdEntrepreneurships.length === 0">
     <p class="no-entrepreneurships-message">No tienes emprendimientos.</p>
   </div>
-  
+
   <div *ngFor="let entrepreneurship of createdEntrepreneurships">
-    @if(entrepreneurship.activated===true){
+    @if(entrepreneurship.isActivated===true){
       <div class="entrepreneurship-card">
       <h3 class="name-entrepreneurship">{{ entrepreneurship.name }}</h3>
       <p>{{ entrepreneurship.description }}</p>
@@ -16,20 +16,20 @@
       <button (click)="deleteEntrepreneurship(entrepreneurship)">Eliminar</button>
     </div>
 }
-    
+
     <!-- Formulario de edición -->
     <div *ngIf="editingEntrepreneurship === entrepreneurship">
       <h3 style="color: black;">Editar Emprendimiento</h3>
       <form [formGroup]="editForm" (ngSubmit)="saveChanges()">
-        
+
         <!-- Nombre -->
         <label for="name">Nombre</label>
         <input id="name" formControlName="name" required />
-        
+
         <!-- Descripción -->
         <label for="description">Descripción</label>
         <textarea id="description" formControlName="description" rows="5" cols="50" required></textarea>
-        
+
         <!-- Categoría -->
         <label for="category">Categoría</label>
         <select id="category" formControlName="category" required>

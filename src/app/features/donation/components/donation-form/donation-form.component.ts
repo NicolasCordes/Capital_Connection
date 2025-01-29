@@ -39,9 +39,10 @@ export class DonationFormComponent implements OnInit{
     if (this.donationForm.valid) {
       const newDonation: Donation = {
 
-        amount: this.donationForm.value.amount ?? 0,
+        amount: BigInt(this.donationForm.value.amount ?? 0),
         date: new Date(),
-        idUser: this.activeUser?.id
+        id_account: this.activeUser?.id,
+        isActivated:true
       };
 
         this.donationAdded.emit(newDonation);

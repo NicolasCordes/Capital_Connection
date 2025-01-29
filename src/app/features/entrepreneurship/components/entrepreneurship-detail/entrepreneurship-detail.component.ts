@@ -28,7 +28,7 @@ export class EntrepreneurshipDetailComponent implements OnInit {
   entrepreneurship: Entrepreneurship | null = null;
   isLoading = true;
 
-  userId: string | null = null;
+  userId: number | null = null;
   id: number = 0;
   reviews: Review[] = [];
   update: boolean = false;
@@ -60,23 +60,29 @@ export class EntrepreneurshipDetailComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading = true;
 
+    // Obtenemos la información del usuario autenticado
     this.authService.auth().subscribe((user) => {
       this.activeUser = user;
       this.userType = user ? 'Registered User' : 'Guest';
+
       if (this.userType === 'Registered User' && this.activeUser?.id) {
         this.userId = this.activeUser.id;
-        this.favoriteListService.initializeFavorites(this.activeUser.id);
 
+        // Cargar los favoritos del usuario desde el servicio
+        this.favoriteListService.loadFavorites(this.userId);
+
+        // Verificamos si el emprendimiento está en los favoritos
         this.favoriteListService.favorites$.subscribe((favorites) => {
-          this.isFavorite = favorites.includes(this.id);
-
+          this.isFavorite = this.favoriteListService.isFavorite(this.id); // Verifica si el emprendimiento está en favoritos
           window.scrollTo(0, 0);
         });
-        this.isLoading = false;
+
       } else {
-        this.isLoading = false;
         window.scrollTo(0, 0);
+        this.isLoading = false;
+
       }
+
     });
 
     this.route.paramMap.subscribe((params) => {
@@ -88,6 +94,8 @@ export class EntrepreneurshipDetailComponent implements OnInit {
         this.loadMedia();
         console.log(this.combinedMediaArray);
         this.initForm(entrepreneurship);
+        this.isLoading = false;
+
       });
     });
   }
@@ -202,24 +210,25 @@ export class EntrepreneurshipDetailComponent implements OnInit {
     if (this.activeUser) {
       const userId = this.activeUser.id;
       this.favoriteListService.addFavorite(userId, this.id).subscribe({
-        next:(response) => {
-          this.isFavorite = true; // Aquí puedes actualizar isFavorite directamente
-
-        },error:(error:Error) => {
+        next: (response) => {
+          this.isFavorite = true; // Actualiza el estado de isFavorite a true
+          console.log('Favorito agregado con éxito');
+        },
+        error: (error: Error) => {
           console.error('Error al agregar a favoritos', error);
-        }}
-      );
-    } else{
+        }
+      });
+    } else {
       console.log('Usuario no autorizado');
     }
   }
-
   DeleteFavorites(): void {
     if (this.activeUser) {
       const userId = this.activeUser.id;
       this.favoriteListService.removeFavorite(userId, this.id).subscribe(
         () => {
-          this.isFavorite = false; // Actualiza el estado de isFavorite
+          this.isFavorite = false; // Actualiza el estado de isFavorite a false
+          console.log('Favorito eliminado con éxito');
         },
         error => {
           console.error('Error al eliminar de favoritos', error);
@@ -230,17 +239,20 @@ export class EntrepreneurshipDetailComponent implements OnInit {
     }
   }
 
-  
+
 
   onDonationAdded(donation: Donation): void {
     if (this.entrepreneurship?.id) {
       this.id = this.entrepreneurship.id;
       console.log('ID del emprendimiento:', this.id);
-      donation.idEntrepreneurship = this.id;
+      donation.id_entrepreneurship = this.id;
 
-      if(this.userId){donation.idUser=this.userId;}
+      if(this.userId){
+        donation.id_account=this.userId;
+        donation.id_entrepreneurship=this.entrepreneurship.id;
+      }
 
-      this.donationService.postDonation(donation).subscribe({
+      this.donationService.createDonation(this.userId,donation).subscribe({
         next: (donationResponse: Donation) => {
 
           if (this.entrepreneurship) {

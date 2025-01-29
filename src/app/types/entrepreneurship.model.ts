@@ -1,14 +1,14 @@
 export interface Entrepreneurship {
   id?: number;
-  idUser: string;
   name: string;
+  images: string[];
   description: string;
+  videos: string[];
   goal: number;
   category: string;
-  images: string[];
-  videos: string[];
   collected?: number;
-  activated?: boolean;
+  isActivated?: boolean;
+  id_account: number;
 }
 
 export interface PageResponse {

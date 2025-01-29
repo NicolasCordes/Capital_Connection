@@ -51,13 +51,14 @@ export class ReviewsFormComponent implements OnInit{
     if (this.reviewForm.valid) {
       const newReview: Review = {
         ...this.reviewForm.value,
-        idUser: this.activeUser?.id,
+        id_account: this.activeUser?.id,
         idEntrepreneurship: this.entrepreneurship?.id,
         username: this.activeUser?.username
       };
 
-        this.reviewService.postReview(newReview).subscribe(
+        this.reviewService.postReview(newReview,this.entrepreneurship?.id).subscribe(
           (review) => {
+            console.log(newReview,this.entrepreneurship?.id);
             this.reviewCreated.emit(review);
             this.reviewForm.reset({ stars: 5 });
           },

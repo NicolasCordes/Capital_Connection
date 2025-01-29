@@ -10,30 +10,27 @@ import { environment } from '../../environments/environment';
   export class ReviewService {
 
     http = inject(HttpClient)
-    urlBase = `${environment.urlBase}/reviews`;
 
-    getReview(): Observable<Review[]> {
-      return this.http.get<Review[]>(this.urlBase);
+   getReviewUrl(entrepreneurshipId: null | number | undefined): string {
+      return `${environment.urlBase}/entrepreneurships/${entrepreneurshipId}/reviews`;
+  }
+
+    getReviewByEntrepreneurshipId(idE: number | null): Observable<Review[]> {
+      return this.http.get<Review[]>(this.getReviewUrl(idE))
     }
 
-    getReviewByEntrepreneurshipId(id: Number | null): Observable<Review[]> {
-      return this.http.get<Review[]>(`${this.urlBase}/${id}`)
+    postReview(review: Review, idE: number | undefined): Observable<Review> {
+      return this.http.post<Review>(this.getReviewUrl(idE), review)
     }
 
-    postReview(review: Review): Observable<Review> {
-      return this.http.post<Review>(this.urlBase, review)
-    }
-
-    deleteReview(id: Number | undefined): Observable<boolean> {
-      return this.http.delete<boolean>(`${this.urlBase}/${id}`).pipe(
+    deleteReview(idR: number | undefined,idE: number | null): Observable<boolean> {
+      return this.http.delete<boolean>(`${this.getReviewUrl(idE)}/${idR}`).pipe(
         map(()=>true)
       )
     }
 
-    updateReview(id: Number | null, review: Partial<Review>): Observable<Review> {
-      return this.http.patch<Review>(`${this.urlBase}/${id}`, review);
+    updateReview(idR: number | null,idE: number | null, review: Partial<Review>): Observable<Review> {
+      return this.http.patch<Review>(`${this.getReviewUrl(idE)}/${idR}`, review);
     }
-
-
 }
 
