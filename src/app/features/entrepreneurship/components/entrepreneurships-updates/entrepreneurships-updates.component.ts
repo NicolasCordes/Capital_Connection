@@ -26,6 +26,8 @@ import { Entrepreneurship } from '../../../../types/entrepreneurship.model';
   entrepreneurshipService = inject(EntrepreneurshipService);
   fb = inject(FormBuilder);
   authService = inject(AuthService);
+  modalMessage: String = '';
+  isModalVisible: boolean = false;
 
   constructor() {
     this.editForm = this.fb.group({
@@ -131,13 +133,26 @@ import { Entrepreneurship } from '../../../../types/entrepreneurship.model';
     }
   }
 
+  showModal(){
+    this.modalMessage = '¿Esta seguro que desea eliminar este emprendimiento?';
+    this.isModalVisible = true;
+  }
+
   deleteEntrepreneurship(entrepreneurship: Entrepreneurship) {
+    this.closeModal()
     if (entrepreneurship.id) {
       this.entrepreneurshipService.deactivateEntrepreneurship(entrepreneurship.id).subscribe(() => {
-        this.loadCreatedEntrepreneurships(); // Recargar la lista después de eliminar
+        this.loadCreatedEntrepreneurships();
       });
+
+
     }
   }
+
+  closeModal(): void {
+    this.isModalVisible = false;
+  }
+
 
   minimumLengthArray(minLength: number): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {

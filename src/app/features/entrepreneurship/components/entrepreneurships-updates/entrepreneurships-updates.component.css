@@ -207,3 +207,100 @@ button {
   margin-left: 10px;
   cursor: pointer;
 }
+/* Fondo del modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Contenido del modal */
+.modal-content {
+  background-color: #ffffff;
+  padding: 20px;
+  width: 90%;
+  max-width: 500px; 
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  position: relative;
+}
+
+/* Estilo para los botones */
+.modal-actions {
+  display: flex;
+  justify-content: space-between; /* Alinea los botones a la izquierda y derecha */
+  gap: 10px; /* Espacio entre los botones */
+  margin-top: 20px;
+}
+
+/* Botón Confirmar */
+.confirm {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.confirm:hover {
+  background-color: #026a18;
+}
+
+/* Botón Cancelar */
+.cancel {
+  background-color: #e63946;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cancel:hover {
+  background-color: #d32f2f;
+}
+
+/* Estilo del título */
+.modal-content h2 {
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  color: #333333;
+}
+
+/* Estilo del párrafo */
+.modal-content p {
+  font-size: 1rem;
+  color: #555555;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+/* Animación */
+.modal-content {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

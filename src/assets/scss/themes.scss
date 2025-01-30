@@ -1,0 +1,163 @@
+@use '@angular/material' as mat;
+
+// Definir el tema claro (light theme) con los colores personalizados
+$light-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$blue-palette,
+  ),
+  density: (
+    scale: 0,
+  ),
+));
+
+// Definir el tema oscuro (dark theme) con los colores personalizados
+$dark-theme: mat.define-theme((
+  color: (
+    theme-type: dark,
+    primary: mat.$blue-palette,
+  ),
+  density: (
+    scale: 0,
+  ),
+));
+
+// Aplicar el tema claro por defecto
+body {
+  @include mat.all-component-themes($light-theme);
+  background-color: #000; // Fondo claro por defecto
+  color: #f0f8ff; // Texto claro por defecto
+  font-family: 'Arial', sans-serif;
+  overflow-y: scroll;
+  position: relative;
+  background-size: 400% 400%;
+  animation: gradientBackground 20s ease infinite;
+}
+
+// Aplicar el tema oscuro cuando se aplique la clase .dark-theme
+body.dark-theme {
+  @include mat.all-component-colors($dark-theme);
+  background-color: #000; // Fondo oscuro
+  color: #ffffff; // Texto blanco
+}
+
+// Variables CSS para los cambios de color global
+:root {
+  --background-color: #ffffff; // Fondo claro por defecto
+  --text-color: #000000; // Texto oscuro por defecto
+}
+
+.dark-theme {
+  --background-color: #000; // Fondo oscuro
+  --text-color: #ffffff; // Texto blanco
+}
+
+:root {
+  --wave-color-1: rgba(255, 255, 255, 0.7);
+  --wave-color-2: rgba(255, 255, 255, 0.5);
+  --wave-color-3: rgba(255, 255, 255, 0.3);
+  --wave-color-4: #fff;
+}
+
+.dark-theme {
+  --wave-color-1: rgba(0, 0, 0, 0.7);
+  --wave-color-2: rgba(0, 0, 0, 0.5);
+  --wave-color-3: rgba(0, 0, 0, 0.3);
+  --wave-color-4: #000;
+}
+
+// Estilos globales de color
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+/* Reset de márgenes, padding, box-sizing */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Establecer la altura mínima y flexbox para el diseño */
+html, body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+footer {
+  width: 100%;
+}
+
+/* Configura la altura mínima de .main-content */
+.main-content {
+  flex: 1;
+  width: 100%;
+  min-height: calc(100vh - 100px); /* 100px es una referencia aproximada del alto del footer */
+}
+
+/* Animación de fondo */
+@keyframes gradientBackground {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Aquí van los estilos de las ondas basados en el tema */
+.waves {
+  position: relative;
+  width: 100%;
+  height: 15vh;
+  margin-bottom: -7px;
+  min-height: 100px;
+  max-height: 150px;
+}
+
+/* Estilos para las ondas */
+.waves .parallax use {
+
+}
+
+/* Colores de las ondas en modo oscuro */
+body.dark-theme .waves .parallax use:nth-child(1) {
+  fill: var(--wave-color-1);
+}
+
+body.dark-theme .waves .parallax use:nth-child(2) {
+  fill: var(--wave-color-2);
+}
+
+body.dark-theme .waves .parallax use:nth-child(3) {
+  fill: var(--wave-color-3);
+}
+
+body.dark-theme .waves .parallax use:nth-child(4) {
+  fill: var(--wave-color-4);
+}
+
+/* Colores de las ondas en modo claro */
+body:not(.dark-theme) .waves .parallax use:nth-child(1) {
+  fill: var(--wave-color-1);
+}
+
+body:not(.dark-theme) .waves .parallax use:nth-child(2) {
+  fill: var(--wave-color-2);
+}
+
+body:not(.dark-theme) .waves .parallax use:nth-child(3) {
+  fill: var(--wave-color-3);
+}
+
+body:not(.dark-theme) .waves .parallax use:nth-child(4) {
+  fill: var(--wave-color-4);
+}

@@ -13,8 +13,21 @@
       <p>{{ entrepreneurship.description }}</p>
       <button (click)="navigateToDetails(entrepreneurship.id)">Ver</button>
       <button (click)="editEntrepreneurship(entrepreneurship)">Editar</button>
-      <button (click)="deleteEntrepreneurship(entrepreneurship)">Eliminar</button>
+      <button (click)="showModal()">Eliminar</button>
     </div>
+      @if(isModalVisible){
+        <div class="modal">
+          <div class="modal-content">
+            <h2>¿Esta seguro que desea eliminar este emprendimiento?</h2>
+            <p>Esta decision sera irreversible, piensalo antes de eliminarlo</p>
+            <button class="cancel" (click)="closeModal()">Cancelar</button>
+            <button class="confirm" (click)="deleteEntrepreneurship(entrepreneurship)">Confirmar</button>
+
+          </div>
+        </div>
+        }
+
+   
 }
 
     <!-- Formulario de edición -->

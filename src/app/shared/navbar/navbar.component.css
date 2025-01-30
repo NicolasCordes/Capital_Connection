@@ -59,6 +59,13 @@
   background-color: #43a047;
 }
 
+/* Contenedor para el botón y el theme switcher */
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;  /* Espacio entre el botón y el theme switcher */
+}
+
 /* Botón del menú para móvil */
 .navbar-toggle {
   display: none;  /* No se muestra en pantallas grandes */
@@ -74,4 +81,3 @@
   margin: 6px auto;
   transition: transform 0.3s ease;
 }
-
