@@ -18,7 +18,7 @@ label {
   display: block;
   margin-bottom: 10px;
   font-weight: bold;
-  color: #333;
+  color: var(--text-color);
 }
 
 input[type="text"],
@@ -40,27 +40,27 @@ textarea {
   height: 80px;
 }
 
-  /* Estilos generales para el botón de enviar reseña */
+/* Estilos generales para el botón de enviar reseña */
 button[type="submit"] {
-  background-color: #e6f2ff; /* Color del fondo del botón */
-  border: 2px solid #3399bb; /* Borde azul */
-  color: #3399bb; /* Color del texto */
+  background-color: var(--submit-btn-background-light);
+  border: 2px solid var(--submit-btn-border-light);
+  color: var(--submit-btn-text-light);
   padding: 10px 20px;
   font-size: 16px;
   font-weight: 500;
   border-radius: 5px;
   display: inline-flex;
   align-items: center;
-  justify-content: center; /* Alinea el texto */
+  justify-content: center;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Estilo cuando el botón está habilitado y se pasa el ratón por encima */
 button[type="submit"]:hover:enabled {
-  background-color: #b3d9e6; /* Fondo más suave al pasar el ratón */
-  color: #3399bb; /* Texto azul al pasar el ratón */
-  border-color: #3399bb; /* Borde azul al pasar el ratón */
+  background-color: var(--submit-btn-hover-background-light);
+  color: var(--submit-btn-text-light);
+  border-color: var(--submit-btn-border-light);
 }
 
 /* Elimina el contorno del botón cuando está enfocado */

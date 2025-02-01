@@ -60,10 +60,10 @@ body.dark-theme {
 }
 
 .dark-theme {
-  --wave-color-1: rgba(0, 0, 0, 0.7);
-  --wave-color-2: rgba(0, 0, 0, 0.5);
-  --wave-color-3: rgba(0, 0, 0, 0.3);
-  --wave-color-4: #000;
+  --wave-color-1: rgba(39, 39, 39, 0.7);
+  --wave-color-2: rgba(39, 39, 39, 0.5);
+  --wave-color-3: rgba(39, 39, 39, 0.3);
+  --wave-color-4: rgb(39, 39, 39);
 }
 
 // Estilos globales de color
@@ -162,29 +162,92 @@ body:not(.dark-theme) .waves .parallax use:nth-child(4) {
   fill: var(--wave-color-4);
 }
 
+/* Donations */
 :root {
   --background-color-light: white;
-  --background-color-dark: rgb(60, 60, 60);
-}
+  --background-color-dark: rgb(30, 30, 30);
 
-.dark-theme {
-  --background-color-light: rgb(60, 60, 60);/* Se usa en modo oscuro */
-}
-
-:root {
   --border-color-hover-light: #3399bb;
-  --border-color-hover-dark: rgb(39, 39, 39);
+  --border-color-hover-dark: rgb(60, 60, 60);
+
+  --border-color-details-light: #f0f0f0;
+  --border-color-details-dark: rgb(60, 60, 60);
+  --box-shadow-details-dark: 0 6px 12px rgba(0, 0, 0, 0.5);
 }
 
 .dark-theme {
-  --border-color-hover-light: rgb(17, 17, 17);
+  --background-color-light: var(--background-color-dark);
+  --border-color-hover-light: var(--border-color-hover-dark);
+  --border-color-details-light: var(--border-color-details-dark);
+  --box-shadow-details-light: var(--box-shadow-details-dark);
+}
+
+/* Donations Form */
+:root {
+  --background-color-form-light: #f9f9f9;
+  --background-color-form-dark: rgb(60, 60, 60);
+}
+
+.dark-theme {
+  --background-color-form-light: var(--background-color-form-dark);
+}
+
+/* Carrousel */
+:root {
+  /* Modo claro */
+  --background-color-carrousel-light: #ffffff;
+  --border-color-carrousel-light: #f0f0f0;
+
+  /* Modo oscuro */
+  --background-color-carrousel-dark: rgb(30, 30, 30);
+  --border-color-carrousel-dark: rgb(60, 60, 60);
+  --box-shadow-carrousel-dark: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
+.dark-theme {
+  --background-color-carrousel-light: var(--background-color-carrousel-dark);
+  --border-color-carrousel-light: var(--border-color-carrousel-dark);
+  --box-shadow-carrousel-light: var(--box-shadow-carrousel-dark);
 }
 
 :root {
-  --border-color-details-light: #f0f0f0;
-  --border-color-details-dark: rgb(17, 17, 17);
+  /* Modo claro */
+  --follow-btn-background-light: #e6f2ff;
+  --follow-btn-border-light: #3399bb;
+  --follow-btn-text-light: #3399bb;
+  --follow-btn-hover-background-light: #b3d9e6;
+
+  /* Modo oscuro */
+  --follow-btn-background-dark: #4CAF50;
+  --follow-btn-border-dark: #4CAF50;
+  --follow-btn-text-dark: white;
+  --follow-btn-hover-background-dark: #45a049;
 }
 
 .dark-theme {
-  --border-color-details-light: rgb(17, 17, 17);
+  --follow-btn-background-light: var(--follow-btn-background-dark);
+  --follow-btn-border-light: var(--follow-btn-border-dark);
+  --follow-btn-text-light: var(--follow-btn-text-dark);
+  --follow-btn-hover-background-light: var(--follow-btn-hover-background-dark);
+}
+
+:root {
+  /* Modo claro */
+  --submit-btn-background-light: #e6f2ff;
+  --submit-btn-border-light: #3399bb;
+  --submit-btn-text-light: #3399bb;
+  --submit-btn-hover-background-light: #b3d9e6;
+
+  /* Modo oscuro */
+  --submit-btn-background-dark: #4CAF50;
+  --submit-btn-border-dark: #4CAF50;
+  --submit-btn-text-dark: white;
+  --submit-btn-hover-background-dark: #45a049;
+}
+
+.dark-theme {
+  --submit-btn-background-light: var(--submit-btn-background-dark);
+  --submit-btn-border-light: var(--submit-btn-border-dark);
+  --submit-btn-text-light: var(--submit-btn-text-dark);
+  --submit-btn-hover-background-light: var(--submit-btn-hover-background-dark);
 }

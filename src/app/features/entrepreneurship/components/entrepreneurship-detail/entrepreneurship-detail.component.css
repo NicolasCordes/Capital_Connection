@@ -30,6 +30,7 @@ p {
   padding: 20px 0;
   margin-bottom: 0;
 }
+
 .follow-btn-container {
   display: flex;
   justify-content: flex-end; /* Esto moverá el botón a la derecha */
@@ -37,9 +38,9 @@ p {
 }
 
 .follow-btn {
-  background-color: #e6f2ff; /* Color del fondo del botón */
-  border: 2px solid #3399bb;
-  color: #3399bb;
+  background-color: var(--follow-btn-background-light);
+  border: 2px solid var(--follow-btn-border-light);
+  color: var(--follow-btn-text-light);
   padding: 10px 20px;
   font-size: 16px;
   font-weight: 500;
@@ -54,9 +55,9 @@ p {
 
 /* Hover efecto */
 .follow-btn:hover {
-  background-color: #b3d9e6;
-  color: #3399bb;
-  border-color: #3399bb;
+  background-color: var(--follow-btn-hover-background-light);
+  color: var(--follow-btn-text-light);
+  border-color: var(--follow-btn-border-light);
 }
 
 /* Estado deshabilitado */
@@ -109,6 +110,7 @@ p {
   padding: 40px 20px;
   background-color: var(--background-color);
   text-align: center;
+  box-shadow: var(--box-shadow-details-light);
 }
 
 .entrepreneurship-wrapper {
@@ -171,11 +173,13 @@ p {
 /* Carrusel */
 .carousel-container {
   position: relative;
-  width: 50%; /* Asegúrate de que el contenedor tenga el tamaño adecuado */
-  height: 400px; /* Ajusta esto según el tamaño que necesites */
+  width: 50%;
+  height: 400px;
   overflow: hidden;
-  border: 2px solid rgb(255, 255, 255); /* Borde de color rgb(39, 39, 39) */
-  box-shadow: 0 8px 16px rgba(255, 255, 255, 0.747); /* Sombra más difuminada para un efecto más natural */
+  border: 2px solid var(--border-color-carrousel-light);
+  border-radius: 12px;
+  box-shadow: var(--box-shadow-carrousel-light);
+  background-color: var(--background-color-carrousel-light);
 }
 
 .carousel-slide {
