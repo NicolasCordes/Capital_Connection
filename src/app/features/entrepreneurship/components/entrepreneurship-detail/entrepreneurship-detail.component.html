@@ -73,7 +73,7 @@
 
     <!-- Formulario de Reseña -->
     <div class="reviews-title">
-      <h3 style="color: black;">Agregar una Reseña</h3>
+      <h3>Agregar una Reseña</h3>
     </div>
     <div class="reviews-form">
       <app-reviews-form (reviewCreated)="addReview($event)" [entrepreneurship]="currentEntrepreneurship"></app-reviews-form>
@@ -81,7 +81,7 @@
 
     <!-- Reseñas del emprendimiento -->
     <div class="reviews-title">
-      <h3 style="color: black;">Reseñas</h3>
+      <h3>Reseñas</h3>
     </div>
     <div class="reviews">
       <app-reviews-list [idE]="currentEntrepreneurship.id || 0" [update]="update"></app-reviews-list>

@@ -44,11 +44,11 @@ body.dark-theme {
 // Variables CSS para los cambios de color global
 :root {
   --background-color: #ffffff; // Fondo claro por defecto
-  --text-color: #000000; // Texto oscuro por defecto
+  --text-color: rgb(17, 17, 17); // Texto oscuro por defecto
 }
 
 .dark-theme {
-  --background-color: #000; // Fondo oscuro
+  --background-color: rgb(39, 39, 39); // Fondo oscuro
   --text-color: #ffffff; // Texto blanco
 }
 
@@ -160,4 +160,31 @@ body:not(.dark-theme) .waves .parallax use:nth-child(3) {
 
 body:not(.dark-theme) .waves .parallax use:nth-child(4) {
   fill: var(--wave-color-4);
+}
+
+:root {
+  --background-color-light: white;
+  --background-color-dark: rgb(60, 60, 60);
+}
+
+.dark-theme {
+  --background-color-light: rgb(60, 60, 60);/* Se usa en modo oscuro */
+}
+
+:root {
+  --border-color-hover-light: #3399bb;
+  --border-color-hover-dark: rgb(39, 39, 39);
+}
+
+.dark-theme {
+  --border-color-hover-light: rgb(17, 17, 17);
+}
+
+:root {
+  --border-color-details-light: #f0f0f0;
+  --border-color-details-dark: rgb(17, 17, 17);
+}
+
+.dark-theme {
+  --border-color-details-light: rgb(17, 17, 17);
 }

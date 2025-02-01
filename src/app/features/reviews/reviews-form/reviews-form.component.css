@@ -1,8 +1,8 @@
 /* Estilos para el formulario */
 form {
-  background-color: white; /* Fondo blanco */
+  background-color: var(--background-color-light); /* Fondo blanco */
   padding: 15px; /* Menos padding para reducir el espacio interno */
-  border: 2px solid #f0f0f0; /* Borde gris clarito */
+  border: 2px solid var(--border-color-details-light); /* Borde gris clarito */
   border-radius: 8px; /* Bordes redondeados */
   max-width: 400px;
   margin-bottom: 20px;
@@ -11,7 +11,7 @@ form {
 
 /* Estilo cuando se pasa el ratón por encima */
 form:hover {
-  border-color: #3399bb; /* Cambia el color del borde a azul */
+  border-color: var(--border-color-hover-light); /* Cambia el color del borde a azul */
 }
 
 label {

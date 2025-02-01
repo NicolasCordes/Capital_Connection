@@ -12,6 +12,10 @@ h1, h2 {
   color: white;
 }
 
+h3 {
+  color: var(--text-color);
+}
+
 p {
   letter-spacing: 1px;
   font-size: 14px;
@@ -103,7 +107,7 @@ p {
 }
 .content {
   padding: 40px 20px;
-  background-color: #f9f9f9;
+  background-color: var(--background-color);
   text-align: center;
 }
 
@@ -118,29 +122,29 @@ p {
   margin-bottom: 20px;
   text-align: left;
   width: 45%; /* Ancho reducido para que ocupe menos de la mitad de la pantalla */
-  background-color: white; /* Fondo blanco */
+  background-color: var(--background-color-light);
   padding: 15px; /* Menos padding para reducir el espacio interno */
-  border: 2px solid #f0f0f0; /* Borde gris clarito */
+  border: 2px solid var(--border-color-details-light); /* Borde gris clarito */
   border-radius: 8px; /* Bordes redondeados */
   transition: border-color 0.3s ease; /* Transición suave para el borde */
 }
 
 /* Estilo cuando se pasa el ratón por encima */
 .entrepreneurship-details:hover {
-  border-color: #3399bb; /* Cambia el color del borde a azul */
+  border-color: var(--border-color-hover-light); /* Cambia el color del borde a azul */
 }
 
 /* Estilo para los párrafos dentro de los detalles */
 .entrepreneurship-details p {
   font-size: 14px; /* Fuente un poco más pequeña */
   margin-bottom: 12px; /* Espacio reducido entre los párrafos */
-  color: #333; /* Color de texto oscuro para mejor legibilidad */
+  color: var(--text-color); /* Color de texto oscuro para mejor legibilidad */
 }
 
 /* Estilo para los títulos dentro de los detalles */
 .entrepreneurship-details strong {
   font-size: 16px; /* Un tamaño más pequeño para los títulos */
-  color: #333; /* Color negro por defecto */
+  color: var(--text-color); /* Color negro por defecto */
   font-weight: bold; /* Negrita */
   transition: color 0.3s ease; /* Transición suave para el color */
 }
@@ -170,7 +174,8 @@ p {
   width: 50%; /* Asegúrate de que el contenedor tenga el tamaño adecuado */
   height: 400px; /* Ajusta esto según el tamaño que necesites */
   overflow: hidden;
-
+  border: 2px solid rgb(255, 255, 255); /* Borde de color rgb(39, 39, 39) */
+  box-shadow: 0 8px 16px rgba(255, 255, 255, 0.747); /* Sombra más difuminada para un efecto más natural */
 }
 
 .carousel-slide {
@@ -210,8 +215,8 @@ p {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: white;
-  color: black;
+  background-color: var(--background-color);
+  color: var(--text-color);
   font-size: 2.5rem;
   padding: 15px;
   cursor: pointer;
