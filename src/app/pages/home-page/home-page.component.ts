@@ -19,6 +19,8 @@ export class HomePageComponent implements OnInit, OnDestroy {
   entrepreneurships: Entrepreneurship[] = [];
   currentIndex = 0;
   carouselTransform = 'translateX(0)';
+  showArrows = false;
+  private slidesVisible = 3; // Número de slides visibles (puedes ajustar esto dinámicamente)
 
   constructor(
     private authService: AuthService,
@@ -31,6 +33,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
    this.entrepreneurshipService.getEntrepreneurshipsActives(0, 9).subscribe({
   next: (response) => {
     this.entrepreneurships = response.content
+    this.updateArrowVisibility();
 
     this.entrepreneurships.forEach(entre => {
       console.log(entre);
@@ -49,10 +52,20 @@ export class HomePageComponent implements OnInit, OnDestroy {
         }
       },
     });
+    window.addEventListener('resize', this.updateArrowVisibility.bind(this));
+
   }
 
   ngOnDestroy(): void {
     this.sub?.unsubscribe();
+    window.removeEventListener('resize', this.updateArrowVisibility.bind(this));
+
+  }
+
+  updateArrowVisibility(): void {
+    const screenWidth = window.innerWidth;
+    this.slidesVisible = screenWidth < 768 ? 1 : 3; // Móvil muestra 1, escritorio 3
+    this.showArrows = this.entrepreneurships.length > this.slidesVisible;
   }
 
   getProgressWidth(goal: number, collected: number): number {
@@ -62,14 +75,15 @@ export class HomePageComponent implements OnInit, OnDestroy {
   }
 
   moveSlider(direction: 'left' | 'right'): void {
+    if (!this.showArrows) return; // No mover si no hay flechas
+
     const totalSlides = this.entrepreneurships.length;
-    const slidesVisible = 3;
     if (direction === 'left') {
-      this.currentIndex = (this.currentIndex - slidesVisible + totalSlides) % totalSlides;
+      this.currentIndex = (this.currentIndex - this.slidesVisible + totalSlides) % totalSlides;
     } else {
-      this.currentIndex = (this.currentIndex + slidesVisible) % totalSlides;
+      this.currentIndex = (this.currentIndex + this.slidesVisible) % totalSlides;
     }
 
-    this.carouselTransform = `translateX(-${this.currentIndex * (100 / slidesVisible)}%)`;
+    this.carouselTransform = `translateX(-${this.currentIndex * (100 / this.slidesVisible)}%)`;
   }
 }

@@ -42,12 +42,12 @@
   transition: color 0.2s ease;
 }
 .navbar-menu a:hover {
-  color: #4caf50;
+  color: var(--btn-detail-light);
 }
 
 /* Botón de Agregar Emprendimiento */
 .add-button {
-  background-color: #4caf50;
+  background-color: var(--btn-detail-light);
   color: #fff;
   padding: 8px 16px;
   border: none;
@@ -57,7 +57,8 @@
   transition: background-color 0.2s ease;
 }
 .add-button:hover {
-  background-color: #43a047;
+  background-color: var(--btn-detail-hover-light);
+  border-color: var(--follow-btn-border-light);
 }
 
 /* Contenedor para el botón y el theme switcher */

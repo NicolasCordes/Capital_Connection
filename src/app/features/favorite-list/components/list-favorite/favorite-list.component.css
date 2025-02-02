@@ -3,11 +3,11 @@
   margin: 20px auto; /* Margen de ambos lados */
   width: 80%; /* Ancho del contenedor */
   max-width: 1200px; /* Max-width para limitar el tamaño en pantallas grandes */
-  background-color: white; /* Fondo blanco */
+  background-color: var(--background-color-light);
   padding: 20px; /* Padding para separar los elementos del borde */
-  border-radius: 8px; /* Bordes redondeados */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
-  border: 2px solid #f0f0f0; /* Borde gris claro */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-color-details-light);
+  border-radius: 8px;
   transition: all 0.3s ease; /* Transición suave */
 }
 
@@ -20,7 +20,7 @@
 
 .favorites-container:hover {
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al pasar el ratón */
-  border-color: #3399bb; /* Cambio de color del borde al pasar el ratón */
+  border-color: var(--border-cards-detail-light) /* Cambio de color del borde al pasar el ratón */
 }
 
 /* Estilos para la cabecera de la lista */
@@ -47,13 +47,15 @@ ul {
   margin: 0;
   display: flex;
   flex-direction: column;
+
   gap: 20px; /* Espacio entre cada ítem de la lista */
 }
 
 /* Estilos para cada ítem de la lista de favoritos */
 li {
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
+  background-color: var(--box-color-details-light);
+  border: 1px solid var(--border-color-details-light);
+
   border-radius: 8px;
   padding: 15px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -68,7 +70,7 @@ li:hover {
 /* Estilo para los títulos de cada favorito */
 h3 {
   font-size: 1.5rem;
-  color: #007bff;
+  color: var(--txt-detail-light);
   margin: 0;
   font-weight: bold;
 }
@@ -76,7 +78,7 @@ h3 {
 /* Estilo para la descripción de cada favorito */
 p {
   font-size: 1rem;
-  color: #555;
+  color:var(--text-color);
   margin-top: 10px;
 }
 
@@ -112,7 +114,7 @@ p {
 
 
 .follow-btn {
-  background-color: #007bff;
+  background-color: var(--btn-detail-light);
   color: white;
   border: none;
   padding: 10px 15px;
@@ -124,5 +126,6 @@ p {
 }
 
 .follow-btn:hover {
-  background-color: #0056b3;
+  background-color: var(--btn-detail-hover-light);
+  border-color: var(--follow-btn-border-light);
 }

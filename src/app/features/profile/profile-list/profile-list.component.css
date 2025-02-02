@@ -19,7 +19,7 @@ p {
   background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%);
   color: white;
   padding: 60px 0; /* Aumentamos el padding para dar espacio al texto */
-  margin-bottom: 20px; 
+  margin-bottom: 20px;
 }
 
 .header h1 {
@@ -32,14 +32,19 @@ p {
 .header p {
   font-size: 20px;
   color: #ffffff; /* Texto blanco para contraste */
-  margin-bottom: 20px; 
+  margin-bottom: 20px;
 }
+
+
+
+
+
 
 /* Estilos generales para los botones */
 .follow-btn {
-  background-color: #e6f2ff; /* Color del fondo del botón */
-  border: 2px solid #3399bb; /* Borde azul */
-  color: #3399bb; /* Color del texto */
+  background-color: var(--follow-btn-background-light); /* Color del fondo del botón */
+  border: 2px solid var(--follow-btn-border-light); /* Borde azul */
+  color: var(--follow-btn-text-light); /* Color del texto */
   padding: 10px 20px;
   font-size: 16px;
   font-weight: 500;
@@ -53,11 +58,10 @@ p {
 
 /* Cambio de color del botón cuando se pasa el ratón */
 .follow-btn:hover {
-  background-color: #b3d9e6; /* Fondo más suave al pasar el ratón */
-  color: #3399bb; /* Texto azul al pasar el ratón */
-  border-color: #3399bb; /* Borde azul al pasar el ratón */
+  background-color: var(--follow-btn-hover-background-light);
+  color: var(--follow-btn-text-light);
+  border-color: var(--follow-btn-border-light);
 }
-
 /* Elimina el contorno del botón cuando está enfocado */
 .follow-btn:focus {
   outline: none;

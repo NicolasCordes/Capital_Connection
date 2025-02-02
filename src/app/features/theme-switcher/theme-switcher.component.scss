@@ -1,0 +1,100 @@
+// Colores del tema
+$light-theme-background: #ffffff;
+$dark-theme-background: #1b5e20; // Verde oscuro para el fondo en tema oscuro
+$primary-color-light: #66bb6a; // Verde claro para el tema claro
+$primary-color-dark: #388e3c; // Verde oscuro para el tema oscuro
+
+// Estilos generales
+mat-slide-toggle {
+  margin: 10px 0;
+
+  // Para asegurar que los iconos y los colores sean correctos
+  .mat-mdc-slide-toggle-bar {
+    background-color: $primary-color-light;
+  }
+
+  .mat-mdc-slide-toggle-thumb {
+    background-color: $primary-color-light;
+  }
+
+  &.mat-mdc-slide-toggle-checked {
+    .mat-mdc-slide-toggle-bar {
+      background-color: $primary-color-dark; // Verde oscuro cuando está activado
+    }
+
+    .mat-mdc-slide-toggle-thumb {
+      background-color: $primary-color-dark; // Verde oscuro en el "thumb"
+    }
+  }
+}
+
+// Estilos para el tema oscuro
+body.dark-theme {
+  background-color: $dark-theme-background;
+
+  mat-slide-toggle {
+    .mat-mdc-slide-toggle-bar {
+      background-color: lighten($primary-color-dark, 10%);
+    }
+
+    .mat-mdc-slide-toggle-thumb {
+      background-color: lighten($primary-color-dark, 10%);
+    }
+
+    &.mat-mdc-slide-toggle-checked {
+      .mat-mdc-slide-toggle-bar {
+        background-color: $primary-color-dark;
+      }
+
+      .mat-mdc-slide-toggle-thumb {
+        background-color: $primary-color-dark;
+      }
+    }
+  }
+}
+
+// Estilos para el tema claro
+body {
+  background-color: $light-theme-background;
+
+  mat-slide-toggle {
+    .mat-mdc-slide-toggle-bar {
+      background-color: $primary-color-light;
+    }
+
+    .mat-mdc-slide-toggle-thumb {
+      background-color: $primary-color-light;
+    }
+
+    &.mat-mdc-slide-toggle-checked {
+      .mat-mdc-slide-toggle-bar {
+        background-color: $primary-color-dark;
+      }
+
+      .mat-mdc-slide-toggle-thumb {
+        background-color: $primary-color-dark;
+      }
+    }
+  }
+}
+
+// Usamos ::ng-deep para evitar la encapsulación de Angular
+::ng-deep {
+  .mat-mdc-slide-toggle-bar {
+    background-color: $primary-color-light !important;
+  }
+
+  .mat-mdc-slide-toggle-thumb {
+    background-color: $primary-color-light !important;
+  }
+
+  &.mat-mdc-slide-toggle-checked {
+    .mat-mdc-slide-toggle-bar {
+      background-color: $primary-color-dark !important;
+    }
+
+    .mat-mdc-slide-toggle-thumb {
+      background-color: $primary-color-dark !important;
+    }
+  }
+}

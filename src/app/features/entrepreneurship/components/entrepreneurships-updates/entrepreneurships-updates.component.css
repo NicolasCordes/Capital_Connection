@@ -3,17 +3,17 @@
   margin: 20px auto; /* Margen de ambos lados */
   width: 80%; /* Ancho del contenedor */
   max-width: 1200px; /* Max-width para limitar el tamaño en pantallas grandes */
-  background-color: white; /* Fondo blanco */
+  background-color: var(--background-color-light);/* Fondo blanco */
   padding: 20px; /* Padding para separar los elementos del borde */
   border-radius: 8px; /* Bordes redondeados */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
-  border: 2px solid #f0f0f0; /* Borde gris claro */
+  border: 1px solid var(--border-color-details-light);/* Borde gris claro */
   transition: all 0.3s ease; /* Transición suave */
 }
 
 .entrepreneurships-container:hover {
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al pasar el ratón */
-  border-color: #3399bb; /* Cambio de color del borde al pasar el ratón */
+  border-color: var(--border-cards-detail-light); /* Cambio de color del borde al pasar el ratón */
 }
 
 .no-entrepreneurships-message {
@@ -22,7 +22,6 @@
   text-align: center;
   margin-top: 20px;
 }
-
 
 /* Estilos para la cabecera de la lista */
 .header {
@@ -43,7 +42,7 @@
 
 /* Estilo para las tarjetas de emprendimiento */
 .entrepreneurship-card {
-  background-color: #fff;
+  background-color: var(--box-color-details-light);
   padding: 20px;
   margin: 10px 0;
   border-radius: 8px;
@@ -58,18 +57,18 @@
 
 .entrepreneurship-card h4 {
   font-size: 1.6rem;
-  color: #333;
+  color: var(--text-color);
   margin-bottom: 10px;
 }
 
 .entrepreneurship-card p {
   font-size: 1rem;
-  color: #666;
+  color:  var(--text-color);
   margin-bottom: 20px;
 }
 
 .entrepreneurship-card button {
-  background-color: #007bff;
+  background-color: var(--btn-detail-light);
   color: white;
   border: none;
   padding: 10px 15px;
@@ -80,19 +79,20 @@
 }
 
 .entrepreneurship-card button:hover {
-  background-color: #0056b3;
+  background-color: var(--btn-detail-hover-light);
+  border-color: var(--follow-btn-border-light);
 }
 
 .name-entrepreneurship {
     font-size: 1.5rem;
-    color: #007bff;
+    color: var(--txt-detail-light);
     margin: 0;
     font-weight: bold;
 }
 
 /* Estilo para el formulario de edición */
 form {
-  background-color: #f9f9f9;
+  background-color: var(--box-color-details-light);
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -101,7 +101,7 @@ form {
 
 form h3 {
   font-size: 1.8rem;
-  color: #333;
+  color: var(--text-color);
   margin-bottom: 20px;
 }
 
@@ -112,7 +112,7 @@ form div {
 form label {
   display: block;
   font-size: 1.1rem;
-  color: #555;
+  color: var(--text-color);
   margin-bottom: 5px;
 }
 
@@ -223,17 +223,19 @@ button {
 
 /* Contenido del modal */
 .modal-content {
-  background-color: #ffffff;
+  background-color: var(--box-color-details-light);
   padding: 20px;
   width: 90%;
-  max-width: 500px; 
+  max-width: 500px;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   text-align: center;
   font-family: 'Arial', sans-serif;
   position: relative;
 }
-
+.switch-color{
+  color: var(--text-color);
+}
 /* Estilo para los botones */
 .modal-actions {
   display: flex;
@@ -241,6 +243,7 @@ button {
   gap: 10px; /* Espacio entre los botones */
   margin-top: 20px;
 }
+
 
 /* Botón Confirmar */
 .confirm {
@@ -278,13 +281,13 @@ button {
 .modal-content h2 {
   margin-bottom: 1rem;
   font-size: 1.8rem;
-  color: #333333;
+  color: var(--text-color);
 }
 
 /* Estilo del párrafo */
 .modal-content p {
   font-size: 1rem;
-  color: #555555;
+  color: var(--text-color);
   line-height: 1.5;
   margin-bottom: 1rem;
 }

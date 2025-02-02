@@ -55,12 +55,12 @@
 
         </div>
 
-      <div class="carousel-arrow carousel-arrow-left" (click)="moveSlider('left')">
-        <span>&lt;</span>
-      </div>
-      <div class="carousel-arrow carousel-arrow-right" (click)="moveSlider('right')">
-        <span>&gt;</span>
-      </div>
+        <div *ngIf="showArrows" class="carousel-arrow carousel-arrow-left" (click)="moveSlider('left')">
+          <span>&lt;</span>
+        </div>
+        <div *ngIf="showArrows" class="carousel-arrow carousel-arrow-right" (click)="moveSlider('right')">
+          <span>&gt;</span>
+        </div>
     </div>
 
     <button mat-button color="primary" [routerLink]="'/entrepreneurships'">
@@ -69,4 +69,3 @@
   </div>
 
 </div>
-  

@@ -20,7 +20,7 @@
 .review-description {
   margin-top: 10px;
   color: var(--text-color);
-} 
+}
 
 .review-item:hover {
   transform: translateY(-4px);
@@ -112,9 +112,10 @@ textarea::placeholder {
 
 .follow-btn:hover {
   background-color: var(--follow-btn-hover-background-light);
-  color: var(--follow-btn-border-light);
+  color: var(--follow-btn-text-light);
   border-color: var(--follow-btn-border-light);
 }
+
 
 .follow-btn:focus {
   outline: none;

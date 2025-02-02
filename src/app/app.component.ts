@@ -4,11 +4,12 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { AuthService } from './services/auth.service';
 import { ActiveUser } from './types/account-data';
 import { FooterComponent } from "./shared/footer/footer.component";
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent, FooterComponent],
+  imports: [RouterOutlet, NavbarComponent, FooterComponent,MatSlideToggleModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

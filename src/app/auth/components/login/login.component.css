@@ -4,7 +4,7 @@
   margin: 0 auto;
   padding: 2rem;
   border-radius: 10px;
-  background-color: #f8f9fa;
+  background-color: var(--background-color-light);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   font-family: Arial, sans-serif;
 }
@@ -16,7 +16,7 @@
 
 .login-form legend {
   font-size: 1.5rem;
-  color: #333;
+  color: var(--text-color);
   text-align: center;
   margin-bottom: 1.5rem;
   font-weight: bold;
@@ -31,7 +31,7 @@
 
 .form-group label {
   margin-bottom: 0.5rem;
-  color: #555;
+  color: var(--text-color);
   font-weight: bold;
 }
 
@@ -73,7 +73,7 @@
 .submit-btn {
   width: 100%;
   padding: 0.8rem;
-  background-color: #007bff;
+  background-color: var(--btn-detail-light);
   color: #fff;
   font-size: 1rem;
   font-weight: bold;
@@ -83,9 +83,12 @@
   transition: background-color 0.3s;
 }
 
+
 .submit-btn:hover {
-  background-color: #0056b3;
+  background-color: var(--btn-detail-hover-light);
+  border-color: var(--follow-btn-border-light);
 }
+
 
 .submit-btn:disabled {
   background-color: #a1a1a1;

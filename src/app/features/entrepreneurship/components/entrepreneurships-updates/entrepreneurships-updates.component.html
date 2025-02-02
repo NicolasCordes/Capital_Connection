@@ -22,17 +22,16 @@
             <p>Esta decision sera irreversible, piensalo antes de eliminarlo</p>
             <button class="cancel" (click)="closeModal()">Cancelar</button>
             <button class="confirm" (click)="deleteEntrepreneurship(entrepreneurship)">Confirmar</button>
-
           </div>
         </div>
         }
 
-   
+
 }
 
     <!-- Formulario de edición -->
     <div *ngIf="editingEntrepreneurship === entrepreneurship">
-      <h3 style="color: black;">Editar Emprendimiento</h3>
+      <h3>Editar Emprendimiento</h3>
       <form [formGroup]="editForm" (ngSubmit)="saveChanges()">
 
         <!-- Nombre -->

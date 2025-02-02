@@ -3,17 +3,17 @@
   margin: 20px auto;
   width: 80%;
   max-width: 1200px;
-  background-color: white;
+  background-color: var(--background-color-light);
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  border: 2px solid #f0f0f0;
+  border: 1px solid var(--border-color-details-light);
   transition: all 0.3s ease;
 }
 
 .donations-container:hover {
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-  border-color: #3399bb;
+  border-color: var(--border-cards-detail-light);
 }
 
 /* Estilos para la cabecera */
@@ -45,8 +45,8 @@ ul {
 
 /* Estilos para cada ítem de la lista de donaciones */
 li {
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
+  background-color: var(--box-color-details-light);
+  border: 1px solid var(--border-color-details-light);
   border-radius: 8px;
   padding: 15px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -63,7 +63,7 @@ li:hover {
 .donated-item-amount,
 .donated-item-date {
   font-size: 1.2rem;
-  color: #333;
+  color: var(--text-color);
   margin-bottom: 10px;
 }
 
@@ -77,7 +77,7 @@ li:hover {
 
 .donated-item-date {
   font-size: 1rem;
-  color: #777;
+  color: var(--text-color);
 }
 
 /* Estilo para el mensaje cuando no hay donaciones */
@@ -120,9 +120,9 @@ li:hover {
 
 .button {
   padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
+  background-color: var(--follow-btn-background-light); /* Color del fondo del botón */
+  border: 2px solid var(--follow-btn-border-light); /* Borde azul */
+  color: var(--follow-btn-text-light); /* Color del texto */
   border-radius: 5px;
   cursor: pointer;
   font-size: 14px;
@@ -130,7 +130,9 @@ li:hover {
 }
 
 .button:hover {
-  background-color: #0056b3;
+  background-color: var(--follow-btn-hover-background-light);
+  color: var(--follow-btn-text-light);
+  border-color: var(--follow-btn-border-light);
 }
 /* Fondo del modal */
 .modal {
@@ -148,7 +150,7 @@ li:hover {
 
 /* Contenido del modal */
 .modal-content {
-  background-color: #ffffff;
+  background-color: var(--box-color-details-light);
   padding: 20px;
   width: 90%;
   max-width: 500px; /* Ancho máximo para pantallas grandes */
@@ -166,7 +168,7 @@ li:hover {
   right: 15px;
   font-size: 1.5rem;
   font-weight: bold;
-  color: #333333;
+  color: var(--text-color);
   cursor: pointer;
   transition: color 0.3s ease;
 }
@@ -179,13 +181,13 @@ li:hover {
 .modal-content h2 {
   margin-bottom: 1rem;
   font-size: 1.8rem;
-  color: #333333;
+  color: var(--text-color);
 }
 
 /* Estilo del párrafo */
 .modal-content p {
   font-size: 1rem;
-  color: #555555;
+  color: var(--text-color);
   line-height: 1.5;
   margin-bottom: 1rem;
 }

@@ -1,5 +1,6 @@
 @use '@angular/material' as mat;
 
+
 // Definir el tema claro (light theme) con los colores personalizados
 $light-theme: mat.define-theme((
   color: (
@@ -25,7 +26,7 @@ $dark-theme: mat.define-theme((
 // Aplicar el tema claro por defecto
 body {
   @include mat.all-component-themes($light-theme);
-  background-color: #000; // Fondo claro por defecto
+  background-color: rgb(39, 39, 39); // Fondo claro por defecto
   color: #f0f8ff; // Texto claro por defecto
   font-family: 'Arial', sans-serif;
   overflow-y: scroll;
@@ -37,7 +38,7 @@ body {
 // Aplicar el tema oscuro cuando se aplique la clase .dark-theme
 body.dark-theme {
   @include mat.all-component-colors($dark-theme);
-  background-color: #000; // Fondo oscuro
+  background-color: rgb(39, 39, 39); // Fondo oscuro
   color: #ffffff; // Texto blanco
 }
 
@@ -45,11 +46,13 @@ body.dark-theme {
 :root {
   --background-color: #ffffff; // Fondo claro por defecto
   --text-color: rgb(17, 17, 17); // Texto oscuro por defecto
+  --shadow-arrow: #f1f1f1;
 }
 
 .dark-theme {
   --background-color: rgb(39, 39, 39); // Fondo oscuro
   --text-color: #ffffff; // Texto blanco
+  --shadow-arrow: #0e0e0e;
 }
 
 :root {
@@ -169,7 +172,8 @@ body:not(.dark-theme) .waves .parallax use:nth-child(4) {
 
   --border-color-hover-light: #3399bb;
   --border-color-hover-dark: rgb(60, 60, 60);
-
+  --box-color-details-light:white;
+  --box-color-details-dark:rgb(60, 60, 60);
   --border-color-details-light: #f0f0f0;
   --border-color-details-dark: rgb(60, 60, 60);
   --box-shadow-details-dark: 0 6px 12px rgba(0, 0, 0, 0.5);
@@ -180,6 +184,7 @@ body:not(.dark-theme) .waves .parallax use:nth-child(4) {
   --border-color-hover-light: var(--border-color-hover-dark);
   --border-color-details-light: var(--border-color-details-dark);
   --box-shadow-details-light: var(--box-shadow-details-dark);
+  --box-color-details-light: var(--box-color-details-dark)
 }
 
 /* Donations Form */
@@ -216,12 +221,19 @@ body:not(.dark-theme) .waves .parallax use:nth-child(4) {
   --follow-btn-border-light: #3399bb;
   --follow-btn-text-light: #3399bb;
   --follow-btn-hover-background-light: #b3d9e6;
-
+  --btn-detail-light:#007bff;
+  --btn-detail-hover-light:#0056b3;
+  --txt-detail-light:#007bff;
+  --border-cards-detail-light:#3399bb;
   /* Modo oscuro */
   --follow-btn-background-dark: #4CAF50;
   --follow-btn-border-dark: #4CAF50;
   --follow-btn-text-dark: white;
   --follow-btn-hover-background-dark: #45a049;
+  --btn-detail-dark: #4CAF50;
+  --btn-detail-hover-dark:#45a049;
+  --txt-detail-dark:white;
+  --border-cards-detail-dark:rgb(32, 32, 32);
 }
 
 .dark-theme {
@@ -229,6 +241,10 @@ body:not(.dark-theme) .waves .parallax use:nth-child(4) {
   --follow-btn-border-light: var(--follow-btn-border-dark);
   --follow-btn-text-light: var(--follow-btn-text-dark);
   --follow-btn-hover-background-light: var(--follow-btn-hover-background-dark);
+  --btn-detail-light: var(--btn-detail-dark);
+  --btn-detail-hover-light:var(--btn-detail-hover-dark);
+  --txt-detail-light:var(--txt-detail-dark);
+  --border-cards-detail-light:var(--border-cards-detail-dark);
 }
 
 :root {

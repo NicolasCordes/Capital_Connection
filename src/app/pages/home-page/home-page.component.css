@@ -185,7 +185,7 @@ p {
 /* Estilo para el botón */
 button {
   padding: 10px 20px;
-  background-color: #5cb85c;
+  background-color: var(--btn-detail-light);
   color: white;
   border: none;
   border-radius: 4px;
@@ -195,7 +195,8 @@ button {
 }
 
 button:hover {
-  background-color: #4cae4c;
+  background-color: var(--btn-detail-hover-light);
+  border-color: var(--follow-btn-border-light);
 }
 
 /* Flechas del carrusel */
@@ -203,9 +204,9 @@ button:hover {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: white;
-  color: black;
-  font-size: 2rem;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-size: 2.5rem;
   padding: 15px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
@@ -215,8 +216,9 @@ button:hover {
 }
 
 .carousel-arrow:hover {
-  background-color: #f1f1f1;
+  background-color: var(--shadow-arrow);
   transform: translateY(-50%) scale(1.1);
+
 }
 
 /* Flecha izquierda */

@@ -8,7 +8,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
   standalone: true,
   imports: [MatSlideToggleModule, FormsModule],
   templateUrl: './theme-switcher.component.html',
-  styleUrl: './theme-switcher.component.css'
+  styleUrl: './theme-switcher.component.scss',
 })
 export class ThemeSwitcherComponent {
   isDarkThemeActive = false;

@@ -231,7 +231,7 @@ p {
 }
 
 .carousel-arrow:hover {
-  background-color: #f1f1f1;
+  background-color: var(--shadow-arrow);
   transform: translateY(-50%) scale(1.1);
 
 }
@@ -300,7 +300,7 @@ p {
   width: 60px;
   height: 60px;
   border: 5px solid rgba(0, 0, 0, 0.1);
-  border-top-color: #3498db; /* Cambia el color aquí */
+  border-top-color: var(--btn-detail-light); /* Cambia el color aquí */
   border-radius: 50%;
   animation: spin 1.5s linear infinite;
 }
