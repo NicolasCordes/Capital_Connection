@@ -27,7 +27,10 @@ yarn-error.log
 !.vscode/launch.json
 !.vscode/extensions.json
 .history/*
-
+#server node
+/server/node_modules
+npm-debug.log
+yarn-error.log
 # Miscellaneous
 /.angular/cache
 .sass-cache/

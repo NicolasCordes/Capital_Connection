@@ -4,11 +4,18 @@ import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { ActiveUser } from '../../types/account-data';
 import { ThemeSwitcherComponent } from "../../features/theme-switcher/theme-switcher.component";
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterModule, CommonModule, ThemeSwitcherComponent],
+  imports: [RouterModule, CommonModule, ThemeSwitcherComponent, MatToolbarModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })

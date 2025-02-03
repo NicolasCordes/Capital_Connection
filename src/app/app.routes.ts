@@ -8,8 +8,14 @@ import { EntrepreneurshipDetailPageComponent } from "./pages/entrepreneurship-de
 import { EntrepreneurshipFormPageComponent } from "./pages/entrepreneurship-form-page/entrepreneurship-form-page.component";
 import { EntrepreneurshipListPageComponent } from "./pages/entrepreneurship-list-page/entrepreneurship-list-page.component";
 import { ProfilePageComponent } from "./pages/profile-page/profile-page.component";
+import { FailureComponent } from "./pages/response/failure/failure.component";
+import { PendingComponent } from "./pages/response/pending/pending.component";
+import { SuccessComponent } from "./pages/response/success/success.component";
 
 export const routes: Routes = [
+  { path: 'success', component: SuccessComponent },
+  { path: 'failure', component: FailureComponent },
+  { path: 'pending', component: PendingComponent },
   { path: 'sign-up', component: SignupPageComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'home', component: HomePageComponent },

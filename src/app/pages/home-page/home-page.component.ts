@@ -64,7 +64,8 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
   updateArrowVisibility(): void {
     const screenWidth = window.innerWidth;
-    this.slidesVisible = screenWidth < 768 ? 1 : 3; // Móvil muestra 1, escritorio 3
+    this.slidesVisible = screenWidth < 480 ? 1 :
+                        screenWidth < 768 ? 2 : 3;
     this.showArrows = this.entrepreneurships.length > this.slidesVisible;
   }
 

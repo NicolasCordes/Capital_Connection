@@ -1,4 +1,4 @@
-import { DOCUMENT } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -6,9 +6,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 @Component({
   selector: 'app-theme-switcher',
   standalone: true,
-  imports: [MatSlideToggleModule, FormsModule],
+  imports: [MatSlideToggleModule, FormsModule, CommonModule],
   templateUrl: './theme-switcher.component.html',
-  styleUrl: './theme-switcher.component.scss',
+  styleUrl: './theme-switcher.component.css',
 })
 export class ThemeSwitcherComponent {
   isDarkThemeActive = false;
@@ -16,9 +16,12 @@ export class ThemeSwitcherComponent {
   constructor(@Inject(DOCUMENT) private document: Document) {}
 
   ngOnInit(): void {
-    // Al cargar el componente, verifica el tema guardado en el localStorage
+    // Detecta la preferencia de tema predeterminado del sistema operativo
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    // Si el localStorage no tiene un valor guardado, usa la preferencia del sistema
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
+    if (savedTheme === 'dark' || (savedTheme === null && prefersDark)) {
       this.isDarkThemeActive = true;
       this.applyDarkTheme();
     } else {

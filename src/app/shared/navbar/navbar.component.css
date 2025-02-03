@@ -1,4 +1,4 @@
-/* Estilos generales del navbar */
+/* Estilos generales del navbar (original) */
 .navbar {
   display: flex;
   align-items: center;
@@ -11,7 +11,7 @@
   z-index: 1000;
 }
 
-/* Logo */
+/* Logo (original) */
 .navbar-logo img {
   height: 50px;
   width: auto;
@@ -21,13 +21,14 @@
   transform: scale(1.1);
 }
 
-/* Menú */
+/* Menú (original) */
 .navbar-menu {
   list-style-type: none;
   display: flex;
   gap: 20px;
   margin: 0;
   padding: 0;
+  justify-content: center;
 }
 
 .navbar-menu li {
@@ -40,46 +41,103 @@
   font-size: 1rem;
   cursor: pointer;
   transition: color 0.2s ease;
+  padding: 8px 12px;
 }
 .navbar-menu a:hover {
   color: var(--btn-detail-light);
 }
 
-/* Botón de Agregar Emprendimiento */
+/* Botón Agregar Emprendimiento (original) */
 .add-button {
   background-color: var(--btn-detail-light);
   color: #fff;
-  padding: 8px 16px;
+  padding: 6px 12px;
+  font-size: 0.9rem;
   border: none;
   border-radius: 5px;
-  font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  white-space: nowrap;
 }
 .add-button:hover {
   background-color: var(--btn-detail-hover-light);
   border-color: var(--follow-btn-border-light);
 }
 
-/* Contenedor para el botón y el theme switcher */
+/* Contenedor acciones (original) */
 .navbar-actions {
   display: flex;
   align-items: center;
-  gap: 16px;  /* Espacio entre el botón y el theme switcher */
+  gap: 12px;
+  justify-content: flex-end;
 }
 
-/* Botón del menú para móvil */
-.navbar-toggle {
-  display: none;  /* No se muestra en pantallas grandes */
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
+/* ---------------------------------------------------- */
+/* Modificaciones SOLO para responsive (nuevo) */
+/* ---------------------------------------------------- */
+
+/* Menú móvil (oculto en desktop) */
+.mobile-menu-button {
+  display: none !important;
+  background-color: transparent !important;
+  color: #f0f0f0 !important;
 }
 
-.navbar-toggle-icon {
-  width: 30px;
-  height: 3px;
-  background-color: #fff;
-  margin: 6px auto;
-  transition: transform 0.3s ease;
+/* Menú móvil - Ancho completo */
+::ng-deep .full-width-menu {
+  min-width: 100vw !important;
+  max-width: 100vw !important;
+  margin-left: -20px;
+  margin-right: -20px;
+  border-radius: 0 !important;
+}
+
+::ng-deep .full-width-menu .mat-menu-content {
+  padding: 0 !important;
+}
+
+::ng-deep .full-width-menu .mat-menu-item {
+  width: 100% !important;
+  justify-content: center !important;
+  padding: 12px 20px !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Botón "Agregar Emprendimiento" en móvil */
+.add-button-mobile {
+  background-color: var(--btn-detail-light) !important;
+  color: #fff !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  width: 100%;
+  text-align: center;
+}
+
+/* Estilos base del menú móvil */
+.mat-menu-panel {
+  background-color: #1a1a1a !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.mat-menu-item {
+  color: #f0f0f0 !important;
+  font-size: 1rem !important;
+  transition: color 0.2s ease !important;
+}
+
+.mat-menu-item:hover {
+  color: var(--btn-detail-light) !important;
+  background-color: transparent !important;
+}
+
+/* Responsive: Menú desktop se oculta en móviles */
+@media (max-width: 768px) {
+  .navbar-menu,
+  .navbar-actions > .add-button:not(.add-button-mobile) {
+    display: none !important;
+  }
+
+  .mobile-menu-button {
+    display: block !important;
+  }
 }

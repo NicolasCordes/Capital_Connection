@@ -1,4 +1,7 @@
 /* Contenedor principal */
+.center{
+  margin-top: 5rem;
+}
 .login-form {
   max-width: 400px;
   margin: 0 auto;

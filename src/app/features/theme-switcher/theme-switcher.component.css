@@ -1,0 +1,16 @@
+::ng-deep .mat-accent.mat-mdc-slide-toggle {
+  --mdc-switch-selected-focus-state-layer-color: green !important;
+  --mdc-switch-selected-handle-color: #ffffff !important;
+  --mdc-switch-selected-hover-state-layer-color: #4CAF50 !important;
+  --mdc-switch-selected-pressed-state-layer-color: #4CAF50 !important;
+  --mdc-switch-selected-focus-handle-color: #e0e0ff !important;
+  --mdc-switch-selected-hover-handle-color: #e0e0ff !important;
+  --mdc-switch-selected-pressed-handle-color: #e0e0ff !important;
+  --mdc-switch-selected-focus-track-color: #4CAF50 !important;
+  --mdc-switch-selected-hover-track-color: #4CAF50 !important;
+  --mdc-switch-selected-pressed-track-color: #4CAF50 !important;
+  --mdc-switch-selected-track-color: #4CAF50 !important;
+  --mdc-switch-selected-icon-color: #4CAF50 !important;
+  --mat-switch-disabled-unselected-track-outline-color: #1a1b1f !important;
+  --mat-switch-label-text-color: #1a1b1f !important;
+}

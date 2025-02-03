@@ -1,9 +1,10 @@
 <nav class="navbar">
+  <!-- Logo -->
   <a routerLink="home" class="navbar-logo">
     <img src="https://res.cloudinary.com/dyho1ydzl/image/upload/v1731126682/logo_CC_cximnl.jpg" alt="Logo Capital Connection" />
   </a>
 
-  <!-- Menú de navegación -->
+  <!-- Menú desktop (original) -->
   <ul class="navbar-menu">
     <li><a routerLink="home">Home</a></li>
     <li><a routerLink="profile">Mi perfil</a></li>
@@ -17,11 +18,39 @@
     </ng-template>
   </ul>
 
-  <!-- Botón de Agregar Emprendimiento y Theme Switcher -->
+  <!-- Acciones desktop (original) -->
   <div class="navbar-actions">
     <button class="add-button" routerLink="add-entrepreneurship">
       Agregar Emprendimiento
     </button>
-    <app-theme-switcher></app-theme-switcher>  <!-- Theme switcher aquí -->
+    <app-theme-switcher></app-theme-switcher>
   </div>
+
+  <!-- Menú móvil (nuevo) -->
+  <button mat-icon-button
+  class="mobile-menu-button"
+  [matMenuTriggerFor]="mobileMenu">
+<mat-icon>menu</mat-icon>
+</button>
+
+<mat-menu #mobileMenu="matMenu" class="mobile-menu" panelClass="full-width-menu">
+    <!-- Ítems del menú (mismo orden y estilo) -->
+    <button mat-menu-item routerLink="home">Home</button>
+    <button mat-menu-item routerLink="profile">Mi perfil</button>
+
+    <ng-container *ngIf="!activeUser; else loggedInMobile">
+      <button mat-menu-item routerLink="login">Iniciar Sesión</button>
+      <button mat-menu-item routerLink="sign-up">Registrarse</button>
+    </ng-container>
+    <ng-template #loggedInMobile>
+      <button mat-menu-item (click)="onLogOut()">Cerrar Sesión</button>
+    </ng-template>
+
+    <!-- Botón adicional para móvil -->
+    <button mat-menu-item
+            class="add-button add-button-mobile"
+            routerLink="add-entrepreneurship">
+      Agregar Emprendimiento
+    </button>
+  </mat-menu>
 </nav>

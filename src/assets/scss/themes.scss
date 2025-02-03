@@ -1,5 +1,5 @@
 @use '@angular/material' as mat;
-
+@include mat.core();
 
 // Definir el tema claro (light theme) con los colores personalizados
 $light-theme: mat.define-theme((
@@ -261,9 +261,58 @@ body:not(.dark-theme) .waves .parallax use:nth-child(4) {
   --submit-btn-hover-background-dark: #45a049;
 }
 
+
 .dark-theme {
   --submit-btn-background-light: var(--submit-btn-background-dark);
   --submit-btn-border-light: var(--submit-btn-border-dark);
   --submit-btn-text-light: var(--submit-btn-text-dark);
   --submit-btn-hover-background-light: var(--submit-btn-hover-background-dark);
+}
+.my-custom-toggle {
+  .mdc-switch__icon.mdc-switch__icon--off path {
+    fill: rgb(255, 204, 0)!important;
+    stroke: rgb(255, 204, 0); /* Color del borde */
+    stroke-width: 2.2px; /* Grosor del borde */
+  }
+  .mdc-switch__icon.mdc-switch__icon--on path {
+    fill: black !important;
+  }
+
+  // Agrega el ícono de sol
+ /* Cambiar el icono cuando el switch está apagado */
+ .mdc-switch__icon--off path {
+  d: path("M12 4V2M12 22v-2M4 12H2M22 12h-2M5.6 5.6L4.2 4.2M19.8 19.8l-1.4-1.4M19.8 4.2l-1.4 1.4M5.6 18.4L4.2 19.8M12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8z");
+}
+/* Cambiar el icono cuando el switch está encendido */
+.mdc-switch__icon--on path {
+  d: path("M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1-8.313-12.454z");
+}
+
+
+  .mdc-switch__shadow {
+    background-color: #ffffff; // Fondo gris cuando está desactivado
+  }
+
+
+  .mat-mdc-slide-toggle .mat-ripple {
+    background-color: green;
+  }
+
+  /* Cambiar el color del focus indicator */
+  .mat-mdc-slide-toggle .mat-mdc-focus-indicator::before {
+    border-color: green;
+  }
+
+  /* Cambiar el color del hover */
+  .mat-mdc-slide-toggle:hover .mat-ripple {
+    background-color: green;
+  }
+  .mdc-switch__track::before{
+    background-color: #9b9898 !important; // Verde cuando está activado
+    border-color: #3a3a3a;
+  }
+  .mdc-switch__track::after{
+    background-color: #4CAF50 !important; // Verde cuando está activado
+    border-color: rgb(0, 255, 42);
+  }
 }

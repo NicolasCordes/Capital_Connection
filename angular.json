@@ -75,7 +75,9 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "Capital_Connection:build"
+            "buildTarget": "Capital_Connection:build",
+            "proxyConfig": "src/proxy.conf.json"
+
           }
         },
         "test": {
