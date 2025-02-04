@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { map, Observable } from "rxjs";
 import { Donation } from "../types/donation.model";
 import { environment } from '../../environments/environment';
 
@@ -17,7 +17,9 @@ import { environment } from '../../environments/environment';
     }
 
     getDonationsByAccountId(accountId: number | undefined): Observable<Donation[]> {
-      return this.http.get<Donation[]>(`${this.urlBase}/${accountId}/donations`);
+      return this.http.get<Donation[]>(`${this.urlBase}/${accountId}/donations`).pipe(
+        map(donations => donations.filter(donation => donation.isActivated)) // Filtra solo las activadas
+      );
     }
 
   }

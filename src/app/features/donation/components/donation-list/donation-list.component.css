@@ -45,6 +45,7 @@ ul {
 
 /* Estilos para cada ítem de la lista de donaciones */
 li {
+
   background-color: var(--box-color-details-light);
   border: 1px solid var(--border-color-details-light);
   border-radius: 8px;
@@ -326,4 +327,23 @@ li:hover {
   li {
     border: 2px solid var(--border-color-details-light);
   }
+}
+
+.status-label {
+  color: var(--text-color); /* Color blanco para el texto "Estado de la donación" */
+}
+
+.text-green {
+  color: rgb(16, 226, 16);
+  font-weight: bold;
+}
+
+.text-yellow {
+  color: orange;
+  font-weight: bold;
+}
+
+.text-red {
+  color: red;
+  font-weight: bold;
 }

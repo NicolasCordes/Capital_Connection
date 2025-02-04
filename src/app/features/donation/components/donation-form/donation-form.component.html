@@ -1,8 +1,11 @@
+@if(payOption){
 <form [formGroup]="donationForm">
   <label for="amount">Cantidad:</label>
-  <input id="amount" formControlName="amount" type="number" />
-  <button type="submit" [disabled]="!donationForm.valid || userType === 'Guest'" (click)="pay()">Agregar Donación</button>
+  <input id="amount" formControlName="amount" type="number"/>
+  <button type="submit" [disabled]="!donationForm.valid || userType === 'Guest' || pressed" (click)="pay()">Agregar Donación</button>
 
 </form>
-
-<div id="wallet_container" ></div>
+}@else{
+  <p>Monto de la donacion ${{amount}}</p>
+  <div id="wallet_container" ></div>
+}

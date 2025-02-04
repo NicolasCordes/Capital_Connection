@@ -5,10 +5,10 @@ import fetch from "node-fetch";
 const client = new MercadoPagoConfig({ accessToken: 'TEST-6083462466960165-101910-ab0d02d54a828750e570c73c7ce1d464-581495007'});
 
 const app = express();
-const port = 3000; // Puedes cambiarlo si quieres
+const port = 3000;
 
-app.use(cors()); // Permitir peticiones de otros dominios
-app.use(express.json()); // Permitir peticiones de otros dominios
+app.use(cors());
+app.use(express.json());
 
 
 
@@ -17,7 +17,6 @@ app.get("/",(req,res)=>{
 });
 
 
-// Iniciar el servidor
 app.listen(port, () => {
   console.log(`Servidor corriendo en http://localhost:${port}`);
 });

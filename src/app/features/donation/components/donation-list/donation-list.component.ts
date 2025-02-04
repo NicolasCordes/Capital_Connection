@@ -8,12 +8,14 @@ import { EntrepreneurshipService } from "../../../../services/entrepreneurship.s
 import { ActiveUser } from "../../../../types/account-data";
 import { Donation } from "../../../../types/donation.model";
 import { Entrepreneurship } from "../../../../types/entrepreneurship.model";
+import { StatusPipe } from './status.pipe';  // Asegúrate de que la ruta sea correcta
 
 
 @Component({
+
   selector: 'app-donation-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,StatusPipe],
   templateUrl: './donation-list.component.html',
   styleUrl: './donation-list.component.css'
 })

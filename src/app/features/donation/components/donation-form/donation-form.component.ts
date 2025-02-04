@@ -31,10 +31,10 @@ export class DonationFormComponent implements OnInit{
   activeUser: ActiveUser | undefined;
   userType: string = 'Guest';
   authService= inject(AuthService)
-  private scriptElement?: HTMLScriptElement;
   private walletInstance: any;
-  payOption:boolean=false;
-
+  payOption:boolean=true;
+  pressed:boolean=false;
+  amount:BigInt=BigInt(0);
 
   ngOnInit(): void {
     this.authService.auth().subscribe({
@@ -44,12 +44,6 @@ export class DonationFormComponent implements OnInit{
     }, error:(e:Error)=>{
       console.log(e.message);
     }});
-
-
-
-      // Continuar con la carga del script de MercadoPago
-
-
     }
 
 
@@ -101,10 +95,10 @@ private initMercadoPago(preferenceId: string): void {
 }
 
 
-  donationForm = this.fb.group({
-    amount: [0, [Validators.required, Validators.min(1)]],
+donationForm = this.fb.group({
+  amount: [{ value: 0, disabled: false }, [Validators.required, Validators.min(100)]],
+});
 
-  });
 
   ngOnDestroy(): void {
     // Desmontar la billetera de MercadoPago si existe
@@ -122,13 +116,14 @@ private initMercadoPago(preferenceId: string): void {
   constructor(private fb: FormBuilder, private mpService: MpService, private donationService:DonationService) {}
   pay() {
     if (this.donationForm.valid) {
-
+      this.donationForm.get('amount')?.disable();  // Deshabilita el input correctamente
+      this.pressed=true
       const newDonation: Donation = {
         amount: BigInt(this.donationForm.value.amount ?? 0),
         date: new Date(),
         id_user: this.activeUser?.id,
         id_entrepreneurship: this.idE,
-        isActivated: true,
+        isActivated: false,
         status: 'pending'
       };
       const serializedDonation = JSON.stringify(newDonation, (key, value) =>
@@ -143,16 +138,22 @@ private initMercadoPago(preferenceId: string): void {
               response => {
                 const preferenceId = response.id;
                 if (preferenceId) {
+                  this.activatepay();
+                  this.amount=newDonation.amount;
                   this.initMercadoPago(preferenceId);
                 }
               },
               error => {
                 console.error("Error al crear la preferencia de pago:", error);
+                this.pressed=false
+                this.activatepay();
+                this.amount=BigInt(0);
+
+
               }
             );
           }
     });
-      // Crear la preferencia en MercadoPago
 
     }
   }
@@ -161,31 +162,6 @@ private initMercadoPago(preferenceId: string): void {
     this.payOption = !this.payOption
   }
 
-  /*payConfirmed(){
-
-    if(this.payOption){
-      this.mpService.crearPreferencia("Producto de prueba",1, 1000).subscribe(
-        response => {
-          const preferenceId = response.id; // Asegurarse de obtener el preference_id
-
-          if (!document.querySelector(`script[src="${environment.scriptMercadoPago}"]`)) {
-            this.scriptElement = document.createElement('script');
-            this.scriptElement.src = environment.scriptMercadoPago;
-            this.scriptElement.onload = () => this.initMercadoPago(preferenceId); // Pasar el preference_id aquí
-            this.scriptElement.onerror = err => {
-              console.error('Error cargando MercadoPago:', err);
-            };
-            document.head.appendChild(this.scriptElement);
-          } else {
-            this.initMercadoPago(preferenceId); // Si ya está cargado, solo inicializar
-          }
-        },
-        error => {
-          console.error("Error al crear la preferencia de pago:", error);
-        }
-      );
-    }
-    }*/
 
 
 }
