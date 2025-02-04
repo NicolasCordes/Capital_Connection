@@ -175,3 +175,141 @@ fieldset {
   gap: 20px;
 }
 
+/* =============================================== */
+/* Estilos Responsive para el formulario de registro */
+/* =============================================== */
+
+/* Pantallas medianas (hasta 1024px) */
+@media (max-width: 1024px) {
+  .form-container {
+    padding: 1.5rem;
+    max-width: 90%;
+    margin: 1.5rem auto;
+  }
+
+  .form-title {
+    font-size: 1.6rem;
+  }
+
+  .input-field {
+    font-size: 15px;
+    padding: 8px;
+  }
+
+  .submit-btn {
+    font-size: 0.95rem;
+    padding: 0.7rem;
+  }
+
+  .reveal-btn {
+    font-size: 1rem;
+    margin-top: -2rem;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+}
+
+/* Pantallas pequeñas (hasta 768px) */
+@media (max-width: 768px) {
+  .form-container {
+    padding: 1.2rem;
+    max-width: 95%;
+    margin: 1.2rem auto;
+  }
+
+  .form-title {
+    font-size: 1.5rem;
+  }
+
+  .input-field {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .submit-btn {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+
+  .reveal-btn {
+    font-size: 0.95rem;
+    margin-top: -1.8rem;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+}
+
+/* Pantallas muy pequeñas (hasta 480px) */
+@media (max-width: 480px) {
+  .form-container {
+    padding: 1rem;
+    max-width: 100%;
+    margin: 1rem;
+  }
+
+  .form-title {
+    font-size: 1.4rem;
+  }
+
+  .input-field {
+    font-size: 13px;
+    padding: 7px;
+  }
+
+  .submit-btn {
+    font-size: 0.85rem;
+    padding: 0.5rem;
+  }
+
+  .reveal-btn {
+    font-size: 0.9rem;
+    margin-top: -1.6rem;
+  }
+
+  .error-msg {
+    font-size: 0.8rem;
+  }
+}
+
+/* Pantallas ultra pequeñas (hasta 380px) */
+@media (max-width: 380px) {
+  .form-container {
+    padding: 0.8rem;
+    margin: 0.8rem;
+  }
+
+  .form-title {
+    font-size: 1.3rem;
+  }
+
+  .input-field {
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  .submit-btn {
+    font-size: 0.8rem;
+    padding: 0.4rem;
+  }
+
+  .reveal-btn {
+    font-size: 0.85rem;
+    margin-top: -1.5rem;
+  }
+
+  .error-msg {
+    font-size: 0.75rem;
+  }
+}
+
+/* Mejoras para dispositivos táctiles (sin hover) */
+@media (hover: none) {
+  .submit-btn {
+    padding: 1rem 20px !important;
+    min-height: 44px;
+  }
+}

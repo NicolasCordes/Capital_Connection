@@ -191,3 +191,141 @@ textarea::placeholder {
 .fa-star.checked {
   color: #ffc107;
 }
+
+/* =============================================== */
+/* Estilos Responsive para el componente de reseñas */
+/* =============================================== */
+
+/* Pantallas medianas (hasta 1024px) */
+@media (max-width: 1024px) {
+  .review-item,
+  .average-rating {
+    max-width: 90%;
+    padding: 0.8rem;
+    margin: 0.8rem auto;
+  }
+
+  .follow-btn,
+  .modify-btn {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .fa-star {
+    font-size: 1.4rem;
+  }
+}
+
+/* Pantallas pequeñas (hasta 768px) */
+@media (max-width: 768px) {
+  .review-item,
+  .average-rating {
+    max-width: 95%;
+    padding: 0.7rem;
+    margin: 0.5rem auto;
+  }
+
+  label,
+  .reviewer-name,
+  .rating-text,
+  .review-description {
+    font-size: 0.9rem;
+  }
+
+  textarea {
+    font-size: 0.9rem;
+    padding: 8px;
+    height: 100px;
+  }
+
+  .follow-btn,
+  .modify-btn {
+    padding: 7px 14px;
+    font-size: 13px;
+  }
+
+  .star-rating {
+    gap: 3px;
+  }
+
+  .fa-star {
+    font-size: 1.3rem;
+  }
+}
+
+/* Pantallas muy pequeñas (hasta 480px) */
+@media (max-width: 480px) {
+  .review-item,
+  .average-rating {
+    max-width: 100%;
+    padding: 0.6rem;
+    margin: 0.5rem;
+  }
+
+  label,
+  .reviewer-name,
+  .rating-text,
+  .review-description {
+    font-size: 0.85rem;
+  }
+
+  textarea {
+    font-size: 0.85rem;
+    padding: 6px;
+    height: 90px;
+  }
+
+  .follow-btn,
+  .modify-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .star-rating {
+    gap: 2px;
+  }
+
+  .fa-star {
+    font-size: 1.2rem;
+  }
+}
+
+/* Pantallas ultra pequeñas (hasta 380px) */
+@media (max-width: 380px) {
+  .review-item,
+  .average-rating {
+    padding: 0.5rem;
+  }
+
+  label,
+  .reviewer-name,
+  .rating-text,
+  .review-description {
+    font-size: 0.8rem;
+  }
+
+  textarea {
+    font-size: 0.8rem;
+    padding: 5px;
+    height: 80px;
+  }
+
+  .follow-btn,
+  .modify-btn {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+
+  .fa-star {
+    font-size: 1.1rem;
+  }
+}
+
+/* Mejoras para dispositivos táctiles (sin hover) */
+@media (hover: none) {
+  .follow-btn,
+  .modify-btn {
+    padding: 12px 20px !important;
+    min-height: 44px;
+  }
+}

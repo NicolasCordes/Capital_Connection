@@ -12,7 +12,7 @@ import { environment } from '../../environments/environment';
     http = inject(HttpClient);
     urlBase = `${environment.urlServer}/accounts`;
 
-    createDonation(accountId: number | null, donation: Donation): Observable<Donation> {
+    createDonation(accountId: number | null | undefined, donation: Donation): Observable<Donation> {
       return this.http.post<Donation>(`${this.urlBase}/${accountId}/donations`, donation);
     }
 

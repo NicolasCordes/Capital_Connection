@@ -33,6 +33,8 @@ export class DonationFormComponent implements OnInit{
   authService= inject(AuthService)
   private scriptElement?: HTMLScriptElement;
   private walletInstance: any;
+  payOption:boolean=false;
+
 
   ngOnInit(): void {
     this.authService.auth().subscribe({
@@ -46,26 +48,7 @@ export class DonationFormComponent implements OnInit{
 
 
       // Continuar con la carga del script de MercadoPago
-      this.mpService.crearPreferencia("Producto de prueba", 1000).subscribe(
-        response => {
-          const preferenceId = response.id; // Asegurarse de obtener el preference_id
 
-          if (!document.querySelector(`script[src="${environment.scriptMercadoPago}"]`)) {
-            this.scriptElement = document.createElement('script');
-            this.scriptElement.src = environment.scriptMercadoPago;
-            this.scriptElement.onload = () => this.initMercadoPago(preferenceId); // Pasar el preference_id aquí
-            this.scriptElement.onerror = err => {
-              console.error('Error cargando MercadoPago:', err);
-            };
-            document.head.appendChild(this.scriptElement);
-          } else {
-            this.initMercadoPago(preferenceId); // Si ya está cargado, solo inicializar
-          }
-        },
-        error => {
-          console.error("Error al crear la preferencia de pago:", error);
-        }
-      );
 
     }
 
@@ -105,7 +88,13 @@ private initMercadoPago(preferenceId: string): void {
           },
         },
       })
-      .then((instance: any) => (this.walletInstance = instance));
+      .then((instance: any) => {
+        localStorage.setItem('returnUrl', window.location.href);
+        this.walletInstance = instance;
+      })
+      .catch((error: any) => {
+        console.error('Error al crear la billetera de MercadoPago', error);
+      });
   } else {
     console.error('MercadoPago no está definido');
   }
@@ -130,18 +119,73 @@ private initMercadoPago(preferenceId: string): void {
     }
 }
 
-  constructor(private fb: FormBuilder, private donationService: DonationService, private mpService: MpService) {}
-  onSubmit() {
+  constructor(private fb: FormBuilder, private mpService: MpService, private donationService:DonationService) {}
+  pay() {
+    if (this.donationForm.valid) {
 
-    const newDonation: Donation = {
-      amount: BigInt(this.donationForm.value.amount ?? 0),
-      date: new Date(),
-      id_user: this.activeUser?.id,
-      id_entrepreneurship: this.idE,
-      isActivated: true
-    };
+      const newDonation: Donation = {
+        amount: BigInt(this.donationForm.value.amount ?? 0),
+        date: new Date(),
+        id_user: this.activeUser?.id,
+        id_entrepreneurship: this.idE,
+        isActivated: true,
+        status: 'pending'
+      };
+      const serializedDonation = JSON.stringify(newDonation, (key, value) =>
+        typeof value === 'bigint' ? value.toString() : value
+      );
 
+      this.donationService.createDonation(newDonation.id_user,JSON.parse(serializedDonation)).subscribe(
+        (createdDonation: Donation) => {
+          if(createdDonation.id && newDonation.id_user){
+            console.log(createdDonation.id);
+            this.mpService.crearPreferencia('Producto de prueba', 1, Number(newDonation.amount),createdDonation.id,newDonation.id_user).subscribe(
+              response => {
+                const preferenceId = response.id;
+                if (preferenceId) {
+                  this.initMercadoPago(preferenceId);
+                }
+              },
+              error => {
+                console.error("Error al crear la preferencia de pago:", error);
+              }
+            );
+          }
+    });
+      // Crear la preferencia en MercadoPago
 
+    }
   }
+
+  activatepay(){
+    this.payOption = !this.payOption
+  }
+
+  /*payConfirmed(){
+
+    if(this.payOption){
+      this.mpService.crearPreferencia("Producto de prueba",1, 1000).subscribe(
+        response => {
+          const preferenceId = response.id; // Asegurarse de obtener el preference_id
+
+          if (!document.querySelector(`script[src="${environment.scriptMercadoPago}"]`)) {
+            this.scriptElement = document.createElement('script');
+            this.scriptElement.src = environment.scriptMercadoPago;
+            this.scriptElement.onload = () => this.initMercadoPago(preferenceId); // Pasar el preference_id aquí
+            this.scriptElement.onerror = err => {
+              console.error('Error cargando MercadoPago:', err);
+            };
+            document.head.appendChild(this.scriptElement);
+          } else {
+            this.initMercadoPago(preferenceId); // Si ya está cargado, solo inicializar
+          }
+        },
+        error => {
+          console.error("Error al crear la preferencia de pago:", error);
+        }
+      );
+    }
+    }*/
+
 
 }

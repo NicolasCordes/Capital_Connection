@@ -5,4 +5,5 @@ export interface Donation {
     id_entrepreneurship?: number;
     id_user?: number;
     isActivated:boolean;
+    status: String;
 }

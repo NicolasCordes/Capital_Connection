@@ -83,7 +83,7 @@ export class EntrepreneurshipFormComponent implements OnInit {
       let ent = this.entrepreneurshipForm.getRawValue();
       ent.id_account = this.activeUser?.id;
       ent.isActivated=true;
-      ent.collected = 1;
+      ent.collected = 0;
       console.log('Emprendimiento a enviar:', ent);
       this.entrepreneurshipService
         .postEntrepreneurship(ent)

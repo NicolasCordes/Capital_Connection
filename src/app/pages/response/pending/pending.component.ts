@@ -16,7 +16,9 @@ export class PendingComponent implements OnInit {
     const returnUrl = localStorage.getItem('returnUrl');
     if (returnUrl) {
       console.log('Redirigiendo a la página de retorno:', returnUrl);
+      localStorage.removeItem('returnUrl');
       window.location.href = returnUrl;  // Redirigir a la página anterior
+
     } else {
       console.log('No se encontró una URL de retorno, redirigiendo al home...');
       window.location.href = 'http://localhost:4200';  // Redirigir al home si no hay URL de retorno

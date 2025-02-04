@@ -28,6 +28,7 @@ import { Entrepreneurship } from '../../../../types/entrepreneurship.model';
   authService = inject(AuthService);
   modalMessage: String = '';
   isModalVisible: boolean = false;
+  selectedEntrepreneurshipId: number | null = null;
 
   constructor() {
     this.editForm = this.fb.group({
@@ -133,8 +134,8 @@ import { Entrepreneurship } from '../../../../types/entrepreneurship.model';
     }
   }
 
-  showModal(){
-    this.modalMessage = '¿Esta seguro que desea eliminar este emprendimiento?';
+  showModal(entrepreneurship: Entrepreneurship) {
+    this.selectedEntrepreneurshipId = entrepreneurship.id || null;
     this.isModalVisible = true;
   }
 
@@ -151,6 +152,7 @@ import { Entrepreneurship } from '../../../../types/entrepreneurship.model';
 
   closeModal(): void {
     this.isModalVisible = false;
+    this.selectedEntrepreneurshipId = null;
   }
 
 

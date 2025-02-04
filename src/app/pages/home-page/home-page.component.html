@@ -40,10 +40,10 @@
                 <p>{{ entrepreneurship.description }}</p>
 
                 <p><strong>Objetivo:</strong> ${{ entrepreneurship.goal }}</p>
-                <p><strong>Recaudado:</strong> ${{ (entrepreneurship.collected || 0)-1}}</p>
+                <p><strong>Recaudado:</strong> ${{ (entrepreneurship.collected || 0)}}</p>
               <div class="progress-bar-container">
-                <div class="progress-bar" [style.width]="getProgressWidth(entrepreneurship.goal, (entrepreneurship.collected || 0) - 1) + '%'">
-                  {{ getProgressWidth(entrepreneurship.goal, (entrepreneurship.collected || 0) - 1) }}%
+                <div class="progress-bar" [style.width]="getProgressWidth(entrepreneurship.goal, (entrepreneurship.collected || 0)) + '%'">
+                  {{ getProgressWidth(entrepreneurship.goal, (entrepreneurship.collected || 0)) }}%
                 </div>
 
               </div>

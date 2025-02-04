@@ -7,14 +7,14 @@ form {
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   }
-  
+
   label {
     display: block;
     font-size: 1rem;
     margin-bottom: 8px;
     color: var(--text-color);
   }
-  
+
   input {
     width: 100%;
     padding: 8px;
@@ -23,8 +23,8 @@ form {
     border-radius: 4px;
     font-size: 1rem;
   }
-  
-  
+
+
   button {
     width: 100%;
     padding: 10px;
@@ -36,17 +36,166 @@ form {
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
-  
+
   button:disabled {
     background-color: #ccc;
     cursor: not-allowed;
   }
-  
+
   button:hover {
     background-color: #45a049;
   }
-  
+
   button:disabled:hover {
     background-color: #ccc;
   }
-  
+
+  /* =============================================== */
+/* Estilos Responsive para el formulario de donaciones */
+/* =============================================== */
+
+@media (max-width: 1024px) {
+  form {
+    padding: 18px;
+  }
+
+  label {
+    font-size: 0.95rem;
+  }
+
+  input {
+    padding: 7px;
+    font-size: 0.95rem;
+  }
+
+  button {
+    padding: 9px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 768px) {
+  form {
+    max-width: 350px;
+    padding: 16px;
+    margin: 15px auto;
+  }
+
+  label {
+    font-size: 0.9rem;
+  }
+
+  input {
+    padding: 7px;
+    font-size: 0.9rem;
+  }
+
+  button {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  form {
+    max-width: 90%;
+    padding: 14px;
+    margin: 10px auto;
+  }
+
+  label {
+    font-size: 0.85rem;
+  }
+
+  input {
+    padding: 6px;
+    font-size: 0.85rem;
+  }
+
+  button {
+    padding: 7px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 380px) {
+  form {
+    padding: 12px;
+  }
+
+  label {
+    font-size: 0.8rem;
+  }
+
+  input {
+    padding: 5px;
+    font-size: 0.8rem;
+  }
+
+  button {
+    padding: 6px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Mejoras para dispositivos táctiles (sin hover) */
+@media (hover: none) {
+  button {
+    padding: 12px 20px !important;
+    min-height: 44px;
+  }
+}
+/* Agregar al final del CSS */
+#wallet_container {
+  width: 100%;
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 0 10px;
+}
+
+#wallet_container .mp-wallet {
+  width: 100% !important;
+  height: auto !important;
+}
+
+/* Ajustes específicos para el botón de Mercado Pago */
+#wallet_container .mp-wallet-button {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: 48px !important;
+  padding: 12px !important;
+  font-size: 1rem !important;
+}
+
+/* Media Queries para el contenedor de Mercado Pago */
+@media (max-width: 768px) {
+  #wallet_container {
+    max-width: 350px;
+    padding: 0 8px;
+  }
+
+  #wallet_container .mp-wallet-button {
+    font-size: 0.95rem !important;
+    padding: 10px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  #wallet_container {
+    max-width: 90%;
+    padding: 0 5px;
+  }
+
+  #wallet_container .mp-wallet-button {
+    font-size: 0.9rem !important;
+    padding: 8px !important;
+    min-height: 44px !important;
+  }
+}
+
+@media (max-width: 380px) {
+  #wallet_container .mp-wallet-button {
+    font-size: 0.85rem !important;
+    padding: 6px !important;
+  }
+}

@@ -307,3 +307,148 @@ button {
     transform: scale(1);
   }
 }
+
+/* =============================================== */
+/* Estilos Responsive (agregar al final del CSS) */
+/* =============================================== */
+
+@media (max-width: 1024px) {
+  .entrepreneurships-container {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .header h1 {
+    font-size: 2.2rem;
+  }
+
+  .entrepreneurship-card {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .entrepreneurships-container {
+    width: 95%;
+    margin: 10px auto;
+    padding: 10px;
+  }
+
+  .header {
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  .entrepreneurship-card {
+    margin: 8px 0;
+  }
+
+  .entrepreneurship-card button {
+    width: 100%;
+    margin: 5px 0;
+  }
+
+  form {
+    padding: 15px;
+  }
+
+  .video-preview {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .modal-content {
+    width: 95%;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .entrepreneurships-container {
+    width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+  }
+
+  .header h1 {
+    font-size: 1.8rem;
+  }
+
+  .name-entrepreneurship {
+    font-size: 1.3rem;
+  }
+
+  form h3 {
+    font-size: 1.5rem;
+  }
+
+  form label {
+    font-size: 1rem;
+  }
+
+  form input,
+  form select,
+  form textarea {
+    font-size: 0.95rem;
+    padding: 8px;
+  }
+
+  .modal-content h2 {
+    font-size: 1.4rem;
+  }
+
+  .modal-content p {
+    font-size: 0.9rem;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+  }
+
+  .modal-actions button {
+    width: 100%;
+    margin: 5px 0;
+  }
+}
+
+@media (max-width: 380px) {
+  .header h1 {
+    font-size: 1.6rem;
+    padding: 0 10px;
+  }
+
+  form {
+    padding: 10px;
+  }
+
+  form h3 {
+    font-size: 1.3rem;
+  }
+
+  .entrepreneurship-card p {
+    font-size: 0.9rem;
+  }
+
+  .modal-content {
+    padding: 10px;
+  }
+}
+
+/* Mejoras de toque en móviles */
+@media (hover: none) {
+  button {
+    padding: 12px 20px !important;
+    min-height: 44px; /* Altura mínima para touch */
+  }
+
+  input, textarea, select {
+    font-size: 16px !important;
+    min-height: 44px;
+  }
+}

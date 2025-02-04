@@ -156,3 +156,89 @@ input[type="file"] {
     width: 100%;
   }
 }
+
+/* =============================================== */
+/* Estilos Responsive (agregar al final del CSS) */
+/* =============================================== */
+
+@media (max-width: 768px) {
+  .page-container {
+    padding: 10px;
+  }
+
+  form {
+    width: 100%;
+    max-width: 100%;
+    padding: 20px;
+  }
+
+  .video-preview-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .video-preview {
+    width: 100% !important;
+    max-width: 300px;
+    margin-bottom: 10px;
+  }
+
+  button[type="button"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  label {
+    font-size: 1rem;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  textarea,
+  select {
+    font-size: 0.95rem;
+    padding: 8px;
+  }
+
+  button[type="submit"] {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+
+  .video-preview {
+    max-width: 100%;
+  }
+
+  div p {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 380px) {
+  form {
+    padding: 15px;
+  }
+
+  textarea {
+    min-height: 120px;
+  }
+
+  button[type="submit"] {
+    width: 100%;
+  }
+}
+
+/* Mejoras de toque en móviles */
+@media (hover: none) {
+  button {
+    padding: 12px 20px !important;
+    font-size: 1rem !important;
+  }
+
+  input, textarea, select {
+    font-size: 16px !important; /* Previene el zoom en iOS */
+  }
+}

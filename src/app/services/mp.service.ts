@@ -10,9 +10,16 @@ export class MpService {
 
   constructor(private http: HttpClient) {}
 
-  crearPreferencia(descripcion: string, precio: number): Observable<any> {
-    return this.http.post<any>('http://localhost:3000/createPreference', { descripcion, precio });
+  crearPreferencia(descripcion: string, cantidad: number, precio: number, iddon: number, idacc: number): Observable<any> {
+    return this.http.post<any>('http://localhost:3000/create_preference', {
+      title: descripcion,
+      quantity: cantidad,
+      price: precio,
+      iddon: iddon,
+      idacc: idacc
+    });
   }
+
 
 
 }

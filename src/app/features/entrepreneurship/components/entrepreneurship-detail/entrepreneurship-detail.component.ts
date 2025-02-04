@@ -1,6 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component, OnInit, inject } from "@angular/core";
-import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder, Validators, FormArray } from "@angular/forms";
+import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges, inject } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AuthService } from "../../../../services/auth.service";
 import { DonationService } from "../../../../services/donation.service";
@@ -13,6 +12,7 @@ import { Review } from "../../../../types/review.model";
 import { DonationFormComponent } from "../../../donation/components/donation-form/donation-form.component";
 import { ReviewsFormComponent } from "../../../reviews/reviews-form/reviews-form.component";
 import { ReviewsListComponent } from "../../../reviews/reviews-list/reviews-list.component";
+import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder, Validators, FormArray } from "@angular/forms";
 
 @Component({
   selector: 'app-entrepreneurship-detail',
@@ -22,7 +22,7 @@ import { ReviewsListComponent } from "../../../reviews/reviews-list/reviews-list
   styleUrls: ['./entrepreneurship-detail.component.css'],
 })
 
-export class EntrepreneurshipDetailComponent implements OnInit {
+export class EntrepreneurshipDetailComponent implements OnInit{
   entrepreneurshipForm!: FormGroup;
   isEditing = false;
   entrepreneurship: Entrepreneurship | null = null;
@@ -54,7 +54,7 @@ export class EntrepreneurshipDetailComponent implements OnInit {
     private favoriteListService: FavoriteListService,
     private donationService: DonationService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -83,6 +83,7 @@ export class EntrepreneurshipDetailComponent implements OnInit {
 
       }
 
+
     });
 
     this.route.paramMap.subscribe((params) => {
@@ -99,6 +100,7 @@ export class EntrepreneurshipDetailComponent implements OnInit {
       });
     });
   }
+
 
   previousSlide() {
     if (this.currentIndex > 0) {
@@ -240,48 +242,6 @@ export class EntrepreneurshipDetailComponent implements OnInit {
   }
 
 
-
-  onDonationAdded(donation: Donation): void {
-  if (this.entrepreneurship?.id) {
-    this.id = this.entrepreneurship.id;
-    donation.id_entrepreneurship = this.id;
-    console.log("1",donation);
-    if (this.userId) {
-      donation.id_user = this.userId;
-      donation.id_entrepreneurship = this.entrepreneurship.id;
-    }
-
-    // Convertir BigInt a string antes de enviar
-    const serializedDonation = JSON.stringify(donation, (key, value) => 
-      typeof value === 'bigint' ? value.toString() : value
-    );
-    console.log("2",donation);
-    // Enviar la donación como objeto parseado
-    this.donationService.createDonation(this.userId, JSON.parse(serializedDonation)).subscribe({
-      next: (donationResponse: Donation) => {
-        if (this.entrepreneurship) {
-          const donationAmount = Number(donationResponse.amount);
-          let collect: number = this.entrepreneurship.collected ?? 0;
-          collect += donationAmount;
-          this.entrepreneurship.collected = collect;
-            console.log('llegue aca',this.entrepreneurship.collected )
-          this.entrepreneurshipService.updateEntrepreneurship(this.id, this.entrepreneurship!).subscribe({
-            next: (data) => {},
-            error: (err) => {
-              console.error('Error al actualizar el emprendimiento:', err);
-            }
-          });
-        }
-      },
-      error: (err) => {
-        console.error('Error al agregar la donación:', err);
-      }
-    });
-  } else {
-    console.error('No se pudo asociar la donación con un emprendimiento válido.');
-  }
-}
-
   getProgressWidth(goal: number, collected: number): number {
     if (goal <= 0) return 0;
     const progress = (collected / goal) * 100;
@@ -293,6 +253,12 @@ export class EntrepreneurshipDetailComponent implements OnInit {
     return progress >= 50 ? 'white' : 'black';
   }
 
-
+  /*ngOnDestroy() {
+    // Desconectar cuando el componente se destruya
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+    this.webSocketService.disconnect();
+  }*/
 
 }

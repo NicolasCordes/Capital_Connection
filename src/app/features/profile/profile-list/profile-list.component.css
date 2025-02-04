@@ -95,3 +95,87 @@ p {
     padding: 8px 20px; /* Reducimos el padding del botón */
   }
 }
+
+/* =============================================== */
+/* Estilos Responsive para el componente de usuario */
+/* =============================================== */
+
+/* Ajustes para pantallas medianas (hasta 1024px) */
+@media (max-width: 1024px) {
+  .header h1 {
+    font-size: 50px; /* Disminuye ligeramente el tamaño del título */
+  }
+
+  .button-group button {
+    max-width: 180px; /* Ajusta el ancho máximo de los botones */
+    font-size: 15px; /* Reduce un poco el tamaño de fuente */
+    padding: 9px 18px; /* Ajusta el padding de los botones */
+  }
+}
+
+/* Ajustes para pantallas pequeñas (hasta 768px) */
+@media (max-width: 768px) {
+  .header h1 {
+    font-size: 40px; /* Se reduce más el tamaño del título */
+  }
+
+  .header p {
+    font-size: 16px; /* Ajuste en el tamaño de la descripción si existe */
+  }
+
+  .button-group {
+    flex-wrap: wrap; /* Permite que los botones se acomoden en varias líneas si es necesario */
+    gap: 8px;
+  }
+
+  .button-group button {
+    flex: 1; /* Se extienden equitativamente */
+    max-width: none; /* Permite ocupar el 100% del contenedor en líneas nuevas */
+  }
+}
+
+/* Ajustes para pantallas muy pequeñas (hasta 480px) */
+@media (max-width: 480px) {
+  .header {
+    padding: 40px 0; /* Reduce el padding del header */
+  }
+
+  .header h1 {
+    font-size: 32px; /* Se reduce el tamaño del título para mayor legibilidad */
+  }
+
+  .button-group {
+    flex-direction: column; /* Los botones se apilan verticalmente */
+    gap: 10px;
+  }
+
+  .button-group button {
+    width: 100%; /* Ocupan todo el ancho disponible */
+    font-size: 14px; /* Tamaño de fuente ligeramente menor */
+    padding: 8px 16px; /* Ajuste en el padding */
+  }
+}
+
+/* Ajustes para pantallas ultra pequeñas (hasta 380px) */
+@media (max-width: 380px) {
+  .header {
+    padding: 30px 0; /* Reduce aún más el padding del header */
+  }
+
+  .header h1 {
+    font-size: 28px; /* Disminuye el tamaño del título para pantallas muy reducidas */
+  }
+
+  .button-group button {
+    font-size: 13px; /* Ajuste fino del tamaño de fuente */
+    padding: 7px 14px; /* Ajuste fino del padding */
+  }
+}
+
+/* Mejoras para dispositivos táctiles (sin hover) */
+@media (hover: none) {
+  .follow-btn {
+    padding: 12px 20px !important; /* Aumenta el área táctil */
+    min-height: 44px; /* Altura mínima para facilitar la interacción */
+  }
+}

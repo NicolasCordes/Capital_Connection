@@ -14,13 +14,13 @@
     <div class="progress-bar-container">
       <div
         class="progress-bar"
-        [style.width]="getProgressWidth(entrepreneurship.goal, (entrepreneurship.collected || 0) - 1) + '%'"
+        [style.width]="getProgressWidth(entrepreneurship.goal, (entrepreneurship.collected || 0) ) + '%'"
       ></div>
       <div
         class="progress-bar-text"
-        [style.color]="getProgressColor(entrepreneurship.goal, (entrepreneurship.collected || 0) - 1)"
+        [style.color]="getProgressColor(entrepreneurship.goal, (entrepreneurship.collected || 0))"
       >
-        {{ getProgressWidth(entrepreneurship.goal, (entrepreneurship.collected || 0)- 1) }}%
+        {{ getProgressWidth(entrepreneurship.goal, (entrepreneurship.collected || 0)) }}%
       </div>
     </div>
   <!-- Contenedor principal con Slider a la izquierda y Detalles a la derecha -->
@@ -54,7 +54,7 @@
         <!-- Donaciones -->
         <div class="donations">
           <h3>Agregar Donación</h3>
-          <app-donation-form (donationAdded)="onDonationAdded($event)" [idE]="currentEntrepreneurship.id || 0" ></app-donation-form>
+          <app-donation-form [idE]="currentEntrepreneurship.id || 0" ></app-donation-form>
         </div>
       </div>
     </div>

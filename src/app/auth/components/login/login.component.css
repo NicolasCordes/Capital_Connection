@@ -106,3 +106,148 @@
 .password-group input[type="password"] {
   padding-right: 2.5rem;
 }
+
+/* =============================================== */
+/* Estilos Responsive para el formulario de inicio de sesión */
+/* =============================================== */
+
+/* Pantallas medianas (hasta 1024px) */
+@media (max-width: 1024px) {
+  .login-form {
+    padding: 1.5rem;
+    max-width: 90%;
+  }
+
+  .login-form legend {
+    font-size: 1.4rem;
+  }
+
+  .form-group label {
+    font-size: 0.95rem;
+  }
+
+  .login-form input[type="text"],
+  .login-form input[type="password"] {
+    font-size: 0.95rem;
+    padding: 0.7rem;
+  }
+
+  .submit-btn {
+    font-size: 0.95rem;
+    padding: 0.7rem;
+  }
+
+  .reveal-btn {
+    font-size: 1rem;
+    margin-top: -2rem;
+  }
+}
+
+/* Pantallas pequeñas (hasta 768px) */
+@media (max-width: 768px) {
+  .login-form {
+    padding: 1.2rem;
+    max-width: 95%;
+  }
+
+  .login-form legend {
+    font-size: 1.3rem;
+  }
+
+  .form-group label {
+    font-size: 0.9rem;
+  }
+
+  .login-form input[type="text"],
+  .login-form input[type="password"] {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+
+  .submit-btn {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+
+  .reveal-btn {
+    font-size: 1rem;
+    margin-top: -1.8rem;
+  }
+}
+
+/* Pantallas muy pequeñas (hasta 480px) */
+@media (max-width: 480px) {
+  .center {
+    margin-top: 3rem;
+  }
+
+  .login-form {
+    padding: 1rem;
+    max-width: 100%;
+    margin: 0 1rem;
+  }
+
+  .login-form legend {
+    font-size: 1.2rem;
+  }
+
+  .form-group label {
+    font-size: 0.85rem;
+  }
+
+  .login-form input[type="text"],
+  .login-form input[type="password"] {
+    font-size: 0.85rem;
+    padding: 0.5rem;
+  }
+
+  .submit-btn {
+    font-size: 0.85rem;
+    padding: 0.5rem;
+  }
+
+  .reveal-btn {
+    font-size: 0.9rem;
+    margin-top: -1.6rem;
+  }
+}
+
+/* Pantallas ultra pequeñas (hasta 380px) */
+@media (max-width: 380px) {
+  .login-form {
+    padding: 0.8rem;
+    margin: 0 0.5rem;
+  }
+
+  .login-form legend {
+    font-size: 1.1rem;
+  }
+
+  .form-group label {
+    font-size: 0.8rem;
+  }
+
+  .login-form input[type="text"],
+  .login-form input[type="password"] {
+    font-size: 0.8rem;
+    padding: 0.4rem;
+  }
+
+  .submit-btn {
+    font-size: 0.8rem;
+    padding: 0.4rem;
+  }
+
+  .reveal-btn {
+    font-size: 0.85rem;
+    margin-top: -1.5rem;
+  }
+}
+
+/* Mejoras para dispositivos táctiles (sin hover) */
+@media (hover: none) {
+  .submit-btn {
+    padding: 1rem 20px !important;
+    min-height: 44px;
+  }
+}

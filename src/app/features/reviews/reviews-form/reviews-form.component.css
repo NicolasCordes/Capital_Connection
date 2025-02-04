@@ -88,7 +88,7 @@ button[type="submit"]:disabled {
   flex: 1; /* Los botones se distribuyen de manera equitativa */
   max-width: 200px; /* Limita el ancho máximo */
 }
-  
+
 div.ng-invalid.ng-touched {
   color: #dc3545;
   font-size: 12px;
@@ -109,4 +109,128 @@ div.ng-invalid.ng-touched {
 
 .fa-star.checked {
   color: #ffc107; /* Color de las estrellas seleccionadas */
+}
+
+/* =============================================== */
+/* Estilos Responsive para el formulario de reseñas */
+/* =============================================== */
+
+/* Ajustes para pantallas medianas (hasta 1024px) */
+@media (max-width: 1024px) {
+  form {
+    padding: 12px;
+    max-width: 90%;
+    margin: 0 auto 20px auto;
+  }
+
+  button[type="submit"] {
+    padding: 8px 16px;
+    font-size: 15px;
+  }
+
+  .fa-star {
+    font-size: 1.4rem;
+  }
+}
+
+/* Ajustes para pantallas pequeñas (hasta 768px) */
+@media (max-width: 768px) {
+  form {
+    padding: 10px;
+    max-width: 95%;
+    margin: 10px auto;
+  }
+
+  label {
+    font-size: 0.9rem;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  textarea {
+    padding: 6px;
+    font-size: 0.9rem;
+  }
+
+  button[type="submit"] {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  .star-rating {
+    gap: 3px;
+  }
+
+  .fa-star {
+    font-size: 1.3rem;
+  }
+}
+
+/* Ajustes para pantallas muy pequeñas (hasta 480px) */
+@media (max-width: 480px) {
+  form {
+    padding: 8px;
+    max-width: 100%;
+    margin: 10px;
+  }
+
+  label {
+    font-size: 0.85rem;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  textarea {
+    padding: 5px;
+    font-size: 0.85rem;
+  }
+
+  button[type="submit"] {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+
+  .star-rating {
+    gap: 2px;
+  }
+
+  .fa-star {
+    font-size: 1.2rem;
+  }
+}
+
+/* Ajustes para pantallas ultra pequeñas (hasta 380px) */
+@media (max-width: 380px) {
+  form {
+    padding: 6px;
+  }
+
+  label {
+    font-size: 0.8rem;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  textarea {
+    padding: 4px;
+    font-size: 0.8rem;
+  }
+
+  button[type="submit"] {
+    padding: 5px 8px;
+    font-size: 12px;
+  }
+
+  .fa-star {
+    font-size: 1.1rem;
+  }
+}
+
+/* Mejoras para dispositivos táctiles (sin hover) */
+@media (hover: none) {
+  button[type="submit"] {
+    padding: 12px 20px !important;
+    min-height: 44px;
+  }
 }

@@ -1,6 +1,6 @@
 /* Encabezado con imagen de fondo */
 .explore-header {
-  position: relative; /* Necesario para posicionar el pseudo-elemento encima */
+  position: relative;
   background-image: url('https://res.cloudinary.com/dyho1ydzl/image/upload/v1731173954/3-days-in-san-fran_banner_3_gqnhsl.jpg');
   background-size: cover;
   background-position: center;
@@ -14,7 +14,6 @@
   margin-bottom: 2.5rem;
 }
 
-/* Pseudo-elemento para oscurecer la imagen de fondo */
 .explore-header::before {
   content: '';
   position: absolute;
@@ -22,10 +21,10 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.3); /* Capa oscura con opacidad */
-  z-index: 1; /* Asegura que la capa de oscuridad esté por debajo del contenido */
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1;
 }
-/* Estilo del h1 */
+
 .explore-header h1 {
   font-family: 'Whyte Inktrap', Helvetica, 'Sans-serif';
   font-size: 6rem;
@@ -33,24 +32,10 @@
   font-weight: 500;
   color: white;
   z-index: 2;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Para asegurar buena visibilidad sobre la imagen */
-  text-transform: uppercase; /* Si deseas que sea en mayúsculas */
-  letter-spacing: 1px; /* Si prefieres darle espacio entre las letras */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
-
-/* Estilos responsivos */
-@media (min-width: 768px) {
-  .explore-header h1 {
-    font-size: 3rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .explore-header h1 {
-    font-size: 2.5rem;
-  }
-}
-
 
 /* Contenedor general de las cards */
 .card-container {
@@ -102,7 +87,6 @@
   flex-direction: column;
   justify-content: space-between;
   flex-grow: 1;
-
 }
 
 .card-content h3,
@@ -113,7 +97,7 @@
 
 .card-content p {
   display: -webkit-box;
-  -webkit-line-clamp: 3; /* Limita el texto a 3 líneas */
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -184,40 +168,137 @@
   margin-top: 20px;
 }
 
-
 /* Contenedor de la barra de progreso */
 .progress-bar-container {
   width: 100%;
-  background-color: #e0e0e0; /* Fondo gris claro */
+  background-color: #e0e0e0;
   border-radius: 8px;
   overflow: hidden;
   margin-bottom: 10px;
-  height: 20px; /* Altura de la barra */
+  height: 20px;
 }
 
 /* Barra de progreso */
 .progress-bar {
-  background-color: #4caf50; /* Color verde */
+  background-color: #4caf50;
   color: white;
   text-align: center;
   font-size: 0.9rem;
   font-weight: bold;
-  line-height: 20px; /* Alinea el texto verticalmente */
+  line-height: 20px;
   height: 100%;
-  border-radius: 8px 0 0 8px; /* Bordes redondeados */
-  transition: width 0.3s ease; /* Animación suave */
+  border-radius: 8px 0 0 8px;
+  transition: width 0.3s ease;
 }
 
-/* Para móvil */
+/* =============================================== */
+/* Estilos Responsive */
+/* =============================================== */
+@media (max-width: 1024px) {
+  .explore-header h1 {
+    font-size: 4.5rem;
+    line-height: 1.2;
+    padding: 0 20px;
+  }
+}
+
 @media (max-width: 768px) {
+  .explore-header {
+    height: 200px;
+  }
+
+  .explore-header h1 {
+    font-size: 3.5rem;
+    line-height: 1.1;
+  }
+
+  .card-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 15px;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .card-image {
+    height: 180px;
+  }
+}
+
+@media (max-width: 600px) {
   .card-container {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* Para pantallas muy pequeñas */
 @media (max-width: 480px) {
+  .explore-header {
+    height: 180px;
+  }
+
+  .explore-header h1 {
+    font-size: 2.2rem;
+    line-height: 1;
+    padding: 0 15px;
+  }
+
   .card-container {
     grid-template-columns: 1fr;
+    padding: 10px;
+  }
+
+  .card {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .card-content {
+    padding: 15px;
+  }
+
+  .card-content h3 {
+    font-size: 1.1rem;
+  }
+
+  .card-content p {
+    -webkit-line-clamp: 2;
+    font-size: 0.9rem;
+  }
+
+  .card-footer button {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+
+  .progress-bar-container {
+    height: 18px;
+  }
+
+  .progress-bar {
+    font-size: 0.8rem;
+    line-height: 18px;
+  }
+}
+
+@media (max-width: 380px) {
+  .explore-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .card-image {
+    height: 160px;
+  }
+
+  .card-footer {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .card-footer button {
+    width: 100%;
   }
 }

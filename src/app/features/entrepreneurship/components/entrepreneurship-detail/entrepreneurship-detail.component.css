@@ -314,3 +314,117 @@ p {
     transform: rotate(360deg);
   }
 }
+
+/* =============================================== */
+/* Estilos Responsive (agregar al final del CSS) */
+/* =============================================== */
+
+@media (max-width: 1024px) {
+  .entrepreneurship-wrapper {
+    gap: 15px;
+  }
+
+  .carousel-container {
+    height: 350px;
+  }
+
+  .entrepreneurship-details {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header h2 {
+    font-size: 2rem;
+    padding: 0 15px;
+  }
+
+  .carousel-container {
+    height: 300px;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .carousel-arrow {
+    font-size: 1.8rem;
+    padding: 10px;
+  }
+
+  .entrepreneurship-details {
+    border: 1px solid var(--border-color-details-light);
+    padding: 20px;
+  }
+
+  .entrepreneurship-details p {
+    font-size: 0.95rem;
+  }
+
+  .follow-btn {
+    width: 100%;
+    margin-top: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header h2 {
+    font-size: 1.5rem;
+  }
+
+  .carousel-container {
+    height: 250px;
+  }
+
+  .carousel-arrow {
+    font-size: 1.5rem;
+    padding: 8px;
+  }
+
+  .progress-bar-text {
+    font-size: 0.8rem;
+  }
+
+  .entrepreneurship-details {
+    padding: 15px;
+  }
+
+  .entrepreneurship-details strong {
+    font-size: 0.95rem;
+  }
+
+  .reviews-title h3 {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .carousel-container {
+    height: 200px;
+  }
+
+  .entrepreneurship-details p {
+    font-size: 0.85rem;
+  }
+
+  .follow-btn {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+  }
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border-width: 4px;
+  }
+}
+
+/* Mejoras de toque en móviles */
+@media (hover: none) {
+  .carousel-arrow:hover {
+    background-color: var(--background-color);
+    transform: translateY(-50%);
+  }
+
+  .entrepreneurship-details:hover {
+    border-color: var(--border-color-details-light);
+  }
+}

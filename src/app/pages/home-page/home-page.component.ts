@@ -13,6 +13,7 @@ import { Entrepreneurship } from '../../types/entrepreneurship.model';
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css'],
 })
+
 export class HomePageComponent implements OnInit, OnDestroy {
   username = 'invitado';
   private sub?: Subscription;
@@ -24,7 +25,8 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
-    private entrepreneurshipService: EntrepreneurshipService
+    private entrepreneurshipService: EntrepreneurshipService,
+
   ) {}
 
   ngOnInit(): void {
@@ -36,7 +38,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
     this.updateArrowVisibility();
 
     this.entrepreneurships.forEach(entre => {
-      console.log(entre);
+
     });
   },
   error: (err) => {
@@ -58,6 +60,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.sub?.unsubscribe();
+
     window.removeEventListener('resize', this.updateArrowVisibility.bind(this));
 
   }
@@ -87,4 +90,6 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
     this.carouselTransform = `translateX(-${this.currentIndex * (100 / this.slidesVisible)}%)`;
   }
+
+
 }

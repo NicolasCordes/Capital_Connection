@@ -12,7 +12,9 @@
   "description": "",
   "dependencies": {
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "express": "^4.21.2",
-    "mercadopago": "^2.3.0"
+    "mercadopago": "^2.3.0",
+    "node-fetch": "^3.3.2"
   }
 }

@@ -13,14 +13,14 @@
 
       <div class="goal-progress">
         <p>Goal: ${{ entrepreneurship.goal || 0 }}</p>
-        <p><strong>Recaudado:</strong> ${{ (entrepreneurship.collected || 0) - 1 }}</p>
+        <p><strong>Recaudado:</strong> ${{ (entrepreneurship.collected || 0) }}</p>
 
         <div class="progress-bar-container">
           <div
             class="progress-bar"
-            [style.width]="getProgressWidth(entrepreneurship.goal, (entrepreneurship.collected || 0) - 1) + '%'"
+            [style.width]="getProgressWidth(entrepreneurship.goal, (entrepreneurship.collected || 0)) + '%'"
           >
-            {{ getProgressWidth(entrepreneurship.goal, (entrepreneurship.collected || 0) - 1) }}%
+            {{ getProgressWidth(entrepreneurship.goal, (entrepreneurship.collected || 0)) }}%
           </div>
         </div>
       </div>

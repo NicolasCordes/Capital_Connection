@@ -208,3 +208,122 @@ li:hover {
     transform: scale(1);
   }
 }
+
+/* =============================================== */
+/* Estilos Responsive para el componente de Donaciones */
+/* =============================================== */
+
+@media (max-width: 1024px) {
+  .donations-container {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .header h1 {
+    font-size: 2.2rem;
+  }
+
+  ul {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .donations-container {
+    width: 95%;
+    margin: 10px auto;
+  }
+
+  .header {
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  li {
+    padding: 12px;
+  }
+
+  .donated-item-title {
+    font-size: 1.1rem;
+  }
+
+  .donated-item-amount,
+  .donated-item-date {
+    font-size: 0.9rem;
+  }
+
+  .button {
+    margin: 5px 0;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .donations-container {
+    width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+    padding: 10px;
+  }
+
+  .header h1 {
+    font-size: 1.8rem;
+    padding: 0 10px;
+  }
+
+  li {
+    margin: 8px 0;
+    padding: 10px;
+  }
+
+  .donated-item-title {
+    font-size: 1rem;
+  }
+
+  .donated-item-amount,
+  .donated-item-date {
+    font-size: 0.85rem;
+  }
+
+  .button {
+    font-size: 0.95rem;
+    padding: 8px 12px;
+  }
+}
+
+@media (max-width: 380px) {
+  .header h1 {
+    font-size: 1.6rem;
+  }
+
+  .donated-item-title {
+    font-size: 0.9rem;
+  }
+
+  .donated-item-amount,
+  .donated-item-date {
+    font-size: 0.8rem;
+  }
+
+  .button {
+    font-size: 0.85rem;
+  }
+}
+
+/* Mejoras de toque en dispositivos móviles sin hover */
+@media (hover: none) {
+  .button {
+    padding: 12px 20px !important;
+    min-height: 44px;
+  }
+
+  li {
+    border: 2px solid var(--border-color-details-light);
+  }
+}

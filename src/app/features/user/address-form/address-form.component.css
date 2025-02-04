@@ -105,3 +105,99 @@ h3 {
   color: #aaa;
   cursor: not-allowed;
 }
+
+/* =============================================== */
+/* Estilos Responsive (agregar al final del CSS) */
+/* =============================================== */
+
+@media (max-width: 768px) {
+  .address-form {
+    padding: 15px;
+    margin-top: 15px;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+  }
+
+  .form-group {
+    margin-bottom: 12px;
+  }
+
+  .form-control {
+    padding: 8px;
+    font-size: 0.95rem;
+  }
+
+  .error-message {
+    font-size: 0.8rem;
+  }
+
+  .select-container select {
+    padding: 8px 35px 8px 8px;
+    font-size: 0.95rem;
+  }
+
+  .select-arrow {
+    right: 8px;
+    border-top-width: 4px;
+    border-left-width: 4px;
+    border-right-width: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .address-form {
+    padding: 12px;
+    border-width: 1px;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+  }
+
+  .form-group label {
+    font-size: 0.9rem;
+  }
+
+  .form-control {
+    padding: 7px;
+    font-size: 0.9rem;
+  }
+
+  .select-container select {
+    padding: 7px 30px 7px 7px;
+  }
+
+  .error-message {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .address-form {
+    padding: 10px;
+  }
+
+  .form-control {
+    font-size: 0.85rem;
+  }
+
+  .select-container select {
+    font-size: 0.85rem;
+  }
+}
+
+/* Mejoras de accesibilidad móvil */
+@media (hover: none) {
+  .form-control {
+    min-height: 44px; /* Altura mínima para touch */
+    padding: 10px !important;
+  }
+
+  select.form-control {
+    font-size: 16px !important; /* Previene el zoom en iOS */
+  }
+}
