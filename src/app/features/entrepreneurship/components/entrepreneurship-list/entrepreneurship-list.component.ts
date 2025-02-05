@@ -1,81 +1,164 @@
-import { Component, EventEmitter, HostListener, inject, OnInit } from '@angular/core';
-import { Route, Router } from '@angular/router';
+import { Component, HostListener, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { catchError } from 'rxjs/internal/operators/catchError';
-import { of } from 'rxjs/internal/observable/of';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../../../services/auth.service';
 import { ActiveUser } from '../../../../types/account-data';
 import { EntrepreneurshipService } from '../../../../services/entrepreneurship.service';
 import { DonationService } from '../../../../services/donation.service';
 import { Entrepreneurship } from '../../../../types/entrepreneurship.model';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-entrepreneurship-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './entrepreneurship-list.component.html',
-  styleUrl: './entrepreneurship-list.component.css',
+  styleUrls: ['./entrepreneurship-list.component.css'],
 })
 export class EntrepreneurshipListComponent implements OnInit {
   entrepreneurships: Entrepreneurship[] = [];
-  page = 0;
-  size = 12;
-  isLoading = false;
-  hasMore = true;
+  originalEntrepreneurships: Entrepreneurship[] = []; // Guardar la lista original
+
+  page: number = 0;
+  size: number = 12;
+  isLoading: boolean = false;
+  hasMore: boolean = true;
   activeUser: ActiveUser | undefined;
   userType: string = 'Guest';
-  authService= inject(AuthService)
+  authService = inject(AuthService);
+  fb = inject(FormBuilder);
+  category: string | null = null;
+  goalValue: string | null = null;  // Cambié 'String' a 'string'
+  goal: number | null = null;
+
+  // Estado del botón de orden
+  sortState: number = 0; // 0 = sin orden, 1 = mayor a menor, 2 = menor a mayor
+
+  filterForm: FormGroup = this.fb.group({
+    category: [''],
+    goal: [''],
+  });
 
   constructor(
     private entrepreneurshipService: EntrepreneurshipService,
     private donationService: DonationService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-
     this.authService.auth().subscribe((user) => {
       this.activeUser = user;
       this.userType = user ? 'Registered User' : 'Guest';
     });
-    this.loadEntrepreneurships();
-  }
-  loadEntrepreneurships(): void {
-    // Verifica si ya se está cargando o si no hay más datos para cargar
-    if (this.isLoading || !this.hasMore) return;
 
-    // Marca el inicio de la carga
+      // Captura el parámetro de consulta 'category'
+    this.route.queryParams.subscribe((params) => {
+      const category = params['category'];
+      if (category) {
+        this.category = category;
+        this.filterForm.get('category')?.setValue(category); // Actualiza el formulario
+        this.onFilter(); // Aplica el filtro
+      } else {
+        this.loadEntrepreneurships(); // Carga todos los emprendimientos si no hay categoría
+      }
+    });
+  }
+
+
+  onFilter(): void {
+    this.page = 0;
+    this.entrepreneurships = [];
+    this.originalEntrepreneurships = []; // Resetear la lista original
+    this.hasMore = true;
+
+    // Obtener valores de los filtros
+    this.category = this.filterForm.get('category')?.value;
+    this.goalValue = this.filterForm.get('goal')?.value;
+    this.goal = this.goalValue ? Number(this.goalValue) : null;
+    this.sortState = 0;
+
+    let goalCondition: 'asc' | 'desc' | 'none' = 'none';  // Valor por defecto es 'none'
+    // Determinar la condición de orden basada en el goal
+    if (this.goal !== null) {
+      // Si hay un valor de goal, se asigna 'asc' o 'desc' según el valor ingresado
+      goalCondition = this.sortState === 1 ? 'desc' : (this.sortState === 2 ? 'asc' : 'none');
+    }
+
+    // Llamar al servicio para cargar los emprendimientos con los filtros y orden
+    this.loadEntrepreneurships(this.category, this.goal, goalCondition);
+  }
+
+
+  loadEntrepreneurships(
+    category?: string | null,
+    goal?: number | null,
+    goalCondition: 'asc' | 'desc' | 'none' = 'none',
+    sortDirection: 'asc' | 'desc' = 'asc'
+  ): void {
+    if (this.isLoading || !this.hasMore) return;
     this.isLoading = true;
 
-    // Llama al servicio para obtener los emprendimientos activados de forma paginada
-    this.entrepreneurshipService.getEntrepreneurshipsActives(this.page, this.size).subscribe(
-      (data) => {
-        console.log('Datos recibidos de la API:', data);
+    // Asegúrate de que goal esté definido como null si es undefined
+    if (goal === undefined) goal = null;
 
-        // Verifica que la respuesta contenga datos de emprendimientos activados
-        if (data && data.content) {
-          // Agrega los nuevos emprendimientos activados al array existente
-          this.entrepreneurships = [...this.entrepreneurships, ...data.content];
-
-          // Actualiza `hasMore` basado en si se alcanzó el límite de elementos en la respuesta
-          this.hasMore = data.content.length === this.size;
-
-          // Si hay más elementos, incrementa el número de página
-          if (this.hasMore) this.page++;
-        } else {
-          // Si no hay contenido, marca que no hay más elementos para cargar
-          this.hasMore = false;
+    this.entrepreneurshipService
+      .getEntrepreneurshipsFiltered(category, goal, this.page, this.size, goalCondition, sortDirection)
+      .subscribe(
+        (data) => {
+          if (data && data.content) {
+            this.entrepreneurships = [...this.entrepreneurships, ...data.content];
+            this.hasMore = data.content.length === this.size;
+            if (this.hasMore) this.page++;
+          } else {
+            this.hasMore = false;
+          }
+          this.isLoading = false;
+        },
+        (error) => {
+          console.error('Error al obtener emprendimientos:', error);
+          this.isLoading = false;
         }
-
-        // Marca el fin de la carga
-        this.isLoading = false;
-      },
-      (error) => {
-        console.error('Error al obtener los datos:', error);
-        this.isLoading = false;
-      }
-    );
+      );
   }
+
+
+  toggleSort(): void {
+    const category = this.category;
+    const goal = this.goal;
+
+    if (goal !== null) {
+      this.sortState = (this.sortState + 1) % 3;
+      let goalCondition: 'asc' | 'desc' | 'none' = 'none';
+
+      // Corregir la asignación de goalCondition según sortState
+      if (this.sortState === 1) {
+        goalCondition = 'asc'; // Ascendente: de menor a mayor
+      } else if (this.sortState === 2) {
+        goalCondition = 'desc'; // Descendente: de mayor a menor
+      }
+
+      this.page = 0;
+      this.entrepreneurships = [];
+      this.hasMore = true;
+      // No pasar sortDirection, o alinearlo con goalCondition si es necesario
+      this.loadEntrepreneurships(category, goal, goalCondition);
+    } else {
+      this.sortState = (this.sortState + 1) % 3;
+      const sortDirection = this.sortState === 1 ? 'asc' : 'desc'; // Ajustar según el estado
+
+      this.page = 0;
+      this.entrepreneurships = [];
+      this.hasMore = true;
+      this.loadEntrepreneurships(category, null, 'none', sortDirection);
+    }
+  }
+
+ getSortLabel(): string {
+  if (this.sortState === 0) return "=";
+  if (this.sortState === 1) return "⬆️";
+  return "⬇️";
+}
 
   getProgressWidth(goal: number, collected: number): number {
     if (!goal) return 0;
@@ -84,10 +167,13 @@ export class EntrepreneurshipListComponent implements OnInit {
   }
 
   navigateToDetails(id: number | null): void {
-    this.router.navigate([`/entrepreneurships/${id}`]);
+    if (id) {
+      this.router.navigate([`/entrepreneurships/${id}`]);
+    }
   }
 
   deleteEntrepreneurship(id: number | null): void {
+    if (!id) return;
     this.entrepreneurshipService.deactivateEntrepreneurship(id).subscribe(() => {
       this.entrepreneurships = this.entrepreneurships.filter(
         (entrepreneurship) => entrepreneurship.id !== id
@@ -97,7 +183,11 @@ export class EntrepreneurshipListComponent implements OnInit {
 
   @HostListener('window:scroll', ['$event'])
   onScroll(): void {
-    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 120 && !this.isLoading && this.hasMore) {
+    if (
+      window.innerHeight + window.scrollY >= document.body.offsetHeight - 120 &&
+      !this.isLoading &&
+      this.hasMore
+    ) {
       this.loadEntrepreneurships();
     }
   }

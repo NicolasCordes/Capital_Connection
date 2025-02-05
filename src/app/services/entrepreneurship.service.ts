@@ -26,6 +26,30 @@ export class EntrepreneurshipService {
     );
   }
 
+ /**
+   * Obtiene los emprendimientos filtrados opcionalmente por categoría y/o goal.
+   */
+ getEntrepreneurshipsFiltered(
+  category: string | null|undefined,
+  goal: number | null|undefined,
+  page: number,
+  size: number,
+  goalCondition: 'asc' | 'desc' | 'none',
+  sortDirection: 'asc' | 'desc'
+) {
+  const params: any = { page, size, sortBy: 'goal', sortDirection, goalCondition };
+
+  if (category) params.category = category;
+  if (goal !== null) params.goal = goal;
+
+
+  return this.http.get<{ content: Entrepreneurship[] }>(
+    `${this.urlBase}/filter`,
+    { params }
+  );
+}
+
+
   getEntrepreneurshipById(id: number): Observable<Entrepreneurship> {
     return this.http.get<Entrepreneurship>(`${this.urlBase}/${id}`);
   }
@@ -33,6 +57,7 @@ export class EntrepreneurshipService {
   getEntrepreneurshipsByAccountId(accountId: number | undefined): Observable<Entrepreneurship[]> {
     return this.http.get<Entrepreneurship[]>(`${this.urlBase}/account/${accountId}`);
   }
+
 
   postEntrepreneurship(entrepreneurship: Entrepreneurship): Observable<Entrepreneurship> {
     return this.http.post<Entrepreneurship>(this.urlBase, entrepreneurship);

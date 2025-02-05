@@ -19,11 +19,11 @@
                 <div class="footer-widget">
                     <h3>Our Projects</h3>
                     <ul>
-                        <li><a [routerLink]="'/entrepreneurships'">Tecnologia</a></li>
-                        <li><a [routerLink]="'/entrepreneurships'">Salud</a></li>
-                        <li><a [routerLink]="'/entrepreneurships'">Educacion</a></li>
-                        <li><a [routerLink]="'/entrepreneurships'">Sostenibilidad</a></li>
-                        <li><a [routerLink]="'/entrepreneurships'">Alimentacion</a></li>
+                        <li><a [routerLink]="['/entrepreneurships']" [queryParams]="{ category: 'tecnologia' }">Tecnologia</a></li>
+                        <li><a [routerLink]="['/entrepreneurships']" [queryParams]="{ category: 'salud' }">Salud</a></li>
+                        <li><a [routerLink]="['/entrepreneurships']" [queryParams]="{ category: 'educacion' }">Educacion</a></li>
+                        <li><a [routerLink]="['/entrepreneurships']" [queryParams]="{ category: 'sostenibilidad' }">Sostenibilidad</a></li>
+                        <li><a [routerLink]="['/entrepreneurships']" [queryParams]="{ category: 'alimentacion' }">Alimentacion</a></li>
                     </ul>
                 </div>
 

@@ -13,6 +13,7 @@ import { AuthService } from '../../../services/auth.service';
 export class LoginComponent {
 
   private formBuilder = inject(FormBuilder);
+  errorMessage: string | null = null;
 
   form = this.formBuilder.group({
     username: ['', [Validators.required, Validators.minLength(4)]],
@@ -32,10 +33,13 @@ export class LoginComponent {
         if (loggedIn) {
           this.router.navigate(['/']);
         } else {
-          console.log('error en las credenciales');
+          this.errorMessage = 'Error en las credenciales. Verifique el nombre de usuario o la contraseña'; // Asignamos el mensaje de error aquí
         }
       },
-      error: console.log
+      error: (err) => {
+        this.errorMessage = 'Hubo un error al intentar iniciar sesión. Intente nuevamente más tarde.'; // En caso de un error de red o similar
+        console.error(err); // Opcionalmente logueamos el error en la consola para depuración
+      }
     });
   }
 

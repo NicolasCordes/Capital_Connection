@@ -1,26 +1,56 @@
 <div class="explore-header">
   <h1>Explorar los emprendimientos</h1>
 </div>
-<div *ngIf="entrepreneurships.length > 0;" class="card-container">
-  <div class="card" *ngFor="let entrepreneurship of entrepreneurships; let i = index">
+
+<!-- Formulario de Filtros -->
+<div class="filter-container">
+  <form [formGroup]="filterForm" (ngSubmit)="onFilter()">
+    <div class="filter-field">
+      <label for="category">Categoría:</label>
+      <select id="category" formControlName="category">
+        <option value="">-- Selecciona una categoría --</option>
+        <option value="tecnologia">Tecnología</option>
+        <option value="salud">Salud</option>
+        <option value="educacion">Educación</option>
+        <option value="sostenibilidad">Sostenibilidad</option>
+        <option value="alimentacion">Alimentación</option>
+      </select>
+    </div>
+    <div class="filter-field">
+      <label for="goal">Goal:</label>
+      <input type="number" id="goal" formControlName="goal" placeholder="Ej: 10000" />
+    </div>
+
+    <button class="follow-btn" type="submit">Filtrar</button>
+  </form>
+</div>
+
+
+<div class="sort-container">
+  <button class="follow-btn" (click)="toggleSort()">{{ getSortLabel() }}</button>
+</div>
+<!-- Listado de Emprendimientos -->
+<div *ngIf="entrepreneurships.length > 0" class="card-container">
+  <div class="card" *ngFor="let entrepreneurship of entrepreneurships">
     <div class="card-image">
-      <img [src]="entrepreneurship.images[0]" alt="Proyecto" class="imgF">
-      <div class="overlay"></div> <!-- Aquí agregamos el overlay -->
+      <img [src]="entrepreneurship.images[0]" alt="Proyecto" class="imgF" />
+      <div class="overlay"></div>
     </div>
     <div class="card-content">
       <h3>{{ entrepreneurship.name }}</h3>
-      <p>{{ entrepreneurship.description.length > 250 ? (entrepreneurship.description | slice: 0:250) + '...' : entrepreneurship.description }}</p>
+      <p>
+        {{ entrepreneurship.description.length > 250 ? (entrepreneurship.description | slice: 0:250) + '...' : entrepreneurship.description }}
+      </p>
 
       <div class="goal-progress">
         <p>Goal: ${{ entrepreneurship.goal || 0 }}</p>
-        <p><strong>Recaudado:</strong> ${{ (entrepreneurship.collected || 0) }}</p>
-
+        <p><strong>Recaudado:</strong> ${{ entrepreneurship.collected || 0 }}</p>
         <div class="progress-bar-container">
           <div
             class="progress-bar"
-            [style.width]="getProgressWidth(entrepreneurship.goal, (entrepreneurship.collected || 0)) + '%'"
+            [style.width]="getProgressWidth(entrepreneurship.goal, entrepreneurship.collected || 0) + '%'"
           >
-            {{ getProgressWidth(entrepreneurship.goal, (entrepreneurship.collected || 0)) }}%
+            {{ getProgressWidth(entrepreneurship.goal, entrepreneurship.collected || 0) }}%
           </div>
         </div>
       </div>

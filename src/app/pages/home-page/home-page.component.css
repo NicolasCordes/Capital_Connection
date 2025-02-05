@@ -108,44 +108,49 @@ p {
 
 /* Carrusel de Entrepreneurships */
 .carousel-container {
-  width: 90%;
+  width: 100%; /* Ancho completo del contenedor */
+  max-width: 1280px; /* Máximo ancho 1280px (si es necesario) */
+  height: calc(100% * 9 / 16); /* Calculamos la altura con relación 16:9 */
   margin: 20px auto;
   padding-bottom: 40px;
   text-align: center;
-  overflow: hidden;
+  position: relative;
 }
 
 .carousel-content {
-  display: flex;
-  transition: transform 0.5s ease;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - (var(--slides-visible) - 1) * var(--gap)) / var(--slides-visible));
+  gap: var(--gap);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
   padding: 20px 0;
-  height: 450px;
-  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+.carousel-content::-webkit-scrollbar {
+  display: none;
 }
 
 .carousel-slide {
-  flex-shrink: 0;
-  width: calc(100% / 3 - 30px);
+  scroll-snap-align: start;
   height: 400px;
-  margin: 0 15px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 .carousel-slide-content {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  height: 100%;
   border: 1px solid #ddd;
   border-radius: 8px;
   background-color: white;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
-  height: 100%;
   overflow: hidden;
 }
-
 .carousel-slide-content:hover {
   transform: scale(1.02);
 }
@@ -200,6 +205,19 @@ button:hover {
 }
 
 /* Flechas del carrusel */
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 100%;
+  width: calc(100% * var(--total-items) / var(--slides-visible)); /* Se adapta a los elementos reales */
+
+}
+
+.carousel-item {
+  flex: 0 0 calc(100% / var(--slides-visible)); /* Se adapta dinámicamente */
+  transition: transform 0.5s ease-in-out; /* Suaviza el movimiento */
+}
 .carousel-arrow {
   position: absolute;
   top: 50%;
@@ -209,35 +227,36 @@ button:hover {
   font-size: 2.5rem;
   padding: 15px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition: all 0.3s ease;
   border: 2px solid #d3d3d3;
   border-radius: 5px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 2;
 }
 
-.carousel-arrow:hover {
-  background-color: var(--shadow-arrow);
-  transform: translateY(-50%) scale(1.1);
+.carousel-arrow-left { left: 20px; }
+.carousel-arrow-right { right: 20px; }
 
+@media (max-width: 768px) {
+  .carousel-slide {
+    height: 350px;
+  }
+
+  .carousel-arrow {
+    font-size: 2rem;
+    padding: 12px;
+  }
 }
 
-/* Flecha izquierda */
-.carousel-arrow-left {
-  left: 10px;
-}
+@media (max-width: 480px) {
+  .carousel-slide {
+    height: 320px;
+  }
 
-/* Flecha derecha */
-.carousel-arrow-right {
-  right: 10px;
-}
-
-.carousel-slide-link {
-  text-decoration: none;
-  color: inherit;
-}
-
-.carousel-slide-link:focus, .carousel-slide-link:hover {
-  outline: none;
+  .carousel-arrow {
+    font-size: 1.8rem;
+    padding: 10px;
+  }
 }
 
 /* Contenedor de la barra de progreso */

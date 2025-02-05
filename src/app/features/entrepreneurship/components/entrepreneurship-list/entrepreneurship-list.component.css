@@ -37,6 +37,54 @@
   letter-spacing: 1px;
 }
 
+/* Estilos para el formulario de filtro */
+.filter-container {
+  margin: 20px auto;
+  max-width: 1200px;
+  padding: 10px;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.filter-container form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 15px;
+  justify-content: center;
+}
+
+.filter-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-field label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.filter-field input,
+.filter-field select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.filter-container button {
+  padding: 10px 20px;
+  background-color: var(--btn-detail-light);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.filter-container button:hover {
+  background-color: var(--btn-detail-hover-light);
+}
+
 /* Contenedor general de las cards */
 .card-container {
   display: grid;
@@ -114,18 +162,25 @@
   margin-bottom: 5px;
 }
 
-.progress-bar {
+.progress-bar-container {
   width: 100%;
-  height: 10px;
   background-color: #e0e0e0;
-  border-radius: 5px;
+  border-radius: 8px;
+  overflow: hidden;
   margin-bottom: 10px;
+  height: 20px;
 }
 
-.progress {
-  height: 100%;
+.progress-bar {
   background-color: #4caf50;
-  border-radius: 5px;
+  color: white;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: bold;
+  line-height: 20px;
+  height: 100%;
+  border-radius: 8px 0 0 8px;
+  transition: width 0.3s ease;
 }
 
 /* Footer de la card */
@@ -158,8 +213,56 @@
   border-color: var(--follow-btn-border-light);
 }
 
+.sort-container {
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+.sort-container button {
+  padding: 10px 15px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.sort-container button:hover {
+  background-color: #388e3c;
+}
+
+/* Estilos generales para los botones */
+.follow-btn {
+  background-color: var(--follow-btn-background-light); /* Color del fondo del botón */
+  border: 2px solid var(--follow-btn-border-light); /* Borde azul */
+  color: var(--follow-btn-text-light); /* Color del texto */
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center; /* Alinea el texto */
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Cambio de color del botón cuando se pasa el ratón */
+.follow-btn:hover {
+  background-color: var(--follow-btn-hover-background-light);
+  color: var(--follow-btn-text-light);
+  border-color: var(--follow-btn-border-light);
+}
+/* Elimina el contorno del botón cuando está enfocado */
+.follow-btn:focus {
+  outline: none;
+}
+
 /* Indicador de carga y mensaje de no más datos */
-.loading, .no-more-data {
+.loading,
+.no-more-data {
   text-align: center;
   font-size: 16px;
   padding: 10px;
@@ -168,32 +271,7 @@
   margin-top: 20px;
 }
 
-/* Contenedor de la barra de progreso */
-.progress-bar-container {
-  width: 100%;
-  background-color: #e0e0e0;
-  border-radius: 8px;
-  overflow: hidden;
-  margin-bottom: 10px;
-  height: 20px;
-}
-
-/* Barra de progreso */
-.progress-bar {
-  background-color: #4caf50;
-  color: white;
-  text-align: center;
-  font-size: 0.9rem;
-  font-weight: bold;
-  line-height: 20px;
-  height: 100%;
-  border-radius: 8px 0 0 8px;
-  transition: width 0.3s ease;
-}
-
-/* =============================================== */
-/* Estilos Responsive */
-/* =============================================== */
+/* Responsive */
 @media (max-width: 1024px) {
   .explore-header h1 {
     font-size: 4.5rem;
@@ -206,23 +284,19 @@
   .explore-header {
     height: 200px;
   }
-
   .explore-header h1 {
     font-size: 3.5rem;
     line-height: 1.1;
   }
-
   .card-container {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
     padding: 15px;
   }
-
   .card {
     width: 100%;
     max-width: 300px;
   }
-
   .card-image {
     height: 180px;
   }
@@ -238,45 +312,36 @@
   .explore-header {
     height: 180px;
   }
-
   .explore-header h1 {
     font-size: 2.2rem;
     line-height: 1;
     padding: 0 15px;
   }
-
   .card-container {
     grid-template-columns: 1fr;
     padding: 10px;
   }
-
   .card {
     max-width: 100%;
     margin: 0 auto;
   }
-
   .card-content {
     padding: 15px;
   }
-
   .card-content h3 {
     font-size: 1.1rem;
   }
-
   .card-content p {
     -webkit-line-clamp: 2;
     font-size: 0.9rem;
   }
-
   .card-footer button {
     padding: 8px 16px;
     font-size: 0.9rem;
   }
-
   .progress-bar-container {
     height: 18px;
   }
-
   .progress-bar {
     font-size: 0.8rem;
     line-height: 18px;
@@ -287,17 +352,14 @@
   .explore-header h1 {
     font-size: 1.8rem;
   }
-
   .card-image {
     height: 160px;
   }
-
   .card-footer {
     flex-direction: column;
     gap: 10px;
     align-items: flex-start;
   }
-
   .card-footer button {
     width: 100%;
   }

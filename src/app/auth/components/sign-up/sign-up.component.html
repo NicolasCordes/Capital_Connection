@@ -103,12 +103,19 @@
       <label for="dateOfBirth">Fecha de Nacimiento</label>
       <input type="date" id="dateOfBirth" formControlName="dateOfBirth" class="input-field">
 
-      @if (form.controls['dateOfBirth'].touched && form.controls['dateOfBirth'].invalid) {
+      @if (form.controls['dateOfBirth'].touched && form.controls['dateOfBirth'].hasError('required')) {
         <div class="error-msg">
           La fecha de nacimiento es obligatoria.
         </div>
       }
+
+      @if (form.controls['dateOfBirth'].touched && form.controls['dateOfBirth'].hasError('ageInvalid')) {
+        <div class="error-msg">
+          Debes ser mayor de 16 años para registrarte.
+        </div>
+      }
     </section>
+
 
     <section class="form-group">
       <label for="yearsOfExperience">Años de Experiencia</label>

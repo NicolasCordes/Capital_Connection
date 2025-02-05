@@ -106,7 +106,12 @@
 .password-group input[type="password"] {
   padding-right: 2.5rem;
 }
-
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
 /* =============================================== */
 /* Estilos Responsive para el formulario de inicio de sesión */
 /* =============================================== */

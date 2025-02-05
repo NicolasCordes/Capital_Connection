@@ -13,6 +13,11 @@
                 👁️
             </button>
         </section>
+        @if (errorMessage) {
+        <div class="error-message">
+          {{ errorMessage }}
+        </div>
+      }
         <button type="submit" [disabled]="form.invalid" class="submit-btn">Iniciar sesión</button>
     </fieldset>
   </form>
