@@ -188,15 +188,12 @@ p {
 .carousel-slide {
   width: 100%;
   height: 100%;
-  display: none;
+  display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
 }
 
-.carousel-slide.active {
-  display: block;
-}
 .carousel-media {
   width: 100%;
   height: 100%;
