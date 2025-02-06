@@ -4,8 +4,12 @@
     <div class="average-rating">
       <p>Calificación promedio: {{ averageRating | number: '1.1-1' }} / 5</p>
       <div class="star-rating">
-        <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
-          <i class="fa fa-star" [ngClass]="{'checked': i < averageRating}"></i>
+        <ng-container *ngFor="let star of [1,2,3,4,5]">
+          <i class="fas fa-star" 
+             [ngClass]="{
+               'checked': averageRating >= star,
+               'half-checked': averageRating >= (star - 0.5) && averageRating < star
+             }"></i>
         </ng-container>
       </div>
     </div>
@@ -19,8 +23,12 @@
             <div class="review-stars">
               <p class="rating-text">Calificación: {{ review.stars }} / 5</p>
               <div class="star-rating">
-                <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
-                  <i class="fa fa-star" [ngClass]="{'checked': i < review.stars}"></i>
+                <ng-container *ngFor="let star of [1,2,3,4,5]">
+                  <i class="fas fa-star"
+                     [ngClass]="{
+                       'checked': review.stars >= star,
+                       'half-checked': review.stars >= (star - 0.5) && review.stars < star
+                     }"></i>
                 </ng-container>
               </div>
             </div>
@@ -38,16 +46,19 @@
                 <label for="stars">
                   Calificación:
                   <div class="star-rating">
-                    <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
-                      <i
-                        class="fa fa-star"
-                        [ngClass]="{'checked': i < reviewUpdateForm.get('stars')?.value}"
-                        (click)="setRating(i + 1)">
+                    <ng-container *ngFor="let star of [0,1,2,3,4]; let i = index">
+                      <i class="fas fa-star"
+                        [ngClass]="{
+                          'checked': (i + 1) <= reviewUpdateForm.get('stars')?.value,
+                          'half-checked': (i + 0.5) === reviewUpdateForm.get('stars')?.value
+                        }"
+                        (click)="setRating($event, i)">
+                        <div class="star-overlay"></div>
                       </i>
                     </ng-container>
                   </div>
                   <div *ngIf="reviewUpdateForm.get('stars')?.invalid && reviewUpdateForm.get('stars')?.touched">
-                    La calificación debe estar entre 1 y 5.
+                    La calificación debe estar entre 0 y 5.
                   </div>
                 </label>
               </div>

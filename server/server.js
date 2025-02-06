@@ -2,7 +2,25 @@ import express from "express";
 import cors from "cors";
 import {MercadoPagoConfig, Preference} from 'mercadopago'
 import fetch from "node-fetch";
-const client = new MercadoPagoConfig({ accessToken: 'TEST-6083462466960165-101910-ab0d02d54a828750e570c73c7ce1d464-581495007'});
+import dotenv from 'dotenv';
+
+dotenv.config()
+
+const result = dotenv.config();
+
+if (result.error) {
+  console.log("Error al cargar el archivo .env:", result.error);
+} else {
+  console.log("Archivo .env cargado correctamente.");
+} 
+const accessTokenMP = process.env.MP_TOKEN;
+const publicKeyMP = process.env.MP_PUBLIC_KEY;
+const urlBase = process.env.URL_BASE;
+const webhookUrl = process.env.NGROK_URL;
+const urlFr = process.env.URL_FR;
+
+
+const client = new MercadoPagoConfig({ accessToken: accessTokenMP});
 
 const app = express();
 const port = 3000;
@@ -19,6 +37,7 @@ app.get("/",(req,res)=>{
 
 app.listen(port, () => {
   console.log(`Servidor corriendo en http://localhost:${port}`);
+
 });
 
 
@@ -33,15 +52,15 @@ try{
     },
   ],
     back_urls: {
-        success: "http://localhost:4200/success",
-        failure: "http://localhost:4200/failure",
-        pending: "http://localhost:4200/pending",
+        success: `${urlFr}/success`,
+        failure: `${urlFr}/failure`,
+        pending: `${urlFr}/pending`,
     },
     auto_return: "approved",
-    notification_url:"https://e3af-200-105-34-95.ngrok-free.app/webhook",
+    notification_url:`${webhookUrl}/webhook`,
     metadata: {
       iddon: req.body.iddon,
-      idacc: req.body.idacc  // Aquí pones el ID que necesites, como el orderId
+      idacc: req.body.idacc  
     },
 };
 
@@ -81,7 +100,7 @@ app.post('/webhook', async function (req, res) {
               console.log("✅ Pago aprobado");
 
               // Realizamos el PATCH a tu backend para actualizar el estado de la donación
-              const updateResponse = await fetch(`http://localhost:8080/accounts/${data.metadata.idacc}/donations/${data.metadata.iddon}`, {
+              const updateResponse = await fetch(`${urlBase}/accounts/${data.metadata.idacc}/donations/${data.metadata.iddon}`, {
                 method: 'PATCH',
                 headers: {
                   'Content-Type': 'application/json',
@@ -99,7 +118,7 @@ app.post('/webhook', async function (req, res) {
           } else if (data.status === "rejected") {
               console.log("❌ Pago rechazado");
 
-              const updateResponse = await fetch(`http://localhost:8080/accounts/${data.metadata.idacc}/donations/${data.metadata.iddon}`, {
+              const updateResponse = await fetch(`${urlBase}/accounts/${data.metadata.idacc}/donations/${data.metadata.iddon}`, {
                 method: 'PATCH',
                 headers: {
                   'Content-Type': 'application/json',

@@ -23,6 +23,8 @@ $dark-theme: mat.define-theme((
   ),
 ));
 
+
+
 // Aplicar el tema claro por defecto
 body {
   @include mat.all-component-themes($light-theme);
@@ -174,9 +176,13 @@ body:not(.dark-theme) .waves .parallax use:nth-child(4) {
   --border-color-hover-dark: rgb(60, 60, 60);
   --box-color-details-light:white;
   --box-color-details-dark:rgb(60, 60, 60);
-  --border-color-details-light: #f0f0f0;
+  --border-color-details-light: #dddddd;
   --border-color-details-dark: rgb(60, 60, 60);
   --box-shadow-details-dark: 0 6px 12px rgba(0, 0, 0, 0.5);
+  --color-hover-text-light: #3399bb;
+  --color-hover-text-dark: #4CAF50;
+  --color-donations-light: white;
+  --color-donations-dark: rgb(44, 44, 44);
 }
 
 .dark-theme {
@@ -184,7 +190,9 @@ body:not(.dark-theme) .waves .parallax use:nth-child(4) {
   --border-color-hover-light: var(--border-color-hover-dark);
   --border-color-details-light: var(--border-color-details-dark);
   --box-shadow-details-light: var(--box-shadow-details-dark);
-  --box-color-details-light: var(--box-color-details-dark)
+  --box-color-details-light: var(--box-color-details-dark);
+  --color-hover-text-light: var(--color-hover-text-dark);
+  --color-donations-light: var(--color-donations-dark);
 }
 
 /* Donations Form */

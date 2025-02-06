@@ -144,12 +144,13 @@ p {
   display: flex;
   flex-direction: column;
   height: 100%;
-  border: 1px solid #ddd;
+  border: 2px solid var(--border-color-carrousel-light);
   border-radius: 8px;
-  background-color: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color:  var(--background-color-carrousel-light);
+  box-shadow: var(--box-shadow-carrousel-light);
   transition: transform 0.3s ease-in-out;
   overflow: hidden;
+  text-decoration: none !important;
 }
 .carousel-slide-content:hover {
   transform: scale(1.02);
@@ -169,6 +170,8 @@ p {
   color: #333;
   font-weight: 600;
   text-align: center;
+  text-decoration: none !important;
+
 }
 
 .carousel-slide-content p {
@@ -181,10 +184,12 @@ p {
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+  text-decoration: none !important;
 }
 
 .carousel-slide-content p strong {
   font-weight: 600;
+  text-decoration: none !important;
 }
 
 /* Estilo para el botón */
@@ -280,6 +285,19 @@ button:hover {
   height: 100%;
   border-radius: 8px 0 0 8px;
   transition: width 0.3s ease;
+}
+
+.carousel-slide-link {
+  text-decoration: none !important;
+  display: block;
+  height: 100%;
+}
+
+.carousel-slide-content h3,
+.carousel-slide-content p,
+.carousel-slide-content strong {
+  text-decoration: none !important;
+  color: var(--text-color); 
 }
 
 /* =============================================== */
@@ -388,6 +406,7 @@ button:hover {
 .carousel-content {
   scroll-behavior: smooth;
   overflow-x: auto;
+  overflow-y: hidden;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
 }

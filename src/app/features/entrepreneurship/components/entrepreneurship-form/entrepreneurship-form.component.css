@@ -10,7 +10,8 @@ form {
   max-width: 700px;  /* Aumenta el ancho del formulario */
   margin: 0 auto;
   padding: 30px;  /* Aumenta el padding interno */
-  background-color: #f9f9f9;
+  background-color: var(--background-color-light);
+  border-color: var(--border-color-details-light);
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -21,7 +22,7 @@ label {
   margin-bottom: 12px;  /* Aumenta el espacio entre los elementos */
   font-weight: bold;
   font-size: 1.1rem;  /* Aumenta el tamaño de la fuente */
-  color: black;
+  color: var(--text-color);
 }
 
 /* Estilo de los campos de entrada */
@@ -50,6 +51,7 @@ div p {
   color: red;
   font-size: 0.95rem;  /* Aumenta el tamaño del texto de error */
   margin-top: 5px;
+  font-style: italic;
 }
 
 select {
@@ -93,12 +95,6 @@ ul li video {
   border-radius: 4px;
 }
 
-/* Indicador de carga */
-div p {
-  color: #333;
-  font-size: 1.1rem;  /* Aumenta el tamaño de la fuente */
-  font-style: italic;
-}
 
 /* Estilo del botón de envío */
 button[type="submit"] {

@@ -1,6 +1,6 @@
 /* Modificación del cuadro de texto y formulario */
 .review-item {
-  border: 1px solid var(--border-color-details-dark);;
+  border: 1px solid var(--border-color-details-dark);
   border-radius: 8px;
   padding: 1rem;
   margin-bottom: 1rem;
@@ -23,50 +23,63 @@
 }
 
 .review-item:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px);
 }
 
-/* Estilo para la sección de calificación */
 .rating-section {
-  margin-bottom: 1rem; /* Añadir espacio entre la calificación y el comentario */
+  margin-bottom: 1rem;
 }
 
-/* Añadir más distancia entre los botones en el contenedor */
 .button-group {
-  margin-top: 10px; /* Un poco más de espacio en la parte superior */
   display: flex;
-  gap: 20px; /* Aumentar el espacio entre los botones */
+  gap: 15px;
   justify-content: center;
+  margin-top: 15px;
 }
 
-/* Ajustes en los botones de acción */
 .follow-btn, .modify-btn {
-  margin-bottom: 10px; /* Añadir espacio inferior a cada botón */
+  margin-bottom: 10px;
 }
 
 .star-rating {
   display: flex;
+  gap: 5px;
   justify-content: center;
+  margin: 10px 0;
 }
 
+/* ========== ESTILOS CORREGIDOS DE ESTRELLAS ========== */
 .fa-star {
   font-size: 1.5rem;
-  color: #ddd;
+  color: #ddd; /* Color base gris */
   cursor: pointer;
+  position: relative;
+  transition: color 0.2s ease;
+}
+/* Estrella completa naranja */
+.fa-star.checked {
+  color: #ffc107 !important; /* Fuerza el color naranja */
 }
 
-.fa-star.checked {
-  color: #ffc107;
+/* Media estrella */
+.fa-star.half-checked::after {
+  content: "\f089";
+    font-family: "Font Awesome 5 Free";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50%;
+    overflow: hidden;
+    color: #ffc107;
 }
+/* ==================================================== */
 
 .rating-text {
   color: var(--text-color);
 }
 
-/* Estilo para el cuadro de texto (textarea) */
 .review-text-section {
-  margin-bottom: 1.5rem; /* Añadir espacio entre el comentario y el botón */
+  margin-bottom: 1.5rem;
 }
 
 textarea {
@@ -90,7 +103,6 @@ textarea::placeholder {
   color: #aaa;
 }
 
-/* Estilo de los botones */
 .submit-btn-container {
   text-align: center;
 }
@@ -116,7 +128,6 @@ textarea::placeholder {
   border-color: var(--follow-btn-border-light);
 }
 
-
 .follow-btn:focus {
   outline: none;
 }
@@ -128,7 +139,6 @@ textarea::placeholder {
   cursor: not-allowed;
 }
 
-/* Mejorar el estilo de los botones de acción */
 .modify-btn {
   background-color: #f0ad4e;
   border: 2px solid #e6892a;
@@ -160,14 +170,16 @@ textarea::placeholder {
   color: #888;
   cursor: not-allowed;
 }
+
 .average-rating {
   background-color: var(--background-color-light);
   border: 1px solid var(--border-color-details-dark);
   border-radius: 8px;
   padding: 15px;
-  margin-bottom: 20px; /* Margen inferior para separar del resto */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  max-width: 450px;
 }
+
 
 .average-rating p {
   font-size: 1.1rem;
@@ -176,27 +188,10 @@ textarea::placeholder {
   margin-bottom: 10px;
 }
 
-.star-rating {
-  display: flex;
-  justify-content: center;
-  gap: 5px; /* Espaciado entre las estrellas */
-}
-
-.fa-star {
-  font-size: 1.5rem;
-  color: #ddd;
-  cursor: pointer;
-}
-
-.fa-star.checked {
-  color: #ffc107;
-}
-
 /* =============================================== */
-/* Estilos Responsive para el componente de reseñas */
+/* Responsive */
 /* =============================================== */
 
-/* Pantallas medianas (hasta 1024px) */
 @media (max-width: 1024px) {
   .review-item,
   .average-rating {
@@ -211,12 +206,13 @@ textarea::placeholder {
     font-size: 14px;
   }
 
-  .fa-star {
+  .star-rating .fas.fa-star,
+  .star-rating .fas.fa-star-half-alt,
+  .star-rating .far.fa-star {
     font-size: 1.4rem;
   }
 }
 
-/* Pantallas pequeñas (hasta 768px) */
 @media (max-width: 768px) {
   .review-item,
   .average-rating {
@@ -248,12 +244,13 @@ textarea::placeholder {
     gap: 3px;
   }
 
-  .fa-star {
+  .star-rating .fas.fa-star,
+  .star-rating .fas.fa-star-half-alt,
+  .star-rating .far.fa-star {
     font-size: 1.3rem;
   }
 }
 
-/* Pantallas muy pequeñas (hasta 480px) */
 @media (max-width: 480px) {
   .review-item,
   .average-rating {
@@ -285,12 +282,13 @@ textarea::placeholder {
     gap: 2px;
   }
 
-  .fa-star {
+  .star-rating .fas.fa-star,
+  .star-rating .fas.fa-star-half-alt,
+  .star-rating .far.fa-star {
     font-size: 1.2rem;
   }
 }
 
-/* Pantallas ultra pequeñas (hasta 380px) */
 @media (max-width: 380px) {
   .review-item,
   .average-rating {
@@ -316,12 +314,13 @@ textarea::placeholder {
     font-size: 11px;
   }
 
-  .fa-star {
+  .star-rating .fas.fa-star,
+  .star-rating .fas.fa-star-half-alt,
+  .star-rating .far.fa-star {
     font-size: 1.1rem;
   }
 }
 
-/* Mejoras para dispositivos táctiles (sin hover) */
 @media (hover: none) {
   .follow-btn,
   .modify-btn {

@@ -28,7 +28,7 @@ export class ReviewsFormComponent implements OnInit{
 
   constructor(private fb: FormBuilder, private reviewService: ReviewService) {
     this.reviewForm = this.fb.group({
-      stars: [5, [Validators.required, Validators.min(1), Validators.max(5)]],
+      stars: [0, [Validators.required, Validators.min(0), Validators.max(5)]], // Cambiado a 0
       reviewText: ['', Validators.required],
     });
   }
@@ -71,7 +71,15 @@ export class ReviewsFormComponent implements OnInit{
     }
 
 
-  setRating(value: number): void {
-    this.reviewForm.get('stars')?.setValue(value);
-  }
+    setRating(event: MouseEvent, index: number): void {
+      const starElement = event.currentTarget as HTMLElement;
+      const rect = starElement.getBoundingClientRect();
+      const clickPosition = (event.clientX - rect.left) / rect.width;
+      
+      const newValue = clickPosition <= 0.5 ? index + 0.5 : index + 1;
+      const currentValue = this.reviewForm.get('stars')?.value;
+      
+      // Toggle para 0 si hace clic en la misma estrella
+      this.reviewForm.get('stars')?.setValue(newValue === currentValue ? 0 : newValue);
+    }
 }

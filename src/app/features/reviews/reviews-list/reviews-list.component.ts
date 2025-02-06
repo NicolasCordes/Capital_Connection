@@ -21,7 +21,6 @@ export class ReviewsListComponent implements OnInit, OnChanges {
   averageRating: number = 0;
   @Input() idE!: number;
   @Input() update!: boolean;
-
   activeUser: ActiveUser | undefined;
   userType: string = 'Guest';
   authService = inject(AuthService);
@@ -34,9 +33,10 @@ export class ReviewsListComponent implements OnInit, OnChanges {
 
   constructor(private fb: FormBuilder, private reviewService: ReviewService) {
     this.reviewUpdateForm = this.fb.group({
-      stars: [5, [Validators.required, Validators.min(1), Validators.max(5)]],
+      stars: [0, [Validators.required, Validators.min(0), Validators.max(5)]], // Cambiar a 0 y validación 0-5
       reviewText: ['', Validators.required],
     });
+    
   }
 
   ngOnInit(): void {
@@ -49,7 +49,7 @@ export class ReviewsListComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['idE'] && this.idE != null) {
+    if (changes['update'] && this.idE != null) {
       console.log(this.idE);
       this.loadReviews();
     }
@@ -115,8 +115,16 @@ export class ReviewsListComponent implements OnInit, OnChanges {
     });
   }
 
-  setRating(value: number): void {
-    this.reviewUpdateForm.get('stars')?.setValue(value);
+  setRating(event: MouseEvent, index: number): void {
+    const starElement = event.currentTarget as HTMLElement;
+    const rect = starElement.getBoundingClientRect();
+    const clickPosition = (event.clientX - rect.left) / rect.width;
+    
+    const newValue = clickPosition <= 0.5 ? index + 0.5 : index + 1;
+    const currentValue = this.reviewUpdateForm.get('stars')?.value;
+    
+    // Toggle para 0 si hace clic en la misma calificación
+    this.reviewUpdateForm.get('stars')?.setValue(newValue === currentValue ? 0 : newValue);
   }
 
   updateReview(): void {
@@ -124,7 +132,7 @@ export class ReviewsListComponent implements OnInit, OnChanges {
 
     const resultForm = this.reviewUpdateForm.getRawValue();
     this.editingReview = { ...this.editingReview, ...resultForm };
-
+      console.log(this.editingReview);
     if (this.editingReview) {
       this.reviewService.updateReview(this.editingReview.id,this.idE, this.editingReview).subscribe(
         (updatedReview) => {

@@ -1,10 +1,6 @@
 /* Encabezado con imagen de fondo */
 .explore-header {
   position: relative;
-  background-image: url('https://res.cloudinary.com/dyho1ydzl/image/upload/v1731173954/3-days-in-san-fran_banner_3_gqnhsl.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   height: 240px;
   display: flex;
   align-items: center;
@@ -12,6 +8,7 @@
   text-align: center;
   color: #fff;
   margin-bottom: 2.5rem;
+  overflow: hidden; /* Asegura que el blur no se salga del contenedor */
 }
 
 .explore-header::before {
@@ -19,10 +16,19 @@
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: 100%;
+  background-image: url('https://res.cloudinary.com/dyho1ydzl/image/upload/v1731173954/3-days-in-san-fran_banner_3_gqnhsl.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: blur(5px) brightness(0.5); /* Difuminado + oscurecimiento */
   z-index: 1;
+}
+
+/* Capa de contenido */
+.explore-header > * {
+  position: relative;
+  z-index: 2; /* Asegura que el texto quede sobre el fondo */
 }
 
 .explore-header h1 {
@@ -42,7 +48,8 @@
   margin: 20px auto;
   max-width: 1200px;
   padding: 10px;
-  background-color: #f7f7f7;
+  background-color: var(--background-color-light);
+  border: 1px solid var(--border-color-details-dark);
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -98,9 +105,10 @@
 
 /* Estilo para cada card */
 .card {
-  background-color: #fff;
+  background-color:  var(--background-color-carrousel-light);
   border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow-carrousel-light);
+  border: 2px solid var(--border-color-carrousel-light);
   overflow: hidden;
   transition: transform 0.3s ease, background-color 0.3s ease;
   display: flex;
@@ -140,7 +148,7 @@
 .card-content h3,
 .card-content p {
   user-select: none;
-  color: black;
+  color: var(--text-color);
 }
 
 .card-content p {
@@ -220,17 +228,19 @@
 
 .sort-container button {
   padding: 10px 15px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
+  background-color: var(--btn-detail-light); /* Color del fondo del botón */
+  border: 1px solid var(--follow-btn-border-light); /* Borde azul */
+  color: white; /* Color del texto */
   border-radius: 5px;
   cursor: pointer;
   font-size: 14px;
   transition: background-color 0.3s ease;
+  margin-right:2rem;
 }
 
 .sort-container button:hover {
-  background-color: #388e3c;
+  background-color: var(--btn-detail-hover-light);
+  border-color: var(--follow-btn-border-light);
 }
 
 /* Estilos generales para los botones */

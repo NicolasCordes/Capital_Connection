@@ -1,54 +1,53 @@
-@if(donatedEntrepreneurships.length > -1){
-
+@if(donatedEntrepreneurships.length > -1) {
   <div class="donations-container">
     <div class="header">
       <h1>Mis Donaciones</h1>
-
     </div>
 
-    @if(donatedEntrepreneurships.length === 0){
+    @if(donatedEntrepreneurships.length === 0) {
       <p class="no-donations-message">No has donado a ningún emprendimiento.</p>
-    }@else {
+    } @else {
       <ul>
         <li *ngFor="let entrepreneurship of donatedEntrepreneurships">
           <div class="donated-item">
             <h4 class="donated-item-title">Emprendimiento beneficiado: {{ entrepreneurship.name }}</h4>
 
             @for (item of donateds; track $index) {
-                @if (item.id_entrepreneurship === entrepreneurship.id) {
-                <h4 class="donated-item-amount">Monto donado: ${{ item.amount }}</h4>
-                <h4 class="donated-item-date">Día de la donación: {{ item.date | date: 'dd/MM/yyyy' }}</h4>
-                <h4 class="donated-item-date">
-                  <span class="status-label">Estado de la donación:</span>
-                  <span
-                    [ngClass]="{
-                      'text-green': item.status === 'approved',
-                      'text-yellow': item.status === 'pending',
-                      'text-red': item.status === 'rejected'
-                    }">
-                    {{ item.status | statusTransform }}
-                  </span>
-                </h4>
-                <button class="button" (click)="navigateToDetails(item.id_entrepreneurship, entrepreneurship.isActivated)">Ver Emprendimiento</button>
-
-
+              @if (item.id_entrepreneurship === entrepreneurship.id) {
+                <div class="donation-details">
+                  <div class="donation-info">
+                    <h4 class="donated-item-amount">Monto donado: ${{ item.amount }}</h4>
+                    <h4 class="donated-item-status">
+                      <span
+                        [ngClass]="{
+                          'text-green': item.status === 'approved',
+                          'text-yellow': item.status === 'pending',
+                          'text-red': item.status === 'rejected'
+                        }">
+                        {{ item.status | statusTransform }}
+                      </span>
+                    </h4>
+                  </div>
+                  <h4 class="donated-item-date">Día de la donación: {{ item.date | date: 'dd/MM/yyyy' }}</h4>
+                  <button class="button" (click)="navigateToDetails(item.id_entrepreneurship, entrepreneurship.isActivated)">
+                    Ver Emprendimiento
+                  </button>
+                </div>
               }
             }
-
           </div>
         </li>
       </ul>
     }
-
-
   </div>
-  @if(isModalVisible){
-  <div class="modal">
-    <div class="modal-content">
-      <span class="close" (click)="closeModal()">×</span>
-      <h2>¡Este emprendimiento ha sido eliminado!</h2>
-      <p>El emprendimiento al que intentas acceder ya no está disponible.</p>
+
+  @if(isModalVisible) {
+    <div class="modal">
+      <div class="modal-content">
+        <span class="close" (click)="closeModal()">×</span>
+        <h2>¡Este emprendimiento ha sido eliminado!</h2>
+        <p>El emprendimiento al que intentas acceder ya no está disponible.</p>
+      </div>
     </div>
-  </div>
   }
 }

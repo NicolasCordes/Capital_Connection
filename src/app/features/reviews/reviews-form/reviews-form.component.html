@@ -2,16 +2,19 @@
   <label>
     Calificación:
     <div class="star-rating">
-      <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
-        <i
-          class="fa fa-star"
-          [ngClass]="{'checked': i < reviewForm.get('stars')?.value}"
-          (click)="setRating(i + 1)">
+      <ng-container *ngFor="let star of [0,1,2,3,4]; let i = index">
+        <i class="fa fa-star"
+           [ngClass]="{
+             'checked': (i + 1) <= reviewForm.get('stars')?.value,
+             'half-checked': (i + 0.5) === reviewForm.get('stars')?.value
+           }"
+           (click)="setRating($event, i)">
+           <div class="star-overlay"></div>
         </i>
       </ng-container>
     </div>
     <div *ngIf="reviewForm.get('stars')?.invalid && reviewForm.get('stars')?.touched">
-      La calificación debe estar entre 1 y 5.
+      La calificación debe estar entre 0 y 5.
     </div>
   </label>
     

@@ -11,6 +11,83 @@
   transition: all 0.3s ease;
 }
 
+.donation-details {
+  background-color: var(--color-donations-light);
+  border: 1px solid var(--border-color-details-light);
+  border-radius: 8px;
+  padding: 15px;
+  margin-top: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.donation-details:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.donation-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.donated-item-amount {
+  font-size: 1.1rem;
+  color: var(--text-color);
+  margin: 0;
+}
+
+/* Estilos para el estado de la donación */
+.donated-item-status {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.donated-item-status span {
+  font-weight: bold;
+}
+
+.donated-item-date {
+  font-size: 0.9rem;
+  color: var(--text-color);
+  margin-bottom: 10px;
+}
+
+/* Estilos para el botón dentro de cada donación */
+.donation-details .button {
+  padding: 8px 16px; /* Achicamos el botón */
+  font-size: 0.9rem; /* Reducimos el tamaño de la fuente */
+  width: auto; /* Ancho automático en lugar de 100% */
+  display: inline-block; /* Para que no ocupe toda la línea */
+  margin-top: 10px;
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+  .donation-details {
+    padding: 10px;
+  }
+
+  .donated-item-status {
+    font-size: 1rem;
+  }
+
+  .donated-item-status {
+    font-size: 0.9rem;
+  }
+
+  .donated-item-date {
+    font-size: 0.85rem;
+  }
+
+  .donation-details .button {
+    font-size: 0.85rem;
+    padding: 6px 12px;
+  }
+}
+
 .donations-container:hover {
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
   border-color: var(--border-cards-detail-light);

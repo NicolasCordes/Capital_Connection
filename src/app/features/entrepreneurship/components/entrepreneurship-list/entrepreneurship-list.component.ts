@@ -47,6 +47,8 @@ export class EntrepreneurshipListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
+
     this.authService.auth().subscribe((user) => {
       this.activeUser = user;
       this.userType = user ? 'Registered User' : 'Guest';
@@ -156,8 +158,8 @@ export class EntrepreneurshipListComponent implements OnInit {
 
  getSortLabel(): string {
   if (this.sortState === 0) return "=";
-  if (this.sortState === 1) return "⬆️";
-  return "⬇️";
+  if (this.sortState === 1) return "Asc";
+  return "Desc";
 }
 
   getProgressWidth(goal: number, collected: number): number {

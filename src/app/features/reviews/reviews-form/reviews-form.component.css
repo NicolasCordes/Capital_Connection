@@ -101,7 +101,29 @@ div.ng-invalid.ng-touched {
   justify-content: center;
 
 }
+.star-rating .fa-star {
+  position: relative;
+  cursor: pointer;
+}
 
+.star-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.fa-star.half-checked::after {
+  content: '\f089';
+  font-family: 'Font Awesome 5 Free';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 50%;
+  overflow: hidden;
+  color: #ffc107;
+}
 .fa-star {
   font-size: 1.5rem;
   color: #ddd;

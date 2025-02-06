@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges, inject } from "@angular/core";
+import { Component, HostListener, OnChanges, OnDestroy, OnInit, SimpleChanges, inject } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AuthService } from "../../../../services/auth.service";
 import { DonationService } from "../../../../services/donation.service";
@@ -22,11 +22,14 @@ import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder, Validators, F
   styleUrls: ['./entrepreneurship-detail.component.css'],
 })
 
-export class EntrepreneurshipDetailComponent implements OnInit{
+export class EntrepreneurshipDetailComponent implements OnInit, OnDestroy{
   entrepreneurshipForm!: FormGroup;
   isEditing = false;
   entrepreneurship: Entrepreneurship | null = null;
   isLoading = true;
+  isTouch: boolean = false;
+  startX: number = 0;
+  private cleanupListeners: (() => void) | null = null; // Nueva propiedad
 
   userId: number | null = null;
   id: number = 0;
@@ -59,7 +62,7 @@ export class EntrepreneurshipDetailComponent implements OnInit{
 
   ngOnInit(): void {
     this.isLoading = true;
-
+    this.detectTouchDevice();
     // Obtenemos la información del usuario autenticado
     this.authService.auth().subscribe((user) => {
       this.activeUser = user;
@@ -83,8 +86,9 @@ export class EntrepreneurshipDetailComponent implements OnInit{
 
       }
 
-
     });
+
+
 
     this.route.paramMap.subscribe((params) => {
       this.id = parseInt(params.get('id') || '0', 10);
@@ -102,15 +106,53 @@ export class EntrepreneurshipDetailComponent implements OnInit{
   }
 
 
-  previousSlide() {
+  
+  private detectTouchDevice(): void {
+    const mediaQuery = window.matchMedia('(pointer: coarse)');
+    this.isTouch = mediaQuery.matches;
+    
+    // Escuchar cambios en la detección
+    mediaQuery.addEventListener('change', e => {
+      this.isTouch = e.matches;
+    });
+  }
+
+
+  ngOnDestroy(): void {
+    // Limpiar media query listeners
+    const mediaQuery = window.matchMedia('(pointer: coarse)');
+    mediaQuery.removeEventListener('change', () => {});
+  }
+
+  goToSlide(index: number): void {
+    this.currentIndex = index;
+  }
+  @HostListener('touchstart', ['$event'])
+onTouchStart(event: TouchEvent): void {
+  this.startX = event.touches[0].clientX;
+}
+
+@HostListener('touchend', ['$event'])
+onTouchEnd(event: TouchEvent): void {
+  const endX = event.changedTouches[0].clientX;
+  if (Math.abs(this.startX - endX) > 50) {
+    if (this.startX > endX) {
+      this.nextSlide();
+    } else {
+      this.previousSlide();
+    }
+  }
+}
+
+    previousSlide(): void {
     if (this.currentIndex > 0) {
       this.currentIndex--;
     } else {
       this.currentIndex = this.combinedMediaArray.length - 1;
     }
   }
-
-  nextSlide() {
+  
+  nextSlide(): void {
     if (this.currentIndex < this.combinedMediaArray.length - 1) {
       this.currentIndex++;
     } else {
