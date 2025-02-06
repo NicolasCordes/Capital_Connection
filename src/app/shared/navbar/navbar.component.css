@@ -18,7 +18,7 @@
   transition: transform 0.2s ease-in-out;
 }
 .navbar-logo img:hover {
-  transform: scale(1.1);
+  transform: scale(3.5);
 }
 
 /* Menú (original) */
@@ -72,9 +72,15 @@
   justify-content: flex-end;
 }
 
-/* ---------------------------------------------------- */
+/* ---------------s ------------------------------------- */
 /* Modificaciones SOLO para responsive (nuevo) */
 /* ---------------------------------------------------- */
+.img-change {
+  margin-left: 2rem;
+  content: var(--nav-light);
+  object-fit: contain;
+  transform: scale(3);
+}
 
 /* Menú móvil (oculto en desktop) */
 .mobile-menu-button {

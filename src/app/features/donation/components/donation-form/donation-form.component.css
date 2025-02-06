@@ -1,150 +1,158 @@
 form {
-    width: 100%;
-    max-width: 400px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: var(--background-color-form-light);
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  }
+  width: 100%;
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: var(--background-color-form-light);
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
 
-  label {
-    display: block;
-    font-size: 1rem;
-    margin-bottom: 8px;
-    color: var(--text-color);
-  }
+label {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 8px;
+  color: var(--text-color);
+}
 
-  input {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-  }
+input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
 
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 
-  button {
-    width: 100%;
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
 
-  button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
+button:hover:not(:disabled) {
+  background-color: #45a049;
+}
 
-  button:hover {
-    background-color: #45a049;
-  }
+button.processing {
+  background-color: #ff9800;
+}
 
-  button:disabled:hover {
-    background-color: #ccc;
-  }
+.donation-amount {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #4CAF50;
+  text-align: center;
+  margin: 20px 0;
+}
 
-  /* =============================================== */
+/* =============================================== */
 /* Estilos Responsive para el formulario de donaciones */
 /* =============================================== */
 
 @media (max-width: 1024px) {
   form {
-    padding: 18px;
+      padding: 18px;
   }
 
   label {
-    font-size: 0.95rem;
+      font-size: 0.95rem;
   }
 
   input {
-    padding: 7px;
-    font-size: 0.95rem;
+      padding: 7px;
+      font-size: 0.95rem;
   }
 
   button {
-    padding: 9px;
-    font-size: 0.95rem;
+      padding: 9px;
+      font-size: 0.95rem;
   }
 }
 
 @media (max-width: 768px) {
   form {
-    max-width: 350px;
-    padding: 16px;
-    margin: 15px auto;
+      max-width: 350px;
+      padding: 16px;
+      margin: 15px auto;
   }
 
   label {
-    font-size: 0.9rem;
+      font-size: 0.9rem;
   }
 
   input {
-    padding: 7px;
-    font-size: 0.9rem;
+      padding: 7px;
+      font-size: 0.9rem;
   }
 
   button {
-    padding: 8px;
-    font-size: 0.9rem;
+      padding: 8px;
+      font-size: 0.9rem;
   }
 }
 
 @media (max-width: 480px) {
   form {
-    max-width: 90%;
-    padding: 14px;
-    margin: 10px auto;
+      max-width: 90%;
+      padding: 14px;
+      margin: 10px auto;
   }
 
   label {
-    font-size: 0.85rem;
+      font-size: 0.85rem;
   }
 
   input {
-    padding: 6px;
-    font-size: 0.85rem;
+      padding: 6px;
+      font-size: 0.85rem;
   }
 
   button {
-    padding: 7px;
-    font-size: 0.85rem;
+      padding: 7px;
+      font-size: 0.85rem;
   }
 }
 
 @media (max-width: 380px) {
   form {
-    padding: 12px;
+      padding: 12px;
   }
 
   label {
-    font-size: 0.8rem;
+      font-size: 0.8rem;
   }
 
   input {
-    padding: 5px;
-    font-size: 0.8rem;
+      padding: 5px;
+      font-size: 0.8rem;
   }
 
   button {
-    padding: 6px;
-    font-size: 0.8rem;
+      padding: 6px;
+      font-size: 0.8rem;
   }
 }
 
 /* Mejoras para dispositivos táctiles (sin hover) */
 @media (hover: none) {
   button {
-    padding: 12px 20px !important;
-    min-height: 44px;
+      padding: 12px 20px !important;
+      min-height: 44px;
   }
 }
+
 /* Agregar al final del CSS */
 #wallet_container {
   width: 100%;
@@ -170,35 +178,36 @@ form {
 /* Media Queries para el contenedor de Mercado Pago */
 @media (max-width: 768px) {
   #wallet_container {
-    max-width: 350px;
-    padding: 0 8px;
+      max-width: 350px;
+      padding: 0 8px;
   }
 
   #wallet_container .mp-wallet-button {
-    font-size: 0.95rem !important;
-    padding: 10px !important;
+      font-size: 0.95rem !important;
+      padding: 10px !important;
   }
 }
 
 @media (max-width: 480px) {
   #wallet_container {
-    max-width: 90%;
-    padding: 0 5px;
+      max-width: 90%;
+      padding: 0 5px;
   }
 
   #wallet_container .mp-wallet-button {
-    font-size: 0.9rem !important;
-    padding: 8px !important;
-    min-height: 44px !important;
+      font-size: 0.9rem !important;
+      padding: 8px !important;
+      min-height: 44px !important;
   }
 }
 
 @media (max-width: 380px) {
   #wallet_container .mp-wallet-button {
-    font-size: 0.85rem !important;
-    padding: 6px !important;
+      font-size: 0.85rem !important;
+      padding: 6px !important;
   }
 }
+
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;

@@ -1,69 +1,76 @@
-<div class="header">
-  <!-- Mantener misma sección de header y waves -->
-  <div class="inner-header flex">
-    <div class="header-content">
-      <h1>¡Juntos, hacemos que las grandes ideas despeguen 🚀!</h1>
+  <div class="header">
+    <!-- Mantener misma sección de header y waves -->
+    <div class="inner-header flex">
+      <div class="header-content">
+        <h1>¡Juntos, hacemos que las grandes ideas despeguen 🚀!</h1>
+      </div>
+    </div>
+
+    <div>
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s58 18 88 18 58-18 88-18 58 18 88 18v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use id="wave-1" xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7)" />
+          <use id="wave-2" xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+          <use id="wave-3" xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+          <use id="wave-4" xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+        </g>
+      </svg>
     </div>
   </div>
 
-  <div>
-    <svg class="waves" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-      <defs>
-        <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s58 18 88 18 58-18 88-18 58 18 88 18v44h-352z" />
-      </defs>
-      <g class="parallax">
-        <use id="wave-1" xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7)" />
-        <use id="wave-2" xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
-        <use id="wave-3" xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
-        <use id="wave-4" xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
-      </g>
-    </svg>
-  </div>
-</div>
+  <div class="slider-class">
+    <div class="content-title">
+      <h2>Algunas de las Campañas Disponibles</h2>
+    </div>
+    <div class="content">
+      <div class="carousel-container">
+        <div class="carousel-content">
+          <div *ngFor="let entrepreneurship of entrepreneurships; let i = index"
+               class="carousel-slide"
+               [class.active]="i === currentIndex">
+            <a [routerLink]="['/entrepreneurships', entrepreneurship.id]" class="carousel-slide-link">
+              <div class="carousel-slide-content">
+                <img *ngIf="entrepreneurship.images?.length"
+                     [src]="entrepreneurship.images[0]"
+                     alt="{{ entrepreneurship.name }}" class="carousel-media"/>
+                <img *ngIf="!entrepreneurship.images?.length"
+                     src="assets/placeholder-image.jpg" alt="Imagen no disponible" class="carousel-media"/>
+                <h3>{{ entrepreneurship.name }}</h3>
+                <p>{{ entrepreneurship.description }}</p>
+                <p><strong>Objetivo:</strong> ${{ entrepreneurship.goal }}</p>
+                <p><strong>Recaudado:</strong> ${{ (entrepreneurship.collected || 0) }}</p>
 
-<div class="slider-class">
-  <div class="content-title">
-    <h2>Algunas de las Campañas Disponibles</h2>
-  </div>
-
-  <div class="content">
-    <div class="carousel-container">
-      <div class="carousel-content" #carouselContent>
-        <div *ngFor="let entrepreneurship of entrepreneurships" class="carousel-slide">
-          <a [routerLink]="['/entrepreneurships', entrepreneurship.id]" class="carousel-slide-link">
-            <div class="carousel-slide-content">
-              <img *ngIf="entrepreneurship.images?.length"
-                   [src]="entrepreneurship.images[0]"
-                   alt="{{ entrepreneurship.name }}" />
-              <img *ngIf="!entrepreneurship.images?.length"
-                   src="assets/placeholder-image.jpg" alt="Imagen no disponible" />
-
-              <h3>{{ entrepreneurship.name }}</h3>
-              <p>{{ entrepreneurship.description }}</p>
-
-              <p><strong>Objetivo:</strong> ${{ entrepreneurship.goal }}</p>
-              <p><strong>Recaudado:</strong> ${{ (entrepreneurship.collected || 0)}}</p>
-              <div class="progress-bar-container">
-                <div class="progress-bar" [style.width]="getProgressWidth(entrepreneurship.goal, (entrepreneurship.collected || 0)) + '%'">
-                  {{ getProgressWidth(entrepreneurship.goal, (entrepreneurship.collected || 0)) }}%
+                <div class="progress-bar-container">
+                  <div class="progress-bar"
+                      [style.width]="getProgressWidth(entrepreneurship.goal, (entrepreneurship.collected || 0)) + '%'">
+                    {{ getProgressWidth(entrepreneurship.goal, (entrepreneurship.collected || 0)) }}%
+                  </div>
                 </div>
               </div>
-            </div>
-          </a>
+            </a>
+          </div>
+        </div>
+
+
+        <!-- Si NO es táctil, mostrar flechas -->
+        <div *ngIf="!isTouch && entrepreneurships.length > 1" class="carousel-arrows">
+          <div class="carousel-arrow carousel-arrow-left" (click)="moveSlider('left')">&lt;</div>
+          <div class="carousel-arrow carousel-arrow-right" (click)="moveSlider('right')">&gt;</div>
+        </div>
+
+        <!-- Si es táctil, mostrar los indicadores (circulitos) -->
+        <div *ngIf="!isTouch && entrepreneurships.length > 1" class="carousel-arrows">
+          <div class="carousel-arrow carousel-arrow-left" (click)="moveSlider('left')">&lt;</div>
+          <div class="carousel-arrow carousel-arrow-right" (click)="moveSlider('right')">&gt;</div>
         </div>
       </div>
 
-     <!-- Modificar las condiciones de las flechas -->
-<div *ngIf="showArrows && !isTouchDevice" class="carousel-arrow carousel-arrow-left" (click)="moveSlider('left')">
-  <span>&lt;</span>
-</div>
-<div *ngIf="showArrows && !isTouchDevice" class="carousel-arrow carousel-arrow-right" (click)="moveSlider('right')">
-  <span>&gt;</span>
-</div>
-    </div>
 
-    <button mat-button color="primary" [routerLink]="'/entrepreneurships'">
-      Ver más
-    </button>
+      <button mat-button color="primary" [routerLink]="'/entrepreneurships'">
+        Ver más
+      </button>
+    </div>
   </div>
-</div>

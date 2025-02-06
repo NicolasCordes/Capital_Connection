@@ -21,10 +21,18 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class NavbarComponent implements OnInit {
 
+  isDarkThemeActive: boolean = false;
 
   activeUser: ActiveUser | undefined;
 
   constructor(private authService: AuthService) {}
+
+  // Getter que devuelve la URL de la imagen según el estado del tema
+  get logoUrl(): string {
+    return this.isDarkThemeActive
+      ? 'https://res.cloudinary.com/dyho1ydzl/image/upload/v1738812935/Logo_Minimal_D_dark.png'
+      : 'https://res.cloudinary.com/dyho1ydzl/image/upload/v1738812935/Logo_Minimal_D_light.png';
+  }
 
   ngOnInit() {
     this.authService.auth().subscribe(activeUser => {

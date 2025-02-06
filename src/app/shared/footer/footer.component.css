@@ -75,6 +75,12 @@
 .footer-bottom span {
   color: var(--btn-detail-light);
 }
+.img-change {
+  margin-left: 5rem;
+  content: var(--foot-light);
+  object-fit: contain;
+  transform: scale(3);
+}
 
 /* ======================== */
 /* Responsive (Nuevo código) */

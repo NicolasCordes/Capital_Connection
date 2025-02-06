@@ -106,11 +106,11 @@ export class EntrepreneurshipDetailComponent implements OnInit, OnDestroy{
   }
 
 
-  
+
   private detectTouchDevice(): void {
     const mediaQuery = window.matchMedia('(pointer: coarse)');
     this.isTouch = mediaQuery.matches;
-    
+
     // Escuchar cambios en la detección
     mediaQuery.addEventListener('change', e => {
       this.isTouch = e.matches;
@@ -151,7 +151,7 @@ onTouchEnd(event: TouchEvent): void {
       this.currentIndex = this.combinedMediaArray.length - 1;
     }
   }
-  
+
   nextSlide(): void {
     if (this.currentIndex < this.combinedMediaArray.length - 1) {
       this.currentIndex++;

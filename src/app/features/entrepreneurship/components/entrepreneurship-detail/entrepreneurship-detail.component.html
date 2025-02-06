@@ -8,7 +8,7 @@
    <div class="disp">
     <div class="header">
       <h2>{{ currentEntrepreneurship.name }}</h2>
-  
+
       </div>
     </div>
     <div *ngIf="entrepreneurship as currentEntrepreneurship">
@@ -38,13 +38,13 @@
         <video [src]="combinedMediaArray[currentIndex]" controls class="carousel-media"></video>
       </ng-container>
     </div>
-    
+
     <!-- Si NO es táctil, mostrar flechas -->
     <div *ngIf="!isTouch && combinedMediaArray.length > 1" class="carousel-arrows">
       <div class="carousel-arrow carousel-arrow-left" (click)="previousSlide()">&lt;</div>
       <div class="carousel-arrow carousel-arrow-right" (click)="nextSlide()">&gt;</div>
     </div>
-    
+
     <!-- Si es táctil, mostrar los indicadores (circulitos) -->
     <div *ngIf="isTouch" class="carousel-indicators">
       <span *ngFor="let media of combinedMediaArray; let i = index"
@@ -53,21 +53,21 @@
       </span>
     </div>
   </div>
-  
+
         <!-- Detalles del emprendimiento a la derecha -->
         <div class="entrepreneurship-details">
           <p><strong>Descripción:</strong> {{ currentEntrepreneurship.description }}</p>
           <p><strong>Objetivo Financiero:</strong> {{ currentEntrepreneurship.goal | currency }}</p>
           <p><strong>Categoría:</strong> {{ currentEntrepreneurship.category }}</p>
-  
+
           <!-- Donaciones -->
           <div class="donations">
-            <h3>Agregar Donación</h3>
             <app-donation-form [idE]="currentEntrepreneurship.id || 0" ></app-donation-form>
           </div>
+
         </div>
       </div>
-  
+
        <!-- Botón de agregar a favoritos -->
         @if(!isFavorite){
           <button mat-button class="follow-btn" (click)="addToFavorites()" [disabled]="userType === 'Guest'">
@@ -78,8 +78,8 @@
             Eliminar de Favoritos
           </button>
         }
-  
-  
+
+
       <!-- Formulario de Reseña -->
       <div class="reviews-title">
         <h3>Agregar una Reseña</h3>
@@ -87,7 +87,7 @@
       <div class="reviews-form">
         <app-reviews-form (reviewCreated)="addReview($event)" [entrepreneurship]="currentEntrepreneurship"></app-reviews-form>
       </div>
-  
+
       <!-- Reseñas del emprendimiento -->
       <div class="reviews-title">
         <h3>Reseñas</h3>
@@ -95,7 +95,7 @@
       <div class="reviews">
         <app-reviews-list [idE]="currentEntrepreneurship.id || 0" [update]="update"></app-reviews-list>
       </div>
-    
+
 
    </div>
 

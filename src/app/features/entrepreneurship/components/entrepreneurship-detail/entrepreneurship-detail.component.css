@@ -123,12 +123,15 @@ p {
 .entrepreneurship-details {
   margin-bottom: 20px;
   text-align: left;
-  width: 45%; /* Ancho reducido para que ocupe menos de la mitad de la pantalla */
+  width: 45%;            /* Ancho fijo al 45% del contenedor padre */
+  height: 400px;         /* Altura fija: ajusta este valor según tus necesidades */
+  overflow: hidden;        /* Muestra scroll si el contenido excede el tamaño */
   background-color: var(--background-color-light);
-  padding: 15px; /* Menos padding para reducir el espacio interno */
-  border: 2px solid var(--border-color-details-light); /* Borde gris clarito */
-  border-radius: 8px; /* Bordes redondeados */
-  transition: border-color 0.3s ease; /* Transición suave para el borde */
+  padding: 15px;
+  border: 2px solid var(--border-color-details-light);
+  border-radius: 8px;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box; /* Incluye padding y border dentro del ancho y alto */
 }
 
 /* Estilo cuando se pasa el ratón por encima */
@@ -185,12 +188,15 @@ p {
 .carousel-slide {
   width: 100%;
   height: 100%;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   position: relative;
 }
 
+.carousel-slide.active {
+  display: block;
+}
 .carousel-media {
   width: 100%;
   height: 100%;

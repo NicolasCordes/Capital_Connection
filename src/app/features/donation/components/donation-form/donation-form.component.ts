@@ -116,47 +116,44 @@ donationForm = this.fb.group({
   constructor(private fb: FormBuilder, private mpService: MpService, private donationService:DonationService) {}
   pay() {
     if (this.donationForm.valid) {
-      this.donationForm.get('amount')?.disable();  // Deshabilita el input correctamente
-      this.pressed=true
-      const newDonation: Donation = {
-        amount: BigInt(this.donationForm.value.amount ?? 0),
-        date: new Date(),
-        id_user: this.activeUser?.id,
-        id_entrepreneurship: this.idE,
-        isActivated: false,
-        status: 'pending'
-      };
-      const serializedDonation = JSON.stringify(newDonation, (key, value) =>
-        typeof value === 'bigint' ? value.toString() : value
-      );
+        this.donationForm.get('amount')?.disable();  // Deshabilita el input correctamente
+        this.pressed = true;
+        const newDonation: Donation = {
+            amount: BigInt(this.donationForm.value.amount ?? 0),
+            date: new Date(),
+            id_user: this.activeUser?.id,
+            id_entrepreneurship: this.idE,
+            isActivated: false,
+            status: 'pending'
+        };
+        const serializedDonation = JSON.stringify(newDonation, (key, value) =>
+            typeof value === 'bigint' ? value.toString() : value
+        );
 
-      this.donationService.createDonation(newDonation.id_user,JSON.parse(serializedDonation)).subscribe(
-        (createdDonation: Donation) => {
-          if(createdDonation.id && newDonation.id_user){
-            console.log(createdDonation.id);
-            this.mpService.crearPreferencia('Producto de prueba', 1, Number(newDonation.amount),createdDonation.id,newDonation.id_user).subscribe(
-              response => {
-                const preferenceId = response.id;
-                if (preferenceId) {
-                  this.activatepay();
-                  this.amount=newDonation.amount;
-                  this.initMercadoPago(preferenceId);
+        this.donationService.createDonation(newDonation.id_user, JSON.parse(serializedDonation)).subscribe(
+            (createdDonation: Donation) => {
+                if (createdDonation.id && newDonation.id_user) {
+                    console.log(createdDonation.id);
+                    this.mpService.crearPreferencia('Donacion', 1, Number(newDonation.amount), createdDonation.id, newDonation.id_user).subscribe(
+                        response => {
+                            const preferenceId = response.id;
+                            if (preferenceId) {
+                                this.activatepay();
+                                this.amount = newDonation.amount;
+                                this.initMercadoPago(preferenceId);
+                            }
+                        },
+                        error => {
+                            console.error("Error al crear la preferencia de pago:", error);
+                            this.pressed = false;
+                            this.activatepay();
+                            this.amount = BigInt(0);
+                        }
+                    );
                 }
-              },
-              error => {
-                console.error("Error al crear la preferencia de pago:", error);
-                this.pressed=false
-                this.activatepay();
-                this.amount=BigInt(0);
-
-
-              }
-            );
-          }
-    });
-
+            });
     }
-  }
+}
 
   activatepay(){
     this.payOption = !this.payOption

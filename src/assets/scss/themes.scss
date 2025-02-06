@@ -23,6 +23,10 @@ $dark-theme: mat.define-theme((
   ),
 ));
 
+:root {
+  --dark-theme: dark;
+  --light-theme: light;
+}
 
 
 // Aplicar el tema claro por defecto
@@ -36,6 +40,7 @@ body {
   background-size: 400% 400%;
   animation: gradientBackground 20s ease infinite;
 }
+
 
 // Aplicar el tema oscuro cuando se aplique la clase .dark-theme
 body.dark-theme {
@@ -183,6 +188,7 @@ body:not(.dark-theme) .waves .parallax use:nth-child(4) {
   --color-hover-text-dark: #4CAF50;
   --color-donations-light: white;
   --color-donations-dark: rgb(44, 44, 44);
+
 }
 
 .dark-theme {
@@ -199,10 +205,16 @@ body:not(.dark-theme) .waves .parallax use:nth-child(4) {
 :root {
   --background-color-form-light: #f9f9f9;
   --background-color-form-dark: rgb(60, 60, 60);
+  --foot-light: url('https://res.cloudinary.com/dyho1ydzl/image/upload/v1738812935/Logo_Minimal_L_opsvjd.png');
+  --foot-dark: url('https://res.cloudinary.com/dyho1ydzl/image/upload/v1738812935/Logo_Minimal_D_cu47xd.png');
+  --nav-light: url('https://res.cloudinary.com/dyho1ydzl/image/upload/v1738812935/Logo_Letras_L_xisypb.png');
+  --nav-dark: url('https://res.cloudinary.com/dyho1ydzl/image/upload/v1738812935/Logo_Letras_D_yjbahc.png');
 }
 
 .dark-theme {
   --background-color-form-light: var(--background-color-form-dark);
+  --nav-light: var(--nav-dark);
+  --foot-light: var(--foot-dark);
 }
 
 /* Carrousel */

@@ -1,11 +1,13 @@
 @if(payOption){
-<form [formGroup]="donationForm">
-  <label for="amount">Cantidad:</label>
-  <input id="amount" formControlName="amount" type="number"/>
-  <button type="submit" [disabled]="!donationForm.valid || userType === 'Guest' || pressed" (click)="pay()">Agregar Donación</button>
-
-</form>
-}@else{
-  <p>Monto de la donacion ${{amount}}</p>
-  <div id="wallet_container" ></div>
-}
+  <form [formGroup]="donationForm">
+    <h3>{{ pressed ? 'Confirmar Donación' : 'Agregar Donación' }}</h3>
+    <label for="amount">Cantidad:</label>
+    <input id="amount" formControlName="amount" type="number"/>
+    <button type="submit" [disabled]="!donationForm.valid || userType === 'Guest' || pressed" (click)="pay()">
+      {{ pressed ? 'Procesando...' : 'Agregar Donación' }}
+    </button>
+  </form>
+  }@else{
+    <p class="donation-amount">Monto de la donación: ${{amount}}</p>
+    <div id="wallet_container"></div>
+  }
