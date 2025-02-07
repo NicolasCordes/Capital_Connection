@@ -1,14 +1,15 @@
 import { CommonModule } from "@angular/common";
 import { Component, OnInit, inject } from "@angular/core";
 import { Router } from "@angular/router";
-import { forkJoin } from "rxjs";
+import { forkJoin, Observable } from "rxjs";
 import { AuthService } from "../../../../services/auth.service";
 import { DonationService } from "../../../../services/donation.service";
 import { EntrepreneurshipService } from "../../../../services/entrepreneurship.service";
 import { ActiveUser } from "../../../../types/account-data";
 import { Donation } from "../../../../types/donation.model";
-import { Entrepreneurship } from "../../../../types/entrepreneurship.model";
+import { Entrepreneurship } from '../../../../types/entrepreneurship.model';
 import { StatusPipe } from './status.pipe';  // Asegúrate de que la ruta sea correcta
+import { LoadingService } from "../../../../services/loading.service";
 
 
 @Component({
@@ -20,7 +21,6 @@ import { StatusPipe } from './status.pipe';  // Asegúrate de que la ruta sea co
   styleUrl: './donation-list.component.css'
 })
 export class DonationListComponent implements OnInit {
-
   activeUser: ActiveUser | undefined;
   donateds: Donation[] = [];
   donatedEntrepreneurships: Entrepreneurship[] = [];
@@ -34,6 +34,7 @@ export class DonationListComponent implements OnInit {
   amounts: number[] = [];
 
   ngOnInit() {
+
     this.authService.auth().subscribe((user) => {
       this.activeUser = user;
       if (this.activeUser) {

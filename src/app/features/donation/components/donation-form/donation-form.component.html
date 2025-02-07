@@ -1,13 +1,20 @@
-@if(payOption){
+
+
+  @if(payOption){
   <form [formGroup]="donationForm">
     <h3>{{ pressed ? 'Confirmar Donación' : 'Agregar Donación' }}</h3>
     <label for="amount">Cantidad:</label>
     <input id="amount" formControlName="amount" type="number"/>
-    <button type="submit" [disabled]="!donationForm.valid || userType === 'Guest' || pressed" (click)="pay()">
+    <button type="submit" [disabled]="!donationForm.valid || userType === 'Guest' || pressed || !isBackendAvailable" (click)="pay()">
       {{ pressed ? 'Procesando...' : 'Agregar Donación' }}
     </button>
+    @if(!isBackendAvailable){
+      <p class="error">El servidor de pagos no está disponible en este momento.</p>
+    }
+
   </form>
   }@else{
     <p class="donation-amount">Monto de la donación: ${{amount}}</p>
     <div id="wallet_container"></div>
   }
+

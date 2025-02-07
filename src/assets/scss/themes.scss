@@ -217,6 +217,7 @@ body:not(.dark-theme) .waves .parallax use:nth-child(4) {
   --foot-light: var(--foot-dark);
 }
 
+
 /* Carrousel */
 :root {
   /* Modo claro */
@@ -335,4 +336,7 @@ body:not(.dark-theme) .waves .parallax use:nth-child(4) {
     background-color: #4CAF50 !important; // Verde cuando está activado
     border-color: rgb(0, 255, 42);
   }
+}
+.mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic {
+  stroke: var(--btn-detail-light) !important;
 }

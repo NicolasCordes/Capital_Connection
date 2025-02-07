@@ -15,6 +15,7 @@ import { MpService } from '../../../../services/mp.service';
 import { catchError, throwError } from 'rxjs';
 import { environment } from '../../../../../environments/environment.development';
 import { environmentMP } from '../../../../../environments/environment';
+import { BackendStatusServiceService } from '../../../../services/backend-status-service.service';
 declare let MercadoPago: any;
 
 @Component({
@@ -31,12 +32,26 @@ export class DonationFormComponent implements OnInit{
   activeUser: ActiveUser | undefined;
   userType: string = 'Guest';
   authService= inject(AuthService)
+  backendStatusService= inject(BackendStatusServiceService)
   private walletInstance: any;
   payOption:boolean=true;
   pressed:boolean=false;
   amount:BigInt=BigInt(0);
+  isBackendAvailable: boolean = false;  // Variable para controlar la disponibilidad del backend
 
   ngOnInit(): void {
+
+    this.backendStatusService.checkBackendStatus().subscribe(
+      () => {
+        this.isBackendAvailable = true;  // Backend está disponible
+      },
+      (error) => {
+        console.error('Backend no disponible', error);
+        this.isBackendAvailable = false;  // Backend no disponible
+      }
+    );
+
+
     this.authService.auth().subscribe({
       next:(user: ActiveUser | undefined) => {
       this.activeUser = user;

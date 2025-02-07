@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { EntrepreneurshipService } from '../../services/entrepreneurship.service';
 import { Entrepreneurship } from '../../types/entrepreneurship.model';
+import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'app-home-page',
@@ -27,18 +28,26 @@ export class HomePageComponent implements OnInit, OnDestroy {
   constructor(
     private authService: AuthService,
     private entrepreneurshipService: EntrepreneurshipService,
+    private loadingService: LoadingService
   ) {}
 
-  ngOnInit(): void {
+ngOnInit(): void {
     window.scrollTo(0, 0);
     this.detectTouchDevice();
+
+    // 🔹 Activa el loading
+
     this.entrepreneurshipService.getEntrepreneurshipsActives(0, 9).subscribe({
       next: (response) => {
         this.entrepreneurships = response.content;
         this.updateArrowVisibility();
+
+        // 🔹 Desactiva el loading cuando se recibe la respuesta
       },
       error: (err) => {
         console.error('Error al obtener entrepreneurships', err);
+
+        // 🔹 Asegurar que el loading se detenga también en caso de error
       },
     });
 
@@ -49,7 +58,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
     });
 
     window.addEventListener('resize', this.onResize.bind(this));
-  }
+}
 
   onResize(): void {
     this.detectTouchDevice();

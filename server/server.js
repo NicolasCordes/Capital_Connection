@@ -12,7 +12,7 @@ if (result.error) {
   console.log("Error al cargar el archivo .env:", result.error);
 } else {
   console.log("Archivo .env cargado correctamente.");
-} 
+}
 const accessTokenMP = process.env.MP_TOKEN;
 const publicKeyMP = process.env.MP_PUBLIC_KEY;
 const urlBase = process.env.URL_BASE;
@@ -28,7 +28,9 @@ const port = 3000;
 app.use(cors());
 app.use(express.json());
 
-
+app.get('/status', (req, res) => {
+  res.json({ status: 'ok' });
+});
 
 app.get("/",(req,res)=>{
   res.send("Server !")
@@ -60,7 +62,7 @@ try{
     notification_url:`${webhookUrl}/webhook`,
     metadata: {
       iddon: req.body.iddon,
-      idacc: req.body.idacc  
+      idacc: req.body.idacc
     },
 };
 

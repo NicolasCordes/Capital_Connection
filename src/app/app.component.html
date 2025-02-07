@@ -1,8 +1,15 @@
-    <app-navbar></app-navbar>
-    <div class="main-content"> 
-        <router-outlet></router-outlet>
-    </div>
-    
-    <div class="footer-container">
-        <app-footer></app-footer>
-    </div>
+@if (isLoading) {
+  <div class="global-spinner-overlay">
+    <mat-spinner mode="indeterminate"></mat-spinner>
+  </div>
+}
+
+<app-navbar></app-navbar>
+
+<div class="main-content">
+  <router-outlet></router-outlet>
+</div>
+
+<div class="footer-container">
+  <app-footer></app-footer>
+</div>

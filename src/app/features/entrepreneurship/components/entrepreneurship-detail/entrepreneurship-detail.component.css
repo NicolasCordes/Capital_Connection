@@ -124,8 +124,8 @@ p {
   margin-bottom: 20px;
   text-align: left;
   width: 45%;            /* Ancho fijo al 45% del contenedor padre */
-  height: 400px;         /* Altura fija: ajusta este valor según tus necesidades */
-  overflow: hidden;        /* Muestra scroll si el contenido excede el tamaño */
+  height: 500px;         /* Altura fija: ajusta este valor según tus necesidades */
+  overflow-y: auto;      /* Muestra scroll vertical si el contenido excede el tamaño */
   background-color: var(--background-color-light);
   padding: 15px;
   border: 2px solid var(--border-color-details-light);
@@ -141,14 +141,18 @@ p {
 
 /* Estilo para los párrafos dentro de los detalles */
 .entrepreneurship-details p {
-  font-size: 14px; /* Fuente un poco más pequeña */
-  margin-bottom: 12px; /* Espacio reducido entre los párrafos */
+  font-size: 15px;      /* Aumenta la legibilidad sin ser excesivo */
+  margin-bottom: 12px;  /* Más espacio entre líneas para evitar amontonamientos */
+  line-height: 1.5;     /* Mejora la lectura */
+  word-wrap: break-word; /* Rompe palabras largas para evitar desbordamiento */
+  overflow-wrap: break-word; /* Alternativa moderna para word-wrap */
   color: var(--text-color); /* Color de texto oscuro para mejor legibilidad */
 }
 
 /* Estilo para los títulos dentro de los detalles */
 .entrepreneurship-details strong {
-  font-size: 16px; /* Un tamaño más pequeño para los títulos */
+  font-size: 16px;      /* Destaca un poco más los títulos */
+  margin-right: 8px;    /* Separa el label del contenido */
   color: var(--text-color); /* Color negro por defecto */
   font-weight: bold; /* Negrita */
   transition: color 0.3s ease; /* Transición suave para el color */
@@ -177,7 +181,7 @@ p {
 .carousel-container {
   position: relative;
   width: 50%;
-  height: 400px;
+  height: 500px;
   overflow: hidden;
   border: 2px solid var(--border-color-carrousel-light);
   border-radius: 12px;

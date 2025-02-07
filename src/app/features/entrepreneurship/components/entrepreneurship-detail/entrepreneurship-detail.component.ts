@@ -30,6 +30,8 @@ export class EntrepreneurshipDetailComponent implements OnInit, OnDestroy{
   isTouch: boolean = false;
   startX: number = 0;
   private cleanupListeners: (() => void) | null = null; // Nueva propiedad
+private onTouchStartBound: EventListener = (event: Event) => this.onTouchStart(event as TouchEvent);
+private onTouchEndBound: EventListener = (event: Event) => this.onTouchEnd(event as TouchEvent);
 
   userId: number | null = null;
   id: number = 0;
@@ -63,7 +65,7 @@ export class EntrepreneurshipDetailComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.isLoading = true;
     this.detectTouchDevice();
-    // Obtenemos la información del usuario autenticado
+    this.addTouchListeners();
     this.authService.auth().subscribe((user) => {
       this.activeUser = user;
       this.userType = user ? 'Registered User' : 'Guest';
@@ -121,28 +123,43 @@ export class EntrepreneurshipDetailComponent implements OnInit, OnDestroy{
   ngOnDestroy(): void {
     // Limpiar media query listeners
     const mediaQuery = window.matchMedia('(pointer: coarse)');
-    mediaQuery.removeEventListener('change', () => {});
+    this.removeTouchListeners();
   }
 
   goToSlide(index: number): void {
     this.currentIndex = index;
   }
-  @HostListener('touchstart', ['$event'])
-onTouchStart(event: TouchEvent): void {
-  this.startX = event.touches[0].clientX;
-}
-
-@HostListener('touchend', ['$event'])
-onTouchEnd(event: TouchEvent): void {
-  const endX = event.changedTouches[0].clientX;
-  if (Math.abs(this.startX - endX) > 50) {
-    if (this.startX > endX) {
-      this.nextSlide();
-    } else {
-      this.previousSlide();
+  private addTouchListeners() {
+    const carouselContainer = document.querySelector('.carousel-container');
+    if (carouselContainer) {
+      carouselContainer.addEventListener('touchstart', this.onTouchStartBound, { passive: true });
+      carouselContainer.addEventListener('touchend', this.onTouchEndBound, { passive: true });
     }
   }
-}
+
+  private removeTouchListeners() {
+    const carouselContainer = document.querySelector('.carousel-container');
+    if (carouselContainer) {
+      carouselContainer.removeEventListener('touchstart', this.onTouchStartBound);
+      carouselContainer.removeEventListener('touchend', this.onTouchEndBound);
+    }
+  }
+
+
+  public onTouchStart(event: TouchEvent): void {
+    this.startX = event.touches[0].clientX;
+  }
+
+  public onTouchEnd(event: TouchEvent): void {
+    const endX = event.changedTouches[0].clientX;
+    if (Math.abs(this.startX - endX) > 50) {
+      if (this.startX > endX) {
+        this.nextSlide();
+      } else {
+        this.previousSlide();
+      }
+    }
+  }
 
     previousSlide(): void {
     if (this.currentIndex > 0) {

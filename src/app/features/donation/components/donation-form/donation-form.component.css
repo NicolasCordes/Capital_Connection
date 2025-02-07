@@ -1,11 +1,14 @@
+
+
 form {
   width: 100%;
-  max-width: 400px;
+  max-width: 100%; /* Asegura que no exceda el ancho del contenedor padre */
   margin: 20px auto;
   padding: 20px;
   background-color: var(--background-color-form-light);
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box; /* Incluye padding y border dentro del ancho */
 }
 
 label {
@@ -55,6 +58,12 @@ button.processing {
   color: #4CAF50;
   text-align: center;
   margin: 20px 0;
+}
+.error {
+  color:  #ff5252;
+  font-size: 1rem;
+  text-align: center;
+  margin-top: 10px;
 }
 
 /* =============================================== */
@@ -156,9 +165,10 @@ button.processing {
 /* Agregar al final del CSS */
 #wallet_container {
   width: 100%;
-  max-width: 400px;
+  max-width: 100%; /* Asegura que no exceda el ancho del contenedor padre */
   margin: 20px auto;
   padding: 0 10px;
+  box-sizing: border-box; /* Incluye padding y border dentro del ancho */
 }
 
 #wallet_container .mp-wallet {
@@ -217,4 +227,24 @@ input[type="number"]::-webkit-outer-spin-button {
 /* Para Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+
+/* Ajustes para pantallas medianas y pequeñas */
+@media (max-width: 768px) {
+  .error {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .error {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .error {
+    font-size: 0.85rem;
+  }
 }

@@ -1,0 +1,36 @@
+.global-spinner-overlay {
+  position: fixed; /* Fija el spinner en la pantalla */
+  top: 0;
+  left: 0;
+  width: 100vw; /* Usa el 100% del ancho de la ventana */
+  height: 100vh; /* Usa el 100% del alto de la ventana */
+  background-color: rgba(255, 255, 255, 0.8); /* Fondo semitransparente */
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  z-index: 1000; /* Asegura que esté por encima de todo */
+}
+
+/* Ajusta el tamaño del spinner */
+mat-spinner {
+  width: 10vw !important; /* Ajusta el ancho del spinner */
+  height: 10vw !important; /* Ajusta el alto del spinner */
+  max-width: 100px; /* Tamaño máximo para pantallas grandes */
+  max-height: 100px; /* Tamaño máximo para pantallas grandes */
+  stroke: #FF5733; /* Cambia el color aquí */
+}
+
+/* Media queries para ajustar el spinner en diferentes tamaños de pantalla */
+@media (max-width: 768px) {
+  mat-spinner {
+    width: 20vw !important; /* Aumenta el tamaño en pantallas más pequeñas */
+    height: 20vw !important;
+  }
+}
+
+@media (max-width: 480px) {
+  mat-spinner {
+    width: 15vw !important; /* Aumenta aún más el tamaño en pantallas muy pequeñas */
+    height: 15vw !important;
+  }
+}
