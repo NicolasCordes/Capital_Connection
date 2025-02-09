@@ -54,7 +54,7 @@
 
     <section class="form-group">
       <label for="password">Contraseña</label>
-      <input #password type="password" id="password" formControlName="password" class="input-field">
+      <input #password type="password" id="password" formControlName="password" class="input-field" autocomplete="new-password">
       <button type="button" (click)="onRevealPassword(password)" class="reveal-btn">
         👁️
       </button>
@@ -83,7 +83,8 @@
 
     <section class="form-group">
       <label for="confirmPassword">Confirmar Contraseña</label>
-      <input #confirmPasswordField type="password" id="confirmPassword" formControlName="confirmPassword" class="input-field">
+      <input #confirmPasswordField type="password" id="confirmPassword" formControlName="confirmPassword" class="input-field" autocomplete="new-password">
+      >
       <button type="button" (click)="onRevealPassword(confirmPasswordField)" class="reveal-btn">
         👁️
       </button>

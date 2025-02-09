@@ -9,6 +9,7 @@
   justify-content: center; /* Centra horizontalmente */
   align-items: center; /* Centra verticalmente */
   z-index: 1000; /* Asegura que esté por encima de todo */
+
 }
 
 /* Ajusta el tamaño del spinner */

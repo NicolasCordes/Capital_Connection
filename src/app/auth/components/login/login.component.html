@@ -8,8 +8,12 @@
         </section>
         <section class="form-group password-group">
             <label for="password">Contraseña</label>
-            <input #password type="password" id="password" formControlName="password" placeholder="Ingresa tu contraseña" required>
-            <button type="button" (click)="onRevealPassword(password)" class="reveal-btn">
+            <input #password type="password" id="password"
+            formControlName="password"
+            placeholder="Ingresa tu contraseña"
+            autocomplete="current-password"
+            required>
+                        <button type="button" (click)="onRevealPassword(password)" class="reveal-btn">
                 👁️
             </button>
         </section>
