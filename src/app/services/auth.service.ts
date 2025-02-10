@@ -113,10 +113,10 @@ export class AuthService {
       console.log('No hay refresh token disponible');
       return of(false);
     }
-  
+
     const body = { refreshToken: refreshToken }; // Asegúrate de usar el nombre correcto del parámetro
-  
- 
+
+
     return this.http.post<{ access_token: string, refresh_token?: string }>(
       `${this.baseUrl}/auth/token/refresh`,
       body,
@@ -213,7 +213,7 @@ export class AuthService {
 
   loginWithOAuth2(provider: string): Observable<boolean> {
     return new Observable<boolean>(observer => {
-      window.location.href = `${this.baseUrl}/oauth2/auth?provider=${provider}`;
+      window.location.href = `${this.baseUrl}/oauth2/authorization/oauth2`;
       observer.next(true);
       observer.complete();
     });
