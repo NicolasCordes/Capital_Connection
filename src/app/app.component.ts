@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { AuthService } from './services/auth.service';
 import { ActiveUser } from './types/account-data';
@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   activeUser: ActiveUser | undefined;  isLoading = false;
 
 
-  constructor(private authService: AuthService, public loadingService: LoadingService) {}
+  constructor(private authService: AuthService, public loadingService: LoadingService,private route: ActivatedRoute,private router: Router) {}
 
   ngOnInit() {
     this.loadingService.isLoading$.subscribe((loading) => {
@@ -30,7 +30,18 @@ export class AppComponent implements OnInit {
       this.activeUser = activeUser;
     });
 
-
+    // Detectar si estamos en la página de callback
+    this.route.queryParams.subscribe(params => {
+      const code = params['code'];
+      if (code) {
+        // Si hay un código en la URL, lo manejamos
+        this.authService.handleOAuth2Callback(code).subscribe(success => {
+          if (success) {
+            this.router.navigate(['/dashboard']); // Redirige a la página principal
+          }
+        });
+      }
+    });
   }
 
   onLogOut() {

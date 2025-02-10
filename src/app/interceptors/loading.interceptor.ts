@@ -7,7 +7,13 @@ export const loadingInterceptor: HttpInterceptorFn = (req, next) => {
   const loadingService = inject(LoadingService);
 
   // URLs que queremos excluir del spinner
-  const excludedUrls = ['http://localhost:4200/entrepreneurships', '/filter','http://localhost:4200/sign-up','/accounts']; // Incluye '/filter' si es necesario
+  const excludedUrls = [
+    'http://localhost:4200/entrepreneurships',
+    '/filter',
+    'http://localhost:4200/sign-up',
+    '/accounts',
+    '/token/refresh' // Excluir la ruta del refresh token
+  ];
   const isExcluded = excludedUrls.some(url => req.url.includes(url));
 
   if (!isExcluded) {

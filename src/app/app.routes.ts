@@ -11,6 +11,7 @@ import { ProfilePageComponent } from "./pages/profile-page/profile-page.componen
 import { FailureComponent } from "./pages/response/failure/failure.component";
 import { PendingComponent } from "./pages/response/pending/pending.component";
 import { SuccessComponent } from "./pages/response/success/success.component";
+import { CallbackPageComponent } from "./pages/callback-page-component/callback-page-component.component";
 
 export const routes: Routes = [
   { path: 'success', component: SuccessComponent },
@@ -24,4 +25,6 @@ export const routes: Routes = [
   { path: 'entrepreneurships/:id', component: EntrepreneurshipDetailPageComponent },
   { path: 'profile', component: ProfilePageComponent  , canActivate: [AuthGuard] },
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'callback', component: CallbackPageComponent }
+
 ];

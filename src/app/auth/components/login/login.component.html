@@ -23,6 +23,11 @@
         </div>
       }
         <button type="submit" [disabled]="form.invalid" class="submit-btn">Iniciar sesión</button>
+
+        <button type="button" (click)="onLoginWithOAuth2()" class="oauth-btn">
+          Iniciar sesión con OAuth2
+        </button>
+
     </fieldset>
   </form>
 </div>
