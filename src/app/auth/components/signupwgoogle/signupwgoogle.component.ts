@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { AbstractControl, AsyncValidatorFn, FormBuilder, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AccountData } from '../../../types/account-data';
 import { CommonModule } from '@angular/common';
 import { Address } from '../../../types/address.model';
@@ -10,29 +10,24 @@ import { Observable, of, map, catchError } from 'rxjs';
 import { Account } from '../../../types/account.model';
 
 @Component({
-  selector: 'app-signup',
+  selector: 'app-signupwgoogle',
   standalone: true,
   imports: [ReactiveFormsModule, RouterModule, CommonModule, AddressFormComponent],
-  templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.css']
+  templateUrl: './signupwgoogle.component.html',
+  styleUrl: './signupwgoogle.component.css'
 })
-export class SignupComponent {
-
+export class SignupwgoogleComponent implements OnInit {
+  email!: string;
   submitPress = false;
+
   private formBuilder = inject(FormBuilder);
 
   form = this.formBuilder.group({
     username: ['', [Validators.required, Validators.minLength(4)], [this.checkIfUsernameExists()]],
-    password: ['', [
-      Validators.required,
-      Validators.minLength(8),
-      Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).+$/)
-    ]],
-    confirmPassword: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email],[this.checkIfEmailExists()]],
+    email: ['', [Validators.required, Validators.email], [this.checkIfEmailExists()]],
     name: ['', Validators.required],
     surname: ['', Validators.required],
-    dateOfBirth: ['', [Validators.required, this.ageValidator]],
+    dateOfBirth: ['', [Validators.required, this.ageValidator]], // Aquí sigue la validación
     yearsOfExperience: [0, [Validators.required, Validators.min(0)]],
     industry: ['', Validators.required],
     wallet: [{ value: 0, disabled: true }],
@@ -42,46 +37,58 @@ export class SignupComponent {
       locality: ['', Validators.required],
       province: ['', Validators.required],
       type: ['', Validators.required],
-      isActivated: [true]
+      isActivated: [true],
     })
-  }, {
-    validator: this.passwordMatchValidator
   });
 
-  constructor(private authService: AuthService, private router: Router) { }
 
-  passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
-    const password = control.get('password')?.value;
-    const confirmPassword = control.get('confirmPassword')?.value;
-
-    if (password && confirmPassword && password !== confirmPassword) {
-      return { match: true }; // Nombre del error de validación
-    }
-
-    return null;
+  constructor(private authService: AuthService, private router: Router,private route: ActivatedRoute) {
   }
+
+
+  ngOnInit(): void {
+
+    this.route.queryParams.subscribe(params => {
+      console.log('Parámetros recibidos:', params);
+
+      this.email = params['email'];
+      // Verificamos si los valores de given_name o family_name son null o undefined y asignamos un valor por defecto
+      const givenName = params['given_name'] || ''; // Si es null o undefined, asigna una cadena vacía
+      const familyName = params['family_name'] || ''; // Lo mismo para family_name
+
+      if (!this.email) {
+        this.router.navigate(['/']); // Redirigir si no hay correo
+      }
+
+      // Asignar valores a los campos del formulario
+      this.form.patchValue({
+        email: this.email,
+        name: givenName,
+        surname: familyName
+      });
+    });
+  }
+
 
   checkIfEmailExists(): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
       const email = control.value;
       return this.authService.checkIfEmailExists(email).pipe(
         map(exists => (exists ? { emailExists: true } : null)),
-        catchError(() => of(null)) // Si hay un error, no marcar como inválido
+        catchError(() => of(null))
       );
     };
   }
 
-
-      checkIfUsernameExists(): AsyncValidatorFn {
-        return (control: AbstractControl): Observable<ValidationErrors | null> => {
-          const username = control.value;
-          return this.authService.checkIfUsernameExists(username).pipe(
-            map(exists => (exists ? { usernameExists: true } : null)),
-            catchError(() => of(null)) // Si hay un error, no marcar como inválido
-          );
-        };
-      }
-
+  checkIfUsernameExists(): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      const username = control.value;
+      return this.authService.checkIfUsernameExists(username).pipe(
+        map(exists => (exists ? { usernameExists: true } : null)),
+        catchError(() => of(null))
+      );
+    };
+  }
 
 
   ageValidator(control: any): { [key: string]: boolean } | null {
@@ -103,21 +110,19 @@ export class SignupComponent {
   }
 
   onSubmit() {
-    this.submitPress=true;
-    if (this.form.invalid || this.form.get('password')?.value !== this.form.get('confirmPassword')?.value) {
+    if (this.form.invalid) {
       return;
     }
 
-    const { confirmPassword, ...userData } = this.form.getRawValue();
+    const userData = this.form.getRawValue();
 
     const user = {
       ...userData,
       wallet: 0,
       favorites: [],
       isActivated: true,
-      providerId:null,
-    } as Account;
-
+      password: null,
+    } as unknown as Account;
 
     this.authService.signup(user).subscribe({
       next: () => {
@@ -133,13 +138,6 @@ export class SignupComponent {
   }
 
 
-  onRevealPassword(pwInput: HTMLInputElement) {
-    if (pwInput.type == 'password') {
-      pwInput.type = 'text';
-    } else {
-      pwInput.type = 'password';
-    }
-  }
 
   updateAddress(address: Address) {
     const updatedAddress = {

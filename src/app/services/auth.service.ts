@@ -5,6 +5,8 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { AccountData, ActiveUser } from '../types/account-data';
 import { TokenService } from './token.service';
 import { environment } from '../../environments/environment';
+import { Router, RouterModule } from '@angular/router';
+import { Account } from '../types/account.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +16,8 @@ export class AuthService {
   private baseUrl = `${environment.urlServer}`;
   public estoyLogeado: boolean = !!localStorage.getItem("access_token");
   private refreshInterval: any;
-
   constructor(
+    private router: Router,
     private http: HttpClient,
     private tokenService: TokenService
   ) {
@@ -175,13 +177,20 @@ export class AuthService {
     return of(true);
   }
 
-  signup(account: AccountData): Observable<boolean> {
-    return this.http.post<AccountData>(`${this.baseUrl}/accounts`, account).pipe(
-      switchMap(({ id, username }) => {
-        if (id) {
-          return this.login(username, account.password);
+  signup(account: Account): Observable<boolean> {
+    return this.http.post<Account>(`${this.baseUrl}/accounts`, account, { withCredentials: true }).pipe(
+      switchMap(({ id, username, providerId }) => {
+        if (id && username) {
+          // Si se recibe un ID, y no se envió password, se hace el login con providerId
+          if (account.password == null && account.providerId == null && providerId != null) {
+            return this.loginBefSignGoogle(username, providerId); // Usamos providerId del backend si fue asignado
+          }
+          // Si se recibió un password en el account, hacemos el login normal
+          if (account.password) {
+            return this.login(username, account.password);
+          }
         }
-        return of(false);
+        return of(false); // En caso de que no se haya creado correctamente
       }),
       catchError((error) => {
         console.error('Error en el registro: ', error);
@@ -189,7 +198,6 @@ export class AuthService {
       })
     );
   }
-
   getUsernames(): Observable<{ id: number; username: string }[]> {
     return this.http.get<AccountData[]>(`${this.baseUrl}`).pipe(
       map((users) => {
@@ -210,33 +218,63 @@ export class AuthService {
   checkIfEmailExists(email: string): Observable<boolean> {
     return this.http.get<boolean>(`${this.baseUrl}/exists/email/${email}`);
   }
+  loginWithOAuth2(): void {
+    const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?` +
+    `client_id=990693061222-lbdeiil1n280tp0d9udkcbr6n1fs9m3i.apps.googleusercontent.com&` +
+    `redirect_uri=http://localhost:4200/callback&` +
+    `response_type=code&` +
+    `scope=openid%20email%20profile&` +
+    `state=random_state_value&` +
+    `prompt=select_account`;
 
-  loginWithOAuth2(provider: string): Observable<boolean> {
-    return new Observable<boolean>(observer => {
-      window.location.href = `${this.baseUrl}/oauth2/authorization/oauth2`;
-      observer.next(true);
-      observer.complete();
-    });
-  }
+    console.log('Redirigiendo a: ', authUrl);  // Asegúrate que la URL es la esperada
+    window.location.href = authUrl;
+}
 
-  handleOAuth2Callback(code: string): Observable<boolean> {
-    return this.http.post<{ access_token: string, refresh_token: string }>(
-      `${this.baseUrl}/oauth2/callback`,
-      { code }
-    ).pipe(
-      map(tokens => {
-        if (tokens.access_token && tokens.refresh_token) {
-          localStorage.setItem("access_token", tokens.access_token);
-          localStorage.setItem("refresh_token", tokens.refresh_token);
-          const decodedToken = this.tokenService.decodeToken(tokens.access_token);
-          const activeUser = { username: decodedToken.sub, id: decodedToken.account_id };
-          localStorage.setItem("activeUser", JSON.stringify(activeUser));
-          this.activeUserSubject.next(activeUser);
-          return true;
-        }
-        return false;
-      }),
-      catchError(() => of(false))
-    );
-  }
+loginBefSignGoogle(username: String, providerID: String): Observable<boolean> {
+  const body = { username, providerID, withRefreshToken: true };
+
+  return this.http.post<{ access_token: string, refresh_token: string }>(
+    `${this.baseUrl}/oauth2/login_google`, // Aquí también se usa la misma URL del login
+    body
+  ).pipe(
+    map((tokens) => {
+      if (tokens.access_token && tokens.refresh_token) {
+        // Guardamos el access token y refresh token en localStorage
+        localStorage.setItem("access_token", tokens.access_token);
+        localStorage.setItem("refresh_token", tokens.refresh_token);
+
+        // Decodificamos el token para obtener el usuario activo
+        const decodedToken = this.tokenService.decodeToken(tokens.access_token);
+        const activeUser = { username: decodedToken.sub, id: decodedToken.account_id };
+
+        // Guardamos el usuario activo en localStorage
+        localStorage.setItem("activeUser", JSON.stringify(activeUser));
+
+        // Actualizamos el estado de usuario activo
+        this.activeUserSubject.next(activeUser);
+        this.estoyLogeado = true;
+        return true;
+      }
+      this.estoyLogeado = false;
+      return false;
+    }),
+    catchError(() => of(false)) // Manejo de errores en caso de que algo falle
+  );
+}
+
+mandarCookie() {
+  const url = 'http://localhost:8080/auth/cookie'; // Cambia la URL a la de tu backend
+
+  // Enviar la solicitud con responseType: 'text' para manejar la respuesta como texto plano
+  this.http.post(url, {}, { withCredentials: true, responseType: 'text' }).subscribe(
+    response => {
+      console.log('Respuesta del servidor:', response); // Esta es la respuesta en formato texto
+    },
+    error => {
+      console.error('Error al enviar la cookie', error);
+    }
+  );
+}
+
 }

@@ -44,13 +44,7 @@ export class LoginComponent {
   }
 
   onLoginWithOAuth2() {
-    this.authService.loginWithOAuth2('auth0').subscribe(success => {
-      if (success) {
-        console.log('Redirigiendo a OAuth2...');
-      } else {
-        console.log('Hubo un error al iniciar sesión');
-      }
-    });
+    this.authService.loginWithOAuth2();
   }
 
   onRevealPassword(pwInput: HTMLInputElement) {

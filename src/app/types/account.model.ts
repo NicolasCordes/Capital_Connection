@@ -4,7 +4,8 @@ import { Entrepreneurship } from "./entrepreneurship.model";
 export interface Account {
 id?: number,
 username: string,
-password: string,
+password?: string | null,
+providerId?: String | null,
 email: string,
 name: string,
 surname: string,

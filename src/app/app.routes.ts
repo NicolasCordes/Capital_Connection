@@ -12,6 +12,7 @@ import { FailureComponent } from "./pages/response/failure/failure.component";
 import { PendingComponent } from "./pages/response/pending/pending.component";
 import { SuccessComponent } from "./pages/response/success/success.component";
 import { CallbackPageComponent } from "./pages/callback-page-component/callback-page-component.component";
+import { SignupgoogleComponent } from "./pages/signupgoogle/signupgoogle.component";
 
 export const routes: Routes = [
   { path: 'success', component: SuccessComponent },
@@ -23,8 +24,10 @@ export const routes: Routes = [
   { path: 'entrepreneurships', component: EntrepreneurshipListPageComponent },
   { path: 'add-entrepreneurship', component: EntrepreneurshipFormPageComponent, canActivate: [AuthGuard] },
   { path: 'entrepreneurships/:id', component: EntrepreneurshipDetailPageComponent },
+  { path: 'signupwgoogle', component: SignupgoogleComponent },
   { path: 'profile', component: ProfilePageComponent  , canActivate: [AuthGuard] },
+  { path: 'callback', component: CallbackPageComponent },
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'callback', component: CallbackPageComponent }
+
 
 ];
