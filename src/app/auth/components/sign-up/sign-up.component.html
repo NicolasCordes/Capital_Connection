@@ -110,6 +110,12 @@
         </div>
       }
 
+      @if (form.controls['dateOfBirth'].hasError('futureDate')) {
+        <div class="error-msg">
+          ¡No puedes ser viajero del tiempo! La fecha no puede ser futura.
+        </div>
+      }
+
       @if (form.controls['dateOfBirth'].touched && form.controls['dateOfBirth'].hasError('ageInvalid')) {
         <div class="error-msg">
           Debes ser mayor de 16 años para registrarte.
@@ -120,9 +126,24 @@
 
     <section class="form-group">
       <label for="yearsOfExperience">Años de Experiencia</label>
-      <input type="number" id="yearsOfExperience" formControlName="yearsOfExperience" class="input-field">
+      <input type="number"
+             id="yearsOfExperience"
+             formControlName="yearsOfExperience"
+             class="input-field"
+             max="99"> <!-- Opcional: agregar atributo max para soporte nativo -->
+
       @if (form.controls['yearsOfExperience'].touched && form.controls['yearsOfExperience'].invalid) {
-        <div class="error-msg">Los años de experiencia son obligatorios.</div>
+        <div class="error-msg">
+          @if (form.controls['yearsOfExperience'].hasError('required')) {
+            Los años de experiencia son obligatorios.
+          }
+          @if (form.controls['yearsOfExperience'].hasError('min')) {
+            El valor mínimo es 0.
+          }
+          @if (form.controls['yearsOfExperience'].hasError('max')) {
+            El máximo permitido es 99 años.
+          }
+        </div>
       }
     </section>
 

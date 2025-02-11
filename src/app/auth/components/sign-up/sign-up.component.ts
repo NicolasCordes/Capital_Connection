@@ -33,7 +33,11 @@ export class SignupComponent {
     name: ['', Validators.required],
     surname: ['', Validators.required],
     dateOfBirth: ['', [Validators.required, this.ageValidator]],
-    yearsOfExperience: [0, [Validators.required, Validators.min(0)]],
+    yearsOfExperience: [0, [
+      Validators.required,
+      Validators.min(0),
+      Validators.max(99)
+    ]],
     industry: ['', Validators.required],
     wallet: [{ value: 0, disabled: true }],
     address: this.formBuilder.group({
@@ -84,24 +88,33 @@ export class SignupComponent {
 
 
 
-  ageValidator(control: any): { [key: string]: boolean } | null {
-    const birthDate = new Date(control.value);
-    const currentDate = new Date();
+      ageValidator(control: AbstractControl): ValidationErrors | null {
+        const birthDate = new Date(control.value);
+        const currentDate = new Date();
 
-    let age = currentDate.getFullYear() - birthDate.getFullYear();
-    const monthDifference = currentDate.getMonth() - birthDate.getMonth();
+        // Validar que la fecha no sea futura
+        if (birthDate > currentDate) {
+          return { futureDate: true };
+        }
 
-    if (monthDifference < 0 || (monthDifference === 0 && currentDate.getDate() < birthDate.getDate())) {
-      age--;
-    }
+        // Calcular edad
+        let age = currentDate.getFullYear() - birthDate.getFullYear();
+        const monthDifference = currentDate.getMonth() - birthDate.getMonth();
 
-    if (age < 16) {
-      return { ageInvalid: true };
-    }
+        if (monthDifference < 0 ||
+            (monthDifference === 0 && currentDate.getDate() < birthDate.getDate())) {
+          age--;
+        }
 
-    return null;
-  }
+        // Validar edad mínima
+        if (age < 16) {
+          return { ageInvalid: true };
+        }
 
+        return null;
+      }
+
+      
   onSubmit() {
     this.submitPress=true;
     if (this.form.invalid || this.form.get('password')?.value !== this.form.get('confirmPassword')?.value) {
