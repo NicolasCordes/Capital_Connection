@@ -18,8 +18,12 @@ import { environment } from '../../environments/environment';
 
     getDonationsByAccountId(accountId: number | undefined): Observable<Donation[]> {
       return this.http.get<Donation[]>(`${this.urlBase}/${accountId}/donations`).pipe(
-        map(donations => donations.filter(donation => donation.isActivated)) // Filtra solo las activadas
+        map(donations =>
+          donations.filter(donation => donation.isActivated &&
+                                      (donation.status === 'approved' || donation.status === 'rejected'))
+        ) // Filtra solo las activadas y con status 'approved' o 'rejected'
       );
     }
+
 
   }
