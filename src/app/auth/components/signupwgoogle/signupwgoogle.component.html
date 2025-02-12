@@ -97,8 +97,13 @@
 
     <section class="form-group">
       <label for="yearsOfExperience">Años de Experiencia</label>
-      <input type="number" id="yearsOfExperience" formControlName="yearsOfExperience" class="input-field">
-      @if (form.controls['yearsOfExperience'].touched && form.controls['yearsOfExperience'].invalid) {
+      <input type="number"
+             id="yearsOfExperience"
+             formControlName="yearsOfExperience"
+             class="input-field"
+             max="99"
+             (focus)="clearZero()">
+       @if (form.controls['yearsOfExperience'].touched && form.controls['yearsOfExperience'].invalid) {
         <div class="error-msg">Los años de experiencia son obligatorios.</div>
       }
     </section>

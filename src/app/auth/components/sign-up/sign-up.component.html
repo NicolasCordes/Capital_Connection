@@ -141,7 +141,8 @@
              id="yearsOfExperience"
              formControlName="yearsOfExperience"
              class="input-field"
-             max="99"> <!-- Opcional: agregar atributo max para soporte nativo -->
+             max="99"
+             (focus)="clearZero()"> <!-- Opcional: agregar atributo max para soporte nativo -->
 
       @if (form.controls['yearsOfExperience'].touched && form.controls['yearsOfExperience'].invalid) {
         <div class="error-msg">

@@ -28,6 +28,12 @@ export class AddressFormComponent implements OnInit {
   ngOnInit(): void {
     this.addressForm.valueChanges.subscribe(() => this.emitAddress());
   }
+  clearZero(): void {
+    // Verifica si el valor es 0 antes de borrarlo
+    if (this.addressForm.controls['number'].value === 0) {
+      this.addressForm.controls['number'].setValue(null);
+    }
+  }
 
   emitAddress() {
     if (this.addressForm.valid) {

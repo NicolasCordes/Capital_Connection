@@ -63,6 +63,13 @@ export class SignupComponent {
 
   constructor(private authService: AuthService, private router: Router) { }
 
+  clearZero(): void {
+    // Verifica si el valor es 0 antes de borrarlo
+    if (this.form.controls['yearsOfExperience'].value === 0) {
+      this.form.controls['yearsOfExperience'].setValue(null);
+    }
+  }
+
   passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
     const password = control.get('password')?.value;
     const confirmPassword = control.get('confirmPassword')?.value;

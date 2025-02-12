@@ -58,7 +58,12 @@ export class SignupwgoogleComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router,private route: ActivatedRoute) {
   }
 
-
+  clearZero(): void {
+    // Verifica si el valor es 0 antes de borrarlo
+    if (this.form.controls['yearsOfExperience'].value === 0) {
+      this.form.controls['yearsOfExperience'].setValue(null);
+    }
+  }
 
   ngOnInit(): void {
 
