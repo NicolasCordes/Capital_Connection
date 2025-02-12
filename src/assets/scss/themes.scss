@@ -289,6 +289,7 @@ body:not(.dark-theme) .waves .parallax use:nth-child(4) {
   --submit-btn-text-light: var(--submit-btn-text-dark);
   --submit-btn-hover-background-light: var(--submit-btn-hover-background-dark);
 }
+
 .my-custom-toggle {
   .mdc-switch__icon.mdc-switch__icon--off path {
     fill: rgb(255, 204, 0)!important;
@@ -339,4 +340,29 @@ body:not(.dark-theme) .waves .parallax use:nth-child(4) {
 }
 .mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic {
   stroke: var(--btn-detail-light) !important;
+}
+
+:root {
+  /* Modo claro */
+  --google-btn-background-light: #ffffff;
+  --google-btn-border-light: #747775;
+  --google-btn-text-light: #1f1f1f;
+  --google-btn-state-bg-light: #303030;
+  --google-btn-hover-shadow-light: 0 1px 2px 0 rgba(60,64,67,0.30), 0 1px 3px 1px rgba(60,64,67,0.15);
+
+  /* Modo oscuro */
+  --google-btn-background-dark: #131314;
+  --google-btn-border-dark: #8e918f;
+  --google-btn-text-dark: #e3e3e3;
+  --google-btn-state-bg-dark: white;
+  --google-btn-hover-shadow-dark: 0 1px 2px 0 rgba(60,64,67,0.30), 0 1px 3px 1px rgba(60,64,67,0.15);
+}
+
+/* Activamos el modo oscuro reasignando las variables "light" */
+.dark-theme {
+  --google-btn-background-light: var(--google-btn-background-dark);
+  --google-btn-border-light: var(--google-btn-border-dark);
+  --google-btn-text-light: var(--google-btn-text-dark);
+  --google-btn-state-bg-light: var(--google-btn-state-bg-dark);
+  --google-btn-hover-shadow-light: var(--google-btn-hover-shadow-dark);
 }

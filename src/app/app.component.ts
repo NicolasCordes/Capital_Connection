@@ -23,12 +23,25 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthService, public loadingService: LoadingService,private route: ActivatedRoute,private router: Router) {}
 
   ngOnInit() {
+    this.toggleScroll(false); // Deshabilita el scroll
+
     this.loadingService.isLoading$.subscribe((loading) => {
       this.isLoading = loading;
+      this.toggleScroll(true); // Habilita el scroll
+
     });
     this.authService.auth().subscribe(activeUser => {
       this.activeUser = activeUser;
     });
+  }
+
+  toggleScroll(enable: boolean) {
+    const body = document.body;
+    if (enable) {
+      body.classList.remove('no-scroll');
+    } else {
+      body.classList.add('no-scroll');
+    }
   }
 
   onLogOut() {

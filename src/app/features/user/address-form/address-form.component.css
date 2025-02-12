@@ -61,6 +61,17 @@ h3 {
 .address-form select.form-control:focus {
   border-color: #007bff;
 }
+/* Para la mayoría de los navegadores */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Para Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
 
 .select-container {
   position: relative;

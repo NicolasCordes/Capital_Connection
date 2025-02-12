@@ -36,38 +36,63 @@
       }
     </section>
 
-    <section class="form-group">
-      <label for="name">Nombre</label>
-      <input type="text" id="name" formControlName="name" class="input-field">
-      @if (form.controls['name'].touched && form.controls['name'].invalid) {
-        <div class="error-msg">El nombre es obligatorio.</div>
-      }
-    </section>
+    <!-- Campo para el nombre -->
+<section class="form-group">
+  <label for="name">Nombre</label>
+  <input type="text" id="name" formControlName="name" class="input-field">
+  @if ((form.controls['name'].touched || submitPress) && form.controls['name'].invalid) {
+    @if (form.controls['name'].hasError('required')) {
+      <div class="error-msg">El nombre es obligatorio.</div>
+    }
+    @if (form.controls['name'].hasError('hasNumber')) {
+      <div class="error-msg">No se permiten números en este campo.</div>
+    }
+  }
+</section>
 
-    <section class="form-group">
-      <label for="surname">Apellido</label>
-      <input type="text" id="surname" formControlName="surname" class="input-field">
-      @if (form.controls['surname'].touched && form.controls['surname'].invalid) {
-        <div class="error-msg">El apellido es obligatorio.</div>
-      }
-    </section>
+<!-- Campo para el apellido -->
+<section class="form-group">
+  <label for="surname">Apellido</label>
+  <input type="text" id="surname" formControlName="surname" class="input-field">
+  @if ((form.controls['surname'].touched || submitPress) && form.controls['surname'].invalid) {
+    @if (form.controls['surname'].hasError('required')) {
+      <div class="error-msg">El apellido es obligatorio.</div>
+    }
+    @if (form.controls['surname'].hasError('hasNumber')) {
+      <div class="error-msg">No se permiten números en este campo.</div>
+    }
+  }
+</section>
 
     <section class="form-group">
       <label for="dateOfBirth">Fecha de Nacimiento</label>
       <input type="date" id="dateOfBirth" formControlName="dateOfBirth" class="input-field">
 
-      @if (form.controls['dateOfBirth'].touched && form.controls['dateOfBirth'].hasError('required')) {
+      @if ((form.controls['dateOfBirth'].touched || submitPress) && form.controls['dateOfBirth'].hasError('required')) {
         <div class="error-msg">
           La fecha de nacimiento es obligatoria.
         </div>
       }
 
-      @if (form.controls['dateOfBirth'].touched && form.controls['dateOfBirth'].hasError('ageInvalid')) {
+      @if (form.controls['dateOfBirth'].hasError('futureDate')) {
+        <div class="error-msg">
+          ¡No puedes ser viajero del tiempo! La fecha no puede ser futura.
+        </div>
+      }
+
+      @if ((form.controls['dateOfBirth'].touched || submitPress) && form.controls['dateOfBirth'].hasError('underAge')) {
         <div class="error-msg">
           Debes ser mayor de 16 años para registrarte.
         </div>
       }
+
+      @if ((form.controls['dateOfBirth'].touched || submitPress) && form.controls['dateOfBirth'].hasError('overAge')) {
+        <div class="error-msg">
+          La edad no puede ser mayor a 120 años.
+        </div>
+      }
     </section>
+
 
 
     <section class="form-group">

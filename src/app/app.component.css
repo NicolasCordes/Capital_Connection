@@ -1,37 +1,48 @@
+/* Estilo para deshabilitar interacciones */
+.disabled-content {
+  pointer-events: none; /* Deshabilita clics y otras interacciones */
+  opacity: 0.5; /* Opcional: reduce la opacidad para indicar que está deshabilitado */
+}
+
+/* Estilo para el overlay del spinner */
 .global-spinner-overlay {
-  position: fixed; /* Fija el spinner en la pantalla */
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100vw; /* Usa el 100% del ancho de la ventana */
-  height: 100vh; /* Usa el 100% del alto de la ventana */
-  background-color: rgba(255, 255, 255, 0.8); /* Fondo semitransparente */
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.8);
   display: flex;
-  justify-content: center; /* Centra horizontalmente */
-  align-items: center; /* Centra verticalmente */
-  z-index: 1000; /* Asegura que esté por encima de todo */
-
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  pointer-events: auto; /* Permite interacciones con el spinner */
 }
 
-/* Ajusta el tamaño del spinner */
+/* Estilo para el spinner */
 mat-spinner {
-  width: 10vw !important; /* Ajusta el ancho del spinner */
-  height: 10vw !important; /* Ajusta el alto del spinner */
-  max-width: 100px; /* Tamaño máximo para pantallas grandes */
-  max-height: 100px; /* Tamaño máximo para pantallas grandes */
-  stroke: #FF5733; /* Cambia el color aquí */
+  width: 10vw !important;
+  height: 10vw !important;
+  max-width: 100px;
+  max-height: 100px;
+  stroke: #FF5733;
 }
 
-/* Media queries para ajustar el spinner en diferentes tamaños de pantalla */
+/* Deshabilitar el scroll en el body */
+body.no-scroll {
+  overflow: hidden;
+}
+
 @media (max-width: 768px) {
   mat-spinner {
-    width: 20vw !important; /* Aumenta el tamaño en pantallas más pequeñas */
+    width: 20vw !important;
     height: 20vw !important;
   }
 }
 
 @media (max-width: 480px) {
   mat-spinner {
-    width: 15vw !important; /* Aumenta aún más el tamaño en pantallas muy pequeñas */
+    width: 15vw !important;
     height: 15vw !important;
   }
 }

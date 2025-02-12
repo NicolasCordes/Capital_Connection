@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { TokenService } from '../../services/token.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-callback',
@@ -15,15 +16,15 @@ export class CallbackPageComponent implements OnInit {
     private route: ActivatedRoute,
     private http: HttpClient,
     private router: Router,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
     // Recuperar el parámetro "code" de la URL
     this.route.queryParams.subscribe(params => {
       const code = params['code'];
-      console.log(params);
-      console.log(code);
+
       if (code) {
         this.getOAuth2Token(code);
       } else {
@@ -34,26 +35,49 @@ export class CallbackPageComponent implements OnInit {
   }
 
   getOAuth2Token(code: string): void {
-    const url = 'http://localhost:8080/auth/oauth2/token';  // URL de tu backend
+    const url = environment.urlBase  // URL de tu backend
 
     // Enviar el código al backend para obtener los tokens
-    this.http.post('http://localhost:8080/auth/oauth2/token', { code }, { withCredentials: true }).subscribe(
+    this.http.post(`${url}/auth/oauth2/token`, { code }, { withCredentials: true }).subscribe(
         (response: any) => {
-            if (response.redirect) {
-              console.log('rta',response);
-                // Si el backend indica que hay que redirigir, navegar a la página de registro
-                this.router.navigate([response.redirect], { queryParams: { email: response.email, provider_id: response.provider_id, given_name: response.given_name, family_name: response.family_name } });
-            } else {
+          if (response.redirect) {
+            console.log('rta', response);
+
+            // Construir los queryParams dinámicamente
+            const queryParams: any = { email: response.email };
+
+            if (response.given_name) {
+                queryParams.given_name = response.given_name;
+            }
+            if (response.family_name) {
+                queryParams.family_name = response.family_name;
+            }
+
+            // Redirigir a la página de registro con los queryParams
+            this.router.navigate([response.redirect], { queryParams });
+        } else {
                 // Si no hay redirección, guardar los tokens y navegar a la página principal
-                console.log('Tokens recibidos:', response);
-                localStorage.setItem('access_token', response.access_token);
-                localStorage.setItem('refresh_token', response.refresh_token);
-                const decodedToken = this.tokenService.decodeToken(response.access_token);
-                const activeUser = { username: decodedToken.sub, id: decodedToken.account_id };
-        
-                localStorage.setItem("activeUser", JSON.stringify(activeUser));
-                this.router.navigate(['/']);
-                this.router.navigate(['/']);
+                if (response.access_token && response.refresh_token) {
+                  console.log('Tokens recibidos:', response);
+
+                  // Guardar tokens en el localStorage
+                  localStorage.setItem('access_token', response.access_token);
+                  localStorage.setItem('refresh_token', response.refresh_token);
+
+                  // Decodificar el token de acceso
+                  const decodedToken = this.tokenService.decodeToken(response.access_token);
+                  if (decodedToken) {
+                      const activeUser = { username: decodedToken.sub, id: decodedToken.account_id };
+                      localStorage.setItem("activeUser", JSON.stringify(activeUser));
+                      this.authService.activarUser(activeUser);
+                  }
+
+                  // Navegar a la página principal
+                  this.router.navigate(['/']);
+              } else {
+                  console.error('Tokens no recibidos en la respuesta');
+                  // Manejar el caso en que no se reciban tokens
+              }
             }
         },
         (error) => {

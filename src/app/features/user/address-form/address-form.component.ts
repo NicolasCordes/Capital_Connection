@@ -19,7 +19,7 @@ export class AddressFormComponent implements OnInit {
 
   addressForm = this.fb.group({
     street: ['', Validators.required],
-    number: [0, Validators.required],
+    number: [0, [Validators.required, Validators.min(0)]],
     locality: ['', Validators.required],
     province: ['', Validators.required],
     type: ['', Validators.required]

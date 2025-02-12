@@ -22,18 +22,31 @@ export class SignupwgoogleComponent implements OnInit {
 
   private formBuilder = inject(FormBuilder);
 
+  // Dentro de la clase SignupwgoogleComponent
+  noNumbersValidator = (control: AbstractControl): ValidationErrors | null => {
+    const value = control.value;
+    if (value && /\d/.test(value)) {
+      return { hasNumber: true };
+    }
+    return null;
+  };
+
   form = this.formBuilder.group({
     username: ['', [Validators.required, Validators.minLength(4)], [this.checkIfUsernameExists()]],
     email: ['', [Validators.required, Validators.email], [this.checkIfEmailExists()]],
-    name: ['', Validators.required],
-    surname: ['', Validators.required],
+    name: ['', [Validators.required, this.noNumbersValidator]], // Validador agregado
+    surname: ['', [Validators.required, this.noNumbersValidator]], // Validador agregado
     dateOfBirth: ['', [Validators.required, this.ageValidator]], // Aquí sigue la validación
-    yearsOfExperience: [0, [Validators.required, Validators.min(0)]],
+    yearsOfExperience: [0, [
+      Validators.required,
+      Validators.min(0),
+      Validators.max(99)
+    ]],
     industry: ['', Validators.required],
     wallet: [{ value: 0, disabled: true }],
     address: this.formBuilder.group({
       street: ['', Validators.required],
-      number: [0, Validators.required],
+      number: [0, [Validators.required, Validators.min(0)]],
       locality: ['', Validators.required],
       province: ['', Validators.required],
       type: ['', Validators.required],
@@ -44,6 +57,7 @@ export class SignupwgoogleComponent implements OnInit {
 
   constructor(private authService: AuthService, private router: Router,private route: ActivatedRoute) {
   }
+
 
 
   ngOnInit(): void {
@@ -91,23 +105,32 @@ export class SignupwgoogleComponent implements OnInit {
   }
 
 
-  ageValidator(control: any): { [key: string]: boolean } | null {
+  ageValidator(control: AbstractControl): ValidationErrors | null {
     const birthDate = new Date(control.value);
     const currentDate = new Date();
+
+    if (birthDate > currentDate) {
+      return { futureDate: true };
+    }
 
     let age = currentDate.getFullYear() - birthDate.getFullYear();
     const monthDifference = currentDate.getMonth() - birthDate.getMonth();
 
-    if (monthDifference < 0 || (monthDifference === 0 && currentDate.getDate() < birthDate.getDate())) {
+    if (monthDifference < 0 ||
+        (monthDifference === 0 && currentDate.getDate() < birthDate.getDate())) {
       age--;
     }
 
     if (age < 16) {
-      return { ageInvalid: true };
+      return { underAge: true };
+    } else if (age > 120) {
+      return { overAge: true };
     }
 
     return null;
   }
+
+
 
   onSubmit() {
     if (this.form.invalid) {
@@ -136,6 +159,9 @@ export class SignupwgoogleComponent implements OnInit {
       }
     });
   }
+
+
+
 
 
 

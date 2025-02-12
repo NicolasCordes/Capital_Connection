@@ -21,6 +21,15 @@ export class SignupComponent {
   submitPress = false;
   private formBuilder = inject(FormBuilder);
 
+  // Dentro de la clase SignupwgoogleComponent
+  noNumbersValidator = (control: AbstractControl): ValidationErrors | null => {
+    const value = control.value;
+    if (value && /\d/.test(value)) {
+      return { hasNumber: true };
+    }
+    return null;
+  };
+
   form = this.formBuilder.group({
     username: ['', [Validators.required, Validators.minLength(4)], [this.checkIfUsernameExists()]],
     password: ['', [
@@ -30,8 +39,8 @@ export class SignupComponent {
     ]],
     confirmPassword: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email],[this.checkIfEmailExists()]],
-    name: ['', Validators.required],
-    surname: ['', Validators.required],
+    name: ['', [Validators.required, this.noNumbersValidator]], // Validador agregado
+    surname: ['', [Validators.required, this.noNumbersValidator]], // Validador agregado
     dateOfBirth: ['', [Validators.required, this.ageValidator]],
     yearsOfExperience: [0, [
       Validators.required,
@@ -42,7 +51,7 @@ export class SignupComponent {
     wallet: [{ value: 0, disabled: true }],
     address: this.formBuilder.group({
       street: ['', Validators.required],
-      number: [0, Validators.required],
+      number: [0, [Validators.required, Validators.min(0)]],
       locality: ['', Validators.required],
       province: ['', Validators.required],
       type: ['', Validators.required],
@@ -107,14 +116,14 @@ export class SignupComponent {
         }
 
         // Validar edad mínima
-        if (age < 16) {
+        if (age < 16 || age >120) {
           return { ageInvalid: true };
         }
 
         return null;
       }
 
-      
+
   onSubmit() {
     this.submitPress=true;
     if (this.form.invalid || this.form.get('password')?.value !== this.form.get('confirmPassword')?.value) {

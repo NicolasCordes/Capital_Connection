@@ -180,6 +180,7 @@ export class AuthService {
   signup(account: Account): Observable<boolean> {
     return this.http.post<Account>(`${this.baseUrl}/accounts`, account, { withCredentials: true }).pipe(
       switchMap(({ id, username, providerId }) => {
+        console.log(id,username,providerId);
         if (id && username) {
           // Si se recibe un ID, y no se envió password, se hace el login con providerId
           if (account.password == null && account.providerId == null && providerId != null) {
@@ -212,19 +213,21 @@ export class AuthService {
   }
 
   checkIfUsernameExists(username: string): Observable<boolean> {
-    return this.http.get<boolean>(`${this.baseUrl}/exists/username/${username}`);
+    return this.http.get<boolean>(`${this.baseUrl}/accounts/exists/username/${username}`);
   }
 
   checkIfEmailExists(email: string): Observable<boolean> {
-    return this.http.get<boolean>(`${this.baseUrl}/exists/email/${email}`);
+    return this.http.get<boolean>(`${this.baseUrl}/accounts/exists/email/${email}`);
   }
+
   loginWithOAuth2(): void {
-    const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?` +
-    `client_id=990693061222-lbdeiil1n280tp0d9udkcbr6n1fs9m3i.apps.googleusercontent.com&` +
-    `redirect_uri=http://localhost:4200/callback&` +
+    const state = Math.random().toString(36).substring(7);  // Genera un valor único para state
+    const authUrl = `${environment.googleOAuth.authUrl}?` +
+    `client_id=${environment.googleOAuth.clientId}&` +
+    `redirect_uri=${environment.googleOAuth.redirectUri}&` +
     `response_type=code&` +
     `scope=openid%20email%20profile&` +
-    `state=random_state_value&` +
+    `state=${state}&` +
     `prompt=select_account`;
 
     console.log('Redirigiendo a: ', authUrl);  // Asegúrate que la URL es la esperada
@@ -232,13 +235,13 @@ export class AuthService {
 }
 
 loginBefSignGoogle(username: String, providerID: String): Observable<boolean> {
-  const body = { username, providerID, withRefreshToken: true };
-
+  const body = { username, providerID};
   return this.http.post<{ access_token: string, refresh_token: string }>(
-    `${this.baseUrl}/oauth2/login_google`, // Aquí también se usa la misma URL del login
+    `${this.baseUrl}/auth/oauth2/login_google`, // Aquí también se usa la misma URL del login
     body
   ).pipe(
     map((tokens) => {
+
       if (tokens.access_token && tokens.refresh_token) {
         // Guardamos el access token y refresh token en localStorage
         localStorage.setItem("access_token", tokens.access_token);
@@ -250,7 +253,6 @@ loginBefSignGoogle(username: String, providerID: String): Observable<boolean> {
 
         // Guardamos el usuario activo en localStorage
         localStorage.setItem("activeUser", JSON.stringify(activeUser));
-
         // Actualizamos el estado de usuario activo
         this.activeUserSubject.next(activeUser);
         this.estoyLogeado = true;
@@ -263,18 +265,10 @@ loginBefSignGoogle(username: String, providerID: String): Observable<boolean> {
   );
 }
 
-mandarCookie() {
-  const url = 'http://localhost:8080/auth/cookie'; // Cambia la URL a la de tu backend
-
-  // Enviar la solicitud con responseType: 'text' para manejar la respuesta como texto plano
-  this.http.post(url, {}, { withCredentials: true, responseType: 'text' }).subscribe(
-    response => {
-      console.log('Respuesta del servidor:', response); // Esta es la respuesta en formato texto
-    },
-    error => {
-      console.error('Error al enviar la cookie', error);
-    }
-  );
+activarUser(activeuser:ActiveUser){
+  this.activeUserSubject.next(activeuser);
+  this.estoyLogeado = true;
 }
+
 
 }

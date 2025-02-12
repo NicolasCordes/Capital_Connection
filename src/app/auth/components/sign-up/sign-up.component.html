@@ -39,16 +39,27 @@
     <section class="form-group">
       <label for="name">Nombre</label>
       <input type="text" id="name" formControlName="name" class="input-field">
-      @if (form.controls['name'].touched && form.controls['name'].invalid) {
-        <div class="error-msg">El nombre es obligatorio.</div>
+      @if ((form.controls['name'].touched || submitPress) && form.controls['name'].invalid) {
+        @if (form.controls['name'].hasError('required')) {
+          <div class="error-msg">El nombre es obligatorio.</div>
+        }
+        @if (form.controls['name'].hasError('hasNumber')) {
+          <div class="error-msg">No se permiten números en este campo.</div>
+        }
       }
     </section>
 
+    <!-- Campo para el apellido -->
     <section class="form-group">
       <label for="surname">Apellido</label>
       <input type="text" id="surname" formControlName="surname" class="input-field">
-      @if (form.controls['surname'].touched && form.controls['surname'].invalid) {
-        <div class="error-msg">El apellido es obligatorio.</div>
+      @if ((form.controls['surname'].touched || submitPress) && form.controls['surname'].invalid) {
+        @if (form.controls['surname'].hasError('required')) {
+          <div class="error-msg">El apellido es obligatorio.</div>
+        }
+        @if (form.controls['surname'].hasError('hasNumber')) {
+          <div class="error-msg">No se permiten números en este campo.</div>
+        }
       }
     </section>
 
