@@ -1,10 +1,10 @@
 export const environment = {
-  urlBase: 'https://crowdnet-api-2-0.onrender.com/',
+  urlBase: 'http://localhost:8080',
   API_KEY: '844878334141893',
   urlTBE: 'http://localhost:3000',
   API_SECRET: 'ybMtgjOgrDmOuD0-h5Cgg3kSO-w',
   CLOUD_NAME: 'dyho1ydzl',
-  urlServer: 'https://crowdnet-api-2-0.onrender.com/',
+  urlServer: 'http://localhost:8080',
   scriptMercadoPago: 'https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js',
   urlFr: 'http://localhost:4200',
   googleOAuth: {
