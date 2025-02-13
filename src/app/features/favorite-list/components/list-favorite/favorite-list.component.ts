@@ -32,7 +32,6 @@ export class FavoriteListComponent implements OnInit {
     });
 
     if(this.userId)
-      console.log(this.userId);
       this.favoriteListService.getUserFavorites(this.userId).subscribe(favorites => {
         this.userFavorites = favorites.filter((fav: Entrepreneurship) => fav.isActivated === true);
       });

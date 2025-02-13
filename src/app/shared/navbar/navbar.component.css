@@ -9,6 +9,7 @@
   position: sticky;
   top: 0;
   z-index: 1000;
+  overflow: hidden;
 }
 
 /* Logo (original) */
@@ -16,8 +17,6 @@
   height: 50px;
   width: auto;
   transition: transform 0.2s ease-in-out;
-}
-.navbar-logo img:hover {
   transform: scale(3.5);
 }
 
@@ -79,7 +78,6 @@
   margin-left: 2rem;
   content: var(--nav-light);
   object-fit: contain;
-  transform: scale(3);
 }
 
 /* Menú móvil (oculto en desktop) */
@@ -142,7 +140,10 @@
   .navbar-actions > .add-button:not(.add-button-mobile) {
     display: none !important;
   }
+  .navbar-logo img {
 
+    transform: scale(2.5);
+  }
   .mobile-menu-button {
     display: block !important;
   }

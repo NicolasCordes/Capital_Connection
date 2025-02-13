@@ -48,7 +48,6 @@ export class UploadVideoComponent {
 
     this.resetFileInput(event.target);
 
-    console.log('Archivos en videoControl:', this.videoControl.value);
   }
 
   resetFileInput(inputElement: HTMLInputElement) {
@@ -65,7 +64,6 @@ export class UploadVideoComponent {
     const form = this.videoForm.getRawValue();
 
     if (!form?.videoControl || form.videoControl.length === 0) {
-      console.log("No se seleccionaron videos.");
       return;
     }
 

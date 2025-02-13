@@ -21,7 +21,7 @@ import { environment } from '../../environments/environment';
         map(donations =>
           donations.filter(donation => donation.isActivated &&
                                       (donation.status === 'approved' || donation.status === 'rejected'))
-        ) // Filtra solo las activadas y con status 'approved' o 'rejected'
+        )
       );
     }
 

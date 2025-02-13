@@ -28,7 +28,7 @@ export class EntrepreneurshipFormComponent implements OnInit {
   ) {
     this.entrepreneurshipForm = this.fb.group({
       name: ['', Validators.required],
-      description: ['', Validators.required],
+      description: ['', [Validators.required, Validators.maxLength(1000)]],
       goal: [0, [Validators.required, Validators.min(1)]],
       category: ['', Validators.required],
       images: this.fb.array([], this.imagesRequiredValidator()),
@@ -41,7 +41,6 @@ export class EntrepreneurshipFormComponent implements OnInit {
     this.authService.auth().subscribe((user) => {
       this.activeUser = user;
       this.userType = user ? 'Registered User' : 'Guest';
-      console.log("Estado de autenticación:", this.activeUser, this.userType);
     });
   }
 
@@ -52,6 +51,13 @@ export class EntrepreneurshipFormComponent implements OnInit {
       }
       return null;
     };
+  }
+
+  clearZero(): void {
+    // Verifica si el valor es 0 antes de borrarlo
+    if (this.entrepreneurshipForm.controls['goal'].value === 0) {
+      this.entrepreneurshipForm.controls['goal'].setValue(null);
+    }
   }
 
   get imagesArray() {
@@ -84,7 +90,6 @@ export class EntrepreneurshipFormComponent implements OnInit {
       ent.id_account = this.activeUser?.id;
       ent.isActivated=true;
       ent.collected = 0;
-      console.log('Emprendimiento a enviar:', ent);
       this.entrepreneurshipService
         .postEntrepreneurship(ent)
         .subscribe({

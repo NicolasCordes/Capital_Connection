@@ -4,6 +4,8 @@
   background-color: #1a1a1a;
   color: #f0f8ff;
   padding: 2rem 0;
+  overflow: hidden;
+
 }
 
 .site-footer .container {
@@ -110,6 +112,14 @@
   .footer-widget.contact-widget .icon {
       margin-right: 8px;
   }
+
+  .img-change {
+    margin-left: 5rem;
+    content: var(--foot-light);
+    object-fit: contain;
+    transform: scale(3);
+  }
+
 }
 
 @media (max-width: 480px) {
@@ -120,4 +130,5 @@
   .footer-widget h3 {
       font-size: 1.1rem;
   }
+
 }

@@ -59,7 +59,6 @@ export class ReviewsFormComponent implements OnInit{
 
         this.reviewService.postReview(newReview,this.entrepreneurship?.id).subscribe(
           (review) => {
-            console.log(newReview,this.entrepreneurship?.id);
             this.reviewCreated.emit(review);
             this.reviewForm.reset({ stars: 5 });
           },
@@ -75,10 +74,10 @@ export class ReviewsFormComponent implements OnInit{
       const starElement = event.currentTarget as HTMLElement;
       const rect = starElement.getBoundingClientRect();
       const clickPosition = (event.clientX - rect.left) / rect.width;
-      
+
       const newValue = clickPosition <= 0.5 ? index + 0.5 : index + 1;
       const currentValue = this.reviewForm.get('stars')?.value;
-      
+
       // Toggle para 0 si hace clic en la misma estrella
       this.reviewForm.get('stars')?.setValue(newValue === currentValue ? 0 : newValue);
     }

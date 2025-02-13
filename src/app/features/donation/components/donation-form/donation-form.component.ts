@@ -46,7 +46,7 @@ export class DonationFormComponent implements OnInit{
         this.isBackendAvailable = true;  // Backend está disponible
       },
       (error) => {
-        console.error('Backend no disponible', error);
+        console.error('Serivicio de mercadopago no disponible', error);
         this.isBackendAvailable = false;  // Backend no disponible
       }
     );
@@ -74,7 +74,6 @@ private initMercadoPago(preferenceId: string): void {
       return;
     }
 
-    console.log('Métodos disponibles en bricksBuilder:', Object.keys(bricksBuilder));
 
     if (this.walletInstance) {
       this.walletInstance.unmount();
@@ -148,7 +147,6 @@ donationForm = this.fb.group({
         this.donationService.createDonation(newDonation.id_user, JSON.parse(serializedDonation)).subscribe(
             (createdDonation: Donation) => {
                 if (createdDonation.id && newDonation.id_user) {
-                    console.log(createdDonation.id);
                     this.mpService.crearPreferencia('Donacion', 1, Number(newDonation.amount), createdDonation.id, newDonation.id_user).subscribe(
                         response => {
                             const preferenceId = response.id;

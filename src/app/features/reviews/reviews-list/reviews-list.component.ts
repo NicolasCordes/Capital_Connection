@@ -36,7 +36,7 @@ export class ReviewsListComponent implements OnInit, OnChanges {
       stars: [0, [Validators.required, Validators.min(0), Validators.max(5)]], // Cambiar a 0 y validación 0-5
       reviewText: ['', Validators.required],
     });
-    
+
   }
 
   ngOnInit(): void {
@@ -44,13 +44,12 @@ export class ReviewsListComponent implements OnInit, OnChanges {
       this.activeUser = user;
       this.userType = user ? 'Registered User' : 'Guest';
     });
-  
+
     this.loadReviews();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['update'] && this.idE != null) {
-      console.log(this.idE);
       this.loadReviews();
     }
   }
@@ -60,13 +59,10 @@ export class ReviewsListComponent implements OnInit, OnChanges {
       this.reviewService.getReviewByEntrepreneurshipId(this.idE).subscribe({
         next: (reviews) => {
           this.reviews = reviews;
-          console.log(reviews);
           this.calculateAverageRating();
-          console.log('Reseñas cargadas:', reviews);
 
         },
         error: (err) => {
-          console.error('Error al cargar reseñas:', err);
         }
       });
     } else {
@@ -87,7 +83,6 @@ export class ReviewsListComponent implements OnInit, OnChanges {
     this.authService.getUsernames().subscribe({
       next: (data) => {
         this.usersData = data;
-        console.log('Usuarios cargados:', data);
       },
       error: (err) => {
         console.error('Error al cargar usuarios:', err);
@@ -101,7 +96,6 @@ export class ReviewsListComponent implements OnInit, OnChanges {
       if (isDeleted) {
         this.reviews = this.reviews.filter(review => review.id !== idR);
         this.calculateAverageRating();
-        console.log('Reseña eliminada');
       }
     });
   }
@@ -119,10 +113,10 @@ export class ReviewsListComponent implements OnInit, OnChanges {
     const starElement = event.currentTarget as HTMLElement;
     const rect = starElement.getBoundingClientRect();
     const clickPosition = (event.clientX - rect.left) / rect.width;
-    
+
     const newValue = clickPosition <= 0.5 ? index + 0.5 : index + 1;
     const currentValue = this.reviewUpdateForm.get('stars')?.value;
-    
+
     // Toggle para 0 si hace clic en la misma calificación
     this.reviewUpdateForm.get('stars')?.setValue(newValue === currentValue ? 0 : newValue);
   }
@@ -132,11 +126,9 @@ export class ReviewsListComponent implements OnInit, OnChanges {
 
     const resultForm = this.reviewUpdateForm.getRawValue();
     this.editingReview = { ...this.editingReview, ...resultForm };
-      console.log(this.editingReview);
     if (this.editingReview) {
       this.reviewService.updateReview(this.editingReview.id,this.idE, this.editingReview).subscribe(
         (updatedReview) => {
-          console.log('Reseña actualizada:', updatedReview);
           this.loadReviews();
           this.isEditing = false;
           this.editingReview = null;

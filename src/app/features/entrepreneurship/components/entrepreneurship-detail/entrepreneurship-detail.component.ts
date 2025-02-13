@@ -96,10 +96,8 @@ private onTouchEndBound: EventListener = (event: Event) => this.onTouchEnd(event
       this.id = parseInt(params.get('id') || '0', 10);
       this.entrepreneurshipService.getEntrepreneurshipById(this.id).subscribe((entrepreneurship) => {
         this.entrepreneurship = entrepreneurship;
-        console.log('entrepreneurship', this.entrepreneurship)
 
         this.loadMedia();
-        console.log(this.combinedMediaArray);
         this.initForm(entrepreneurship);
         this.isLoading = false;
 
@@ -239,7 +237,6 @@ private onTouchEndBound: EventListener = (event: Event) => this.onTouchEnd(event
         videos: this.videos.value
       };
 
-      console.log('Updated Entrepreneurship:', updatedEntrepreneurship);
 
       this.entrepreneurshipService.updateEntrepreneurship(this.id, updatedEntrepreneurship).subscribe(() => {
         this.isEditing = false;
@@ -262,7 +259,6 @@ private onTouchEndBound: EventListener = (event: Event) => this.onTouchEnd(event
     if (this.entrepreneurship) {
       this.update = !this.update;
       this.entrepreneurshipService.updateEntrepreneurship(this.id, this.entrepreneurship).subscribe(() => {
-        console.log('Reseña agregada correctamente');
       });
     }
   }
@@ -273,7 +269,6 @@ private onTouchEndBound: EventListener = (event: Event) => this.onTouchEnd(event
       this.favoriteListService.addFavorite(userId, this.id).subscribe({
         next: (response) => {
           this.isFavorite = true; // Actualiza el estado de isFavorite a true
-          console.log('Favorito agregado con éxito');
         },
         error: (error: Error) => {
           console.error('Error al agregar a favoritos', error);
@@ -289,7 +284,6 @@ private onTouchEndBound: EventListener = (event: Event) => this.onTouchEnd(event
       this.favoriteListService.removeFavorite(userId, this.id).subscribe(
         () => {
           this.isFavorite = false; // Actualiza el estado de isFavorite a false
-          console.log('Favorito eliminado con éxito');
         },
         error => {
           console.error('Error al eliminar de favoritos', error);

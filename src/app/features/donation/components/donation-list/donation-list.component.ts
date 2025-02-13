@@ -46,7 +46,6 @@ export class DonationListComponent implements OnInit {
   loadDonatedEntrepreneurships(userId: number | undefined) {
     this.donationService.getDonationsByAccountId(this.activeUser?.id).subscribe(donations => {
       this.donateds = donations;
-      console.log(donations);
 
       const entrepreneurshipIds = [...new Set(donations
         .map(donation => donation.id_entrepreneurship)

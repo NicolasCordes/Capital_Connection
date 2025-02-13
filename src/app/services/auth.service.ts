@@ -92,10 +92,8 @@ export class AuthService {
     this.refreshInterval = setInterval(() => {
       const accessToken = localStorage.getItem("access_token");
       if (accessToken && this.tokenService.isTokenExpired(accessToken)) {
-        console.log('Access token expirado, intentando renovar...');
         this.refreshToken().subscribe((success) => {
           if (!success) {
-            console.log('No se pudo renovar el token, cerrando sesión');
             this.logout();
           }
         });
@@ -112,7 +110,6 @@ export class AuthService {
   refreshToken(): Observable<boolean> {
     const refreshToken = localStorage.getItem("refresh_token");
     if (!refreshToken) {
-      console.log('No hay refresh token disponible');
       return of(false);
     }
 
@@ -125,11 +122,9 @@ export class AuthService {
     ).pipe(
       map((tokens) => {
         if (tokens.access_token) {
-          console.log('Nuevo access token obtenido', tokens.access_token);
           localStorage.setItem("access_token", tokens.access_token);
 
           if (tokens.refresh_token) {
-            console.log('Nuevo refresh token obtenido', tokens.refresh_token);
             localStorage.setItem("refresh_token", tokens.refresh_token);
           }
 
@@ -139,13 +134,11 @@ export class AuthService {
           this.activeUserSubject.next(activeUser);
           return true;
         }
-        console.log('No se pudo renovar el token');
         return false;
       }),
       catchError((error) => {
         console.error('Error en la renovación del token', error);
         if (error.status === 401) {
-          console.log('El refresh token ha expirado, cerrando sesión...');
           localStorage.removeItem("access_token");
           localStorage.removeItem("refresh_token");
           this.logout();
@@ -180,7 +173,6 @@ export class AuthService {
   signup(account: Account): Observable<boolean> {
     return this.http.post<Account>(`${this.baseUrl}/accounts`, account, { withCredentials: true }).pipe(
       switchMap(({ id, username, providerId }) => {
-        console.log(id,username,providerId);
         if (id && username) {
           // Si se recibe un ID, y no se envió password, se hace el login con providerId
           if (account.password == null && account.providerId == null && providerId != null) {
@@ -230,7 +222,6 @@ export class AuthService {
     `state=${state}&` +
     `prompt=select_account`;
 
-    console.log('Redirigiendo a: ', authUrl);  // Asegúrate que la URL es la esperada
     window.location.href = authUrl;
 }
 

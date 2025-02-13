@@ -56,7 +56,6 @@ goToDonations(): void {
   if(this.donations === false){
 
     this.donations = true;
-    console.log(this.donations);
   }else{
     this.donations = false;
   }
@@ -67,7 +66,6 @@ goToDonations(): void {
 
   goToFavorites(): void {
     if(this.favorites === false){
-      console.log(this.favorites);
       this.favorites = true;
     }else{
       this.favorites = false;

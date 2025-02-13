@@ -47,7 +47,6 @@ export class UploadImageComponent {
 
     this.resetFileInput(event.target);
 
-    console.log('Archivos en imageControl:', this.imageControl.value);
   }
 
   resetFileInput(inputElement: HTMLInputElement) {
@@ -64,7 +63,6 @@ export class UploadImageComponent {
     const form = this.imageForm.getRawValue();
 
     if (!form?.imageControl || form.imageControl.length === 0) {
-      console.log("No se seleccionaron imágenes.");
       return;
     }
 

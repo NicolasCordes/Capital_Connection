@@ -41,7 +41,6 @@ export class CallbackPageComponent implements OnInit {
     this.http.post(`${url}/auth/oauth2/token`, { code }, { withCredentials: true }).subscribe(
         (response: any) => {
           if (response.redirect) {
-            console.log('rta', response);
 
             // Construir los queryParams dinámicamente
             const queryParams: any = { email: response.email };
@@ -58,7 +57,6 @@ export class CallbackPageComponent implements OnInit {
         } else {
                 // Si no hay redirección, guardar los tokens y navegar a la página principal
                 if (response.access_token && response.refresh_token) {
-                  console.log('Tokens recibidos:', response);
 
                   // Guardar tokens en el localStorage
                   localStorage.setItem('access_token', response.access_token);

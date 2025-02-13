@@ -68,7 +68,6 @@ export class SignupwgoogleComponent implements OnInit {
   ngOnInit(): void {
 
     this.route.queryParams.subscribe(params => {
-      console.log('Parámetros recibidos:', params);
 
       this.email = params['email'];
       // Verificamos si los valores de given_name o family_name son null o undefined y asignamos un valor por defecto

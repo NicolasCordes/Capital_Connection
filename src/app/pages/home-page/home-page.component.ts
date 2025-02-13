@@ -72,7 +72,6 @@ ngOnInit(): void {
   // Detectar si el dispositivo tiene soporte táctil
   detectTouchDevice(): void {
     this.isTouchDevice = navigator.maxTouchPoints > 0 || 'ontouchstart' in window;
-    console.log('¿Es un dispositivo táctil?', this.isTouchDevice);
     this.updateArrowVisibility(); // Actualizar la visibilidad de las flechas cada vez que se detecta el dispositivo
   }
 
@@ -125,7 +124,6 @@ ngOnInit(): void {
   onClick(event: MouseEvent | TouchEvent): void {
     if (this.isTouchDevice) {
       event.preventDefault();  // Prevenimos el clic de mouse cuando el dispositivo es táctil
-      console.log('Evitar click en dispositivo táctil');
     }
   }
 }
