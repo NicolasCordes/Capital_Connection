@@ -1,81 +1,37 @@
-
 # Capital Connection
 
-Capital Connection es un proyecto de crowdfunding desarrollado con **Angular**, **TypeScript**, **HTML** y **CSS**. A continuación, encontrarás las instrucciones necesarias para levantar el entorno de desarrollo y configurar correctamente la aplicación.
+Capital Connection es un proyecto de crowdfunding desarrollado con **Angular**, **TypeScript**, **HTML** y **CSS**. La aplicación ya está deployeada en Render, por lo que **no es necesario configurar un entorno local** para probarla. Simplemente visita la siguiente URL:
 
-## Requisitos previos
+[https://capital-connection.onrender.com/](https://capital-connection.onrender.com/)
 
-Antes de comenzar, asegúrate de tener instalados en tu equipo:
-- **Node.js** (versión recomendada: 16 o superior)
-- **npm** (gestor de paquetes de Node.js)
-- **Angular CLI**
-- **Java 21** (para la API)
+---
 
-## Instalación y configuración
+## Sobre el Proyecto
 
-### 1. Clonar el repositorio
+Capital Connection es una iniciativa de crowdfunding creada por estudiantes de la **Tecnicatura Universitaria en Programación** de la **Universidad Tecnológica Nacional (UTN)**. El proyecto utiliza las siguientes tecnologías:
 
-Descarga o clona este repositorio utilizando el siguiente comando:
+- **Angular**
+- **TypeScript**
+- **HTML & CSS**
+- **CrowdNet API**: desarrollada en **Java con Spring Boot**
 
-```
-git clone https://github.com/NicolasCordes/Capital_Connection.git
-```
+*Nota:* Anteriormente se utilizaba JSON Server para simular un backend, pero ya no es necesario ya que la aplicación se encuentra en producción.
 
-### 2. Abrir el proyecto
+---
 
-Abre el proyecto en **Visual Studio Code (VSC)** o tu editor de código preferido.
+## Acceso a la Aplicación
 
-### 3. Instalar dependencias
+Para ver y utilizar la aplicación, simplemente ingresa a la siguiente dirección en tu navegador:
 
-Dentro del directorio del proyecto, instala las dependencias de Node.js ejecutando:
+[https://capital-connection.onrender.com/](https://capital-connection.onrender.com/)
 
-```
-npm install
-```
-
-### 4. Instalar JSON Server
-
-JSON Server es necesario para simular un backend local. Instálalo de manera global ejecutando:
-
-```
-npm install -g json-server
-```
-
-### 5. Configurar y levantar JSON Server
-
-Ejecuta el siguiente comando para iniciar el JSON Server utilizando el archivo `db.json`:
-
-```
-json-server db/db.json
-```
-
-### 6. Levantar la aplicación Angular
-
-En una terminal separada, inicia el servidor de desarrollo de Angular con:
-
-```
-ng serve
-```
-
-La aplicación estará disponible en [http://localhost:4200](http://localhost:4200).
-
-### 7. Instalar y configurar la API
-
-La aplicación utiliza **CrowdNet API**, desarrollada en **Java con Spring Boot**. Sigue estos pasos:
-
-1. Clona el repositorio de la API desde el siguiente enlace:
-   [CrowdNet API](https://github.com/julianpelle/CrowdNet-API)
-2. Sigue las instrucciones en el archivo `README.md` del repositorio para instalar y ejecutar la API.
-
-### 8. ¡Listo!
-
-Con estos pasos, el proyecto estará funcionando correctamente.
+La aplicación se actualiza automáticamente con cada mejora implementada.
 
 ---
 
 ## Sobre Nosotros
 
-Somos estudiantes de la **Tecnicatura Universitaria en Programación** en la **Universidad Tecnológica Nacional (UTN)**. A continuación, te compartimos más sobre nosotros:
+Somos estudiantes de la **Tecnicatura Universitaria en Programación** en la **Universidad Tecnológica Nacional (UTN)**. Conoce más sobre nuestro trabajo en los siguientes perfiles de GitHub:
 
 - **Nicolás Cordes**  
   [GitHub](https://github.com/NicolasCordes)
