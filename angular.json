@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Capital_Connection": {
+    "capital-connection": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -35,21 +35,21 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "2MB",
+                  "maximumError": "5MB"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "6kB",
+                  "maximumError": "10kB"
                 }
               ],
               "outputHashing": "all"
             },
             "development": {
-              "optimization": false,
+              "optimization": true,
               "extractLicenses": false,
-              "sourceMap": true,
+              "sourceMap": false,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -62,7 +62,6 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-
           "configurations": {
             "production": {
               "buildTarget": "Capital_Connection:build:production"
@@ -78,7 +77,6 @@
           "options": {
             "buildTarget": "Capital_Connection:build",
             "proxyConfig": "src/proxy.conf.json"
-
           }
         },
         "test": {

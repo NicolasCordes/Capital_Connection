@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "npx serve -s",
+    "start": "npx serve -s -l 10000 dist/capital-connection/browser --single",
     "build": "ng build --configuration=production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
