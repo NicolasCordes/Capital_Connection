@@ -33,7 +33,7 @@ export class SignupwgoogleComponent implements OnInit {
 
   form = this.formBuilder.group({
     username: ['', [Validators.required, Validators.minLength(4)], [this.checkIfUsernameExists()]],
-    email: ['', [Validators.required, Validators.email], [this.checkIfEmailExists()]],
+    email: ['', [Validators.required, Validators.email]],
     name: ['', [Validators.required, this.noNumbersValidator]], // Validador agregado
     surname: ['', [Validators.required, this.noNumbersValidator]], // Validador agregado
     dateOfBirth: ['', [Validators.required, this.ageValidator]], // Aquí sigue la validación
@@ -84,19 +84,11 @@ export class SignupwgoogleComponent implements OnInit {
         name: givenName,
         surname: familyName
       });
+      this.form.controls['email'].disable();
     });
+
   }
 
-
-  checkIfEmailExists(): AsyncValidatorFn {
-    return (control: AbstractControl): Observable<ValidationErrors | null> => {
-      const email = control.value;
-      return this.authService.checkIfEmailExists(email).pipe(
-        map(exists => (exists ? { emailExists: true } : null)),
-        catchError(() => of(null))
-      );
-    };
-  }
 
   checkIfUsernameExists(): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
