@@ -22,6 +22,10 @@ p {
   color: #333333;
 }
 
+.descripcion {
+  white-space: pre-wrap;
+}
+
 .header {
   position: relative;
   text-align: center;

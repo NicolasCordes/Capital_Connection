@@ -4,7 +4,7 @@
   <form [formGroup]="donationForm">
     <h3>{{ pressed ? 'Confirmar Donación' : 'Agregar Donación' }}</h3>
     <label for="amount">Cantidad:</label>
-    <input id="amount" formControlName="amount" type="number"/>
+    <input id="amount" formControlName="amount" type="number" (focus)="clearZero()"/>
     <button type="submit" [disabled]="!donationForm.valid || userType === 'Guest' || pressed || !isBackendAvailable" (click)="pay()">
       {{ pressed ? 'Procesando...' : 'Agregar Donación' }}
     </button>

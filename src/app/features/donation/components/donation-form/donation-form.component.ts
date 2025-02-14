@@ -61,6 +61,12 @@ export class DonationFormComponent implements OnInit{
     }});
     }
 
+    clearZero(): void {
+      // Verifica si el valor es 0 antes de borrarlo
+      if (this.donationForm.controls['amount'].value === 0) {
+        this.donationForm.controls['amount'].setValue(null);
+      }
+    }
 
 
 private initMercadoPago(preferenceId: string): void {
