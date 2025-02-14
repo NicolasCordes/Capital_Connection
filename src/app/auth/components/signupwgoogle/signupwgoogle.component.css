@@ -167,6 +167,9 @@ fieldset {
 }
 
 
+input:disabled {
+  color: var(--text-color); /* Usamos la variable de color de texto */
+}
 
 
 .form-row {
