@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { AccountData, ActiveUser } from '../types/account-data';
 import { TokenService } from './token.service';
 import { environment } from '../../environments/environment';
 import { Router, RouterModule } from '@angular/router';
 import { Account } from '../types/account.model';
+import { AsyncValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -205,11 +206,31 @@ export class AuthService {
   }
 
   checkIfUsernameExists(username: string): Observable<boolean> {
-    return this.http.get<boolean>(`${this.baseUrl}/accounts/exists/username/${username}`);
+    return this.http.get<boolean>(`${this.baseUrl}/accounts/exists/username/${username}`).pipe(
+      catchError(() => of(false)) // Return false if there's an error
+    );
   }
 
   checkIfEmailExists(email: string): Observable<boolean> {
-    return this.http.get<boolean>(`${this.baseUrl}/accounts/exists/email/${email}`);
+    return this.http.get<boolean>(`${this.baseUrl}/accounts/exists/email/${email}`).pipe(
+      catchError(() => of(false)) // Return false if there's an error
+    );
+  }
+
+  // Helper function to create async validators
+  createAsyncValidator(
+    checkFn: (value: string) => Observable<boolean>,
+    errorKey: string
+  ): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      return control.valueChanges.pipe(
+        debounceTime(300), // Wait for 300ms after the user stops typing
+        distinctUntilChanged(), // Only emit if the value has changed
+        switchMap((value) => checkFn(value)), // Cancel previous request and switch to the new one
+        map((exists) => (exists ? { [errorKey]: true } : null)),
+        catchError(() => of(null)) // Handle errors gracefully
+      );
+    };
   }
 
   loginWithOAuth2(): void {

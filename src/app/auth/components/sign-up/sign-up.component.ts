@@ -31,14 +31,20 @@ export class SignupComponent {
   };
 
   form = this.formBuilder.group({
-    username: ['', [Validators.required, Validators.minLength(4)], [this.checkIfUsernameExists()]],
+    username: ['', [Validators.required, Validators.minLength(4)], [this.authService.createAsyncValidator(
+      (email) => this.authService.checkIfEmailExists(email),
+      'emailExists'
+    )]],
     password: ['', [
       Validators.required,
       Validators.minLength(8),
       Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).+$/)
     ]],
     confirmPassword: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email],[this.checkIfEmailExists()]],
+    email: ['', [Validators.required, Validators.email],[this.authService.createAsyncValidator(
+      (email) => this.authService.checkIfEmailExists(email),
+      'emailExists'
+    )]],
     name: ['', [Validators.required, this.noNumbersValidator]], // Validador agregado
     surname: ['', [Validators.required, this.noNumbersValidator]], // Validador agregado
     dateOfBirth: ['', [Validators.required, this.ageValidator]],
@@ -81,26 +87,7 @@ export class SignupComponent {
     return null;
   }
 
-  checkIfEmailExists(): AsyncValidatorFn {
-    return (control: AbstractControl): Observable<ValidationErrors | null> => {
-      const email = control.value;
-      return this.authService.checkIfEmailExists(email).pipe(
-        map(exists => (exists ? { emailExists: true } : null)),
-        catchError(() => of(null)) // Si hay un error, no marcar como inválido
-      );
-    };
-  }
 
-
-      checkIfUsernameExists(): AsyncValidatorFn {
-        return (control: AbstractControl): Observable<ValidationErrors | null> => {
-          const username = control.value;
-          return this.authService.checkIfUsernameExists(username).pipe(
-            map(exists => (exists ? { usernameExists: true } : null)),
-            catchError(() => of(null)) // Si hay un error, no marcar como inválido
-          );
-        };
-      }
 
 
 
