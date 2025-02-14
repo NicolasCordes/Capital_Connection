@@ -32,10 +32,7 @@ export class SignupwgoogleComponent implements OnInit {
   };
 
   form = this.formBuilder.group({
-    username: ['', [Validators.required, Validators.minLength(4)], [this.authService.createAsyncValidator(
-      (email) => this.authService.checkIfEmailExists(email),
-      'emailExists'
-    )]],
+    username: ['', [Validators.required, Validators.minLength(4)], [this.checkIfUsernameExists()]],
     email: ['', [Validators.required, Validators.email]],
     name: ['', [Validators.required, this.noNumbersValidator]], // Validador agregado
     surname: ['', [Validators.required, this.noNumbersValidator]], // Validador agregado
@@ -93,6 +90,15 @@ export class SignupwgoogleComponent implements OnInit {
   }
 
 
+  checkIfUsernameExists(): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      const username = control.value;
+      return this.authService.checkIfUsernameExists(username).pipe(
+        map(exists => (exists ? { usernameExists: true } : null)),
+        catchError(() => of(null))
+      );
+    };
+  }
 
 
   ageValidator(control: AbstractControl): ValidationErrors | null {
