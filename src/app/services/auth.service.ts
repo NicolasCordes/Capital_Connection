@@ -171,7 +171,6 @@ export class AuthService {
   }
 
   signup(account: Account): Observable<boolean> {
-    console.log('Account en signup, ', account);
     return this.http.post<Account>(`${this.baseUrl}/accounts`, account, { withCredentials: true }).pipe(
       switchMap(({ id, username }) => {
         if (id && username) {
