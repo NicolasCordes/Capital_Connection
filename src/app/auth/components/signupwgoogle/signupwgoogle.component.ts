@@ -19,7 +19,7 @@ import { Account } from '../../../types/account.model';
 export class SignupwgoogleComponent implements OnInit {
   email!: string;
   submitPress = false;
-
+  providerId!:String;
   private formBuilder = inject(FormBuilder);
 
   // Dentro de la clase SignupwgoogleComponent
@@ -73,6 +73,7 @@ export class SignupwgoogleComponent implements OnInit {
       // Verificamos si los valores de given_name o family_name son null o undefined y asignamos un valor por defecto
       const givenName = params['given_name'] || ''; // Si es null o undefined, asigna una cadena vacía
       const familyName = params['family_name'] || ''; // Lo mismo para family_name
+      this.providerId = params['provider_id'] || ''; // Lo mismo para family_name
 
       if (!this.email) {
         this.router.navigate(['/']); // Redirigir si no hay correo
@@ -141,6 +142,7 @@ export class SignupwgoogleComponent implements OnInit {
       favorites: [],
       isActivated: true,
       password: null,
+      providerId:this.providerId
     } as unknown as Account;
 
     this.authService.signup(user).subscribe({

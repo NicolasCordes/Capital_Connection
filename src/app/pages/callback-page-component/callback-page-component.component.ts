@@ -40,6 +40,7 @@ export class CallbackPageComponent implements OnInit {
     // Enviar el código al backend para obtener los tokens
     this.http.post(`${url}/auth/oauth2/token`, { code }, { withCredentials: true }).subscribe(
         (response: any) => {
+          console.log(response);
           if (response.redirect) {
 
             // Construir los queryParams dinámicamente
@@ -50,6 +51,9 @@ export class CallbackPageComponent implements OnInit {
             }
             if (response.family_name) {
                 queryParams.family_name = response.family_name;
+            }
+            if(response.provider_id) {
+              queryParams.provider_id = response.provider_id;
             }
 
             // Redirigir a la página de registro con los queryParams
