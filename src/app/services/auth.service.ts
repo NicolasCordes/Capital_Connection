@@ -171,12 +171,13 @@ export class AuthService {
   }
 
   signup(account: Account): Observable<boolean> {
+    console.log('Account en signup, ', account);
     return this.http.post<Account>(`${this.baseUrl}/accounts`, account, { withCredentials: true }).pipe(
-      switchMap(({ id, username, providerId }) => {
+      switchMap(({ id, username }) => {
         if (id && username) {
           // Si se recibe un ID, y no se envió password, se hace el login con providerId
-          if (account.password == null && account.providerId == null && providerId != null) {
-            return this.loginBefSignGoogle(username, providerId); // Usamos providerId del backend si fue asignado
+          if (account.password == null && account.providerId != null) {
+            return this.loginBefSignGoogle(username, account.providerId ); // Usamos providerId del backend si fue asignado
           }
           // Si se recibió un password en el account, hacemos el login normal
           if (account.password) {
