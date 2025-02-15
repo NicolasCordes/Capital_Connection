@@ -78,12 +78,15 @@
 
 
       <!-- Formulario de Reseña -->
-      <div class="reviews-title">
-        <h3>Agregar una Reseña</h3>
-      </div>
-      <div class="reviews-form">
-        <app-reviews-form (reviewCreated)="addReview($event)" [entrepreneurship]="currentEntrepreneurship"></app-reviews-form>
-      </div>
+       @if (!hasReviewed) {
+        <div class="reviews-title">
+          <h3>Agregar una Reseña</h3>
+        </div>
+        <div class="reviews-form">
+          <app-reviews-form (reviewCreated)="addReview($event)" [entrepreneurship]="currentEntrepreneurship"></app-reviews-form>
+        </div>
+       }
+
 
       <!-- Reseñas del emprendimiento -->
       <div class="reviews-title">

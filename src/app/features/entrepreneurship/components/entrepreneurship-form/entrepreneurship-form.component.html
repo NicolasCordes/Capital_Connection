@@ -33,14 +33,23 @@
   </div>
 </label>
 
-    <!-- Objetivo financiero -->
-    <label>
-      Objetivo financiero:
-      <input type="number" formControlName="goal" required (focus)="clearZero()"/>
-      <div *ngIf="entrepreneurshipForm.get('goal')?.hasError('required') && entrepreneurshipForm.get('goal')?.touched">
-        <p>El objetivo financiero es requerido.</p>
-      </div>
-    </label>
+   <!-- Objetivo financiero -->
+   <label>
+    Objetivo financiero:
+    <input
+    type="number"
+    formControlName="goal"
+    required
+    min="20000"
+    (focus)="clearZero()"
+  />
+    <div *ngIf="entrepreneurshipForm.get('goal')?.hasError('required') && entrepreneurshipForm.get('goal')?.touched">
+      <p>El objetivo financiero es requerido.</p>
+    </div>
+    <div *ngIf="entrepreneurshipForm.get('goal')?.hasError('min') && entrepreneurshipForm.get('goal')?.touched">
+      <p>El objetivo mínimo es $20,000 pesos.</p>
+    </div>
+  </label>
 
     <!-- Categoría -->
     <label>

@@ -103,9 +103,16 @@
              class="input-field"
              max="99"
              (focus)="clearZero()">
+             <div class="error-msg">
        @if (form.controls['yearsOfExperience'].touched && form.controls['yearsOfExperience'].invalid) {
-        <div class="error-msg">Los años de experiencia son obligatorios.</div>
+        Los años de experiencia son obligatorios.
       }
+      @if (form.controls['yearsOfExperience'].hasError('maxExperience') && !form.controls['dateOfBirth'].invalid) {
+        Los años de experiencia no pueden ser mayores en su edad a {{ form.controls['yearsOfExperience'].errors?.['maxExperience'].max }}.
+    }
+    @if (form.controls['dateOfBirth'].invalid) {
+        La fecha de nacimiento es inválida. Corrígela para calcular los años de experiencia.
+    }</div>
     </section>
 
     <section class="form-group">
@@ -128,6 +135,6 @@
 
     <app-address-form (address)="updateAddress($event)"></app-address-form>
 
-    <button type="submit" class="submit-btn">Enviar</button>
+    <button type="submit" class="submit-btn" [disabled]="form.invalid || submitPress">Enviar</button>
   </fieldset>
 </form>

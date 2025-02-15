@@ -13,6 +13,7 @@ import { DonationFormComponent } from "../../../donation/components/donation-for
 import { ReviewsFormComponent } from "../../../reviews/reviews-form/reviews-form.component";
 import { ReviewsListComponent } from "../../../reviews/reviews-list/reviews-list.component";
 import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder, Validators, FormArray } from "@angular/forms";
+import { ReviewService } from "../../../../services/review.service";
 
 @Component({
   selector: 'app-entrepreneurship-detail',
@@ -28,10 +29,11 @@ export class EntrepreneurshipDetailComponent implements OnInit, OnDestroy{
   entrepreneurship: Entrepreneurship | null = null;
   isLoading = true;
   isTouch: boolean = false;
+  hasReviewed: boolean = false;
   startX: number = 0;
   private cleanupListeners: (() => void) | null = null; // Nueva propiedad
-private onTouchStartBound: EventListener = (event: Event) => this.onTouchStart(event as TouchEvent);
-private onTouchEndBound: EventListener = (event: Event) => this.onTouchEnd(event as TouchEvent);
+  private onTouchStartBound: EventListener = (event: Event) => this.onTouchStart(event as TouchEvent);
+  private onTouchEndBound: EventListener = (event: Event) => this.onTouchEnd(event as TouchEvent);
 
   userId: number | null = null;
   id: number = 0;
@@ -57,7 +59,7 @@ private onTouchEndBound: EventListener = (event: Event) => this.onTouchEnd(event
     private route: ActivatedRoute,
     private entrepreneurshipService: EntrepreneurshipService,
     private favoriteListService: FavoriteListService,
-    private donationService: DonationService,
+    private reviewService:ReviewService,
     private fb: FormBuilder,
     private router: Router,
   ) {}
@@ -75,7 +77,15 @@ private onTouchEndBound: EventListener = (event: Event) => this.onTouchEnd(event
 
         // Cargar los favoritos del usuario desde el servicio
         this.favoriteListService.loadFavorites(this.userId);
-
+        this.reviewService.hasReviewed(this.id, this.userId).subscribe((exists) => {
+          if (exists) {
+            this.hasReviewed = exists;
+              console.log('El usuario ya ha revisado este emprendimiento.');
+          } else {
+            this.hasReviewed = exists;
+              console.log('El usuario no ha revisado este emprendimiento.');
+          }
+      });
         // Verificamos si el emprendimiento está en los favoritos
         this.favoriteListService.favorites$.subscribe((favorites) => {
           this.isFavorite = this.favoriteListService.isFavorite(this.id); // Verifica si el emprendimiento está en favoritos
@@ -259,6 +269,7 @@ private onTouchEndBound: EventListener = (event: Event) => this.onTouchEnd(event
     if (this.entrepreneurship) {
       this.update = !this.update;
       this.entrepreneurshipService.updateEntrepreneurship(this.id, this.entrepreneurship).subscribe(() => {
+        this.hasReviewed = true;
       });
     }
   }
@@ -305,6 +316,8 @@ private onTouchEndBound: EventListener = (event: Event) => this.onTouchEnd(event
     const progress = this.getProgressWidth(goal, collected);
     return progress >= 50 ? 'white' : 'black';
   }
+
+
 
   /*ngOnDestroy() {
     // Desconectar cuando el componente se destruya

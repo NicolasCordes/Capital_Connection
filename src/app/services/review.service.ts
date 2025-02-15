@@ -1,6 +1,6 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
-import { map, Observable } from "rxjs";
+import { catchError, map, Observable, of } from "rxjs";
 import { Review } from "../types/review.model";
 import { environment } from '../../environments/environment';
 
@@ -31,8 +31,23 @@ import { environment } from '../../environments/environment';
       )
     }
 
-    updateReview(idR: number | null,idE: number | null, review: Partial<Review>): Observable<Review> {
-      return this.http.patch<Review>(`${this.getReviewUrl(idE)}/${idR}`, review);
+    updateReview(idR: number | null, idE: number | null, review: Partial<Review>): Observable<Review> {
+      const token = localStorage.getItem('access_token'); // Recupera el token del localStorage
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`); // Lo agrega al header
+
+      return this.http.patch<Review>(`${this.getReviewUrl(idE)}/${idR}`, review, { headers });
     }
+
+
+    hasReviewed(idE: number | null, idA: number | null): Observable<boolean> {
+      if (idE === null || idA === null) {
+          return of(false);
+      }
+
+      return this.http.get<boolean>(`${this.getReviewUrl(idE)}/a/${idA}`).pipe(
+          catchError(() => of(false)) // Devuelve false si hay un error
+      );
+  }
+
 }
 

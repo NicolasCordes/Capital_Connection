@@ -12,12 +12,19 @@
 
   <div class="form-group">
     <label for="number">Número</label>
+
     <input id="number" formControlName="number" type="number" class="form-control" placeholder="Ingrese el número de la calle" inputmode="numeric" (focus)="clearZero()">
-    @if(addressForm.get('number')?.invalid && addressForm.get('number')?.touched) {
+    @if (addressForm.get('number')?.invalid && addressForm.get('number')?.touched) {
       <div class="error-message">
-        El número es obligatorio y debe ser un valor numérico.
+        @if (addressForm.get('number')?.hasError('required')) {
+          El número es obligatorio.
+        }
+        @if (addressForm.get('number')?.hasError('min')) {
+          El número de calle del domicilio no puede ser menor a 1.
+        }
       </div>
     }
+
   </div>
 
   <div class="form-group">

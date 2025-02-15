@@ -19,7 +19,7 @@ export class AddressFormComponent implements OnInit {
 
   addressForm = this.fb.group({
     street: ['', Validators.required],
-    number: [0, [Validators.required, Validators.min(0)]],
+    number: [0, [Validators.required, Validators.min(1)]],
     locality: ['', Validators.required],
     province: ['', Validators.required],
     type: ['', Validators.required]
@@ -34,19 +34,17 @@ export class AddressFormComponent implements OnInit {
       this.addressForm.controls['number'].setValue(null);
     }
   }
-
   emitAddress() {
-    if (this.addressForm.valid) {
-      const formValue = this.addressForm.value;
-      const address: Address = {
-        street: formValue.street || '',
-        number: formValue.number || 0,
-        locality: formValue.locality || '',
-        province: formValue.province || '',
-        type: formValue.type || '',
-        isActivated: true
-      };
-      this.address.emit(address);
-    }
+    const formValue = this.addressForm.value;
+
+    const address: Address = {
+      street: formValue.street || '',
+      number: formValue.number || 0,
+      locality: formValue.locality || '',
+      province: formValue.province || '',
+      type: formValue.type || '',
+      isActivated: true
+    };
+    this.address.emit(address); // Emite el valor siempre, incluso si el formulario es inválido
   }
 }

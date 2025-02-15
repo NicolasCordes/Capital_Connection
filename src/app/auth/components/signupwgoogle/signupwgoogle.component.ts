@@ -1,12 +1,12 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { AbstractControl, AsyncValidatorFn, FormBuilder, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { AbstractControl, AsyncValidatorFn, FormBuilder, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AccountData } from '../../../types/account-data';
 import { CommonModule } from '@angular/common';
 import { Address } from '../../../types/address.model';
 import { AddressFormComponent } from "../../../features/user/address-form/address-form.component";
 import { AuthService } from '../../../services/auth.service';
-import { Observable, of, map, catchError } from 'rxjs';
+import { Observable, of, map, catchError, Subject, takeUntil } from 'rxjs';
 import { Account } from '../../../types/account.model';
 
 @Component({
@@ -16,7 +16,8 @@ import { Account } from '../../../types/account.model';
   templateUrl: './signupwgoogle.component.html',
   styleUrl: './signupwgoogle.component.css'
 })
-export class SignupwgoogleComponent implements OnInit {
+export class SignupwgoogleComponent implements OnInit, OnDestroy{
+  private destroy$ = new Subject<void>();
   email!: string;
   submitPress = false;
   providerId!:String;
@@ -40,7 +41,8 @@ export class SignupwgoogleComponent implements OnInit {
     yearsOfExperience: [0, [
       Validators.required,
       Validators.min(0),
-      Validators.max(99)
+      Validators.max(99),
+      this.experienceValidator('dateOfBirth')
     ]],
     industry: ['', Validators.required],
     wallet: [{ value: 0, disabled: true }],
@@ -58,6 +60,55 @@ export class SignupwgoogleComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router,private route: ActivatedRoute) {
   }
 
+
+    ngOnDestroy() {
+      this.destroy$.next();
+      this.destroy$.complete();
+    }
+    experienceValidator(dateOfBirthControlName: string): ValidatorFn {
+      return (control: AbstractControl): ValidationErrors | null => {
+        const yearsOfExperience = control.value;
+        const dateOfBirthControl = control.parent?.get(dateOfBirthControlName);
+
+        // Verificar si el control de fecha de nacimiento existe y tiene un valor válido
+        if (!dateOfBirthControl || !dateOfBirthControl.value) {
+          return null; // No hay fecha de nacimiento, no se puede validar
+        }
+
+        const dateOfBirth = new Date(dateOfBirthControl.value);
+        const today = new Date();
+
+        // Validar que la fecha de nacimiento no sea futura
+        if (dateOfBirth > today) {
+          return null; // No validar si la fecha de nacimiento es futura
+        }
+
+        // Calcular la edad
+        let age = today.getFullYear() - dateOfBirth.getFullYear();
+
+        // Ajustar la edad si aún no ha pasado el cumpleaños este año
+        if (today.getMonth() < dateOfBirth.getMonth() ||
+            (today.getMonth() === dateOfBirth.getMonth() && today.getDate() < dateOfBirth.getDate())) {
+          age--;
+        }
+
+        // Validar que la edad sea mayor o igual a 14 años
+        if (age < 14) {
+          return null; // No validar si la edad es menor a 14 años
+        }
+
+        const maxExperience = age - 14;
+
+        // Validar los años de experiencia
+        if (yearsOfExperience > maxExperience) {
+          return { maxExperience: { max: maxExperience, actual: yearsOfExperience } };
+        }
+
+        return null;
+      };
+    }
+
+
   clearZero(): void {
     // Verifica si el valor es 0 antes de borrarlo
     if (this.form.controls['yearsOfExperience'].value === 0) {
@@ -66,6 +117,13 @@ export class SignupwgoogleComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.form.get('dateOfBirth')?.valueChanges
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(() => {
+      this.form.get('yearsOfExperience')?.updateValueAndValidity();
+    });
+
 
     this.route.queryParams.subscribe(params => {
 
@@ -164,11 +222,22 @@ export class SignupwgoogleComponent implements OnInit {
 
 
   updateAddress(address: Address) {
+    // Verificar si el campo "number" es null o 0
+
+
     const updatedAddress = {
       ...address,
       isActivated: true
     };
 
+
+    // Actualiza el formulario principal con la nueva dirección
     this.form.get('address')?.setValue(updatedAddress);
+
+    // Marca el campo como "touched" para que se muestren los mensajes de error
+    this.form.get('address')?.markAsTouched();
+
+    // Actualiza el estado de validación del formulario principal
+    this.form.updateValueAndValidity();
   }
 }

@@ -155,6 +155,12 @@
           @if (form.controls['yearsOfExperience'].hasError('max')) {
             El máximo permitido es 99 años.
           }
+          @if (form.controls['yearsOfExperience'].hasError('maxExperience') && !form.controls['dateOfBirth'].invalid) {
+              Los años de experiencia no pueden ser mayores en su edad a {{ form.controls['yearsOfExperience'].errors?.['maxExperience'].max }}.
+          }
+          @if (form.controls['dateOfBirth'].invalid) {
+              La fecha de nacimiento es inválida. Corrígela para calcular los años de experiencia.
+          }
         </div>
       }
     </section>
@@ -179,6 +185,6 @@
 
     <app-address-form (address)="updateAddress($event)"></app-address-form>
 
-    <button type="submit" class="submit-btn">Enviar</button>
-  </fieldset>
+    <button type="submit" class="submit-btn" [disabled]="form.invalid || submitPress">Enviar</button>
+    </fieldset>
 </form>

@@ -108,6 +108,36 @@ button[type="submit"] {
   transition: background-color 0.3s;
 }
 
+form button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+form button:hover:not(:disabled) {
+  background-color: #218838;
+}
+
+form button[type="button"] {
+  background-color: #dc3545;
+  margin-left: 10px;
+}
+
+form button[type="button"]:hover {
+  background-color: #c82333;
+}
+
+
 button[type="submit"]:disabled {
   background-color: #ccc;
   cursor: not-allowed;
