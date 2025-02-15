@@ -127,9 +127,15 @@
         </div>
       }
 
-      @if (form.controls['dateOfBirth'].touched && form.controls['dateOfBirth'].hasError('ageInvalid')) {
+      @if (form.controls['dateOfBirth'].hasError('minAge')) {
         <div class="error-msg">
           Debes ser mayor de 16 años para registrarte.
+        </div>
+      }
+
+      @if (form.controls['dateOfBirth'].hasError('maxAge')) {
+        <div class="error-msg">
+          La edad no puede ser mayor a 120 años.
         </div>
       }
     </section>
