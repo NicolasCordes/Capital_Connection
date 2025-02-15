@@ -11,9 +11,95 @@
   transition: all 0.3s ease; /* Transición suave */
 }
 
+/* Estilos para la tarjeta de emprendimiento */
+.entrepreneurship-card {
+  display: flex;
+  flex-direction: column; /* Organiza los elementos en columna */
+  background-color: var(--box-color-details-light);
+  padding: 20px;
+  margin: 10px 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Contenedor para el título y el monto recaudado */
+.entrepreneurship-card-header {
+  display: flex;
+  justify-content: space-between; /* Separa el título y el monto */
+  align-items: center; /* Alinea verticalmente */
+  margin-bottom: 10px; /* Espacio entre el header y la descripción */
+}
+
+/* Estilos para el título */
+.name-entrepreneurship {
+  font-size: 1.5rem;
+  color: var(--txt-detail-light);
+  margin: 0;
+  font-weight: bold;
+}
+
+/* Estilos para el monto recaudado */
+.entrepreneurship-item-collected {
+  font-size: 1rem;
+  color: var(--text-color);
+  margin: 0;
+  font-weight: bold;
+}
+
+/* Estilos para el contenedor de los botones */
+.entrepreneurship-card-actions {
+  display: flex;
+  gap: 10px; /* Espacio entre los botones */
+}
+
+/* Estilos para los botones (manteniendo los estilos anteriores) */
+.entrepreneurship-card button {
+  background-color: var(--btn-detail-light);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  flex: 0 0 auto; /* Evita que los botones se estiren */
+}
+
+.entrepreneurship-card button:hover {
+  background-color: var(--btn-detail-hover-light);
+  border-color: var(--follow-btn-border-light);
+}
+
+/* Estilos para la descripción y los botones (se mantienen debajo) */
+.entrepreneurship-card p {
+  font-size: 1rem;
+  color: var(--text-color);
+  margin-bottom: 20px;
+}
+
+.entrepreneurship-card button {
+  background-color: var(--btn-detail-light);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
 .entrepreneurships-container:hover {
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al pasar el ratón */
   border-color: var(--border-cards-detail-light); /* Cambio de color del borde al pasar el ratón */
+}
+.entrepreneurship-item-collected {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.entrepreneurship-item-collected span {
+  font-weight: bold;
 }
 
 .no-entrepreneurships-message {
@@ -333,7 +419,13 @@ button {
     margin: 10px auto;
     padding: 10px;
   }
+  .entrepreneurship-item-collected {
+    font-size: 1rem;
+  }
 
+  .entrepreneurship-item-collected {
+    font-size: 0.9rem;
+  }
   .header {
     padding: 15px;
     margin-bottom: 15px;
@@ -450,5 +542,49 @@ button {
   input, textarea, select {
     font-size: 16px !important;
     min-height: 44px;
+  }
+}
+
+/* Estilos base para los botones (ya existentes) */
+.entrepreneurship-card button {
+  background-color: var(--btn-detail-light);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  flex: 0 0 auto; /* Evita que los botones se estiren */
+}
+
+.entrepreneurship-card button:hover {
+  background-color: var(--btn-detail-hover-light);
+  border-color: var(--follow-btn-border-light);
+}
+
+/* Responsive para pantallas menores a 768px (tablets y móviles) */
+@media (max-width: 768px) {
+  .entrepreneurship-card-actions {
+    flex-direction: column; /* Coloca los botones en columna */
+    gap: 8px; /* Reduce el espacio entre botones */
+  }
+
+  .entrepreneurship-card button {
+    width: 100%; /* Ocupa todo el ancho disponible */
+    padding: 12px; /* Aumenta el padding para mejor tacto en móviles */
+    font-size: 0.9rem; /* Reduce el tamaño de la fuente */
+  }
+}
+
+/* Responsive para pantallas menores a 480px (móviles pequeños) */
+@media (max-width: 480px) {
+  .entrepreneurship-card-actions {
+    gap: 6px; /* Reduce aún más el espacio entre botones */
+  }
+
+  .entrepreneurship-card button {
+    padding: 10px; /* Ajusta el padding */
+    font-size: 0.85rem; /* Reduce más el tamaño de la fuente */
   }
 }

@@ -9,12 +9,17 @@
   <div *ngFor="let entrepreneurship of createdEntrepreneurships">
     @if(entrepreneurship.isActivated===true){
       <div class="entrepreneurship-card">
-      <h3 class="name-entrepreneurship">{{ entrepreneurship.name }}</h3>
-      <p>{{ entrepreneurship.description }}</p>
-      <button (click)="navigateToDetails(entrepreneurship.id)">Ver</button>
-      <button (click)="editEntrepreneurship(entrepreneurship)">Editar</button>
-      <button (click)="showModal(entrepreneurship)">Eliminar</button>
-    </div>
+        <div class="entrepreneurship-card-header">
+          <h3 class="name-entrepreneurship">{{ entrepreneurship.name }}</h3>
+          <h4 class="entrepreneurship-item-collected">Recaudado: ARS ${{ entrepreneurship.collected }}</h4>
+        </div>
+        <p>{{ entrepreneurship.description }}</p>
+        <div class="entrepreneurship-card-actions">
+          <button (click)="navigateToDetails(entrepreneurship.id)">Ver</button>
+          <button (click)="editEntrepreneurship(entrepreneurship)">Editar</button>
+          <button (click)="showModal(entrepreneurship)">Eliminar</button>
+        </div>
+      </div>
     @if(isModalVisible && selectedEntrepreneurshipId === entrepreneurship.id){
       <div class="modal">
         <div class="modal-content">

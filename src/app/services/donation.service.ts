@@ -34,7 +34,7 @@ import { environment } from '../../environments/environment';
       return this.http.get<Donation[]>(`${this.urlBase}/${ownerID}/donations/owner/${ownerID}`,{headers}).pipe(
         map(donations =>
           donations.filter(donation => donation.isActivated &&
-                                      (donation.status === 'approved' || donation.status === 'rejected'))
+                                      (donation.status === 'approved'))
         )
       );
     }
