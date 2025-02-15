@@ -158,7 +158,7 @@
           @if (form.controls['yearsOfExperience'].hasError('maxExperience') && !form.controls['dateOfBirth'].invalid) {
               Los años de experiencia no pueden ser mayores en su edad a {{ form.controls['yearsOfExperience'].errors?.['maxExperience'].max }}.
           }
-          @if (form.controls['dateOfBirth'].invalid) {
+          @if (form.controls['dateOfBirth'].invalid && form.controls['dateOfBirth'].touched) {
               La fecha de nacimiento es inválida. Corrígela para calcular los años de experiencia.
           }
         </div>

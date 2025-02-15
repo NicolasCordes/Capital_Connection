@@ -10,12 +10,13 @@ import { Entrepreneurship } from "../../../types/entrepreneurship.model";
 import { DonationListComponent } from "../../donation/components/donation-list/donation-list.component";
 import { FavoriteListComponent } from "../../favorite-list/components/list-favorite/favorite-list.component";
 import { EntrepreneurshipsUpdatesComponent } from "../../entrepreneurship/components/entrepreneurships-updates/entrepreneurships-updates.component";
+import { OwnerComponent } from "../../donation/components/owner/owner.component";
 
 
 @Component({
   selector: 'app-profile-list',
   standalone: true,
-  imports: [CommonModule, FavoriteListComponent,DonationListComponent,EntrepreneurshipsUpdatesComponent],
+  imports: [CommonModule, FavoriteListComponent, DonationListComponent, EntrepreneurshipsUpdatesComponent, OwnerComponent],
   templateUrl: './profile-list.component.html',
   styleUrls: ['./profile-list.component.css']
 })
@@ -29,7 +30,7 @@ export class ProfileListComponent implements OnInit {
   favorites: boolean = false;
   donations: boolean = false;
   myentre: boolean = false;
-
+  owner: boolean = false;
   authService = inject(AuthService);
   donationService = inject(DonationService);
   entrepreneurshipService = inject(EntrepreneurshipService);
@@ -61,7 +62,20 @@ goToDonations(): void {
   }
   this.favorites = false;
   this.myentre = false;
+  this.owner = false;
 
+}
+
+goToOwner(): void {
+  if(this.owner === false){
+
+    this.owner = true;
+  }else{
+    this.owner = false;
+  }
+  this.favorites = false;
+  this.myentre = false;
+  this.donations = false;
 }
 
   goToFavorites(): void {
@@ -72,6 +86,8 @@ goToDonations(): void {
     }
     this.donations = false;
     this.myentre = false;
+    this.owner = false;
+
   }
 
 
@@ -83,5 +99,7 @@ goToDonations(): void {
     }
     this.favorites = false;
     this.donations = false;
+    this.owner = false;
+
   }
 }

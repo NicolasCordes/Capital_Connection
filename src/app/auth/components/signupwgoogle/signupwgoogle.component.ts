@@ -48,7 +48,7 @@ export class SignupwgoogleComponent implements OnInit, OnDestroy{
     wallet: [{ value: 0, disabled: true }],
     address: this.formBuilder.group({
       street: ['', Validators.required],
-      number: [0, [Validators.required, Validators.min(0)]],
+      number: [1, [Validators.required, Validators.min(1)]],
       locality: ['', Validators.required],
       province: ['', Validators.required],
       type: ['', Validators.required],

@@ -24,7 +24,16 @@ label {
   font-size: 1.1rem;  /* Aumenta el tamaño de la fuente */
   color: var(--text-color);
 }
+.no-spinners::-webkit-inner-spin-button,
+.no-spinners::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
+/* Para Firefox */
+.no-spinners {
+  -moz-appearance: textfield;
+}
 /* Estilo de los campos de entrada */
 input[type="text"],
 input[type="number"],
@@ -129,6 +138,7 @@ form button:hover:not(:disabled) {
 }
 
 form button[type="button"] {
+  height: 30%;
   background-color: #dc3545;
   margin-left: 10px;
 }

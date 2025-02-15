@@ -29,7 +29,7 @@ export class EntrepreneurshipFormComponent implements OnInit {
     this.entrepreneurshipForm = this.fb.group({
       name: ['', Validators.required],
       description: ['', [Validators.required, Validators.maxLength(1000)]],
-      goal: [null, [Validators.required, Validators.min(20000)]],
+      goal: [0, [Validators.required, Validators.min(20000)]],
       category: ['', Validators.required],
       images: this.fb.array([], this.imagesRequiredValidator()),
       videos: this.fb.array([]),

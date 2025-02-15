@@ -42,6 +42,8 @@
     required
     min="20000"
     (focus)="clearZero()"
+      class="no-spinners"
+
   />
     <div *ngIf="entrepreneurshipForm.get('goal')?.hasError('required') && entrepreneurshipForm.get('goal')?.touched">
       <p>El objetivo financiero es requerido.</p>

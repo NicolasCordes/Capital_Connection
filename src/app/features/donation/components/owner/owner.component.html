@@ -1,11 +1,11 @@
 @if(donatedEntrepreneurships.length > -1) {
   <div class="donations-container">
     <div class="header">
-      <h1>Mis Donaciones Realizadas</h1>
+      <h1>Mis Donaciones Recibidas</h1>
     </div>
 
     @if(donatedEntrepreneurships.length === 0) {
-      <p class="no-donations-message">No has donado a ningún emprendimiento.</p>
+      <p class="no-donations-message">No has recibido donaciones.</p>
     } @else {
       <ul>
         <li *ngFor="let entrepreneurship of donatedEntrepreneurships">
@@ -29,9 +29,6 @@
                     </h4>
                   </div>
                   <h4 class="donated-item-date">Día de la donación: {{ item.date | date: 'dd/MM/yyyy' }}</h4>
-                  <button class="button" (click)="navigateToDetails(item.id_entrepreneurship, entrepreneurship.isActivated)">
-                    Ver Emprendimiento
-                  </button>
                 </div>
               }
             }
@@ -40,14 +37,4 @@
       </ul>
     }
   </div>
-
-  @if(isModalVisible) {
-    <div class="modal">
-      <div class="modal-content">
-        <span class="close" (click)="closeModal()">×</span>
-        <h2>¡Este emprendimiento ha sido eliminado!</h2>
-        <p>El emprendimiento al que intentas acceder ya no está disponible.</p>
-      </div>
-    </div>
-  }
 }

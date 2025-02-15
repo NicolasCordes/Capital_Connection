@@ -43,8 +43,10 @@ import { environment } from '../../environments/environment';
       if (idE === null || idA === null) {
           return of(false);
       }
+      const token = localStorage.getItem('access_token'); // Recupera el token del localStorage
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`); // Lo agrega al header
 
-      return this.http.get<boolean>(`${this.getReviewUrl(idE)}/a/${idA}`).pipe(
+      return this.http.get<boolean>(`${this.getReviewUrl(idE)}/a/${idA}`, { headers }).pipe(
           catchError(() => of(false)) // Devuelve false si hay un error
       );
   }

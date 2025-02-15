@@ -5,7 +5,8 @@
 
 <div class="button-group">
   <button mat-button class="follow-btn" (click)="goToFavorites()">Ver favoritos</button>
-  <button class="follow-btn" (click)="goToDonations()">Mis Donaciones</button>
+  <button class="follow-btn" (click)="goToDonations()">Donaciones Enviadas</button>
+  <button class="follow-btn" (click)="goToOwner()">Donaciones Recibidas</button>
   <button class="follow-btn" (click)="goToMyEntrepreneurships()">Mis Emprendimientos</button>
 </div>
 
@@ -18,4 +19,6 @@
 @else if(myentre){
   <app-entrepreneurships-updates></app-entrepreneurships-updates>
 }
-
+@else if (owner) {
+  <app-owner></app-owner>
+}

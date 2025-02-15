@@ -68,6 +68,21 @@ export class EntrepreneurshipDetailComponent implements OnInit, OnDestroy{
     this.isLoading = true;
     this.detectTouchDevice();
     this.addTouchListeners();
+
+
+    this.route.paramMap.subscribe((params) => {
+      this.id = parseInt(params.get('id') || '0', 10);
+      this.entrepreneurshipService.getEntrepreneurshipById(this.id).subscribe((entrepreneurship) => {
+        this.entrepreneurship = entrepreneurship;
+
+        this.loadMedia();
+        this.initForm(entrepreneurship);
+        this.isLoading = false;
+
+      });
+    });
+
+
     this.authService.auth().subscribe((user) => {
       this.activeUser = user;
       this.userType = user ? 'Registered User' : 'Guest';
@@ -102,17 +117,6 @@ export class EntrepreneurshipDetailComponent implements OnInit, OnDestroy{
 
 
 
-    this.route.paramMap.subscribe((params) => {
-      this.id = parseInt(params.get('id') || '0', 10);
-      this.entrepreneurshipService.getEntrepreneurshipById(this.id).subscribe((entrepreneurship) => {
-        this.entrepreneurship = entrepreneurship;
-
-        this.loadMedia();
-        this.initForm(entrepreneurship);
-        this.isLoading = false;
-
-      });
-    });
   }
 
 
