@@ -176,10 +176,12 @@ export class SignupwgoogleComponent implements OnInit, OnDestroy{
       age--;
     }
 
+    // Validaciones separadas
     if (age < 16) {
-      return { underAge: true };
-    } else if (age > 120) {
-      return { overAge: true };
+      return { minAge: true };
+    }
+    if (age > 120) {
+      return { maxAge: true };
     }
 
     return null;

@@ -64,34 +64,34 @@
   }
 </section>
 
-    <section class="form-group">
-      <label for="dateOfBirth">Fecha de Nacimiento</label>
-      <input type="date" id="dateOfBirth" formControlName="dateOfBirth" class="input-field">
+<section class="form-group">
+  <label for="dateOfBirth">Fecha de Nacimiento</label>
+  <input type="date" id="dateOfBirth" formControlName="dateOfBirth" class="input-field">
 
-      @if ((form.controls['dateOfBirth'].touched || submitPress) && form.controls['dateOfBirth'].hasError('required')) {
-        <div class="error-msg">
-          La fecha de nacimiento es obligatoria.
-        </div>
-      }
+  @if (form.controls['dateOfBirth'].touched && form.controls['dateOfBirth'].hasError('required')) {
+    <div class="error-msg">
+      La fecha de nacimiento es obligatoria.
+    </div>
+  }
 
-      @if (form.controls['dateOfBirth'].hasError('futureDate')) {
-        <div class="error-msg">
-          ¡No puedes ser viajero del tiempo! La fecha no puede ser futura.
-        </div>
-      }
+  @if (form.controls['dateOfBirth'].hasError('futureDate')) {
+    <div class="error-msg">
+      ¡No puedes ser viajero del tiempo! La fecha no puede ser futura.
+    </div>
+  }
 
-      @if ((form.controls['dateOfBirth'].touched || submitPress) && form.controls['dateOfBirth'].hasError('underAge')) {
-        <div class="error-msg">
-          Debes ser mayor de 16 años para registrarte.
-        </div>
-      }
+  @if (form.controls['dateOfBirth'].hasError('minAge')) {
+    <div class="error-msg">
+      Debes ser mayor de 16 años para registrarte.
+    </div>
+  }
 
-      @if ((form.controls['dateOfBirth'].touched || submitPress) && form.controls['dateOfBirth'].hasError('overAge')) {
-        <div class="error-msg">
-          La edad no puede ser mayor a 120 años.
-        </div>
-      }
-    </section>
+  @if (form.controls['dateOfBirth'].hasError('maxAge')) {
+    <div class="error-msg">
+      La edad no puede ser mayor a 120 años.
+    </div>
+  }
+</section>
 
 
 

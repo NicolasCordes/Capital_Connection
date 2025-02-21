@@ -166,12 +166,10 @@ export class SignupComponent implements OnInit, OnDestroy{
         const birthDate = new Date(control.value);
         const currentDate = new Date();
 
-        // Validar que la fecha no sea futura
         if (birthDate > currentDate) {
           return { futureDate: true };
         }
 
-        // Calcular edad
         let age = currentDate.getFullYear() - birthDate.getFullYear();
         const monthDifference = currentDate.getMonth() - birthDate.getMonth();
 
@@ -180,9 +178,12 @@ export class SignupComponent implements OnInit, OnDestroy{
           age--;
         }
 
-        // Validar edad mínima
-        if (age < 16 || age >120) {
-          return { ageInvalid: true };
+        // Validaciones separadas
+        if (age < 16) {
+          return { minAge: true };
+        }
+        if (age > 120) {
+          return { maxAge: true };
         }
 
         return null;
