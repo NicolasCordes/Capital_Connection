@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit, inject } from '@angular/core';
+import { Component, EventEmitter, HostListener, OnInit, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../../../services/auth.service';
@@ -18,7 +18,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class EntrepreneurshipListComponent implements OnInit {
   entrepreneurships: Entrepreneurship[] = [];
   originalEntrepreneurships: Entrepreneurship[] = []; // Guardar la lista original
-
+  @Output() entrepreneurshipDeleted = new EventEmitter<void>();
   page: number = 0;
   size: number = 12;
   isLoading: boolean = false;
@@ -180,6 +180,7 @@ export class EntrepreneurshipListComponent implements OnInit {
       this.entrepreneurships = this.entrepreneurships.filter(
         (entrepreneurship) => entrepreneurship.id !== id
       );
+      this.entrepreneurshipDeleted.emit();
     });
   }
 

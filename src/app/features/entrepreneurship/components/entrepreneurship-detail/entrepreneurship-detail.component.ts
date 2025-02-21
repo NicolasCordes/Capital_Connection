@@ -321,7 +321,9 @@ export class EntrepreneurshipDetailComponent implements OnInit, OnDestroy{
     return progress >= 50 ? 'white' : 'black';
   }
 
-
+  handleEntrepreneurshipDeleted(): void {
+    this.hasReviewed = false;
+  }
 
   /*ngOnDestroy() {
     // Desconectar cuando el componente se destruya

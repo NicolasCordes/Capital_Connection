@@ -52,7 +52,8 @@ textarea {
 /* Estilo del campo de texto (textarea) */
 textarea {
   min-height: 150px; /* Aumenta la altura mínima del textarea */
-  max-height: 350px; /* Aumenta la altura máxima del textarea */
+  max-height: 350px;
+  field-sizing:content;
 }
 
 /* Mensajes de error */
