@@ -5,7 +5,7 @@
       <p>Calificación promedio: {{ averageRating | number: '1.1-1' }} / 5</p>
       <div class="star-rating">
         <ng-container *ngFor="let star of [1,2,3,4,5]">
-          <i class="fas fa-star" 
+          <i class="fas fa-star"
              [ngClass]="{
                'checked': averageRating >= star,
                'half-checked': averageRating >= (star - 0.5) && averageRating < star

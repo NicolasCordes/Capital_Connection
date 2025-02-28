@@ -324,7 +324,7 @@ export class EntrepreneurshipDetailComponent implements OnInit, OnDestroy{
     return progress >= 50 ? 'white' : 'black';
   }
 
-  handleEntrepreneurshipDeleted(): void {
+  handleReviewDeleted(idR: number): void {
     console.log('estoy en el handleee');
     this.hasReviewed = false;
   }

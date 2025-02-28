@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component, OnInit, OnChanges, Input, inject, SimpleChanges } from "@angular/core";
+import { Component, OnInit, OnChanges, Input, inject, SimpleChanges, Output, EventEmitter } from "@angular/core";
 import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { AuthService } from "../../../services/auth.service";
 import { ReviewService } from "../../../services/review.service";
@@ -28,6 +28,7 @@ export class ReviewsListComponent implements OnInit, OnChanges {
   isEditing = false;
   editingReview: Review | null = null;
   usersData: { id: number; username: string }[] = [];
+  @Output() reviewDeleted = new EventEmitter<number>(); // <-- Agregar esto en la clase
 
   reviewUpdateForm: FormGroup;
 
@@ -91,14 +92,16 @@ export class ReviewsListComponent implements OnInit, OnChanges {
   }
 
 
-  deleteReview(idR: number) {
-    this.reviewService.deleteReview(idR,this.idE).subscribe((isDeleted) => {
-      if (isDeleted) {
-        this.reviews = this.reviews.filter(review => review.id !== idR);
-        this.calculateAverageRating();
-      }
-    });
-  }
+ // En ReviewsListComponent
+deleteReview(idR: number) {
+  this.reviewService.deleteReview(idR, this.idE).subscribe((isDeleted) => {
+    if (isDeleted) {
+      this.reviews = this.reviews.filter(review => review.id !== idR);
+      this.calculateAverageRating();
+      this.reviewDeleted.emit(idR); // Aquí se emite el evento
+    }
+  });
+}
 
   modifyReview(review: Review): void {
     this.isEditing = true;
