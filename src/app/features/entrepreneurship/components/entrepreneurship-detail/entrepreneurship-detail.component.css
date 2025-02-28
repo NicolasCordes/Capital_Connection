@@ -137,12 +137,29 @@ p {
   transition: border-color 0.3s ease;
   box-sizing: border-box; /* Incluye padding y border dentro del ancho y alto */
 }
-
-/* Estilo cuando se pasa el ratón por encima */
-.entrepreneurship-details:hover {
-  border-color: var(--border-color-hover-light); /* Cambia el color del borde a azul */
+.entrepreneurship-details::-webkit-scrollbar {
+  width: 2px; /* Ancho de la barra de desplazamiento */
 }
 
+.entrepreneurship-details::-webkit-scrollbar-thumb {
+  background-color: var(--color-hover-text-light); /* Color de la barra de desplazamiento */
+  border-radius: 10px; /* Bordes redondeados de la barra */
+  opacity: 0.3; /* Opacidad inicial del "pulgar" */
+  transition: opacity 0.5s ease; /* Transición suave cuando cambia la opacidad */
+}
+
+.entrepreneurship-details::-webkit-scrollbar-thumb:hover {
+  opacity: 1; /* Cuando el usuario hace hover, la opacidad se vuelve completa */
+}
+
+.entrepreneurship-details::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1); /* Fondo del riel de la barra */
+  border-radius: 10px;
+}
+
+.entrepreneurship-details::-webkit-scrollbar-corner {
+  background: transparent; /* Relleno en la esquina de la barra */
+}
 /* Estilo para los párrafos dentro de los detalles */
 .entrepreneurship-details p {
   font-size: 15px;      /* Aumenta la legibilidad sin ser excesivo */
