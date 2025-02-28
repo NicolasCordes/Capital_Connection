@@ -175,14 +175,24 @@ export class EntrepreneurshipListComponent implements OnInit {
   }
 
   deleteEntrepreneurship(id: number | null): void {
+    console.log('hola, id: ', id);
     if (!id) return;
-    this.entrepreneurshipService.deactivateEntrepreneurship(id).subscribe(() => {
-      this.entrepreneurships = this.entrepreneurships.filter(
-        (entrepreneurship) => entrepreneurship.id !== id
-      );
-      this.entrepreneurshipDeleted.emit();
+    console.log("Llamando a deactivateEntrepreneurship con ID:", id);
+    this.entrepreneurshipService.deactivateEntrepreneurship(id).subscribe({
+      next: () => {
+        console.log("Petición exitosa, eliminando de la lista...");
+        this.entrepreneurships = this.entrepreneurships.filter(
+          (entrepreneurship) => entrepreneurship.id !== id
+        );
+        console.log("estoy en el handleee");
+        this.entrepreneurshipDeleted.emit();
+      },
+      error: (err) => {
+        console.error("Error al desactivar:", err);
+      },
     });
   }
+
 
   @HostListener('window:scroll', ['$event'])
   onScroll(): void {

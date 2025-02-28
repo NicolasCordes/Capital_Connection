@@ -101,6 +101,9 @@ export class EntrepreneurshipDetailComponent implements OnInit, OnDestroy{
               console.log('El usuario no ha revisado este emprendimiento.');
           }
       });
+
+
+
         // Verificamos si el emprendimiento está en los favoritos
         this.favoriteListService.favorites$.subscribe((favorites) => {
           this.isFavorite = this.favoriteListService.isFavorite(this.id); // Verifica si el emprendimiento está en favoritos
@@ -322,6 +325,7 @@ export class EntrepreneurshipDetailComponent implements OnInit, OnDestroy{
   }
 
   handleEntrepreneurshipDeleted(): void {
+    console.log('estoy en el handleee');
     this.hasReviewed = false;
   }
 
